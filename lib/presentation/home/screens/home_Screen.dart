@@ -5,7 +5,7 @@ import 'package:flutter_projects/presentation/home/constants/image_constant.dart
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/home/screens/bottom_appbar.dart';
 import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-import 'package:sizer/sizer.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/application/auth/auth_bloc.dart';
+import 'package:flutter_projects/application/auth/auth_state.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
@@ -13,56 +16,72 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+
+  final AuthBloc _authBloc = AuthBloc();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: true,
-        body: Stack(
-          children: [
-            SizedBox(
-              height: 40.h,
-              child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 30.h),
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(55.0),
-                      topRight: Radius.circular(55.0)),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 3.h,
+
+    return BlocProvider(
+      create: (_) => _authBloc,
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {},
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            return Scaffold(
+                backgroundColor: Colors.white,
+                extendBody: true,
+                extendBodyBehindAppBar: true,
+                resizeToAvoidBottomInset: true,
+                body: Stack(
+                  children: [
+                    SizedBox(
+                      height: 40.h,
+                      child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.h),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(55.0),
+                              topRight: Radius.circular(55.0)),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                              _setTitle(),
+                              _setMobileNumber(),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              SizedBox(
+                                height: 2.5.h,
+                              ),
+                              _loginCTA(context),
+                              SizedBox(
+                                height: 2.5.h,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      _setTitle(),
-                      _setMobileNumber(),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      SizedBox(
-                        height: 2.5.h,
-                      ),
-                      _loginCTA(context),
-                      SizedBox(
-                        height: 2.5.h,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ));
+                    ),
+                  ],
+                ));
+          },
+        ),
+      ),
+    );
+
+      ;
   }
 
   Widget _setTitle() {
