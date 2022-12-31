@@ -81,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );
 
-      ;
+
   }
 
   Widget _setTitle() {

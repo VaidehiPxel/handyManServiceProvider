@@ -11,7 +11,8 @@ class HomeAsset{
 
   static const String sideBlue = "assets/images/home/Path.png";
   static const String notifications = "assets/images/home/notifications.png";
-  static const String notification = "assets/images/home//notification.png";
-
+  static const String humBurger = "assets/images/home/notification.png";
+  static const String location = "assets/svg/location.svg";
+  static const String time = "assets/svg/time.svg";
 
 }

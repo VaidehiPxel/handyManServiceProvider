@@ -9,11 +9,16 @@ class HomeString{
   static const String message = "Message";
   static const String profile = "Profile";
 
-  static const String tandc = "Terms & Condition";
-  static const String faqs = "FAQS";
-  static const String help = "Help";
-  static const String complaint = "Complaint";
-  static const String logOut = "Log Out";
+  static const String totalReviews = "Total Reviews";
+  static const String todayJob = "Today's Job";
+  static const String completedJob = "Completed Jobs";
+  static const String totalEarning = "Total Earning";
+
+  static const String jobRequest = "Job Request";
+  static const String newJob = "New Jobs";
+
+//message
+  //static const String newJob = "New Jobs";
 
 
 }

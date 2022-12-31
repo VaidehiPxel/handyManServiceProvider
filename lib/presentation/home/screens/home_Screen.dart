@@ -1,11 +1,17 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/model/home/job_listing_model.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
+import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
 import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/home/screens/bottom_appbar.dart';
 import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-
+import 'package:flutter_projects/presentation/home/widget/job_listView.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,363 +22,306 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+  List<JobListingModel> jobModel=[JobListingModel(
+      jobImage: "https://picsum.photos/id/237/200/300",
+      jobTitle: "Sink Cleaning",
+      jobAddress: "543 Main ST, Apt. 12 Chicago",
+      jobDesc: "Lorem ipsum dolor sit amet,.....",
+      jobFee: "99",
+      jobTime: "60 mins"),JobListingModel(
+      jobImage: "https://picsum.photos/id/237/200/300",
+      jobTitle: "Sink Cleaning",
+      jobAddress: "543 Main ST, Apt. 12 Chicago",
+      jobDesc: "Lorem ipsum dolor sit amet,.....",
+      jobFee: "99",
+      jobTime: "60 mins"),JobListingModel(
+      jobImage: "https://picsum.photos/id/237/200/300",
+      jobTitle: "Sink Cleaning",
+      jobAddress: "543 Main ST, Apt. 12 Chicago",
+      jobDesc: "Lorem ipsum dolor sit amet,.....",
+      jobFee: "99",
+      jobTime: "60 mins")];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(HomeString.welcome),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: Builder(builder: (context) {
-          return IconButton(
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            icon: Image.asset(HomeAsset.notification),
-            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          );
-        }),
-        actions: [
-          IconButton(
-              onPressed: () {}, icon: Image.asset(HomeAsset.notifications))
-        ],
-      ),
-      drawer: Drawer(
-        width: MediaQuery.of(context).size.width - 60,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const SizedBox(
-              height: kToolbarHeight,
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              trailing: const Icon(Icons.close),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    radius: 30,
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: ListTile(
-                    title: const Text('Item 1'),
-                    subtitle: const Text('Item 1'),
-                    onTap: () {},
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: kToolbarHeight,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlueBoxText(
-                showBold: true,
-                text: HomeString.tandc,
-                onTap: () {},
-                showBlueBox: currentIndex == 0,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlueBoxText(
-                showBold: true,
-                text: HomeString.faqs,
-                onTap: () {},
-                showBlueBox: currentIndex == 1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlueBoxText(
-                showBold: true,
-                text: HomeString.help,
-                onTap: () {},
-                showBlueBox: currentIndex == 2,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlueBoxText(
-                showBold: true,
-                text: HomeString.complaint,
-                onTap: () {},
-                showBlueBox: currentIndex == 3,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlueBoxText(
-                showBold: true,
-                text: HomeString.logOut,
-                onTap: () {},
-                showBlueBox: currentIndex == 4,
-              ),
-            ),
-          ],
-        ),
-      ),
-      body:  ClipPath(
-        clipper: CustomClipperPath(),
-        child: Container(
-          height: 350,
-          width: MediaQuery.of(context).size.width,
-         margin: const EdgeInsets.only(bottom: 110),
-          decoration: BoxDecoration(
-            color: Colors.blue.shade700,
-            borderRadius: BorderRadius.circular(0),
-            shape: BoxShape.rectangle,
-            image: const DecorationImage(
-              image: AssetImage(AuthImageString.appBg),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ), //HomeScreenWidget(),
-      bottomNavigationBar: EazylifeBottomAppBar(
-        onTap: (int currentIndex) {
-          setState(() {
-            this.currentIndex = currentIndex;
-          });
-        },
-        currentIndex: currentIndex,
-      ),
+      body: renderBodyView(), //HomeScreenWidget(),
 
     );
   }
-}
-class HomeScreenWidget extends StatelessWidget {
-  const HomeScreenWidget({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  Widget renderBodyView() {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
+      physics: AlwaysScrollableScrollPhysics(),
+      child: Container(
+
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 3.5.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipPath(
-                clipper: CustomClipperPath(),
-                child: Container(
-                  height: 350,
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.only(bottom: 110),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade700,
-                    borderRadius: BorderRadius.circular(0),
-                    shape: BoxShape.rectangle,
-                    image: const DecorationImage(
-                      image: AssetImage(AuthImageString.appBg),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+              const SizedBox(
+                height: kToolbarHeight * 2.3,
               ),
-              Column(
-                children: [
-                  const SizedBox(
-                    height: kToolbarHeight + kToolbarHeight + 10,
+              _searchTextField(),
+              SizedBox(
+                height: 2.5.h,
+              ),
+              setUserDetail(),
+              SizedBox(
+                height: 3.3.h,
+              ),
+              dashboardValue(),
+              SizedBox(
+                height: 2.h,
+              ),
+            jobRequest(),
+          // newJob(),
+              SizedBox(
+                height: 3.h,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container _searchTextField() {
+    return Container(
+            height: 6.5.h,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.sp),
+                shape: BoxShape.rectangle,
+                boxShadow: const [
+                  BoxShadow(
+                    color: AppTheme.dropShadow,
+                    blurRadius: 5.0,
                   ),
-                  Container(
-                    height: 60,
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        maxLines: 1,
-                        enableIMEPersonalizedLearning: true,
-                        enableSuggestions: true,
-                        decoration: InputDecoration(
-                          suffixIcon: Image.asset("AppAssets.search"),
-                          border: InputBorder.none,
-                          hintText: "searchText",
-                          contentPadding: const EdgeInsets.all(14),
-                        ),
-                      ),
+                ]),
+            child: Center(
+              child: Column(
+                children: [
+                  TextFormField(
+                    maxLines: 1,
+                    enableIMEPersonalizedLearning: true,
+                    enableSuggestions: true,
+                    decoration: InputDecoration(
+                      suffixIcon: Image.asset(HomeAsset.search),
+                      border: InputBorder.none,
+                      hintText: HomeString.searchText,
+                      contentPadding: const EdgeInsets.all(14),
                     ),
                   ),
                 ],
               ),
-              Positioned(
-                bottom: 20,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 240,
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(16),
-                    shape: BoxShape.rectangle,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 170,
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(
-                      10,
-                          (index) => Container(
-                        width: 130,
-                        height: 170,
-                        margin: const EdgeInsets.only(right: 8),
-
-                        child: Container(
-                          width: 130,
-                          height: 170,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              shape: BoxShape.rectangle,
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                stops: [0, 1],
-                                colors: [
-                                  Colors.black54,
-                                  Colors.black12.withOpacity(0),
-                                ],
-                              )),
-
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "offer",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 170,
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(
-                      10,
-                          (index) => Container(
-                        width: 130,
-                        height: 170,
-                        margin: const EdgeInsets.only(right: 8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                            image: AssetImage(""),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Container(
-                          width: 130,
-                          height: 170,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              shape: BoxShape.rectangle,
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                stops: [0, 1],
-                                colors: [
-                                  Colors.black54,
-                                  Colors.black12.withOpacity(0),
-                                ],
-                              )),
-                          child: const Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "services",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: kToolbarHeight * 3,
-                ),
-              ],
+          );
+  }
+
+  Widget dashboardValue() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(child: _blueContainer(HomeString.totalReviews, 538)),
+            SizedBox(
+              width: 3.w,
             ),
+            Expanded(child: _blueContainer(HomeString.todayJob, 56)),
+          ],
+        ),
+        SizedBox(
+          height: 1.5.h,
+        ),
+        Row(
+          children: [
+            Expanded(child: _blueContainer(HomeString.completedJob, 67)),
+            SizedBox(
+              width: 3.w,
+            ),
+            Expanded(child: _blueContainer(HomeString.totalEarning, 399)),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Container _blueContainer(String title, int count) {
+    return Container(
+      height: 12.h,
+      decoration: BoxDecoration(
+        color: AppTheme.containerBlue,
+        borderRadius: BorderRadius.circular(7.sp),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 12.sp,
+                fontFamily: AppFonts.poppinsMed,
+                color: AppTheme.buttonBlue),
+          ),
+          Text(
+            count.toString(),
+            style: TextStyle(
+                fontSize: 26.sp,
+                fontFamily: AppFonts.poppinsSemiBold,
+                color: AppTheme.buttonBlue),
           ),
         ],
       ),
     );
   }
-}
 
-class CustomClipperPath extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    double w = size.width;
-    double h = size.height;
-    Path path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(0, h * 0.60060000);
-    path.quadraticBezierTo(w * 0.5019222, h * 0.8974000, w, h * 0.5979800);
-    path.quadraticBezierTo(w, h * 0.4484850, w, 0);
-    path.lineTo(0, 0);
-    path.close();
-    return path;
+  setUserDetail() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(4.5.sp), // Border width
+            decoration: const BoxDecoration(
+                color: AppTheme.greyBorder, shape: BoxShape.circle),
+            child: ClipOval(
+              child: SizedBox.fromSize(
+                size: Size.fromRadius(40.sp), // Image radius
+                child: Image.network('https://picsum.photos/id/237/200/300',
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          Text(
+            "Saroj Chacko",
+            style: TextStyle(
+                fontFamily: AppFonts.poppinsBold,
+                fontSize: 18.sp,
+                color: AppTheme.black),
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          Text(
+            "4.0 out of 5 stars",
+            style: TextStyle(
+                fontFamily: AppFonts.poppinsMed,
+                fontSize: 12.sp,
+                color: AppTheme.buttonBlue),
+          ),
+          SizedBox(
+            height: 1.5.h,
+          ),
+          ratingBar("5 stars", 0.2, "20%"),
+          ratingBar("4 stars", 0.4, "40%"),
+          ratingBar("3 stars", 0.15, "15%"),
+          ratingBar("2 stars", 0, "0%"),
+          ratingBar("1 star", 0, "0%"),
+        ],
+      ),
+    );
   }
 
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  Widget ratingBar(String text, double percent, String percentText) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Text(
+            text,
+            style: TextStyle(
+                fontFamily: AppFonts.poppinsMed,
+                fontSize: 12.sp,
+                color: AppTheme.black),
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: LinearPercentIndicator(
+            animation: true,
+            animationDuration: 1000,
+            lineHeight: 2.h,
+            percent: percent,
+            center: Text(
+              percentText,
+              style: TextStyle(
+                  fontFamily: AppFonts.poppinsMed,
+                  fontSize: 9.sp,
+                  color: AppTheme.black),
+            ),
+            progressColor: AppTheme.buttonBlue,
+            backgroundColor: AppTheme.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget jobRequest() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          HomeString.jobRequest,
+          style: TextStyle(
+              fontFamily: AppFonts.poppinsBold,
+              fontSize: 14.sp,
+              color: AppTheme.black),
+        ),
+        SizedBox(
+          height: 1.h,
+        ),
+        ListView.builder(
+          itemCount: jobModel.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return JobListView(
+              jobListingModel: jobModel[index],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget newJob() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 2.h,
+        ),
+        Text(HomeString.newJob,
+            style: TextStyle(
+                fontFamily: AppFonts.poppinsBold,
+                fontSize: 14.sp,
+                color: AppTheme.black)),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 1,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return JobListView(
+                jobListingModel: JobListingModel(
+                    jobImage: "https://picsum.photos/id/237/200/300",
+                    jobTitle: "Sink Cleaning",
+                    jobAddress: "543 Main ST, Apt. 12 Chicago",
+                    jobDesc: "Lorem ipsum dolor sit amet,.....",
+                    jobFee: "99",
+                    jobTime: "60 mins"),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
 }

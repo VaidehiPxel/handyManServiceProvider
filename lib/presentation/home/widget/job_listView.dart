@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/model/home/job_listing_model.dart';
+import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
+
+class JobListView extends StatelessWidget {
+  final JobListingModel jobListingModel;
+
+  const JobListView({Key? key, required this.jobListingModel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppTheme.lightGrey,
+        borderRadius: BorderRadius.circular(7.sp),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(5.sp),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipOval(
+              child: SizedBox.fromSize(
+                size: Size.fromRadius(23.sp), // Image radius
+                child:
+                    Image.network(jobListingModel.jobImage!, fit: BoxFit.cover),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 3.2.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      jobListingModel.jobTitle!,
+                      softWrap: true,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontFamily: AppFonts.poppinsSemiBold,
+                        color: AppTheme.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 0.3.h,
+                    ),
+                    Text(jobListingModel.jobDesc!,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          fontFamily: AppFonts.poppins,
+                          color: AppTheme.MedGrey,
+                        )),
+                    SizedBox(
+                      height: 0.3.h,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(HomeAsset.location),
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        Expanded(
+                          child: Text(jobListingModel.jobAddress!,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                fontFamily: AppFonts.poppinsMed,
+                                color: AppTheme.buttonBlue,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(HomeAsset.time),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    Text(jobListingModel.jobTime!,
+                        softWrap: true,
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          fontFamily: AppFonts.poppins,
+                          color: AppTheme.MedGrey,
+                        ))
+                  ],
+                ),
+                Text("₹${jobListingModel.jobFee!}",
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontFamily: AppFonts.poppinsSemiBold,
+                      color: AppTheme.black,
+                    ))
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

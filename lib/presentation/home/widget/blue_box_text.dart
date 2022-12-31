@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
+import 'package:sizer/sizer.dart';
 
 class BlueBoxText extends StatefulWidget {
   final void Function()? onTap;
@@ -23,13 +25,13 @@ class _BlueBoxTextState extends State<BlueBoxText> {
     return InkWell(
       onTap: widget.onTap,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding:  EdgeInsets.only(left: 5.w,bottom: 1.h),
         child: Row(
           children: [
             if (widget.showBlueBox)
               Container(
-                width: 7,
-                height: 31,
+                width: 1.w,
+                height: 3.h,
                 padding: EdgeInsets.zero,
                 decoration: BoxDecoration(
                   //color: Colors.blue.shade700,
@@ -46,16 +48,17 @@ class _BlueBoxTextState extends State<BlueBoxText> {
                 width: 7,
                 height: 31,
               ),
-            const SizedBox(
-              width: 20,
+             SizedBox(
+              width: 3.w,
             ),
             Text(
               widget.text,
               textAlign: TextAlign.left,
+
               style: TextStyle(
+                fontSize: 12.sp,
                   color: widget.showBlueBox ? Colors.blue : Colors.black,
-                  fontWeight:
-                  widget.showBold ? FontWeight.bold : FontWeight.normal),
+                  fontFamily: AppFonts.poppinsSemiBold),
             ),
           ],
         ),
