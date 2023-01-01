@@ -91,7 +91,7 @@ class HelpScreen extends StatelessWidget {
                     contentPadding: EdgeInsets.all(12.sp),
                     hintStyle: TextStyle(
                       fontFamily: AppFonts.poppins,
-                          color: AppTheme.MedGrey,
+                          color: AppTheme.medGrey,
                           fontSize: 12.sp
                     )
                   ),

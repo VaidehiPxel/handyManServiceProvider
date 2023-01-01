@@ -54,7 +54,7 @@ class JobListView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 11.sp,
                           fontFamily: AppFonts.poppins,
-                          color: AppTheme.MedGrey,
+                          color: AppTheme.medGrey,
                         )),
                     SizedBox(
                       height: 0.3.h,
@@ -94,7 +94,7 @@ class JobListView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 11.sp,
                           fontFamily: AppFonts.poppins,
-                          color: AppTheme.MedGrey,
+                          color: AppTheme.medGrey,
                         ))
                   ],
                 ),

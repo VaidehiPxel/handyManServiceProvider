@@ -10,7 +10,8 @@ class EazylifeAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String leadIcon;
   final String? sideIcon;
   final VoidCallback? onPressed;
-  const EazylifeAppBar({super.key, required this.title,required this.leadIcon,this.sideIcon,this.onPressed});
+  final VoidCallback? sideOnPressed;
+  const EazylifeAppBar({super.key, required this.title,required this.leadIcon,this.sideIcon,this.onPressed,this.sideOnPressed});
 
   @override
   State<EazylifeAppBar> createState() => _EazylifeAppBarState();
@@ -55,7 +56,8 @@ class _EazylifeAppBarState extends State<EazylifeAppBar> {
           }),
           actions: [
             IconButton(
-                onPressed: () {}, icon: SvgPicture.asset(widget.sideIcon??HomeAsset.notifications))
+                onPressed: widget.sideOnPressed, icon: SvgPicture.asset(widget.sideIcon??HomeAsset.notifications))
+
           ],
         ),
       ),

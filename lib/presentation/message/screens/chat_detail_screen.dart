@@ -123,7 +123,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               ? TextStyle(
                                   fontSize: 12.sp,
                                   fontFamily: AppFonts.poppins,
-                                  color: AppTheme.MedGrey)
+                                  color: AppTheme.medGrey)
                               : TextStyle(
                                   fontSize: 12.sp,
                                   fontFamily: AppFonts.poppins,
@@ -135,7 +135,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               ? TextStyle(
                               fontSize: 9.sp,
                               fontFamily: AppFonts.poppins,
-                              color: AppTheme.MedGrey)
+                              color: AppTheme.medGrey)
                               : TextStyle(
                               fontSize: 9.sp,
                               fontFamily: AppFonts.poppins,

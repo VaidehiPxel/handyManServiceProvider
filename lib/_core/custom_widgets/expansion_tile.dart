@@ -68,7 +68,7 @@ class _EazylifeExpansionTileState extends State<EazylifeExpansionTile> {
               child: Text(
                 widget.subTitle,
                 style:  TextStyle(
-                  color:AppTheme.MedGrey,
+                  color:AppTheme.medGrey,
                   fontSize: 12.sp,
                     fontFamily: AppFonts.poppins
                 ),

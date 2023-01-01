@@ -9,10 +9,10 @@ import 'package:flutter_projects/presentation/auth/constants/image_constant.dart
 import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
 import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/home/screens/bottom_appbar.dart';
-import 'package:flutter_projects/presentation/home/screens/chat_detail_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
 import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-import 'package:flutter_projects/presentation/home/widget/job_listView.dart';
+import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
+import 'package:flutter_projects/presentation/message/screens/chat_detail_screen.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -122,7 +122,7 @@ class _MessageScreenState extends State<MessageScreen> {
         padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 7.sp),
         child: InkWell(
           onTap: () {
-            callNextScreen(context, ChatDetailScreen());
+            callNextScreen(context, const ChatDetailScreen());
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -158,7 +158,7 @@ class _MessageScreenState extends State<MessageScreen> {
                           style: TextStyle(
                             fontSize: 11.sp,
                             fontFamily: AppFonts.poppins,
-                            color: AppTheme.MedGrey,
+                            color: AppTheme.medGrey,
                           )),
                     ],
                   ),

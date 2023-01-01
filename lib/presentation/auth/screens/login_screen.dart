@@ -10,6 +10,7 @@ import 'package:flutter_projects/presentation/auth/constants/string_constant.dar
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart';
 import 'package:flutter_projects/presentation/auth/screens/sign_up_provider_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -225,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         onPressed: () {
-          callNextScreen(context, const HomeScreen());
+          callNextScreen(context, const DashBoard());
         },
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 1.h),

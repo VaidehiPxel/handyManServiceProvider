@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/presentation/home/screens/dashboard.dart';
+import 'package:flutter_projects/presentation/auth/screens/app_lang_select_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
-import 'package:flutter_projects/presentation/home/screens/message_screen.dart';
+import 'package:flutter_projects/presentation/message/screens/message_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const DashBoard(),
+        home: const AppLangSelectScreen(),
       );
     });
   }

@@ -7,9 +7,9 @@ import 'package:flutter_projects/presentation/auth/constants/image_constant.dart
 import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
 import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/home/screens/bottom_appbar.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
 import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-import 'package:flutter_projects/presentation/home/widget/job_listView.dart';
+import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -54,36 +54,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget renderBodyView() {
     return SingleChildScrollView(
-      physics: AlwaysScrollableScrollPhysics(),
-      child: Container(
-
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.5.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: kToolbarHeight * 2.3,
-              ),
-              _searchTextField(),
-              SizedBox(
-                height: 2.5.h,
-              ),
-              setUserDetail(),
-              SizedBox(
-                height: 3.3.h,
-              ),
-              dashboardValue(),
-              SizedBox(
-                height: 2.h,
-              ),
-            jobRequest(),
-          // newJob(),
-              SizedBox(
-                height: 3.h,
-              ),
-            ],
-          ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 3.5.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: kToolbarHeight * 2.3,
+            ),
+            _searchTextField(),
+            SizedBox(
+              height: 2.5.h,
+            ),
+            setUserDetail(),
+            SizedBox(
+              height: 3.3.h,
+            ),
+            dashboardValue(),
+            SizedBox(
+              height: 2.h,
+            ),
+          jobRequest(),
+           newJob(),
+            SizedBox(
+              height: 10.h,
+            ),
+          ],
         ),
       ),
     );
@@ -268,6 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget jobRequest() {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           HomeString.jobRequest,
@@ -279,9 +277,15 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 1.h,
         ),
-        ListView.builder(
+        ListView.separated(
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: 1.h,
+            );
+          },
           itemCount: jobModel.length,
           shrinkWrap: true,
+          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return JobListView(
@@ -295,6 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget newJob() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 2.h,
@@ -304,22 +309,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontFamily: AppFonts.poppinsBold,
                 fontSize: 14.sp,
                 color: AppTheme.black)),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 1,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return JobListView(
-                jobListingModel: JobListingModel(
-                    jobImage: "https://picsum.photos/id/237/200/300",
-                    jobTitle: "Sink Cleaning",
-                    jobAddress: "543 Main ST, Apt. 12 Chicago",
-                    jobDesc: "Lorem ipsum dolor sit amet,.....",
-                    jobFee: "99",
-                    jobTime: "60 mins"),
-              );
-            },
-          ),
+        SizedBox(
+          height: 1.h,
+        ),
+        ListView.builder(
+          itemCount: 1,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return JobListView(
+              jobListingModel: JobListingModel(
+                  jobImage: "https://picsum.photos/id/237/200/300",
+                  jobTitle: "Sink Cleaning",
+                  jobAddress: "543 Main ST, Apt. 12 Chicago",
+                  jobDesc: "Lorem ipsum dolor sit amet,.....",
+                  jobFee: "99",
+                  jobTime: "60 mins"),
+            );
+          },
         ),
       ],
     );

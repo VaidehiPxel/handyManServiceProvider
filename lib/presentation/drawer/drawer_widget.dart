@@ -52,7 +52,7 @@ class DrawerWidget extends StatelessWidget {
                   fontSize: 14.sp
                 ),),
                 Text("Lonnie.murphy@gmail.com",style: TextStyle(
-                    color: AppTheme.MedGrey,
+                    color: AppTheme.medGrey,
                     fontFamily: AppFonts.poppins,
                     fontSize: 10.sp
                 ),),

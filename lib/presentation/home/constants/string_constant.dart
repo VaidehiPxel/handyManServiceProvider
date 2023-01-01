@@ -20,5 +20,8 @@ class HomeString{
 //message
   //static const String newJob = "New Jobs";
 
+//jobDetail
+  //static const String newJob = "New Jobs";
+
 
 }
