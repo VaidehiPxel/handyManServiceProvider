@@ -71,6 +71,13 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             ),
             titleSpacing: 0,
             automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed:(){
+
+                  }, icon: SvgPicture.asset(ImageString.call))
+
+            ],
             leading: Builder(builder: (context) {
               return IconButton(
                 onPressed: () {
@@ -110,7 +117,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                               bottomLeft: Radius.circular(7.sp)),
                       color: (messages[index].messageType == "receiver"
                           ? AppTheme.lightGrey
-                          : AppTheme.buttonBlue),
+                          : AppTheme.blue),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 3.w),
                     child: Column(

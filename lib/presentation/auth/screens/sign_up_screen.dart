@@ -1,18 +1,21 @@
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/navigation.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/presentation/auth/screens/login_screen.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
+import 'package:sizer/sizer.dart';
 
-
-class SignUpProviderScreen extends StatefulWidget {
-  const SignUpProviderScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignUpProviderScreen> createState() => _SignUpProviderScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool obscureText = false;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 2.6,
-                  child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+                  child:
+                      AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
                 ),
                 Stack(
                   children: [
@@ -56,33 +60,31 @@ class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
                               primary: false,
                               shrinkWrap: true,
                               children: [
-                                const SizedBox(
-                                  height: 100,
+                                SizedBox(
+                                  height: 13.h,
                                 ),
-                                const Center(
+                                Center(
                                   child: Text(
                                     AuthString.signUp,
                                     style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w900,
-                                    ),
+                                        color: Colors.black,
+                                        fontSize: 20.sp,
+                                        fontFamily: AppFonts.poppinsBold),
                                   ),
                                 ),
-                                const Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      AuthString.sublogin,
-                                      maxLines: 2,
-                                      softWrap: true,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
+                                SizedBox(
+                                  height: 0.5.h,
+                                ),
+                                Center(
+                                  child: Text(
+                                    AuthString.sublogin,
+                                    maxLines: 2,
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppTheme.grey,
+                                        fontSize: 10.sp,
+                                        fontFamily: AppFonts.poppinsMed),
                                   ),
                                 ),
                                 Theme(
@@ -215,20 +217,6 @@ class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
                                     obscureText: obscureText,
                                   ),
                                 ),
-                                const Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      AuthString.forgetPasswordq,
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
                                 const SizedBox(
                                   height: 40,
                                 ),
@@ -274,63 +262,11 @@ class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
                                     ),
                                   ),
                                 ),
-                                Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(AuthImageString.facebook),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(AuthImageString.google),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(AuthImageString.linkedIn),
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                _signupWith(),
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: RichText(
-                                      overflow: TextOverflow.clip,
-
-                                      // Controls how the text should be aligned horizontally
-                                      textAlign: TextAlign.end,
-
-                                      // Control the text direction
-                                      textDirection: TextDirection.rtl,
-
-                                      // Whether the text should break at soft line breaks
-                                      softWrap: true,
-
-                                      // Maximum number of lines for the text to span
-                                      maxLines: 1,
-
-                                      // The number of font pixels for each logical pixel
-                                      textScaleFactor: 1,
-                                      text: const TextSpan(
-                                        text: AuthString.alreadyAmember,
-                                        style: TextStyle(color: Colors.black),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: AuthString.log_in,
-                                              style: TextStyle(
-                                                  color: Colors.blue,
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                _alreadyAccount(context),
                               ],
                             ),
                           ),
@@ -404,6 +340,61 @@ class _SignUpProviderScreenState extends State<SignUpProviderScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Align _alreadyAccount(BuildContext context) {
+    return
+      Align(
+        alignment: Alignment.center,
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: RichText(
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.end,
+            textDirection: TextDirection.rtl,
+            softWrap: true,
+            maxLines: 1,
+            textScaleFactor: 1,
+            text: TextSpan(
+              text: AuthString.alreadyAmember,
+              style: const TextStyle(
+                  color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
+              children: <TextSpan>[
+                TextSpan(
+                    text:AuthString.log_in,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        callNextScreen(context, const LoginScreen());
+                      },
+                    style: const TextStyle(
+                        color: Colors.blue, fontFamily: AppFonts.poppinsMed)),
+              ],
+            ),
+          ),
+        ),
+      );
+  }
+
+  Center _signupWith() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(AuthImageString.facebook),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AuthImageString.google),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(AuthImageString.linkedIn),
+          // )
+        ],
       ),
     );
   }

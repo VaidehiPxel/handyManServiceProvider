@@ -17,11 +17,7 @@ class HomeString{
   static const String jobRequest = "Job Request";
   static const String newJob = "New Jobs";
 
-//message
-  //static const String newJob = "New Jobs";
 
-//jobDetail
-  //static const String newJob = "New Jobs";
 
 
 }

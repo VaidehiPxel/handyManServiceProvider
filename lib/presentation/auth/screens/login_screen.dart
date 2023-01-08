@@ -9,9 +9,8 @@ import 'package:flutter_projects/presentation/auth/constants/image_constant.dart
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart';
-import 'package:flutter_projects/presentation/auth/screens/sign_up_provider_screen.dart';
+import 'package:flutter_projects/presentation/auth/screens/sign_up_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
-import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -136,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: 'Sign Up',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      callNextScreen(context, const SignUpProviderScreen());
+                      callNextScreen(context, const SignUpScreen());
                     },
                   style: const TextStyle(
                       color: Colors.blue, fontFamily: AppFonts.poppinsMed)),
@@ -152,18 +151,18 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AuthImageString.facebook),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(AuthImageString.facebook),
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(AuthImageString.google),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AuthImageString.linkedIn),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Image.asset(AuthImageString.linkedIn),
+          // )
         ],
       ),
     );

@@ -1,8 +1,10 @@
 
 class DrawerString{
 
+  static const String dashboard = "Dashboard";
   static const String notification = "Notification";
   static const String payment = "Payment";
+  static const String reviewAndRating = "Review And Rating";
   static const String changePassword = "Change Password";
   static const String faqs = "FAQS";
   static const String help = "Help";

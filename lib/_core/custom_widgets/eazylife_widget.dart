@@ -1,12 +1,24 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class EazyLifeWidget extends StatefulWidget {
   final String title;
+  final String? fontFamily;
+  final double? fontSize;
   final Widget widget;
-  const EazyLifeWidget({super.key, required this.title, required this.widget});
+  final bool withoutBlue;
+  const EazyLifeWidget(
+      {super.key,
+        required this.title,
+        required this.widget,
+         this.fontFamily,
+         this.fontSize,
+        this.withoutBlue = false});
 
   @override
   State<EazyLifeWidget> createState() => _EazyLifeWidgetState();
@@ -15,45 +27,74 @@ class EazyLifeWidget extends StatefulWidget {
 class _EazyLifeWidgetState extends State<EazyLifeWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      primary: false,
+      padding: EdgeInsets.zero,
+      children: widget.withoutBlue == false
+          ? [
         Row(
           children: [
-            Container(
-              width: 1.w,
-              height: 3.h,
-              padding: EdgeInsets.zero,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                image: DecorationImage(
-                  image: AssetImage(ImageString.sideBlue),
-                  fit: BoxFit.cover,
+            Expanded(
+              flex: 0,
+              child: Container(
+                width: 1.w,
+                height: 3.h,
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  //color: AppTheme.blue,
+                  borderRadius: BorderRadius.circular(0),
+                  shape: BoxShape.rectangle,
                 ),
+                child: SvgPicture.asset(ImageString.sideBlueSvg),
               ),
             ),
              SizedBox(
-              width: 1.5.w,
+              width: 3.w,
             ),
-            Padding(
-              padding:  EdgeInsets.only(left: 2.w),
+            Expanded(
+              flex: 12,
               child: Text(
                 widget.title,
-                style:  TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 12.sp,
-                  fontFamily: AppFonts.poppinsMed
+                  fontSize: 10.sp,
+                  fontFamily: AppFonts.poppins,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 1.h,),
         Row(
           children: [
-           SizedBox(width: 3.w,),
-           Expanded(child:  widget.widget),
+            Expanded(
+              flex: 0,
+              child: Container(
+                width: 7,
+                height: 31,
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0),
+                  shape: BoxShape.rectangle,
+                ),
+              ),
+            ),
+            Expanded(flex: 12, child: widget.widget),
           ],
         )
+      ]
+          : [
+        Text(
+          widget.title,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize:widget.fontSize?? 10.sp,
+            fontFamily: widget.fontFamily??AppFonts.poppins,
+          ),
+        ),
+        widget.widget
       ],
     );
   }

@@ -9,6 +9,7 @@ class AuthString{
 
   static const String forgetPasswordq = "Forget Password?";
   static const String forgetPassword = "Forget Password";
+  static const String setNewPassword = "Set New Password";
   static const String mobileNumber = "Mobile Number";
   static const String password = "Password";
   static const String newPassword = "New Password";
@@ -16,6 +17,7 @@ class AuthString{
   static const String confirmPassword = "Confirm Password";
   static const String changePassword = "Change Password";
   static const String log_in = "Log in";
+  static const String continueS = "Continue";
 
   static const String or = "OR";
   static const String sign_up = "Don't have an account? ";
@@ -29,6 +31,12 @@ class AuthString{
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String email = "Email";
+
+  static const String otpverification = "OTP Verification";
+  static const String otpsubString = "Enter the OTP you received to\n";
+  static const String dontreceive = "Don't receive the OTP? ";
+  static const String resenotp = "RESEND OTP";
+  static const String verifyNow = "Verify Now";
 
 
 }

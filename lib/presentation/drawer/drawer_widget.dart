@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/drawer/screens/faq_screen.dart';
 import 'package:flutter_projects/presentation/drawer/screens/help_screen.dart';
+import 'package:flutter_projects/presentation/drawer/screens/rating_review.dart';
 import 'package:flutter_projects/presentation/drawer/screens/terms_screen.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
+import 'package:flutter_projects/presentation/notification/screen/notification_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -67,9 +70,9 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.notification,
+              text: DrawerString.dashboard,
               onTap: () {
-                callNextScreen(context, const FAQSScreen());
+                callNextScreen(context, const DashBoard());
               },
               showBlueBox: currentIndex == 0,
             ),
@@ -78,11 +81,33 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.payment,
+              text: DrawerString.notification,
               onTap: () {
-                callNextScreen(context, const FAQSScreen());
+                callNextScreen(context, const NotificationScreen());
               },
               showBlueBox: currentIndex == 1,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlueBoxText(
+              showBold: true,
+              text: DrawerString.payment,
+              onTap: () {
+                //callNextScreen(context, const FAQSScreen());
+              },
+              showBlueBox: currentIndex == 2,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlueBoxText(
+              showBold: true,
+              text: DrawerString.reviewAndRating,
+              onTap: () {
+                callNextScreen(context, const RatingAndReviewScreen());
+              },
+              showBlueBox: currentIndex == 3,
             ),
           ),
           Padding(
@@ -93,7 +118,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const FAQSScreen());
               },
-              showBlueBox: currentIndex == 2,
+              showBlueBox: currentIndex == 4,
             ),
           ),
           Padding(
@@ -104,7 +129,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const FAQSScreen());
               },
-              showBlueBox: currentIndex == 3,
+              showBlueBox: currentIndex == 5,
             ),
           ),
           Padding(
@@ -115,7 +140,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const HelpScreen());
               },
-              showBlueBox: currentIndex == 4,
+              showBlueBox: currentIndex == 6,
             ),
           ),
           Padding(
@@ -126,7 +151,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const TAndCScreen());
               },
-              showBlueBox: currentIndex == 5,
+              showBlueBox: currentIndex == 7,
             ),
           ),
           Padding(
@@ -135,7 +160,7 @@ class DrawerWidget extends StatelessWidget {
               showBold: true,
               text: DrawerString.logOut,
               onTap: () {},
-              showBlueBox: currentIndex == 6,
+              showBlueBox: currentIndex == 8,
             ),
           ),
         ],

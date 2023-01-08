@@ -14,5 +14,6 @@ class HomeAsset{
   static const String humBurger = "assets/images/home/notification.png";
   static const String location = "assets/svg/location.svg";
   static const String time = "assets/svg/time.svg";
+  static const String searchSvg = "assets/svg/search_svg.svg";
 
 }

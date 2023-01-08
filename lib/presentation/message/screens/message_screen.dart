@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
-import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/model/home/job_listing_model.dart';
 import 'package:flutter_projects/model/home/message_model.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
-import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
 import 'package:flutter_projects/presentation/message/screens/chat_detail_screen.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -67,10 +57,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        body: renderBodyView()); //HomeScreenWidget(),
+    return  renderBodyView(); //HomeScreenWidget(),
   }
 
   Widget renderBodyView() {
@@ -169,7 +156,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   style: TextStyle(
                     fontSize: 9.sp,
                     fontFamily: AppFonts.poppinsMed,
-                    color: AppTheme.buttonBlue,
+                    color: AppTheme.blue,
                   )),
             ],
           ),

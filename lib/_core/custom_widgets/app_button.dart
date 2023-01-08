@@ -4,7 +4,8 @@ import 'package:sizer/sizer.dart';
 
 class AppButton extends StatelessWidget {
   final String title;
-  const AppButton({Key? key,required this.title}) : super(key: key);
+  final VoidCallback? onPressed;
+  const AppButton({Key? key,required this.title,this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,14 @@ class AppButton extends StatelessWidget {
       padding:  EdgeInsets.symmetric(horizontal: 3.w),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppTheme.buttonBlue,
+          backgroundColor: AppTheme.blue,
           minimumSize: const Size.fromHeight(50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
 
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child:  Padding(
           padding: EdgeInsets.all(10.sp),
           child: Text(

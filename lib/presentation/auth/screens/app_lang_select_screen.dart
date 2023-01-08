@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/navigation.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
@@ -41,31 +42,38 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CTA(
+                      SelectLangBtn(
                         onTap: () {
                           setState(() {
                             selectedLang = 0;
-                            callNextScreen(context, const LoginScreen());
                           });
                         },
-                        bgColor: Colors.white,
+                        bgColor:
+                        selectedLang == 0 ? Colors.white : AppTheme.black,
+                        textColor:
+                        selectedLang == 0 ? Colors.black : AppTheme.white,
                       ),
                       SizedBox(
                         width: 5.w,
                       ),
-                      CTA(
+                      SelectLangBtn(
                         onTap: () {
                           setState(() {
                             selectedLang = 1;
-                            callNextScreen(context, const LoginScreen());
                           });
                         },
-                        bgColor: Colors.black,
+                        bgColor:
+                        selectedLang == 1 ? Colors.white : AppTheme.black,
+                        textColor:
+                        selectedLang == 1 ? Colors.black : AppTheme.white,
                         title: AuthString.french,
-                        textColor: Colors.white,
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  _continueCTA(context)
                 ],
               ),
             ),
@@ -74,14 +82,41 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
       ),
     );
   }
+
+  Widget _continueCTA(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppTheme.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
+        onPressed: () {
+          callNextScreen(context, const LoginScreen());
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 1.h),
+          child: Text(
+            AuthString.continueS,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontFamily: AppFonts.poppinsMed),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class CTA extends StatelessWidget {
+class SelectLangBtn extends StatelessWidget {
   final Color? bgColor;
   final VoidCallback? onTap;
   final String? title;
   final Color? textColor;
-  const CTA({Key? key, this.bgColor, this.onTap, this.title, this.textColor})
+  const SelectLangBtn({Key? key, this.bgColor, this.onTap, this.title, this.textColor})
       : super(key: key);
 
   @override

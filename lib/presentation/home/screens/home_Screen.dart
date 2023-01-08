@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
+import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/model/home/job_listing_model.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
+import 'package:flutter_projects/model/jobs/job_listing_model.dart';
 import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
-import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
+import 'package:flutter_projects/presentation/home/screens/new_job_listing_screen.dart';
+import 'package:flutter_projects/presentation/myJobs/constants/string_constant.dart';
+import 'package:flutter_projects/presentation/myJobs/screen/myJobs_screen.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,50 +21,51 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  List<JobListingModel> jobModel=[JobListingModel(
-      jobImage: "https://picsum.photos/id/237/200/300",
-      jobTitle: "Sink Cleaning",
-      jobAddress: "543 Main ST, Apt. 12 Chicago",
-      jobDesc: "Lorem ipsum dolor sit amet,.....",
-      jobFee: "99",
-      jobTime: "60 mins"),JobListingModel(
-      jobImage: "https://picsum.photos/id/237/200/300",
-      jobTitle: "Sink Cleaning",
-      jobAddress: "543 Main ST, Apt. 12 Chicago",
-      jobDesc: "Lorem ipsum dolor sit amet,.....",
-      jobFee: "99",
-      jobTime: "60 mins"),JobListingModel(
-      jobImage: "https://picsum.photos/id/237/200/300",
-      jobTitle: "Sink Cleaning",
-      jobAddress: "543 Main ST, Apt. 12 Chicago",
-      jobDesc: "Lorem ipsum dolor sit amet,.....",
-      jobFee: "99",
-      jobTime: "60 mins")];
+  List<JobListingModel> jobModel = [
+    JobListingModel(
+        jobImage: "https://picsum.photos/id/214/200/300",
+        jobTitle: "Sink Cleaning",
+        jobAddress: "543 Main ST, Apt. 12 Chicago",
+        jobDesc: "Lorem ipsum dolor sit amet,.....",
+        jobFee: "99",
+        jobTime: "60 mins"),
+    JobListingModel(
+        jobImage: "https://picsum.photos/id/220/200/300",
+        jobTitle: "Sink Cleaning",
+        jobAddress: "543 Main ST, Apt. 12 Chicago",
+        jobDesc: "Lorem ipsum dolor sit amet,.....",
+        jobFee: "99",
+        jobTime: "60 mins"),
+    JobListingModel(
+        jobImage: "https://picsum.photos/id/218/200/300",
+        jobTitle: "Sink Cleaning",
+        jobAddress: "543 Main ST, Apt. 12 Chicago",
+        jobDesc: "Lorem ipsum dolor sit amet,.....",
+        jobFee: "99",
+        jobTime: "60 mins")
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-
       extendBodyBehindAppBar: true,
       body: renderBodyView(), //HomeScreenWidget(),
-
     );
   }
 
   Widget renderBodyView() {
     return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 3.5.w),
+        padding: EdgeInsets.symmetric(horizontal: 4.5.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: kToolbarHeight * 2.3,
             ),
-            _searchTextField(),
+            //_searchTextField(),
             SizedBox(
-              height: 2.5.h,
+              height: 1.5.h,
             ),
             setUserDetail(),
             SizedBox(
@@ -75,8 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 2.h,
             ),
-          jobRequest(),
-           newJob(),
+            jobRequest(),
+            newJob(),
             SizedBox(
               height: 10.h,
             ),
@@ -88,35 +88,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _searchTextField() {
     return Container(
-            height: 6.5.h,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.sp),
-                shape: BoxShape.rectangle,
-                boxShadow: const [
-                  BoxShadow(
-                    color: AppTheme.dropShadow,
-                    blurRadius: 5.0,
-                  ),
-                ]),
-            child: Center(
-              child: Column(
-                children: [
-                  TextFormField(
-                    maxLines: 1,
-                    enableIMEPersonalizedLearning: true,
-                    enableSuggestions: true,
-                    decoration: InputDecoration(
-                      suffixIcon: Image.asset(HomeAsset.search),
-                      border: InputBorder.none,
-                      hintText: HomeString.searchText,
-                      contentPadding: const EdgeInsets.all(14),
-                    ),
-                  ),
-                ],
+      height: 6.5.h,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.sp),
+          shape: BoxShape.rectangle,
+          boxShadow: const [
+            BoxShadow(
+              color: AppTheme.dropShadow,
+              blurRadius: 5.0,
+            ),
+          ]),
+      child: Center(
+        child: Column(
+          children: [
+            TextFormField(
+              maxLines: 1,
+              enableIMEPersonalizedLearning: true,
+              enableSuggestions: true,
+              decoration: InputDecoration(
+                suffixIcon: Image.asset(HomeAsset.search),
+                border: InputBorder.none,
+                hintText: HomeString.searchText,
+                contentPadding: const EdgeInsets.all(14),
               ),
             ),
-          );
+          ],
+        ),
+      ),
+    );
   }
 
   Widget dashboardValue() {
@@ -163,14 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(
                 fontSize: 12.sp,
                 fontFamily: AppFonts.poppinsMed,
-                color: AppTheme.buttonBlue),
+                color: AppTheme.blue),
           ),
           Text(
             count.toString(),
             style: TextStyle(
                 fontSize: 26.sp,
                 fontFamily: AppFonts.poppinsSemiBold,
-                color: AppTheme.buttonBlue),
+                color: AppTheme.blue),
           ),
         ],
       ),
@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ClipOval(
               child: SizedBox.fromSize(
                 size: Size.fromRadius(40.sp), // Image radius
-                child: Image.network('https://picsum.photos/id/237/200/300',
+                child: Image.network('https://picsum.photos/id/218/200/300',
                     fit: BoxFit.cover),
               ),
             ),
@@ -207,12 +207,33 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 1.h,
           ),
+          RatingsWidget(
+            value: 4,
+            filledStar: Icon(
+              Icons.star_rate_rounded,
+              color: AppTheme.ratingsStarColor,
+              size: 20.sp,
+            ),
+            halffilledStar: Icon(
+              Icons.star_half_rounded,
+              color: AppTheme.ratingsStarColor,
+              size: 20.sp,
+            ),
+            unfilledStar: Icon(
+              Icons.star_rate_rounded,
+              color: AppTheme.greyStar,
+              size: 20.sp,
+            ),
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
           Text(
             "4.0 out of 5 stars",
             style: TextStyle(
                 fontFamily: AppFonts.poppinsMed,
                 fontSize: 12.sp,
-                color: AppTheme.buttonBlue),
+                color: AppTheme.blue),
           ),
           SizedBox(
             height: 1.5.h,
@@ -254,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 9.sp,
                   color: AppTheme.black),
             ),
-            progressColor: AppTheme.buttonBlue,
+            progressColor: AppTheme.blue,
             backgroundColor: AppTheme.white,
           ),
         ),
@@ -267,6 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 1.h,),
         Text(
           HomeString.jobRequest,
           style: TextStyle(
@@ -283,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 1.h,
             );
           },
-          itemCount: jobModel.length,
+          itemCount: 1,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
@@ -304,28 +326,40 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 2.h,
         ),
-        Text(HomeString.newJob,
-            style: TextStyle(
-                fontFamily: AppFonts.poppinsBold,
-                fontSize: 14.sp,
-                color: AppTheme.black)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(HomeString.newJob,
+                style: TextStyle(
+                    fontFamily: AppFonts.poppinsBold,
+                    fontSize: 14.sp,
+                    color: AppTheme.black)),
+            InkWell(
+              onTap: (){
+                callNextScreen(context, NewJobList());
+              },
+              child: Text(
+                MyJobsString.viewAll,
+                style: TextStyle(
+                  color: AppTheme.blue,
+                  fontSize: 10.sp,
+                  fontFamily: AppFonts.poppinsMed,
+                ),
+              ),
+            ),
+          ],
+        ),
         SizedBox(
           height: 1.h,
         ),
         ListView.builder(
-          itemCount: 1,
+          itemCount: jobModel.length>3?3: jobModel.length,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return JobListView(
-              jobListingModel: JobListingModel(
-                  jobImage: "https://picsum.photos/id/237/200/300",
-                  jobTitle: "Sink Cleaning",
-                  jobAddress: "543 Main ST, Apt. 12 Chicago",
-                  jobDesc: "Lorem ipsum dolor sit amet,.....",
-                  jobFee: "99",
-                  jobTime: "60 mins"),
+              jobListingModel: jobModel[index],
             );
           },
         ),

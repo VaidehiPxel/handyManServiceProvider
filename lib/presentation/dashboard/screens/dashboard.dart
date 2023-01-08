@@ -3,11 +3,13 @@ import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
+import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
 import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
 import 'package:flutter_projects/presentation/message/screens/message_screen.dart';
-import 'package:flutter_projects/presentation/myJobs/screen/job_detail_screen.dart';
+import 'package:flutter_projects/presentation/myJobs/screen/my_job_detail_screen.dart';
+import 'package:flutter_projects/presentation/myJobs/screen/myJobs_screen.dart';
 import 'package:flutter_projects/presentation/notification/screen/notification_screen.dart';
 
 class DashBoard extends StatefulWidget {
@@ -40,7 +42,11 @@ class _DashBoardState extends State<DashBoard> {
                     ? HomeString.message
                     : HomeString.profile,
         leadIcon: ImageString.humBurgerSvg,
-        sideIcon: ImageString.notificationSvg,
+        sideIcon: currentIndex == 1
+            ? ImageString.filter
+            : currentIndex == 2
+                ? HomeAsset.searchSvg
+                : ImageString.notificationSvg,
         sideOnPressed: () {
           callNextScreen(context, NotificationScreen());
         },
@@ -74,11 +80,11 @@ class _DashBoardState extends State<DashBoard> {
       onPageChanged: (index) {
         pageChanged(index);
       },
-      children: <Widget>[
-        const HomeScreen(),
-        const JobDeatilScreen(),
-        const MessageScreen(),
-        const MessageScreen(),
+      children: const <Widget>[
+        HomeScreen(),
+        MyJobsScreen(),
+        MessageScreen(),
+        MessageScreen(),
       ],
     );
   }

@@ -1,4 +1,4 @@
-import 'package:flutter_projects/model/home/service_provider_model.dart';
+import 'package:flutter_projects/model/service_provider/service_provider_model.dart';
 
 class JobDetailModel {
   String? jobTitle;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/auth/auth_state.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/presentation/auth/screens/otp_verification.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:sizer/sizer.dart';
 
@@ -121,32 +123,34 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         decoration: InputDecoration(
             labelText: AuthString.entermobileNumber,
-            focusColor: Colors.blue,
+            focusColor: AppTheme.authGrey,
             labelStyle: const TextStyle(
-                color: Colors.blue, fontFamily: AppFonts.poppinsMed),
-            prefixIcon: Image.asset(AuthImageString.phone)),
+                color:AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
+            prefixIcon: Image.asset(AuthImageString.phone),
+        prefixIconColor: AppTheme.authGrey),
       ),
     );
   }
 
   Widget _loginCTA(BuildContext context) {
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.sp),
         ),
       ),
       onPressed: () {
-        // callNextScreen(context, const HomeScreen());
+        callNextScreen(context, const OTPVerification());
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.h),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
         child: Text(
           AuthString.getOtp,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               fontFamily: AppFonts.poppinsMed),
         ),
       ),

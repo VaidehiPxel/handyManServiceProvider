@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
 import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
+import 'package:sizer/sizer.dart';
 
 
 
@@ -43,40 +47,21 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    primary: false,
-                    shrinkWrap: true,
+                  child: Column(
+
                     children: [
-                      const SizedBox(
-                        height: 40,
+                      SizedBox(
+                        height: 3.h,
                       ),
-                      const Center(
-                        child: Text(
-                          AuthString.forgetPassword,
-                          style: TextStyle(
+                      Text(
+                        AuthString.setNewPassword,
+                        style: TextStyle(
                             color: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
+                            fontSize: 20.sp,
+                            fontFamily: AppFonts.poppinsBold),
                       ),
-                      const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            AuthString.sublogin,
-                            maxLines: 2,
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                      ),
+
+
                       Theme(
                         data: ThemeData(primaryColor: Colors.blue),
                         child: TextFormField(
@@ -140,25 +125,24 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       const SizedBox(
                         height: 40,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 60, right: 60),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.sp),
                           ),
-                          onPressed: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.all(18.0),
-                            child: Text(
-                              AuthString.save,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
-                              ),
+                        ),
+                        onPressed: () {
+                          callNextScreen(context, const DashBoard());
+                        },
+                        child:   Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
+                          child: Text(
+                            AuthString.save,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
