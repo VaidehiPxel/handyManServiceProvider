@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
-import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
+import 'package:flutter_projects/presentation/dashboard/home/screens/home_Screen.dart';
+import 'package:flutter_projects/presentation/dashboard/message/screens/message_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/myJobs/screen/myJobs_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/profile/screens/profile_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/bottom_appbar.dart';
-import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
-import 'package:flutter_projects/presentation/message/screens/message_screen.dart';
-import 'package:flutter_projects/presentation/myJobs/screen/my_job_detail_screen.dart';
-import 'package:flutter_projects/presentation/myJobs/screen/myJobs_screen.dart';
-import 'package:flutter_projects/presentation/notification/screen/notification_screen.dart';
+import 'package:flutter_projects/presentation/drawer/drawer_widget.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -35,20 +34,20 @@ class _DashBoardState extends State<DashBoard> {
       extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
         title: currentIndex == 0
-            ? HomeString.welcome
+            ? AppString.welcome
             : currentIndex == 1
-                ? HomeString.myJobs
+                ? AppString.myJobs
                 : currentIndex == 2
-                    ? HomeString.message
-                    : HomeString.profile,
-        leadIcon: ImageString.humBurgerSvg,
+                    ? AppString.message
+                    : AppString.profile,
+        leadIcon: AppAssets.humBurgerSvg,
         sideIcon: currentIndex == 1
-            ? ImageString.filter
+            ? AppAssets.filter
             : currentIndex == 2
-                ? HomeAsset.searchSvg
-                : ImageString.notificationSvg,
+                ? AppAssets.searchSvg
+                : AppAssets.notificationSvg,
         sideOnPressed: () {
-          callNextScreen(context, NotificationScreen());
+          callNextScreen(context, const NotificationScreen());
         },
       ),
       drawer: DrawerWidget(
@@ -84,7 +83,7 @@ class _DashBoardState extends State<DashBoard> {
         HomeScreen(),
         MyJobsScreen(),
         MessageScreen(),
-        MessageScreen(),
+        ProfileScreen(),
       ],
     );
   }

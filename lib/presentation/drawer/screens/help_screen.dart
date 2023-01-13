@@ -4,7 +4,7 @@ import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -17,8 +17,8 @@ class HelpScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: DrawerString.help,
-        leadIcon: ImageString.backIcon,
+        title: AppString.help,
+        leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -30,36 +30,36 @@ class HelpScreen extends StatelessWidget {
           child: Column(
             children: [
               EazyLifeWidget(
-                title: DrawerString.firstName,
-                widget: _customTextField(6.h,DrawerString.firstNameHint,1),
+                title: AppString.firstName,
+                widget: _customTextField(6.h,AppString.firstNameHint,1),
               ),
               SizedBox(height: 1.h,),
               EazyLifeWidget(
-                title: DrawerString.lastName,
-                widget: _customTextField(6.h,DrawerString.lastNameHint,1),
-              ),
-              SizedBox(height: 1.h,),
-
-              EazyLifeWidget(
-                title: DrawerString.emailAddress,
-                widget: _customTextField(6.h,DrawerString.emailAddressHint,1),
+                title: AppString.lastName,
+                widget: _customTextField(6.h,AppString.lastNameHint,1),
               ),
               SizedBox(height: 1.h,),
 
               EazyLifeWidget(
-                title: DrawerString.mobileNumber,
-                widget:_customTextField(6.h,DrawerString.mobileNumberHint,1),
+                title: AppString.emailAddress,
+                widget: _customTextField(6.h,AppString.emailAddressHint,1),
               ),
               SizedBox(height: 1.h,),
 
               EazyLifeWidget(
-                title: DrawerString.message,
-                widget: _customTextField(25.h,DrawerString.messageHint,70),
+                title: AppString.mobileNumber,
+                widget:_customTextField(6.h,AppString.mobileNumberHint,1),
+              ),
+              SizedBox(height: 1.h,),
+
+              EazyLifeWidget(
+                title: AppString.message,
+                widget: _customTextField(25.h,AppString.messageHint,70),
               ),
                SizedBox(
                 height: 2.5.h,
               ),
-              const AppButton(title: DrawerString.submit),
+               AppButton(title: AppString.submit,onPressed: (){},),
               SizedBox(height: 2 .h,),
             ],
           ),

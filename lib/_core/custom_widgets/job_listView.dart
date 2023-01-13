@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/model/jobs/job_listing_model.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/home/screens/job_detail_view.dart';
+import 'package:flutter_projects/presentation/dashboard/home/screens/job_detail_view.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -68,7 +69,7 @@ class JobListView extends StatelessWidget {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SvgPicture.asset(HomeAsset.location),
+                          SvgPicture.asset(AppAssets.location),
                           SizedBox(
                             width: 2.w,
                           ),
@@ -94,7 +95,7 @@ class JobListView extends StatelessWidget {
                   Row(
 
                     children: [
-                      SvgPicture.asset(HomeAsset.time),
+                      SvgPicture.asset(AppAssets.time),
                       SizedBox(
                         width: 1.w,
                       ),

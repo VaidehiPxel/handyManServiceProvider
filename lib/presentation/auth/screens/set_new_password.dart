@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:sizer/sizer.dart';
@@ -28,13 +28,19 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
       body: Stack(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 2.6,
-            child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+            height: 45.h,
+            child: AppBGWidget(
+                body: Center(
+                  child: Image.asset(
+                    AppAssets.appLogo,
+                    height: 13.h,
+                  ),
+                )),
           ),
           ListView(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height / 4,
+                height: 30.h,
               ),
               Container(
                 width: double.infinity,
@@ -54,7 +60,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         height: 3.h,
                       ),
                       Text(
-                        AuthString.setNewPassword,
+                        AppString.setNewPassword,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.sp,
@@ -69,13 +75,13 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                             color: Colors.blue,
                           ),
                           decoration: InputDecoration(
-                            labelText: AuthString.newPassword,
+                            labelText: AppString.newPassword,
                             focusColor: Colors.blue,
                             labelStyle: const TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
-                            prefixIcon: Image.asset(AuthImageString.password),
+                            prefixIcon: Image.asset(AppAssets.password),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -99,13 +105,13 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                             color: Colors.blue,
                           ),
                           decoration: InputDecoration(
-                            labelText: AuthString.confirmPassword,
+                            labelText: AppString.confirmPassword,
                             focusColor: Colors.blue,
                             labelStyle: const TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
-                            prefixIcon: Image.asset(AuthImageString.password),
+                            prefixIcon: Image.asset(AppAssets.password),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -138,7 +144,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         child:   Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
                           child: Text(
-                            AuthString.save,
+                            AppString.save,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
+
 
 
 class EazylifeBottomAppBar extends StatefulWidget {
@@ -40,52 +39,52 @@ class _EazylifeBottomAppBarState extends State<EazylifeBottomAppBar> {
             items: [
               BottomNavigationBarItem(
                   icon: Image.asset(
-                    HomeAsset.home,
+                    AppAssets.home,
                     height: 30,
                     width: 30,
                   ),
-                  label: HomeString.home,
+                  label: AppString.home,
                   activeIcon: Image.asset(
-                    HomeAsset.homehover,
+                    AppAssets.homehover,
                     height: 30,
                     width: 30,
                   ),
                   backgroundColor: Colors.white),
               BottomNavigationBarItem(
                   icon: Image.asset(
-                    HomeAsset.myJobs,
+                    AppAssets.myJobs,
                     height: 30,
                     width: 30,
                   ),
-                  label: HomeString.myJobs,
+                  label: AppString.myJobs,
                   activeIcon: Image.asset(
-                    HomeAsset.myJobshover,
+                    AppAssets.myJobshover,
                     height: 30,
                     width: 30,
                   ),
                   backgroundColor: Colors.white),
               BottomNavigationBarItem(
                   icon: Image.asset(
-                    HomeAsset.message,
+                    AppAssets.message,
                     height: 30,
                     width: 30,
                   ),
-                  label: HomeString.message,
+                  label: AppString.message,
                   activeIcon: Image.asset(
-                    HomeAsset.messagehover,
+                    AppAssets.messagehover,
                     height: 30,
                     width: 30,
                   ),
                   backgroundColor: Colors.white),
               BottomNavigationBarItem(
                   icon: Image.asset(
-                    HomeAsset.profile,
+                    AppAssets.profile,
                     height: 30,
                     width: 30,
                   ),
-                  label: HomeString.profile,
+                  label: AppString.profile,
                   activeIcon: Image.asset(
-                    HomeAsset.profilehover,
+                    AppAssets.profilehover,
                     height: 30,
                     width: 30,
                   ),

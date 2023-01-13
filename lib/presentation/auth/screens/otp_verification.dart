@@ -4,8 +4,7 @@ import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
 import 'package:flutter_projects/_core/custom_widgets/otp_text_field.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/screens/set_new_password.dart';
 import 'package:sizer/sizer.dart';
 
@@ -26,7 +25,7 @@ class _OTPVerificationState extends State<OTPVerification> {
         ),
           Center(
           child: Text(
-            AuthString.otpverification,
+            AppString.otpverification,
             style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
@@ -45,7 +44,7 @@ class _OTPVerificationState extends State<OTPVerification> {
           maxLines: 2,
           textScaleFactor: 1,
           text:  TextSpan(
-            text: AuthString.otpsubString,
+            text: AppString.otpsubString,
             style: TextStyle(color: AppTheme.grey,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),
             children: <TextSpan>[
               TextSpan(
@@ -87,11 +86,11 @@ class _OTPVerificationState extends State<OTPVerification> {
               maxLines: 1,
               textScaleFactor: 1,
               text:  TextSpan(
-                text: AuthString.dontreceive,
+                text: AppString.dontreceive,
                 style: TextStyle(color: AppTheme.grey,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),
                 children: <TextSpan>[
                   TextSpan(
-                      text: AuthString.resenotp,
+                      text: AppString.resenotp,
                 style: TextStyle(color: AppTheme.blue,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),),
                 ],
               ),
@@ -117,7 +116,7 @@ class _OTPVerificationState extends State<OTPVerification> {
             child:   Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
               child: Text(
-                AuthString.verifyNow,
+                AppString.verifyNow,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.sp,

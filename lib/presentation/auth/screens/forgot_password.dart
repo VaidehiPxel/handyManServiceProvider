@@ -4,8 +4,8 @@ import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/auth/auth_state.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/screens/otp_verification.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:sizer/sizer.dart';
@@ -38,11 +38,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 body: Stack(
                   children: [
                     SizedBox(
-                      height: 40.h,
-                      child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+                      height: 45.h,
+                      child: AppBGWidget(
+                          body: Center(
+                            child: Image.asset(
+                              AppAssets.appLogo,
+                              height: 13.h,
+                            ),
+                          )),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 30.h),
+                      padding: EdgeInsets.only(top: 35.h),
                       child: Container(
                         width: double.infinity,
                         decoration: const BoxDecoration(
@@ -91,7 +97,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AuthString.forgetPassword,
+          AppString.forgetPassword,
           style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
@@ -100,7 +106,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AuthString.sublogin,
+            AppString.sublogin,
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,
@@ -122,11 +128,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: AuthString.entermobileNumber,
+            labelText: AppString.entermobileNumber,
             focusColor: AppTheme.authGrey,
             labelStyle: const TextStyle(
                 color:AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
-            prefixIcon: Image.asset(AuthImageString.phone),
+            prefixIcon: Image.asset(AppAssets.phone),
         prefixIconColor: AppTheme.authGrey),
       ),
     );
@@ -147,7 +153,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
         child: Text(
-          AuthString.getOtp,
+          AppString.getOtp,
           style: TextStyle(
               color: Colors.white,
               fontSize: 14.sp,

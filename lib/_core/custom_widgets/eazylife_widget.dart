@@ -27,11 +27,8 @@ class EazyLifeWidget extends StatefulWidget {
 class _EazyLifeWidgetState extends State<EazyLifeWidget> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      primary: false,
-      padding: EdgeInsets.zero,
+    return Column(
+
       children: widget.withoutBlue == false
           ? [
         Row(
@@ -47,7 +44,7 @@ class _EazyLifeWidgetState extends State<EazyLifeWidget> {
                   borderRadius: BorderRadius.circular(0),
                   shape: BoxShape.rectangle,
                 ),
-                child: SvgPicture.asset(ImageString.sideBlueSvg),
+                child: SvgPicture.asset(AppAssets.sideBlueSvg),
               ),
             ),
              SizedBox(

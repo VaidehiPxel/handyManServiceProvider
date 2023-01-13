@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/login/login_bloc.dart';
 import 'package:flutter_projects/application/login/login_state.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart';
 import 'package:flutter_projects/presentation/auth/screens/sign_up_screen.dart';
@@ -43,12 +44,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     Stack(
                       children: [
                         SizedBox(
-                          height: 40.h,
+                          height: 45.h,
                           child: AppBGWidget(
-                              body: Image.asset(AuthImageString.appLogo)),
+                              body: Center(
+                            child: Image.asset(
+                              AppAssets.appLogo,
+                              height: 13.h,
+                            ),
+                          )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 30.h),
+                          padding: EdgeInsets.only(top: 35.h),
                           child: Container(
                             width: double.infinity,
                             decoration: const BoxDecoration(
@@ -84,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: Text(
-                                        AuthString.or,
+                                        AppString.or,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 12.sp,
@@ -93,8 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   _loginWith(),
-                                  const SizedBox(
-                                    height: 20,
+                                  SizedBox(
+                                    height: 1.5.h,
                                   ),
                                   _dontHaveAccount(context),
                                 ],
@@ -127,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
           maxLines: 1,
           textScaleFactor: 1,
           text: TextSpan(
-            text: AuthString.sign_up,
+            text: AppString.sign_up,
             style: const TextStyle(
                 color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
             children: <TextSpan>[
@@ -153,15 +159,15 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
-          //   child: Image.asset(AuthImageString.facebook),
+          //   child: Image.asset(AppAssets.facebook),
           // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AuthImageString.google),
+            child: Image.asset(AppAssets.google),
           ),
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
-          //   child: Image.asset(AuthImageString.linkedIn),
+          //   child: Image.asset(AppAssets.linkedIn),
           // )
         ],
       ),
@@ -176,11 +182,11 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-          labelText: AuthString.password,
+          labelText: AppString.password,
           focusColor: Colors.blue,
           labelStyle: const TextStyle(
               color: Colors.blue, fontFamily: AppFonts.poppinsMed),
-          prefixIcon: Image.asset(AuthImageString.password),
+          prefixIcon: Image.asset(AppAssets.password),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {
@@ -205,39 +211,23 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: AuthString.mobileNumber,
+            labelText: AppString.mobileNumber,
             focusColor: Colors.blue,
             labelStyle: const TextStyle(
                 color: Colors.blue, fontFamily: AppFonts.poppinsMed),
-            prefixIcon: Image.asset(AuthImageString.phone)),
+            prefixIcon: Image.asset(AppAssets.phone)),
       ),
     );
   }
 
   Widget _loginCTA(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-        ),
-        onPressed: () {
-          callNextScreen(context, const DashBoard());
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 1.h),
-          child: Text(
-            AuthString.log_in,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.sp,
-                fontFamily: AppFonts.poppinsMed),
-          ),
-        ),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: AuthButton(
+          btnTitle: AppString.login,
+          onPressed: () {
+            callNextScreen(context, const DashBoard());
+          }),
     );
   }
 
@@ -251,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AuthString.forgetPasswordq,
+            AppString.forgetPasswordq,
             style: TextStyle(
                 color: Colors.blue,
                 fontSize: 10.sp,
@@ -267,7 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AuthString.login,
+          AppString.login,
           style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
@@ -276,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AuthString.sublogin,
+            AppString.sublogin,
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,

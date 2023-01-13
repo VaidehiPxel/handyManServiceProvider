@@ -13,22 +13,26 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.sp),
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: 3.w),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          minimumSize: const Size.fromHeight(50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.sp),
+          ),
         ),
-      ),
-      onPressed: onPressed,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
-        child: Text(
-          btnTitle,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 14.sp,
-              fontFamily: AppFonts.poppinsMed),
+        onPressed: onPressed,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
+          child: Text(
+            btnTitle,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontFamily: AppFonts.poppinsMed),
+          ),
         ),
       ),
     );

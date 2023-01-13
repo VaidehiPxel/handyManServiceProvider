@@ -9,27 +9,24 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 3.w),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppTheme.blue,
-          minimumSize: const Size.fromHeight(50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppTheme.blue,
+        minimumSize: const Size.fromHeight(50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
 
-          ),
         ),
-        onPressed: onPressed,
-        child:  Padding(
-          padding: EdgeInsets.all(10.sp),
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14.sp,
-              fontFamily: AppFonts.poppinsMed,
-            ),
+      ),
+      onPressed: onPressed,
+      child:  Padding(
+        padding: EdgeInsets.all(10.sp),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14.sp,
+            fontFamily: AppFonts.poppinsMed,
           ),
         ),
       ),

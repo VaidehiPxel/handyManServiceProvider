@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/expansion_tile.dart';
-import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class FAQSScreen extends StatelessWidget {
@@ -14,8 +14,8 @@ class FAQSScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EazylifeAppBar(
-        title: DrawerString.faqs,
-        leadIcon: ImageString.backIcon,
+        title: AppString.faqs,
+        leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -25,33 +25,33 @@ class FAQSScreen extends StatelessWidget {
         padding:  EdgeInsets.all(18.sp),
         child: ListView(
           children: [
-            const EazylifeExpansionTile(
-                title: DrawerString.faqTitle,
-                subTitle: DrawerString.faqSubTitle),
+             EazylifeExpansionTile(
+                title: AppString.faqTitle,
+                subTitle: AppString.faqSubTitle),
             SizedBox(
               height: 2.h,
             ),
             const EazylifeExpansionTile(
-                title: DrawerString.faqTitle,
-                subTitle: DrawerString.faqSubTitle),
+                title: AppString.faqTitle,
+                subTitle: AppString.faqSubTitle),
             SizedBox(
               height: 2.h,
             ),
             const EazylifeExpansionTile(
-                title: DrawerString.faqTitle,
-                subTitle: DrawerString.faqSubTitle),
+                title: AppString.faqTitle,
+                subTitle: AppString.faqSubTitle),
             SizedBox(
               height: 2.h,
             ),
             const EazylifeExpansionTile(
-                title: DrawerString.faqTitle,
-                subTitle: DrawerString.faqSubTitle),
+                title: AppString.faqTitle,
+                subTitle: AppString.faqSubTitle),
             SizedBox(
               height: 2.h,
             ),
             const EazylifeExpansionTile(
-                title: DrawerString.faqTitle,
-                subTitle: DrawerString.faqSubTitle),
+                title: AppString.faqTitle,
+                subTitle: AppString.faqSubTitle),
           ],
         ),
       ),

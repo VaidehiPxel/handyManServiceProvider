@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/presentation/auth/screens/app_lang_select_screen.dart';
-import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
-import 'package:flutter_projects/presentation/home/screens/home_Screen.dart';
-import 'package:flutter_projects/presentation/message/screens/message_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {

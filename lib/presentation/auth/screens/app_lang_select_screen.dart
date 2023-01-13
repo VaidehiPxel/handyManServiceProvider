@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/auth/screens/login_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -23,17 +23,18 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
       body: AppBGWidget(
         body: Column(
           children: [
-            Expanded(flex: 2, child: Image.asset(AuthImageString.appLogo)),
+            Expanded(flex: 2, child: Image.asset(AppAssets.appLogo)),
             Expanded(
               flex: 2,
               child: Column(
                 children: [
                    Text(
-                    AuthString.selectLang,
+                    AppString.selectLang,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: AppFonts.poppinsBold
+
                     ),
                   ),
                   SizedBox(
@@ -66,7 +67,7 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
                         selectedLang == 1 ? Colors.white : AppTheme.black,
                         textColor:
                         selectedLang == 1 ? Colors.black : AppTheme.white,
-                        title: AuthString.french,
+                        title: AppString.french,
                       ),
                     ],
                   ),
@@ -99,7 +100,7 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 1.h),
           child: Text(
-            AuthString.continueS,
+            AppString.continueS,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 16.sp,
@@ -129,11 +130,11 @@ class SelectLangBtn extends StatelessWidget {
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 5.w,vertical: 1.2.h),
         child: Text(
-          title ?? AuthString.english,
+          title ?? AppString.english,
           style: TextStyle(
             color: textColor ?? Colors.black,
             fontSize: 14.sp,
-            fontWeight: FontWeight.normal,
+              fontFamily: AppFonts.poppinsMed
           ),
         ),
       ),

@@ -30,8 +30,8 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: EazylifeAppBar(
-        title: StringConst.reportAndcomplaint,
-        leadIcon: ImageString.backIcon,
+        title: AppString.reportAndcomplaint,
+        leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -45,7 +45,7 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
                 height: 2.h,
               ),
               EazyLifeWidget(
-                title: StringConst.selectComplaint,
+                title: AppString.selectComplaint,
                 fontFamily: AppFonts.poppinsMed,
                 fontSize: 16.sp,
                 widget: Padding(
@@ -90,7 +90,7 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
               ),
               SizedBox(height: 2.h,),
               EazyLifeWidget(
-                title: StringConst.addComplaint,
+                title: AppString.addComplaint,
                 widget: Padding(
                   padding:  EdgeInsets.only(top:0.8.h),
                   child: Container(
@@ -109,7 +109,7 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
                         maxLines: 40,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: StringConst.addComplaint,
+                          hintText: AppString.addComplaint,
                           contentPadding: EdgeInsets.all(14),
                         ),
                       ),
@@ -121,7 +121,7 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
                 height: 20,
               ),
               AppButton(
-                title: StringConst.raiseAComplaint,
+                title: AppString.raiseAComplaint,
                 onPressed: () {},
               ),
             ],

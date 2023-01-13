@@ -4,7 +4,7 @@ import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -21,8 +21,8 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: EazylifeAppBar(
-        title: DrawerString.reviewAndRating,
-        leadIcon: ImageString.backIcon,
+        title: AppString.reviewAndRating,
+        leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -120,172 +120,175 @@ class CustomerReviewsListItem extends StatefulWidget {
 class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppTheme.lightGrey,
-        borderRadius: BorderRadius.circular(6.sp),
-        border: Border.all(color: AppTheme.greyBorderContainer),
-        shape: BoxShape.rectangle,
-      ),
-      child: Padding(
-        padding:  EdgeInsets.all(10.sp),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Expanded(flex: 0, child: CircleAvatar()),
-                SizedBox(width: 3 .w,),
-                Expanded(
-                  flex: 2,
-                  child:
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Abhithi Maheshvari",
-                                style: TextStyle(
-                                  color: AppTheme.black,
-                                  fontSize: 12.sp,
-                                  fontFamily: AppFonts.poppinsSemiBold,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 0.5.h,),
-                              Row(
-                                children: [
-                                  RatingsWidget(
-                                    value: 4,
-                                    filledStar: Icon(
-                                      Icons.star_rate_rounded,
-                                      color: AppTheme.ratingsStarColor,
-                                      size: 14.sp,
-                                    ),
-                                    halffilledStar: Icon(
-                                      Icons.star_half_rounded,
-                                      color: AppTheme.ratingsStarColor,
-                                      size: 14.sp,
-                                    ),
-                                    unfilledStar: Icon(
-                                      Icons.star_rate_rounded,
-                                      color: AppTheme.greyStar,
-                                      size: 14.sp,
-                                    ),
-                                  ),
-                                  SizedBox(width: 3 .w,),
-                                  Text(
-                                    "4.0",
-                                    style: TextStyle(
-                                      color: AppTheme.blue,
-                                      fontSize: 12.sp,
-                                      fontFamily: AppFonts.poppinsSemiBold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Column(
+    return Padding(
+      padding:  EdgeInsets.only(bottom: 2.h),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppTheme.lightGrey,
+          borderRadius: BorderRadius.circular(6.sp),
+          border: Border.all(color: AppTheme.greyBorderContainer),
+          shape: BoxShape.rectangle,
+        ),
+        child: Padding(
+          padding:  EdgeInsets.all(10.sp),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(flex: 0, child: CircleAvatar()),
+                  SizedBox(width: 3 .w,),
+                  Expanded(
+                    flex: 2,
+                    child:
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(ImageString.calSvg),
-                                    SizedBox(width: 2 .w,),
-                                    Text(
-                                      "24 Sep",
-                                      style: TextStyle(
-                                        color: AppTheme.messageGrey,
-                                        fontSize: 10.sp,
-                                        fontFamily: AppFonts.poppins,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  "Abhithi Maheshvari",
+                                  style: TextStyle(
+                                    color: AppTheme.black,
+                                    fontSize: 12.sp,
+                                    fontFamily: AppFonts.poppinsSemiBold,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                                 SizedBox(height: 0.5.h,),
                                 Row(
                                   children: [
-                                    SvgPicture.asset(ImageString.time),
-                                    SizedBox(width: 2 .w,),
+                                    RatingsWidget(
+                                      value: 4,
+                                      filledStar: Icon(
+                                        Icons.star_rate_rounded,
+                                        color: AppTheme.ratingsStarColor,
+                                        size: 14.sp,
+                                      ),
+                                      halffilledStar: Icon(
+                                        Icons.star_half_rounded,
+                                        color: AppTheme.ratingsStarColor,
+                                        size: 14.sp,
+                                      ),
+                                      unfilledStar: Icon(
+                                        Icons.star_rate_rounded,
+                                        color: AppTheme.greyStar,
+                                        size: 14.sp,
+                                      ),
+                                    ),
+                                    SizedBox(width: 3 .w,),
                                     Text(
-                                      "60 mins",
+                                      "4.0",
                                       style: TextStyle(
-                                        color: AppTheme.messageGrey,
-                                        fontSize: 10.sp,
-                                        fontFamily: AppFonts.poppins,
-                                        fontWeight: FontWeight.w300,
+                                        color: AppTheme.blue,
+                                        fontSize: 12.sp,
+                                        fontFamily: AppFonts.poppinsSemiBold,
                                       ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                     SizedBox(height: 1.h,),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-
-
-                          Text(
-                            "Excellent service and very fast dispatch and good customer service and wide number.",
-                            style: TextStyle(
-                              color: AppTheme.messageGrey,
-                              fontSize: 10.sp,
-                              fontFamily: AppFonts.poppins,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          RichText(
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.center,
-                            textDirection: TextDirection.rtl,
-                            softWrap: true,
-                            maxLines: 1,
-                            textScaleFactor: 1,
-                            text: TextSpan(
-                              text: "Job Title :",
-                              style: TextStyle(
-                                color: AppTheme.black,
-                                fontFamily: AppFonts.poppinsSemiBold,
-                                fontSize: 12.sp,
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(AppAssets.calSvg),
+                                      SizedBox(width: 2 .w,),
+                                      Text(
+                                        "24 Sep",
+                                        style: TextStyle(
+                                          color: AppTheme.messageGrey,
+                                          fontSize: 10.sp,
+                                          fontFamily: AppFonts.poppins,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 0.5.h,),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(AppAssets.time),
+                                      SizedBox(width: 2 .w,),
+                                      Text(
+                                        "60 mins",
+                                        style: TextStyle(
+                                          color: AppTheme.messageGrey,
+                                          fontSize: 10.sp,
+                                          fontFamily: AppFonts.poppins,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: "  Sofa Cleaning",
-                                    style: TextStyle(
-                                      color: AppTheme.messageGrey,
-                                      fontFamily: AppFonts.poppins,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                    )),
-                              ],
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                          ],
+                        ),
+                       SizedBox(height: 1.h,),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
 
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 0.5.h,
-            ),
-          ],
+
+                            Text(
+                              "Excellent service and very fast dispatch and good customer service and wide number.",
+                              style: TextStyle(
+                                color: AppTheme.messageGrey,
+                                fontSize: 10.sp,
+                                fontFamily: AppFonts.poppins,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            RichText(
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.center,
+                              textDirection: TextDirection.rtl,
+                              softWrap: true,
+                              maxLines: 1,
+                              textScaleFactor: 1,
+                              text: TextSpan(
+                                text: "Job Title :",
+                                style: TextStyle(
+                                  color: AppTheme.black,
+                                  fontFamily: AppFonts.poppinsSemiBold,
+                                  fontSize: 12.sp,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: "  Sofa Cleaning",
+                                      style: TextStyle(
+                                        color: AppTheme.messageGrey,
+                                        fontFamily: AppFonts.poppins,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10.sp,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 0.5.h,
+              ),
+            ],
+          ),
         ),
       ),
     );

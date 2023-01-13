@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
+import 'package:sizer/sizer.dart';
 
 
 
@@ -26,8 +27,14 @@ class _EazylifeScaffoldState extends State<EazylifeScaffold> {
             Stack(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 2.6,
-                  child: AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+                  height: 45.h,
+                  child: AppBGWidget(
+                      body: Center(
+                        child: Image.asset(
+                          AppAssets.appLogo,
+                          height: 13.h,
+                        ),
+                      )),
                 ),
                 ListView(
                   shrinkWrap: true,
@@ -35,7 +42,7 @@ class _EazylifeScaffoldState extends State<EazylifeScaffold> {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 4,
+                      height: 30.h,
                     ),
                     Container(
                       width: double.infinity,

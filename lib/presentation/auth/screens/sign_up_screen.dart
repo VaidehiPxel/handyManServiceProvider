@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/auth/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/screens/login_screen.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -30,9 +32,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Stack(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 2.6,
-                  child:
-                      AppBGWidget(body: Image.asset(AuthImageString.appLogo)),
+                  height: 45.h,
+                  child: AppBGWidget(
+                      body: Center(
+                        child: Image.asset(
+                          AppAssets.appLogo,
+                          height: 13.h,
+                        ),
+                      )),
                 ),
                 Stack(
                   children: [
@@ -42,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 3.6,
+                          height:30.h,
                         ),
                         Container(
                           width: double.infinity,
@@ -61,11 +68,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               shrinkWrap: true,
                               children: [
                                 SizedBox(
-                                  height: 13.h,
+                                  height: 10.h,
                                 ),
                                 Center(
                                   child: Text(
-                                    AuthString.signUp,
+                                    AppString.signUp,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20.sp,
@@ -77,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 Center(
                                   child: Text(
-                                    AuthString.sublogin,
+                                    AppString.sublogin,
                                     maxLines: 2,
                                     softWrap: true,
                                     textAlign: TextAlign.center,
@@ -92,16 +99,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: TextFormField(
                                     style: const TextStyle(
                                       color: Colors.blue,
+                                        fontFamily: AppFonts.poppinsMed
                                     ),
                                     decoration: InputDecoration(
-                                        labelText: AuthString.firstName,
+                                        labelText: AppString.firstName,
                                         focusColor: Colors.blue,
                                         labelStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
+                                          color: AppTheme.authGrey,
+                                            fontFamily: AppFonts.poppinsMed
                                         ),
                                         prefixIcon:
-                                            Image.asset(AuthImageString.user)),
+                                        Padding(
+                                          padding:  EdgeInsets.all(12.sp),
+                                          child: SvgPicture.asset(AppAssets.person,
+                                            color: AppTheme.authGrey,
+                                          ),
+                                        )),
+                                  ),
+                                ),
+                                Theme(
+                                  data: ThemeData(primaryColor: Colors.blue),
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      color: AppTheme.authGrey,
+                                        fontFamily: AppFonts.poppinsMed
+                                    ),
+                                    decoration: InputDecoration(
+                                        labelText: AppString.lastName,
+                                        focusColor: Colors.blue,
+                                        labelStyle: const TextStyle(
+                                          color:AppTheme.authGrey,
+                                            fontFamily: AppFonts.poppinsMed
+                                        ),
+                                        prefixIcon:
+                                        Padding(
+                                          padding:  EdgeInsets.all(12.sp),
+                                          child: SvgPicture.asset(AppAssets.person,
+                                            color: AppTheme.authGrey,
+                                          ),
+                                        )),
                                   ),
                                 ),
                                 Theme(
@@ -109,16 +145,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: TextFormField(
                                     style: const TextStyle(
                                       color: Colors.blue,
+                                        fontFamily: AppFonts.poppinsMed
                                     ),
                                     decoration: InputDecoration(
-                                        labelText: AuthString.lastName,
+                                        labelText: AppString.email,
                                         focusColor: Colors.blue,
                                         labelStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
+                                          color:AppTheme.authGrey,
+                                            fontFamily: AppFonts.poppinsMed
                                         ),
                                         prefixIcon:
-                                            Image.asset(AuthImageString.user)),
+                                            Padding(
+                                              padding:  EdgeInsets.all(12.sp),
+                                              child: SvgPicture.asset(AppAssets.emailSvg,
+                                                color: AppTheme.authGrey,
+                                         ),
+                                            )),
                                   ),
                                 ),
                                 Theme(
@@ -126,16 +168,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: TextFormField(
                                     style: const TextStyle(
                                       color: Colors.blue,
+                                        fontFamily: AppFonts.poppinsMed
                                     ),
                                     decoration: InputDecoration(
-                                        labelText: AuthString.email,
+                                        labelText: AppString.mobileNumber,
                                         focusColor: Colors.blue,
                                         labelStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
+                                          color:AppTheme.authGrey,
+                                            fontFamily: AppFonts.poppinsMed
                                         ),
                                         prefixIcon:
-                                            Image.asset(AuthImageString.email)),
+                                        Padding(
+                                          padding:  EdgeInsets.all(12.sp),
+                                          child: SvgPicture.asset(AppAssets.callSvg,
+                                            color: AppTheme.authGrey,
+                                          ),
+                                        )),
                                   ),
                                 ),
                                 Theme(
@@ -143,33 +191,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: TextFormField(
                                     style: const TextStyle(
                                       color: Colors.blue,
+                                        fontFamily: AppFonts.poppinsMed
                                     ),
                                     decoration: InputDecoration(
-                                        labelText: AuthString.mobileNumber,
-                                        focusColor: Colors.blue,
-                                        labelStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        prefixIcon:
-                                            Image.asset(AuthImageString.phone)),
-                                  ),
-                                ),
-                                Theme(
-                                  data: ThemeData(primaryColor: Colors.blue),
-                                  child: TextFormField(
-                                    style: const TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                    decoration: InputDecoration(
-                                      labelText: AuthString.password,
+                                      labelText: AppString.password,
                                       focusColor: Colors.blue,
                                       labelStyle: const TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold,
+                                        color: AppTheme.authGrey,
+                                          fontFamily: AppFonts.poppinsMed
                                       ),
                                       prefixIcon:
-                                          Image.asset(AuthImageString.password),
+                                          Image.asset(AppAssets.password),
                                       suffixIcon: GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -191,16 +223,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: TextFormField(
                                     style: const TextStyle(
                                       color: Colors.blue,
+                                        fontFamily: AppFonts.poppinsMed
                                     ),
                                     decoration: InputDecoration(
-                                      labelText: AuthString.confirmPassword,
+                                      labelText: AppString.confirmPassword,
                                       focusColor: Colors.blue,
                                       labelStyle: const TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold,
+                                        color: AppTheme.authGrey,
+                                          fontFamily: AppFonts.poppinsMed
                                       ),
                                       prefixIcon:
-                                          Image.asset(AuthImageString.password),
+                                          Image.asset(AppAssets.password),
                                       suffixIcon: GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -221,30 +254,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   height: 40,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 60, right: 60),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(18.0),
-                                      child: Text(
-                                        AuthString.signUp,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  padding:  EdgeInsets.symmetric(horizontal: 15.w),
+                                  child: AuthButton(
+                                      btnTitle: AppString.signUp,
+                                      onPressed: () {
+                                      }),
                                 ),
+
                                 const SizedBox(
                                   height: 20,
                                 ),
@@ -253,11 +269,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      AuthString.or,
+                                      AppString.or,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                                          fontFamily: AppFonts.poppinsMed
                                       ),
                                     ),
                                   ),
@@ -358,12 +374,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             maxLines: 1,
             textScaleFactor: 1,
             text: TextSpan(
-              text: AuthString.alreadyAmember,
+              text: AppString.alreadyAmember,
               style: const TextStyle(
                   color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
               children: <TextSpan>[
                 TextSpan(
-                    text:AuthString.log_in,
+                    text:AppString.log_in,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         callNextScreen(context, const LoginScreen());
@@ -384,15 +400,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
-          //   child: Image.asset(AuthImageString.facebook),
+          //   child: Image.asset(AppAssets.facebook),
           // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AuthImageString.google),
+            child: Image.asset(AppAssets.google),
           ),
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
-          //   child: Image.asset(AuthImageString.linkedIn),
+          //   child: Image.asset(AppAssets.linkedIn),
           // )
         ],
       ),

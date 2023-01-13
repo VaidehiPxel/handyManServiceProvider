@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class TAndCScreen extends StatelessWidget {
@@ -14,8 +14,8 @@ class TAndCScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EazylifeAppBar(
-        title: DrawerString.tandc,
-        leadIcon: ImageString.backIcon,
+        title: AppString.tandc,
+        leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -28,7 +28,7 @@ class TAndCScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children:  [
               Text(
-                DrawerString.tandc,
+                AppString.tandc,
                 style: TextStyle(
                   color: AppTheme.black,
                   fontSize: 16.sp,

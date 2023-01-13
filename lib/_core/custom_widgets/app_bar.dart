@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/presentation/auth/constants/image_constant.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+
+import '../constants/image_constants.dart';
 
 class EazylifeAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -31,8 +31,8 @@ class _EazylifeAppBarState extends State<EazylifeAppBar> {
           color: Colors.blue.shade700,
           borderRadius: BorderRadius.circular(18),
           shape: BoxShape.rectangle,
-          image: const DecorationImage(
-            image: AssetImage(AuthImageString.appBg),
+          image:  const DecorationImage(
+            image: AssetImage(AppAssets.appBg),
             fit: BoxFit.cover,
           ),
         ),
@@ -56,7 +56,7 @@ class _EazylifeAppBarState extends State<EazylifeAppBar> {
           }),
           actions: [
             IconButton(
-                onPressed: widget.sideOnPressed, icon: SvgPicture.asset(widget.sideIcon??HomeAsset.notifications))
+                onPressed: widget.sideOnPressed, icon: SvgPicture.asset(widget.sideIcon??AppAssets.notifications))
 
           ],
         ),

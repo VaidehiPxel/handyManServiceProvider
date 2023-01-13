@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/custom_dialogs/logout_dialog.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/presentation/auth/screens/change_password.dart';
+import 'package:flutter_projects/presentation/dashboard/home/widget/blue_box_text.dart';
+import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
-import 'package:flutter_projects/presentation/drawer/constants/string_constant.dart';
+
 import 'package:flutter_projects/presentation/drawer/screens/faq_screen.dart';
 import 'package:flutter_projects/presentation/drawer/screens/help_screen.dart';
 import 'package:flutter_projects/presentation/drawer/screens/rating_review.dart';
 import 'package:flutter_projects/presentation/drawer/screens/terms_screen.dart';
-import 'package:flutter_projects/presentation/home/constants/string_constant.dart';
-import 'package:flutter_projects/presentation/home/widget/blue_box_text.dart';
-import 'package:flutter_projects/presentation/notification/screen/notification_screen.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,7 +36,7 @@ class DrawerWidget extends StatelessWidget {
             },
             trailing: Padding(
               padding:  EdgeInsets.only(right: 2.w),
-              child: SvgPicture.asset(ImageString.closeSvg),
+              child: SvgPicture.asset(AppAssets.closeSvg),
             ),
           ),
           Row(
@@ -70,97 +72,113 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.dashboard,
+              text: AppString.dashboard,
               onTap: () {
                 callNextScreen(context, const DashBoard());
               },
               showBlueBox: currentIndex == 0,
+              showSelected: currentIndex == 0,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.notification,
+              text: AppString.notification,
               onTap: () {
                 callNextScreen(context, const NotificationScreen());
               },
               showBlueBox: currentIndex == 1,
+              showSelected: currentIndex == 1,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.payment,
+              text: AppString.payment,
               onTap: () {
                 //callNextScreen(context, const FAQSScreen());
               },
               showBlueBox: currentIndex == 2,
+              showSelected: currentIndex == 2,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.reviewAndRating,
+              text: AppString.reviewAndRating,
               onTap: () {
                 callNextScreen(context, const RatingAndReviewScreen());
               },
               showBlueBox: currentIndex == 3,
+              showSelected: currentIndex == 3,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.changePassword,
+              text: AppString.changePassword,
               onTap: () {
-                callNextScreen(context, const FAQSScreen());
+                callNextScreen(context, const ChangePassword());
               },
               showBlueBox: currentIndex == 4,
+              showSelected: currentIndex == 4,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.faqs,
+              text: AppString.faqs,
               onTap: () {
                 callNextScreen(context, const FAQSScreen());
               },
               showBlueBox: currentIndex == 5,
+              showSelected: currentIndex == 5,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.help,
+              text: AppString.help,
               onTap: () {
                 callNextScreen(context, const HelpScreen());
               },
               showBlueBox: currentIndex == 6,
+              showSelected: currentIndex == 6,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.tandc,
+              text: AppString.tandc,
               onTap: () {
                 callNextScreen(context, const TAndCScreen());
               },
               showBlueBox: currentIndex == 7,
+              showSelected: currentIndex == 7,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: DrawerString.logOut,
-              onTap: () {},
+              text: AppString.logOut,
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const LogOutDialogBox();
+                    });
+              },
               showBlueBox: currentIndex == 8,
+              showSelected: currentIndex == 8,
             ),
           ),
         ],

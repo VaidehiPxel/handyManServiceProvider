@@ -35,7 +35,7 @@ class _EazylifeExpansionTileState extends State<EazylifeExpansionTile> {
                 decoration: const BoxDecoration(
                   shape: BoxShape.rectangle,
                   image: DecorationImage(
-                    image: AssetImage(ImageString.sideBlue),
+                    image: AssetImage(AppAssets.sideBlue),
                     fit: BoxFit.cover,
                   ),
                 ),
