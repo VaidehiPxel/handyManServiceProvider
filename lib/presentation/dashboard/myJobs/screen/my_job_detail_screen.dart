@@ -359,7 +359,7 @@ class _MyJobDetailScreenState extends State<MyJobDetailScreen> {
                         onOkPressed: () {
                           Navigator.of(context).pop();
                         },
-                        title: "Are you sure?",
+                        title: AppString.areYouSure,
                         titleNo: "Cancel",
                         titleYes: "Remove",
                         colorNo: AppTheme.black,

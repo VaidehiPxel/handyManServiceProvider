@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/model/jobs/job_listing_model.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/job_detail_view.dart';
+import 'package:flutter_projects/presentation/dashboard/home/screens/job_request_view.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class JobListView extends StatelessWidget {
   final JobListingModel jobListingModel;
+  final JobType jobType;
 
-  const JobListView({Key? key, required this.jobListingModel})
+  const JobListView({Key? key, required this.jobListingModel,
+    required this.jobType})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        jobType==JobType.jobRequest?
+        callNextScreen(context, JobRequestView(appBarTitle: jobListingModel.jobTitle,))
+
+        :
         callNextScreen(context, JobDetailView(appBarTitle: jobListingModel.jobTitle,));
       },
       child: Container(

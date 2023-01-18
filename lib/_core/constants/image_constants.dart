@@ -65,5 +65,5 @@ class AppAssets{
   static const String cancel = "assets/svg/cancelApp.svg";
   static const String chat = "assets/svg/chat_icon.svg";
 
-  static const String notification = "Notification";
+  static const String wallet = "assets/svg/wallet.svg";
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
@@ -113,6 +114,7 @@ class _NewJobListState extends State<NewJobList> {
                 itemBuilder: (context, index) {
                   return JobListView(
                     jobListingModel: jobModel[index],
+                    jobType: JobType.newJob,
                   );
                 },
               ),

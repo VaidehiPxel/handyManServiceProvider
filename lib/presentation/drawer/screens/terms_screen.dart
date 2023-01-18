@@ -14,7 +14,7 @@ class TAndCScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EazylifeAppBar(
-        title: AppString.tandc,
+        title: AppString.termsCondition,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -28,7 +28,7 @@ class TAndCScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children:  [
               Text(
-                AppString.tandc,
+                AppString.termsCondition,
                 style: TextStyle(
                   color: AppTheme.black,
                   fontSize: 16.sp,

@@ -25,7 +25,7 @@ class AuthButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
+          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.5.h),
           child: Text(
             btnTitle,
             style: TextStyle(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/presentation/auth/screens/app_lang_select_screen.dart';
+import 'package:flutter_projects/presentation/payment/add_bank_details.dart';
+import 'package:flutter_projects/presentation/payment/payment_screen.dart';
+import 'package:flutter_projects/presentation/payment/withdrawal_money.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {

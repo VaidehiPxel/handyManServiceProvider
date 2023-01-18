@@ -29,6 +29,15 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
   Duration duration = const Duration();
   Timer? timer;
 
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
+  String dropdownvalue = 'Item 1';
+
   @override
   void initState() {
     super.initState();
@@ -169,8 +178,8 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             ),
           ],
         ),
-        SizedBox(height: 2.h,),
-      AppButton(title: "Update Amount",onPressed: (){},),
+        SizedBox(height: 3.h,),
+      AppButton(title: AppString.updateAmount,onPressed: (){},),
         SizedBox(height: 2.h,),
       ],
     );
@@ -222,7 +231,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                   },
                 ),
                 Text(
-                  "Yes",
+                  AppString.yes,
                   style: TextStyle(
                     color: AppTheme.blue,
                     fontSize: 12.sp,
@@ -264,7 +273,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                     },
                   ),
                   Text(
-                    "No",
+                   AppString.no,
                     style: TextStyle(
                       color: AppTheme.blue,
                       fontSize: 12.sp,
@@ -341,6 +350,42 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
         ),
         SizedBox(
           height: 1.h,
+        ),
+        Container(
+          height: 6.h,
+          margin:  EdgeInsets.symmetric(horizontal:2.w),
+          decoration: BoxDecoration(
+            color: AppTheme.lightGrey,
+            borderRadius: BorderRadius.circular(5.sp),
+            shape: BoxShape.rectangle,
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: dropdownvalue,
+                    icon: const Icon(Icons.keyboard_arrow_down,color: AppTheme.blue,),
+                    items: items.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        dropdownvalue = value!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -575,7 +620,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             color: Colors.black,
             fontSize: 12.sp,
             fontFamily: AppFonts.poppinsSemiBold,
-            fontWeight: FontWeight.bold,
+           
           ),
         ),
         SizedBox(
@@ -588,7 +633,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             color: AppTheme.medGrey,
             fontSize: 10.sp,
             fontFamily: AppFonts.poppins,
-            fontWeight: FontWeight.normal,
+          
           ),
         ),
         SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -312,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return JobListView(
               jobListingModel: jobModel[index],
+              jobType: JobType.jobRequest,
             );
           },
         ),
@@ -360,6 +362,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return JobListView(
               jobListingModel: jobModel[index],
+              jobType: JobType.newJob,
             );
           },
         ),

@@ -30,7 +30,7 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: EazylifeAppBar(
-        title: AppString.reportAndcomplaint,
+        title: AppString.reportAndComplaint,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);

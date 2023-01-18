@@ -13,6 +13,7 @@ import 'package:flutter_projects/presentation/drawer/screens/help_screen.dart';
 import 'package:flutter_projects/presentation/drawer/screens/rating_review.dart';
 import 'package:flutter_projects/presentation/drawer/screens/terms_screen.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/presentation/payment/payment_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -98,7 +99,7 @@ class DrawerWidget extends StatelessWidget {
               showBold: true,
               text: AppString.payment,
               onTap: () {
-                //callNextScreen(context, const FAQSScreen());
+                callNextScreen(context, const PaymentScreen());
               },
               showBlueBox: currentIndex == 2,
               showSelected: currentIndex == 2,
@@ -156,7 +157,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.tandc,
+              text: AppString.termsCondition,
               onTap: () {
                 callNextScreen(context, const TAndCScreen());
               },

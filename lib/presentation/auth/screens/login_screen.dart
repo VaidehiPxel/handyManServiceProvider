@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               body: Center(
                             child: Image.asset(
                               AppAssets.appLogo,
-                              height: 13.h,
+                              height: 12.h,
                             ),
                           )),
                         ),
@@ -69,13 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 3.h,
+                                    height: 2.h,
                                   ),
                                   _setTitle(),
                                   _setMobileNumber(),
                                   _setPassword(),
                                   SizedBox(
-                                    height: 1.h,
+                                    height: 1.2.h,
                                   ),
                                   _forgotPassword(context),
                                   SizedBox(
@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   SizedBox(
                                     height: 2.5.h,
                                   ),
+
                                   Align(
                                     alignment: Alignment.center,
                                     child: Padding(
@@ -96,8 +97,45 @@ class _LoginScreenState extends State<LoginScreen> {
                                             fontSize: 12.sp,
                                             fontFamily: AppFonts.poppinsMed),
                                       ),
+                                      // Row(
+                                      //   children: [
+                                      //     Expanded(
+                                      //       child: Container(
+                                      //         decoration: BoxDecoration(
+                                      //           gradient:  SweepGradient(
+                                      //               colors: [ Color(0xFF02BB9F),
+                                      //                 Colors.black87, Colors.black12,
+                                      //                 Color(0xFF02BB9F), Color(0xFF02BB9F)],
+                                      //               stops: [0.0, 0.25, 0.5, 0.75, 1],
+                                      //               startAngle: 0.5,
+                                      //               endAngle: 1
+                                      //           ),),
+                                      //       ),
+                                      //     ),
+                                      //     Text(
+                                      //       AppString.or,
+                                      //       style: TextStyle(
+                                      //           color: Colors.black,
+                                      //           fontSize: 12.sp,
+                                      //           fontFamily: AppFonts.poppinsMed),
+                                      //     ),
+                                      //     Expanded(
+                                      //       child: Container(
+                                      //           height: 0.8.h,
+                                      //           width: double.infinity,
+                                      //           decoration: const BoxDecoration(
+                                      //               gradient: LinearGradient(
+                                      //                   begin: Alignment.topLeft,
+                                      //                   end: Alignment.topRight,
+                                      //                   stops: [0.8,1.0],
+                                      //                   colors: [AppTheme.black,Colors.transparent, ]))
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
                                     ),
                                   ),
+
                                   _loginWith(),
                                   SizedBox(
                                     height: 1.5.h,
@@ -133,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
           maxLines: 1,
           textScaleFactor: 1,
           text: TextSpan(
-            text: AppString.sign_up,
+            text: AppString.doNotHaveAccount,
             style: const TextStyle(
                 color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
             children: <TextSpan>[
@@ -185,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
           labelText: AppString.password,
           focusColor: Colors.blue,
           labelStyle: const TextStyle(
-              color: Colors.blue, fontFamily: AppFonts.poppinsMed),
+              color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
           prefixIcon: Image.asset(AppAssets.password),
           suffixIcon: GestureDetector(
             onTap: () {
@@ -214,8 +252,8 @@ class _LoginScreenState extends State<LoginScreen> {
             labelText: AppString.mobileNumber,
             focusColor: Colors.blue,
             labelStyle: const TextStyle(
-                color: Colors.blue, fontFamily: AppFonts.poppinsMed),
-            prefixIcon: Image.asset(AppAssets.phone)),
+                color:AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
+            prefixIcon: Image.asset(AppAssets.phone,color:AppTheme.authGrey ,)),
       ),
     );
   }
@@ -241,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AppString.forgetPasswordq,
+            "${AppString.forgetPassword}?",
             style: TextStyle(
                 color: Colors.blue,
                 fontSize: 10.sp,
@@ -266,7 +304,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AppString.sublogin,
+            AppString.subLogin,
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,

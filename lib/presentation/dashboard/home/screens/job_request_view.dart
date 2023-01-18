@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/grey_textField.dart';
+import 'package:flutter_projects/presentation/dashboard/message/screens/chat_detail_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
@@ -11,9 +13,9 @@ import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class JobDetailView extends StatelessWidget {
+class JobRequestView extends StatelessWidget {
   final String? appBarTitle;
-  const JobDetailView({Key? key, this.appBarTitle}) : super(key: key);
+  const JobRequestView({Key? key, this.appBarTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
 
-  bool isUpdate=false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,10 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           SizedBox(
             height: 1.h,
           ),
+          _setAcceptDeclineCTA(context),
+          SizedBox(
+            height: 8.sp,
+          ),
           _setProviderTitle(),
           SizedBox(
             height: 8.sp,
@@ -83,18 +89,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           SizedBox(
             height: 8.sp,
           ),
-          isUpdate?_setUpdateBid():_setEnterBid(),
-          SizedBox(
-            height: 3.h,
-          ),
-          isUpdate?_setListOfBidTitle():Container(),
-          SizedBox(
-            height: 2.h,
-          ),
-          isUpdate?_setListOfProvider():Container(),
-          SizedBox(
-            height: 2.h,
-          ),
+
         ],
       ),
     );
@@ -202,29 +197,6 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget _setListOfBidTitle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          AppString.listOfBids,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 13.sp,
-            fontFamily: AppFonts.poppinsSemiBold,
-          ),
-        ),
-        Text(
-          AppString.viewAll,
-          style: TextStyle(
-            color: AppTheme.blue,
-            fontSize: 10.sp,
-            fontFamily: AppFonts.poppinsMed,
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _setProviderTitle() {
     return Row(
@@ -250,201 +222,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget _setEnterBid() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppString.yourBid,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 13.sp,
-            fontFamily: AppFonts.poppinsSemiBold,
-          ),
-        ),
-        SizedBox(
-          height: 1.h,
-        ),
-        Row(
-          children: [
-            const Expanded(
-              flex: 4,
-              child: GreyTextField(
-                hintText: "Enter Amount",
-              ),
-            ),
-            SizedBox(
-              width: 2.w,
-            ),
-            Expanded(
-              flex: 2,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.blue,
-                  minimumSize: const Size.fromHeight(40),
-                  elevation: 0,
-                  shadowColor: Colors.transparent,
-                ),
-                onPressed: () {
-                  setState(() {
-                    isUpdate=true;
-                  });
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                  child: Text(
-                    AppString.bid,
-                    style: TextStyle(
-                        color: AppTheme.white,
-                        fontSize: 14.sp,
-                        fontFamily: AppFonts.poppinsMed),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
-  Widget _setUpdateBid() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppString.bidInfo,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 13.sp,
-            fontFamily: AppFonts.poppinsSemiBold,
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RichText(
-              overflow: TextOverflow.clip,
-              textAlign: TextAlign.center,
-              textDirection: TextDirection.ltr,
-              softWrap: true,
-              maxLines: 2,
-              textScaleFactor: 1,
-              text: TextSpan(
-                text: AppString.myBidPosition,
-                style: TextStyle(
-                    color: AppTheme.medGrey,
-                    fontFamily: AppFonts.poppinsMed,
-                    fontSize: 10.sp),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: "# 20",
-                      style: TextStyle(
-                          color: AppTheme.blue,
-                          fontFamily: AppFonts.poppinsMed,
-                          fontSize: 10.sp)),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 4.w,
-            ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogBoxWithIcon(
-                        icon: AppAssets.delete,
-                        content: Text(
-                          AppString.removeYourBid,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppTheme.black,
-                              fontFamily: AppFonts.poppins,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 10.sp),
-                        ),
-                        iconColor: AppTheme.red,
-                        onCancelPressed: () {
-                          Navigator.of(context)
-                            ..pop()
-                            ..pop();
-                        },
-                        onOkPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        title: AppString.areYouSure,
-                        titleNo: "Cancel",
-                        titleYes: "Remove",
-                        colorNo: AppTheme.black,
-                        colorYes: AppTheme.white,
-                        colorYesBtn: AppTheme.red,
-                        sizeNo: 10.sp,
-                        titleFamily: AppFonts.poppinsMed,
-                      );
-                    });
-              },
-              child: Row(
-                children: [
-                  SvgPicture.asset(AppAssets.delete),
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Text(
-                  AppString.remove,
-                    style: TextStyle(
-                      color: AppTheme.red,
-                      fontSize: 11.sp,
-                      fontFamily: AppFonts.poppinsMed,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 1.h,
-        ),
-        Row(
-          children: [
-            const Expanded(
-              flex: 4,
-              child: GreyTextField(
-                hintText: "\$ 290.00",
-              ),
-            ),
-            SizedBox(
-              width: 2.w,
-            ),
-            Expanded(
-              flex: 2,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.blue,
-                  minimumSize: const Size.fromHeight(40),
-                  elevation: 0,
-                  shadowColor: Colors.transparent,
-                ),
-                onPressed: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                  child: Text(
-                    AppString.update,
-                    style: TextStyle(
-                        color: AppTheme.white,
-                        fontSize: 14.sp,
-                        fontFamily: AppFonts.poppinsMed),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
   Widget _setAcceptDeclineCTA(BuildContext context) {
     return Column(
@@ -466,7 +244,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                         return DialogBoxWithIcon(
                           icon: AppAssets.save,
                           content: Text(
-                           AppString.decline,
+                            AppString.decline,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppTheme.black,
@@ -568,22 +346,27 @@ class _RenderBodyViewState extends State<RenderBodyView> {
         ),
         Align(
           alignment: Alignment.centerRight,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(AppAssets.chat),
-              SizedBox(
-                width: 2.w,
-              ),
-              Text(
-                AppString.chatNow,
-                style: TextStyle(
-                  color: AppTheme.blue,
-                  fontSize: 11.sp,
-                  fontFamily: AppFonts.poppinsMed,
+          child: GestureDetector(
+            onTap: (){
+              callNextScreen(context, ChatDetailScreen());
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(AppAssets.chat),
+                SizedBox(
+                  width: 2.w,
                 ),
-              ),
-            ],
+                Text(
+                  AppString.chatNow,
+                  style: TextStyle(
+                    color: AppTheme.blue,
+                    fontSize: 11.sp,
+                    fontFamily: AppFonts.poppinsMed,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -843,83 +626,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget _cancelApplication() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppString.cancelTheApplication,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 12.sp,
-            fontFamily: AppFonts.poppinsSemiBold,
-          ),
-        ),
-        SizedBox(
-          height: 1.5.h,
-        ),
-        _keyValueRow(AppString.status, "Payment Requested"),
-        _keyValueRow(AppString.amountInEscrow, "₹ 199"),
-        _keyValueRow(AppString.originalAmount, "₹ 199"),
-        _keyValueRow(AppString.amountRequested, "₹ 399"),
-        SizedBox(
-          height: 1.5.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w),
-          child: InkWell(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return DialogBoxWithIcon(
-                      icon: AppAssets.cancel,
-                      content: Text(
-                        AppString.youCancelThisApplication,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: AppTheme.black,
-                            fontFamily: AppFonts.poppins,
-                            fontSize: 10.sp),
-                      ),
-                      onCancelPressed: () {
-                        Navigator.of(context)
-                          ..pop()
-                          ..pop();
-                      },
-                      onOkPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      title: "Cancel Application",
-                      titleYes: "Done",
-                      colorYes: AppTheme.white,
-                      sizeNo: 10.sp,
-                      titleFamily: AppFonts.poppinsMed,
-                    );
-                  });
-            },
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(8.sp),
-              decoration: BoxDecoration(
-                color: AppTheme.lightRed,
-                borderRadius: BorderRadius.circular(4.sp),
-              ),
-              child: Center(
-                child: Text(
-                  AppString.cancelApplication,
-                  style: TextStyle(
-                      color: AppTheme.red,
-                      fontSize: 14.sp,
-                      fontFamily: AppFonts.poppinsMed),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
+
 
   Widget _keyValueRow(String key, String value) {
     return Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
@@ -33,7 +34,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 body: Center(
                   child: Image.asset(
                     AppAssets.appLogo,
-                    height: 13.h,
+                    height: 12.h,
                   ),
                 )),
           ),
@@ -72,16 +73,17 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         data: ThemeData(primaryColor: Colors.blue),
                         child: TextFormField(
                           style: const TextStyle(
-                            color: Colors.blue,
+                            color: AppTheme.authGrey,
+                              fontFamily: AppFonts.poppinsMed
                           ),
                           decoration: InputDecoration(
                             labelText: AppString.newPassword,
                             focusColor: Colors.blue,
                             labelStyle: const TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
+                              color: AppTheme.authGrey,
+                              fontFamily: AppFonts.poppinsMed
                             ),
-                            prefixIcon: Image.asset(AppAssets.password),
+                            prefixIcon: Image.asset(AppAssets.password,color: AppTheme.authGrey,),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -92,6 +94,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                 obscureText
                                     ? Icons.visibility_off
                                     : Icons.visibility,
+                                color: AppTheme.authGrey,
                               ),
                             ),
                           ),
@@ -103,15 +106,17 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         child: TextFormField(
                           style: const TextStyle(
                             color: Colors.blue,
+                              fontFamily: AppFonts.poppinsMed
                           ),
                           decoration: InputDecoration(
                             labelText: AppString.confirmPassword,
                             focusColor: Colors.blue,
                             labelStyle: const TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
+                              color: AppTheme.authGrey,
+                                fontFamily: AppFonts.poppinsMed
+
                             ),
-                            prefixIcon: Image.asset(AppAssets.password),
+                            prefixIcon: Image.asset(AppAssets.password,color: AppTheme.authGrey,),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -122,6 +127,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                 obscureText
                                     ? Icons.visibility_off
                                     : Icons.visibility,
+                                color: AppTheme.authGrey,
                               ),
                             ),
                           ),
@@ -131,28 +137,14 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       const SizedBox(
                         height: 40,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.sp),
-                          ),
-                        ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: AuthButton(
+                        btnTitle: AppString.save,
                         onPressed: () {
                           callNextScreen(context, const DashBoard());
-                        },
-                        child:   Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
-                          child: Text(
-                            AppString.save,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                      ),
+                        }),
+                  )
                     ],
                   ),
                 ),

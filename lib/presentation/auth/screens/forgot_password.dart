@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/auth/auth_state.dart';
@@ -43,7 +44,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           body: Center(
                             child: Image.asset(
                               AppAssets.appLogo,
-                              height: 13.h,
+                              height: 12.h,
                             ),
                           )),
                     ),
@@ -66,14 +67,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 height: 3.h,
                               ),
                               _setTitle(),
+                              SizedBox(
+                                height: 1.h,
+                              ),
                               _setMobileNumber(),
                               SizedBox(
                                 height: 1.h,
                               ),
                               SizedBox(
-                                height: 2.5.h,
+                                height: 3.5.h,
                               ),
-                              _loginCTA(context),
+                              _getOtpCTA(context),
                               SizedBox(
                                 height: 2.5.h,
                               ),
@@ -106,7 +110,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AppString.sublogin,
+            AppString.subLogin,
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,
@@ -128,7 +132,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: AppString.entermobileNumber,
+            labelText: AppString.enterMobileNumber,
             focusColor: AppTheme.authGrey,
             labelStyle: const TextStyle(
                 color:AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
@@ -138,28 +142,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Widget _loginCTA(BuildContext context) {
+  Widget _getOtpCTA(BuildContext context) {
 
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.sp),
-        ),
-      ),
-      onPressed: () {
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: 10.w),
+      child: AuthButton(btnTitle: AppString.getOtp, onPressed: (){
         callNextScreen(context, const OTPVerification());
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.5.h),
-        child: Text(
-          AppString.getOtp,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 14.sp,
-              fontFamily: AppFonts.poppinsMed),
-        ),
-      ),
+      }),
     );
   }
 }

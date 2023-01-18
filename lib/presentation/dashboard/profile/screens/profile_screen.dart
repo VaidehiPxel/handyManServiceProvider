@@ -59,7 +59,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: AppTheme.black,
                         fontSize: 18.sp,
                         fontFamily: AppFonts.poppinsSemiBold,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -208,14 +207,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Personal Detail",
+            AppString.personalDetail,
             style: TextStyle(
               color: AppTheme.black,
               fontSize: 12.sp,
               fontFamily: AppFonts.poppinsMed,
-              fontWeight: FontWeight.bold,
             ),
           ),
+
           if (showEdit == false)
             GestureDetector(
               onTap: () {
@@ -235,7 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(
                       color: AppTheme.messageGrey,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                   fontFamily: AppFonts.poppinsMed
                     ),
                   ),
                 ),
@@ -243,14 +242,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
         ],
       ),
-      SizedBox(
-        height: 4.sp,
-      ),
+      SizedBox(height: 1.5.h,),
       ProfileItemWidget(
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.person,
-        title: "First Name",
+        title: AppString.firstName,
         isEdit: showEdit,
         value: "Lonnie Murphy",
       ),
@@ -258,7 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.person,
-        title: "Last Name",
+        title:AppString.lastName,
         isEdit: showEdit,
         value: "Lonnie Murphy",
       ),
@@ -266,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.emailSvg,
-        title: "Email",
+        title: AppString.email,
         isEdit: showEdit,
         value: "lonnie.murphy@gmail.com",
       ),
@@ -274,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.calSvg,
-        title: "Mobile Number",
+        title: AppString.mobileNumber,
         isEdit: showEdit,
         value: "+230 5763 6925",
       ),
@@ -282,7 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Multiline,
         assetName: AppAssets.introSvg,
-        title: "Introduction Description",
+        title: AppString.introDesc,
         isEdit: showEdit,
         value:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt leo a neque accumsan posuere. Nullam a purus congue,",
@@ -296,22 +293,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Widget> mWorkExperience(context, bool showEdit) {
     return [
       Text(
-        "Work Experience",
+        AppString.workExperience,
         style: TextStyle(
           color: AppTheme.black,
           fontSize: 12.sp,
           fontFamily: AppFonts.poppinsMed,
-          fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(
-        height: 4.sp,
-      ),
+      SizedBox(height: 1.5.h,),
       ProfileItemWidget(
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.workSvg,
-        title: "Work Experience",
+        title:  AppString.workExperience,
         isEdit: showEdit,
         value: "5-6 Years",
       ),
@@ -324,22 +318,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Widget> mServiceCategories(context, bool showEdit) {
     return [
       Text(
-        "Service Categories",
+        AppString.serviceCategories,
         style: TextStyle(
           color: AppTheme.black,
           fontSize: 12.sp,
           fontFamily: AppFonts.poppinsMed,
-          fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(
-        height: 4.sp,
-      ),
+      SizedBox(height: 1.5.h,),
       ProfileItemWidget(
         key: UniqueKey(),
         profileItemType: ProfileItemType.Dropdown,
         assetName: AppAssets.serviceSvg,
-        title: "Service Categories",
+        title:AppString.serviceCategories,
         isEdit: showEdit,
         value: "Cleaning",
         items: ["Select Service", "Cleaning"],
@@ -348,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Dropdown,
         assetName: AppAssets.serviceSvg,
-        title: "Service Area",
+        title: AppString.serviceArea,
         isEdit: showEdit,
         value: "Wales",
         items: ["Select Service Area", "Wales"],
@@ -357,7 +348,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.chargeSvg,
-        title: "Service Charges",
+        title: AppString.serviceCharges,
         isEdit: showEdit,
         value: "₹ 399",
       ),
@@ -365,7 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Text,
         assetName: AppAssets.time,
-        title: "Working Hours",
+        title: AppString.workingHours,
         isEdit: showEdit,
         value: "9 AM To 9 PM",
       ),
@@ -378,22 +369,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Widget> mEducationalDetails(context, bool showEdit) {
     return [
       Text(
-        "Education Details",
+        AppString.educationDetail,
         style: TextStyle(
           color: AppTheme.black,
           fontSize: 12.sp,
           fontFamily: AppFonts.poppinsMed,
-          fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(
-        height: 4.sp,
-      ),
+      SizedBox(height: 1.5.h,),
       ProfileItemWidget(
         key: UniqueKey(),
         profileItemType: ProfileItemType.Dropdown,
         assetName: AppAssets.eduSvg,
-        title: "Education Details",
+        title: AppString.educationDetail,
         isEdit: showEdit,
         value: "University of Wales, Swansea",
         items: ["Select", "University of Wales, Swansea"],
@@ -402,7 +390,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Upload,
         assetName: AppAssets.certiSvg,
-        title: "Upload Certificate",
+        title: AppString.uploadCerti,
         isEdit: showEdit,
         value: "Uploaded Certificate",
       ),
@@ -410,7 +398,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         key: UniqueKey(),
         profileItemType: ProfileItemType.Multiline,
         assetName: AppAssets.extraCourseSvg,
-        title: "Extra Course Details",
+        title:AppString.extraCourseDetail,
         isEdit: showEdit,
         value:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt leo a neque accumsan posuere. Nullam a purus congue,",

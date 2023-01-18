@@ -69,6 +69,7 @@ class _DialogBoxWithIconState extends State<DialogBoxWithIcon> {
             ),
             Text(
               widget.title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppTheme.black,
                   fontFamily: AppFonts.poppinsMed,

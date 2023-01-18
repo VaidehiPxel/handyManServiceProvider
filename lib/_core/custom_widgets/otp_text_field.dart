@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 typedef OnCodeEnteredCompletion = void Function(String value);
 typedef OnCodeChanged = void Function(String value);
@@ -131,55 +132,59 @@ class _OtpTextFieldState extends State<OtpTextField> {
     required int index,
     TextStyle? style,
   }) {
-    return Container(
-      width: widget.fieldWidth,
-      margin: widget.margin,
-      child: TextField(
-        showCursor: widget.showCursor,
-        keyboardType: widget.keyboardType,
-        textAlign: TextAlign.center,
-        maxLength: 1,
-        readOnly: widget.readOnly,
-        style: style ?? widget.textStyle,
-        autofocus: widget.autoFocus,
-        cursorColor: widget.cursorColor,
-        controller: _textControllers[index],
-        focusNode: _focusNodes[index],
-        enabled: widget.enabled,
-        inputFormatters: widget.inputFormatters,
-        decoration: widget.hasCustomInputDecoration
-            ? widget.decoration
-            : InputDecoration(
-          counterText: "",
-          filled: widget.filled,
-          fillColor: widget.fillColor,
-          contentPadding: const EdgeInsets.only(top: 32, bottom: 32),
-          focusedBorder: widget.showFieldAsBox
-              ? outlineBorder(widget.focusedBorderColor)
-              : underlineInputBorder(widget.focusedBorderColor),
-          enabledBorder: widget.showFieldAsBox
-              ? outlineBorder(widget.enabledBorderColor)
-              : underlineInputBorder(widget.enabledBorderColor),
-          disabledBorder: widget.showFieldAsBox
-              ? outlineBorder(widget.disabledBorderColor)
-              : underlineInputBorder(widget.disabledBorderColor),
-          border: widget.showFieldAsBox
-              ? outlineBorder(widget.borderColor)
-              : underlineInputBorder(widget.borderColor),
+    return Padding(
+      padding:  EdgeInsets.only(left: 1.7.w),
+      child: Container(
+        width: widget.fieldWidth,
+        height: widget.fieldHeight,
+        margin: widget.margin,
+        child: TextField(
+          showCursor: widget.showCursor,
+          keyboardType: widget.keyboardType,
+          textAlign: TextAlign.center,
+          maxLength: 1,
+          readOnly: widget.readOnly,
+          style: style ?? widget.textStyle,
+          autofocus: widget.autoFocus,
+          cursorColor: widget.cursorColor,
+          controller: _textControllers[index],
+          focusNode: _focusNodes[index],
+          enabled: widget.enabled,
+          inputFormatters: widget.inputFormatters,
+          decoration: widget.hasCustomInputDecoration
+              ? widget.decoration
+              : InputDecoration(
+            counterText: "",
+            filled: widget.filled,
+            fillColor: widget.fillColor,
+            contentPadding:  EdgeInsets.all(12.sp),
+            focusedBorder: widget.showFieldAsBox
+                ? outlineBorder(widget.focusedBorderColor)
+                : underlineInputBorder(widget.focusedBorderColor),
+            enabledBorder: widget.showFieldAsBox
+                ? outlineBorder(widget.enabledBorderColor)
+                : underlineInputBorder(widget.enabledBorderColor),
+            disabledBorder: widget.showFieldAsBox
+                ? outlineBorder(widget.disabledBorderColor)
+                : underlineInputBorder(widget.disabledBorderColor),
+            border: widget.showFieldAsBox
+                ? outlineBorder(widget.borderColor)
+                : underlineInputBorder(widget.borderColor),
+          ),
+          obscureText: widget.obscureText,
+          onChanged: (String value) {
+            //save entered value in a list
+            _verificationCode[index] = value;
+            onCodeChanged(verificationCode: value);
+            changeFocusToNextNodeWhenValueIsEntered(
+              value: value,
+              indexOfTextField: index,
+            );
+            changeFocusToPreviousNodeWhenValueIsRemoved(
+                value: value, indexOfTextField: index);
+            onSubmit(verificationCode: _verificationCode);
+          },
         ),
-        obscureText: widget.obscureText,
-        onChanged: (String value) {
-          //save entered value in a list
-          _verificationCode[index] = value;
-          onCodeChanged(verificationCode: value);
-          changeFocusToNextNodeWhenValueIsEntered(
-            value: value,
-            indexOfTextField: index,
-          );
-          changeFocusToPreviousNodeWhenValueIsRemoved(
-              value: value, indexOfTextField: index);
-          onSubmit(verificationCode: _verificationCode);
-        },
       ),
     );
   }

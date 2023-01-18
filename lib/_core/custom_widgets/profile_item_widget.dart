@@ -41,9 +41,8 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
   @override
   void initState() {
     super.initState();
-    print(widget.isEdit);
     Future.delayed(
-      Duration(milliseconds: 300),
+      const Duration(milliseconds: 300),
       () {
         setState(() {
           if (widget.profileItemType == ProfileItemType.Text) {
@@ -58,7 +57,6 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
           if (widget.profileItemType == ProfileItemType.Dropdown) {
             items.clear();
             items.addAll(widget.items!);
-            print(items);
 
             dropdownvalue = widget.value;
           }
@@ -70,7 +68,6 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
 
           if (widget.profileItemType == ProfileItemType.Gender) {
             gender = widget.value;
-            print(gender);
           }
         });
       },
@@ -81,7 +78,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       primary: false,
       padding: EdgeInsets.zero,
       children: [
@@ -155,7 +152,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                   child: widget.isEdit
                       ? TextFormField(
                           controller: controller,
-                          decoration: InputDecoration.collapsed(hintText: ""),
+                          decoration: const InputDecoration.collapsed(hintText: ""),
                         )
                       : Text(widget.value),
                 ),
@@ -170,7 +167,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           controller: controller,
                           minLines: 6,
                           maxLines: 10,
-                          decoration: InputDecoration.collapsed(hintText: ""),
+                          decoration: const InputDecoration.collapsed(hintText: ""),
                         )
                       : Text(widget.value),
                 ),
@@ -242,25 +239,23 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                                 value: "Male",
                                 groupValue: gender,
                                 onChanged: (value) {
-                                  print(value);
                                   setState(() {
                                     gender = value.toString();
                                   });
                                 },
                               ),
-                              Text("Male"),
+                              const Text("Male"),
                               Radio(
                                 visualDensity: VisualDensity.compact,
                                 value: "Female",
                                 groupValue: gender,
                                 onChanged: (value) {
-                                  print(value);
                                   setState(() {
                                     gender = value.toString();
                                   });
                                 },
                               ),
-                              Text("Female"),
+                              const Text("Female"),
                             ],
                           ),
                         )

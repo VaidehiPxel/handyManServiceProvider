@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
 import 'package:flutter_projects/_core/custom_widgets/otp_text_field.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -20,20 +20,20 @@ class _OTPVerificationState extends State<OTPVerification> {
   Widget build(BuildContext context) {
     return EazylifeScaffold(
       children: [
-          SizedBox(
+        SizedBox(
           height: 5.h,
         ),
-          Center(
+        Center(
           child: Text(
-            AppString.otpverification,
+            AppString.otpVerification,
             style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
-             fontFamily: AppFonts.poppinsBold,
+              fontFamily: AppFonts.poppinsBold,
             ),
           ),
         ),
-         SizedBox(
+        SizedBox(
           height: 2.h,
         ),
         RichText(
@@ -43,35 +43,44 @@ class _OTPVerificationState extends State<OTPVerification> {
           softWrap: true,
           maxLines: 2,
           textScaleFactor: 1,
-          text:  TextSpan(
-            text: AppString.otpsubString,
-            style: TextStyle(color: AppTheme.grey,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),
+          text: TextSpan(
+            text: AppString.enterTheOtp,
+            style: TextStyle(
+                color: AppTheme.grey,
+                fontFamily: AppFonts.poppinsMed,
+                fontSize: 12.sp),
             children: <TextSpan>[
               TextSpan(
                   text: "+91 72858 31282",
-                  style: TextStyle(color: AppTheme.black,fontFamily: AppFonts.poppinsSemiBold,fontSize: 14.sp)),
+                  style: TextStyle(
+                      color: AppTheme.black,
+                      fontFamily: AppFonts.poppinsSemiBold,
+                      fontSize: 14.sp)),
             ],
           ),
         ),
-         SizedBox(
+        SizedBox(
           height: 3.h,
         ),
         OtpTextField(
           borderColor: Colors.blue,
           showFieldAsBox: true,
           autoFocus: true,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(8.sp),
           borderWidth: 2,
           clearText: true,
           cursorColor: Colors.blue,
-          fieldWidth: 20.w,
+          fieldWidth: 16.w,
+          fieldHeight: 10.h,
           onCodeChanged: (value) {},
           showCursor: true,
-          textStyle:  TextStyle(
-              fontSize: 26.sp,fontFamily: AppFonts.poppinsSemiBold, color: Colors.blue),
+          textStyle: TextStyle(
+              fontSize: 26.sp,
+              fontFamily: AppFonts.poppinsSemiBold,
+              color: Colors.blue),
           obscureText: true,
         ),
-         SizedBox(
+        SizedBox(
           height: 3.h,
         ),
         Align(
@@ -85,13 +94,20 @@ class _OTPVerificationState extends State<OTPVerification> {
               softWrap: true,
               maxLines: 1,
               textScaleFactor: 1,
-              text:  TextSpan(
-                text: AppString.dontreceive,
-                style: TextStyle(color: AppTheme.grey,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),
+              text: TextSpan(
+                text: AppString.doNotReceive,
+                style: TextStyle(
+                    color: AppTheme.grey,
+                    fontFamily: AppFonts.poppinsMed,
+                    fontSize: 12.sp),
                 children: <TextSpan>[
                   TextSpan(
-                      text: AppString.resenotp,
-                style: TextStyle(color: AppTheme.blue,fontFamily: AppFonts.poppinsMed,fontSize: 12.sp),),
+                    text: AppString.resendOTP,
+                    style: TextStyle(
+                        color: AppTheme.blue,
+                        fontFamily: AppFonts.poppinsMed,
+                        fontSize: 12.sp),
+                  ),
                 ],
               ),
             ),
@@ -100,32 +116,14 @@ class _OTPVerificationState extends State<OTPVerification> {
         const SizedBox(
           height: 20,
         ),
-
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 15.w),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.sp),
-              ),
-            ),
-            onPressed: () {
-              callNextScreen(context, const SetNewPasswordScreen());
-            },
-            child:   Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
-              child: Text(
-                AppString.verifyNow,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ),
-        ),
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: AuthButton(
+              btnTitle: AppString.verifyNow,
+              onPressed: () {
+                callNextScreen(context, const SetNewPasswordScreen());
+              }),
+        )
       ],
     );
   }

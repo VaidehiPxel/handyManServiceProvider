@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 Center(
                                   child: Text(
-                                    AppString.sublogin,
+                                    AppString.subLogin,
                                     maxLines: 2,
                                     softWrap: true,
                                     textAlign: TextAlign.center,
@@ -212,6 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           obscureText
                                               ? Icons.visibility_off
                                               : Icons.visibility,
+                                          color:AppTheme.authGrey,
                                         ),
                                       ),
                                     ),
@@ -244,6 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           obscureText
                                               ? Icons.visibility_off
                                               : Icons.visibility,
+                                          color:AppTheme.authGrey,
                                         ),
                                       ),
                                     ),
@@ -374,12 +376,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             maxLines: 1,
             textScaleFactor: 1,
             text: TextSpan(
-              text: AppString.alreadyAmember,
+              text: AppString.alreadyMember,
               style: const TextStyle(
                   color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
               children: <TextSpan>[
                 TextSpan(
-                    text:AppString.log_in,
+                    text:AppString.logIn,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         callNextScreen(context, const LoginScreen());
