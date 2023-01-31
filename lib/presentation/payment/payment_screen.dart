@@ -7,7 +7,6 @@ import 'package:flutter_projects/_core/custom_widgets/side_blue_container.dart';
 
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
-import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:flutter_projects/presentation/payment/add_bank_details.dart';
 import 'package:flutter_projects/presentation/payment/withdrawal_money.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -471,7 +470,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           );
                         },
                       ),
-
                     ],
                   ),
                 ),
