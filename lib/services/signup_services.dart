@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/services/base_service.dart';
 
 typedef SignUpSuccess = void Function(bool isSuccess, String msg);
 typedef AppErrorCallBack = void Function(String appError);
@@ -12,23 +13,21 @@ class SignUpService {
   SignUpService({Dio? dio}) : _dio = dio ?? Dio();
 
   Future<void> singUp(
-      {
-        required String firstName,
-        required String lastName,
-        required String mobileNo,
-        required String email,
-        required String password,
-        required String confirmPassword,
-        required AppErrorCallBack errorCallBack,
-        required SignUpSuccess signUpSuccess}) async {
+      {required String firstName,
+      required String lastName,
+      required String mobileNo,
+      required String email,
+      required String password,
+      required String confirmPassword,
+      required AppErrorCallBack errorCallBack,
+      required SignUpSuccess signUpSuccess}) async {
     try {
       bool resSuccess = false;
       String message = '', errorCode = '';
       Response? response;
-      final url = 'https://mrinvito.com/laravel/easylife/api/serviceprovidersignup';
       Map<String, dynamic> map = {
-        "firstname":firstName,
-        "lastname":lastName,
+        "firstname": firstName,
+        "lastname": lastName,
         "mobileno": mobileNo,
         "email": email,
         "password": password,
@@ -37,7 +36,7 @@ class SignUpService {
 
       print(map);
       response = await _dio.post(
-        url,
+        URL.signUpUrl,
         data: FormData.fromMap(map),
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: 'application/json',

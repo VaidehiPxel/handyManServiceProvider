@@ -18,7 +18,7 @@ class FaqService {
       required FaqSuccess faqSuccess}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
       List<FaqModel> faq = [];
 
@@ -40,7 +40,6 @@ class FaqService {
 
         if (resSuccess) {
           for (var r in data["result"]) {
-            // print(r);
             faq.add(FaqModel.fromMap(r));
           }
           print(faq.length);

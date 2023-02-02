@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/services/base_service.dart';
 
 typedef LoginSuccess = void Function(bool isSuccess, String msg);
 typedef AppErrorCallBack = void Function(String appError);
@@ -13,15 +14,15 @@ class LoginService {
 
   Future<void> login(
       {required String username,
-        required String password,
-        required bool isMobile,
-        required AppErrorCallBack errorCallBack,
-        required LoginSuccess loginSuccess}) async {
+      required String password,
+      required bool isMobile,
+      required AppErrorCallBack errorCallBack,
+      required LoginSuccess loginSuccess}) async {
     try {
       bool resSuccess = false;
       String message = '', errorCode = '';
       Response? response;
-      final url = 'https://mrinvito.com/laravel/easylife/api/userlogin';
+
       Map<String, dynamic> map = {};
 
       if (isMobile) {
@@ -29,26 +30,20 @@ class LoginService {
       } else {
         map = {"email": username, "password": password};
       }
-      print(map);
       response = await _dio.post(
-        url,
+        URL.loginUrl,
         data: FormData.fromMap(map),
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         }, responseType: ResponseType.json),
       );
-
-      print(response.statusCode);
-      print(response.data);
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
         resSuccess = data['status'];
-
         message = data['message'].toString();
 
         if (resSuccess && message.contains("login successful")) {
-          print(response.data);
           loginSuccess(true, "");
         }
         if (resSuccess &&
@@ -62,7 +57,6 @@ class LoginService {
         }
       }
     } catch (e) {
-      print(e);
       errorCallBack(e.toString());
     }
   }

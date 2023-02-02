@@ -2,28 +2,28 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/model/home/dashboard_model.dart';
 import 'package:flutter_projects/services/base_service.dart';
 
-typedef TermsConditionServiceSuccess = void Function(String description);
+typedef DashboardData = void Function(DashboardModel dashboardModel);
 typedef AppErrorCallBack = void Function(String appError);
 
-class TermsConditionService {
+class DashboardService {
   final Dio _dio;
 
-  TermsConditionService({Dio? dio}) : _dio = dio ?? Dio();
+  DashboardService({Dio? dio}) : _dio = dio ?? Dio();
 
-  Future<void> getTAndC(
+  Future<void> getDashboardData(
       {required AppErrorCallBack errorCallBack,
-      required TermsConditionServiceSuccess
-          termsConditionServiceSuccess}) async {
+      required DashboardData dashboardData}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
-      String description = "";
+      DashboardModel dashboardModel;
 
       response = await _dio.get(
-        URL.termsUrl,
+        "${URL.dashboardUrl}26",
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         }, responseType: ResponseType.json),
@@ -35,18 +35,12 @@ class TermsConditionService {
 
       if (response.statusCode == 200) {
         resSuccess = data['status'].toString().compareTo("1") == 0;
-
         message = data['message'].toString();
 
         if (resSuccess &&
-            message.compareTo("terms and condition details Get Successfull") ==
-                0) {
-          for (var r in data["result"]) {
-            // print(r);
-            description = r["description"];
-          }
-          print(description);
-          termsConditionServiceSuccess(description);
+            message.compareTo("Dashboard Details get Successfull") == 0) {
+          dashboardModel = DashboardModel.fromJson(data['usersdetails']);
+          dashboardData(dashboardModel);
         } else if (resSuccess) {
           errorCallBack(message);
         }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/presentation/home/constants/image_constant.dart';
 import 'package:sizer/sizer.dart';
 
 class BlueBoxText extends StatefulWidget {
