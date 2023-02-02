@@ -39,7 +39,7 @@ class DashboardService {
 
         if (resSuccess &&
             message.compareTo("Dashboard Details get Successfull") == 0) {
-          dashboardModel = DashboardModel.fromJson(data['usersdetails']);
+          dashboardModel = DashboardModel.fromJson(data);
           dashboardData(dashboardModel);
         } else if (resSuccess) {
           errorCallBack(message);

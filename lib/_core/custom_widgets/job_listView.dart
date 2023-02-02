@@ -3,7 +3,7 @@ import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/model/jobs/job_listing_model.dart';
+import 'package:flutter_projects/model/home/dashboard_model.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/job_detail_view.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/job_request_view.dart';
 
@@ -11,22 +11,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class JobListView extends StatelessWidget {
-  final JobListingModel jobListingModel;
+  final Jobrequest jobListingModel;
   final JobType jobType;
 
-  const JobListView({Key? key, required this.jobListingModel,
-    required this.jobType})
+  const JobListView(
+      {Key? key, required this.jobListingModel, required this.jobType})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        jobType==JobType.jobRequest?
-        callNextScreen(context, JobRequestView(appBarTitle: jobListingModel.jobTitle,))
-
-        :
-        callNextScreen(context, JobDetailView(appBarTitle: jobListingModel.jobTitle,));
+      onTap: () {
+        jobType == JobType.jobRequest
+            ? callNextScreen(
+                context,
+                JobRequestView(
+                  appBarTitle: jobListingModel.title,
+                ))
+            : callNextScreen(
+                context,
+                JobDetailView(
+                  appBarTitle: jobListingModel.title,
+                ));
       },
       child: Container(
         width: double.infinity,
@@ -42,8 +48,8 @@ class JobListView extends StatelessWidget {
               ClipOval(
                 child: SizedBox.fromSize(
                   size: Size.fromRadius(20.sp), // Image radius
-                  child:
-                      Image.network(jobListingModel.jobImage!, fit: BoxFit.cover),
+                  child: Image.network("https://picsum.photos/id/214/200/300",
+                      fit: BoxFit.cover),
                 ),
               ),
               Expanded(
@@ -53,7 +59,7 @@ class JobListView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        jobListingModel.jobTitle!,
+                        jobListingModel.title,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 12.sp,
@@ -64,7 +70,7 @@ class JobListView extends StatelessWidget {
                       SizedBox(
                         height: 0.3.h,
                       ),
-                      Text(jobListingModel.jobDesc!,
+                      Text(jobListingModel.description!,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 10.sp,
@@ -82,7 +88,9 @@ class JobListView extends StatelessWidget {
                             width: 2.w,
                           ),
                           Expanded(
-                            child: Text(jobListingModel.jobAddress!,
+                            child: Text(
+                                jobListingModel.address1! +
+                                    jobListingModel.address2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 10.sp,
@@ -96,33 +104,35 @@ class JobListView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 2.w,),
+              SizedBox(
+                width: 2.w,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-
-                    children: [
-                      SvgPicture.asset(AppAssets.time),
-                      SizedBox(
-                        width: 1.w,
-                      ),
-                      Text(jobListingModel.jobTime!,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontFamily: AppFonts.poppins,
-                            color: AppTheme.medGrey,
-                          ))
-                    ],
-                  ),
-                  Text("₹ ${jobListingModel.jobFee!}",
-                      softWrap: true,
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontFamily: AppFonts.poppinsSemiBold,
-                        color: AppTheme.black,
-                      ))
+                  //  Row(
+                  //           children: [
+                  //             SvgPicture.asset(AppAssets.time),
+                  //             SizedBox(
+                  //               width: 1.w,
+                  //             ),
+                  //             Text(jobListingModel.jobtime,
+                  //                 softWrap: true,
+                  //                 style: TextStyle(
+                  //                   fontSize: 10.sp,
+                  //                   fontFamily: AppFonts.poppins,
+                  //                   color: AppTheme.medGrey,
+                  //                 ))
+                  //           ],
+                  //         ),
+                  if (jobListingModel.fromamount != null)
+                    Text("₹ ${jobListingModel.fromamount}",
+                        softWrap: true,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontFamily: AppFonts.poppinsSemiBold,
+                          color: AppTheme.black,
+                        ))
                 ],
               )
             ],
@@ -131,5 +141,4 @@ class JobListView extends StatelessWidget {
       ),
     );
   }
-
 }

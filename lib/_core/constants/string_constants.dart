@@ -128,7 +128,8 @@ class AppString {
   static const String done = "Done";
   static const String chatNow = "Chat Now";
   static const String amountInEscrow = "Amount in Escrow";
-  static const String youCancelThisApplication = "You Canceled this Application";
+  static const String youCancelThisApplication =
+      "You Canceled this Application";
   static const String cancelTheApplication = "Cancel the application";
   static const String cancelApplication = "Cancel application";
   static const String updateAmount = "Update Amount";
@@ -147,9 +148,8 @@ class AppString {
   static const String uploadCerti = "Upload Certificate";
   static const String extraCourseDetail = "Extra Course Details";
 
-
   //logout
-  static const String yes  = "Yes";
+  static const String yes = "Yes";
 
   //Payment
   static const String addBankDetail = "Add Bank Detail";
@@ -168,7 +168,8 @@ class AppString {
   static const String withdrawalMoney = "Withdrawal Money";
   static const String moneyWithdrawal = "Money Withdrawal";
   static const String amount = "Amount";
-  static const String moneyWithdrawalDes = "No direct or hidden charges. Enter Amount for money Withdrawal.";
+  static const String moneyWithdrawalDes =
+      "No direct or hidden charges. Enter Amount for money Withdrawal.";
   static const String selectBankAccount = "Select a Saved Bank Account";
   static const String acNo = "A/c No. ";
   static const String sendingMoneyFrom = "Sending money from Withdrawal to";
@@ -202,8 +203,7 @@ class AppString {
   static const String areYouSure = "Are you sure?";
   static const String removeDetail = "Remove your Detail";
 
-
-
-
-
+//Hive
+  static const String userIdKey = "USER_ID_KEY";
+  static const String userOTPKey = "USER_OTP_KEY";
 }

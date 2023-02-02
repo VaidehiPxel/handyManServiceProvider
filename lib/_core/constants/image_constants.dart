@@ -1,4 +1,4 @@
-class AppAssets{
+class AppAssets {
   static const String appLogo = "assets/images/auth/logo_bw.png";
   static const String sideBlue = "assets/images/auth/Path.png";
   static const String backIcon = "assets/svg/back_icon.svg";
@@ -13,7 +13,6 @@ class AppAssets{
   static const String call = "assets/svg/call.svg";
   static const String filter = "assets/svg/filter.svg";
   static const String rupee = "assets/svg/Rupee.svg";
-
 
   //Auth
 
@@ -66,4 +65,5 @@ class AppAssets{
   static const String chat = "assets/svg/chat_icon.svg";
 
   static const String wallet = "assets/svg/wallet.svg";
+  static const String profileThumb = "assets/profile/profile_thumb.png";
 }

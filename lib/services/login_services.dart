@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/services/base_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 typedef LoginSuccess = void Function(bool isSuccess, String msg);
 typedef AppErrorCallBack = void Function(String appError);
@@ -42,9 +45,9 @@ class LoginService {
       if (response.statusCode == 200) {
         resSuccess = data['status'];
         message = data['message'].toString();
-
         if (resSuccess && message.contains("login successful")) {
           loginSuccess(true, "");
+          box1.put(AppString.userIdKey, data['result']['userid']);
         }
         if (resSuccess &&
             data["isNewUser"] &&

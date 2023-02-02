@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/validation.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -14,8 +16,6 @@ import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart'
 import 'package:flutter_projects/presentation/auth/screens/sign_up_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:sizer/sizer.dart';
-
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,8 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   (state is LoginScreenShowMessage)
                       ? state.msg
                       : (state is LoginScreenError)
-                      ? state.mErrorMsg.toString()
-                      : "",
+                          ? state.mErrorMsg.toString()
+                          : "",
                   style: const TextStyle(color: Colors.black),
                 ),
                 actions: [
@@ -83,11 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 45.h,
                         child: AppBGWidget(
                             body: Center(
-                              child: Image.asset(
-                                AppAssets.appLogo,
-                                height: 12.h,
-                              ),
-                            )),
+                          child: Image.asset(
+                            AppAssets.appLogo,
+                            height: 12.h,
+                          ),
+                        )),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 35.h),
@@ -118,16 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 2.5.h,
                                 ),
                                 if (state is! LoginScreenLoading)
-                                  _loginCTA(context),
-                                if (state is LoginScreenLoading)
-                                  const Center(
-                                      child: CircularProgressIndicator(
-                                        backgroundColor: AppTheme.lightBlue,
-                                      )),
+                                  _loginCTA(context)
+                                else
+                                  const APILoader(),
                                 SizedBox(
                                   height: 2.5.h,
                                 ),
-
                                 Align(
                                   alignment: Alignment.center,
                                   child: Padding(
@@ -139,45 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           fontSize: 12.sp,
                                           fontFamily: AppFonts.poppinsMed),
                                     ),
-                                    // Row(
-                                    //   children: [
-                                    //     Expanded(
-                                    //       child: Container(
-                                    //         decoration: BoxDecoration(
-                                    //           gradient:  SweepGradient(
-                                    //               colors: [ Color(0xFF02BB9F),
-                                    //                 Colors.black87, Colors.black12,
-                                    //                 Color(0xFF02BB9F), Color(0xFF02BB9F)],
-                                    //               stops: [0.0, 0.25, 0.5, 0.75, 1],
-                                    //               startAngle: 0.5,
-                                    //               endAngle: 1
-                                    //           ),),
-                                    //       ),
-                                    //     ),
-                                    //     Text(
-                                    //       AppString.or,
-                                    //       style: TextStyle(
-                                    //           color: Colors.black,
-                                    //           fontSize: 12.sp,
-                                    //           fontFamily: AppFonts.poppinsMed),
-                                    //     ),
-                                    //     Expanded(
-                                    //       child: Container(
-                                    //           height: 0.8.h,
-                                    //           width: double.infinity,
-                                    //           decoration: const BoxDecoration(
-                                    //               gradient: LinearGradient(
-                                    //                   begin: Alignment.topLeft,
-                                    //                   end: Alignment.topRight,
-                                    //                   stops: [0.8,1.0],
-                                    //                   colors: [AppTheme.black,Colors.transparent, ]))
-                                    //       ),
-                                    //     ),
-                                    //   ],
-                                    // ),
                                   ),
                                 ),
-
                                 _loginWith(),
                                 SizedBox(
                                   height: 1.5.h,
@@ -195,60 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _dontHaveAccount(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: RichText(
-          overflow: TextOverflow.clip,
-          textAlign: TextAlign.end,
-          textDirection: TextDirection.rtl,
-          softWrap: true,
-          maxLines: 1,
-          textScaleFactor: 1,
-          text: TextSpan(
-            text: AppString.doNotHaveAccount,
-            style: const TextStyle(
-                color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
-            children: <TextSpan>[
-              TextSpan(
-                  text: 'Sign Up',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      callNextScreen(context, const SignUpScreen());
-                    },
-                  style: const TextStyle(
-                      color: Colors.blue, fontFamily: AppFonts.poppinsMed)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _loginWith() {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.facebook),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.google),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.linkedIn),
-          )
-        ],
       ),
     );
   }
@@ -292,11 +197,14 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: AppString.mobileNumber+" / "+AppString.email,
+            labelText: "${AppString.mobileNumber} / ${AppString.email}",
             focusColor: Colors.blue,
             labelStyle: const TextStyle(
-                color:AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
-            prefixIcon: Image.asset(AppAssets.phone,color:AppTheme.authGrey ,)),
+                color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
+            prefixIcon: Image.asset(
+              AppAssets.phone,
+              color: AppTheme.authGrey,
+            )),
       ),
     );
   }
@@ -306,10 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: AuthButton(
         btnTitle: AppString.login,
-
         onPressed: () async {
-          print(mMobileEmailController.text.isNotEmpty &&
-              mPasswordController.text.isNotEmpty);
           if (mMobileEmailController.text.isNotEmpty &&
               mPasswordController.text.isNotEmpty) {
             context.read<LoginBloc>().add(LoginScreenCallApiEvent(
@@ -319,10 +224,10 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             if (mMobileEmailController.text.isEmpty) {
               ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                  const SnackBar(content: Text("MobileEmail cant be empty")));
+                  const SnackBar(content: Text("Mobile/Email can't be empty")));
             } else if (mPasswordController.text.isEmpty) {
               ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                  const SnackBar(content: Text("password cant be empty")));
+                  const SnackBar(content: Text("Password can't be empty")));
             }
           }
         },
@@ -379,9 +284,57 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _dontHaveAccount(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: RichText(
+          overflow: TextOverflow.clip,
+          textAlign: TextAlign.end,
+          textDirection: TextDirection.rtl,
+          softWrap: true,
+          maxLines: 1,
+          textScaleFactor: 1,
+          text: TextSpan(
+            text: AppString.doNotHaveAccount,
+            style: const TextStyle(
+                color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
+            children: <TextSpan>[
+              TextSpan(
+                  text: 'Sign Up',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      callNextScreen(context, const SignUpScreen());
+                    },
+                  style: const TextStyle(
+                      color: Colors.blue, fontFamily: AppFonts.poppinsMed)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-
-
+  Widget _loginWith() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.facebook),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.google),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.linkedIn),
+          )
+        ],
+      ),
+    );
+  }
 }
-
-

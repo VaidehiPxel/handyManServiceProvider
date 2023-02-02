@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
+import 'package:flutter_projects/model/home/dashboard_model.dart';
 import 'package:flutter_projects/model/jobs/job_listing_model.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/new_job_listing_screen.dart';
-
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
@@ -21,40 +23,37 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentIndex = 0;
-  List<JobListingModel> jobModel = [
-    JobListingModel(
-        jobImage: "https://picsum.photos/id/214/200/300",
-        jobTitle: "Sink Cleaning",
-        jobAddress: "543 Main ST, Apt. 12 Chicago",
-        jobDesc: "Lorem ipsum dolor sit amet,.....",
-        jobFee: "99",
-        jobTime: "60 mins"),
-    JobListingModel(
-        jobImage: "https://picsum.photos/id/220/200/300",
-        jobTitle: "Sink Cleaning",
-        jobAddress: "543 Main ST, Apt. 12 Chicago",
-        jobDesc: "Lorem ipsum dolor sit amet,.....",
-        jobFee: "99",
-        jobTime: "60 mins"),
-    JobListingModel(
-        jobImage: "https://picsum.photos/id/218/200/300",
-        jobTitle: "Sink Cleaning",
-        jobAddress: "543 Main ST, Apt. 12 Chicago",
-        jobDesc: "Lorem ipsum dolor sit amet,.....",
-        jobFee: "99",
-        jobTime: "60 mins")
-  ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<DashboardBloc>().add(const DashboardCallApiEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      body: renderBodyView(), //HomeScreenWidget(),
+    return BlocListener<DashboardBloc, DashboardState>(
+      listener: (context, state) {
+        print(state is DashboardSuccess);
+      },
+      child: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+          return state.isLoading == true
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  backgroundColor: AppTheme.lightBlue,
+                ))
+              : (state.isLoading == false && (state is DashboardSuccess))
+                  ? renderBodyView(state)
+                  : const Center(
+                      child: CircularProgressIndicator(
+                      backgroundColor: AppTheme.lightBlue,
+                    ));
+        },
+      ),
     );
   }
 
-  Widget renderBodyView() {
+  Widget renderBodyView(DashboardSuccess state) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.5.w),
@@ -64,20 +63,44 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: kToolbarHeight * 2.3,
             ),
-            //_searchTextField(),
             SizedBox(
               height: 1.5.h,
             ),
-            setUserDetail(),
+            setUserDetail(state.dashboardModel.usersdetails),
+            Center(
+              child: Text(
+                "${state.dashboardModel.totalreview} out of 5 stars",
+                style: TextStyle(
+                    fontFamily: AppFonts.poppinsMed,
+                    fontSize: 12.sp,
+                    color: AppTheme.blue),
+              ),
+            ),
+            SizedBox(
+              height: 1.5.h,
+            ),
+            ratingBar(
+                "5 stars", serPercentage(state.dashboardModel.total5Star)),
+            ratingBar(
+                "4 stars", serPercentage(state.dashboardModel.total4Star)),
+            ratingBar(
+                "3 stars", serPercentage(state.dashboardModel.total3Star)),
+            ratingBar(
+                "2 stars", serPercentage(state.dashboardModel.total2Star)),
+            ratingBar("1 star", serPercentage(state.dashboardModel.total1Star)),
             SizedBox(
               height: 3.3.h,
             ),
-            dashboardValue(),
+            dashboardValue(state.dashboardModel),
             SizedBox(
               height: 2.h,
             ),
-            jobRequest(),
-            newJob(),
+            state.dashboardModel.jobrequest.isEmpty
+                ? Container()
+                : jobRequest(state.dashboardModel.jobrequest),
+            state.dashboardModel.newjobs.isEmpty
+                ? Container()
+                : newJob(state.dashboardModel.newjobs),
             SizedBox(
               height: 10.h,
             ),
@@ -120,16 +143,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget dashboardValue() {
+  Widget dashboardValue(DashboardModel dashboardModel) {
     return Column(
       children: [
         Row(
           children: [
-            Expanded(child: _blueContainer(AppString.totalReviews, 538)),
+            Expanded(
+                child: _blueContainer(
+                    AppString.totalReviews, dashboardModel.totalreview)),
             SizedBox(
               width: 3.w,
             ),
-            Expanded(child: _blueContainer(AppString.todayJob, 56)),
+            Expanded(
+                child: _blueContainer(
+                    AppString.todayJob, dashboardModel.todayjob)),
           ],
         ),
         SizedBox(
@@ -137,11 +164,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         Row(
           children: [
-            Expanded(child: _blueContainer(AppString.completedJob, 67)),
+            Expanded(
+                child: _blueContainer(
+                    AppString.completedJob, dashboardModel.completedjob)),
             SizedBox(
               width: 3.w,
             ),
-            Expanded(child: _blueContainer(AppString.totalEarning, 399)),
+            Expanded(
+                child: _blueContainer(
+                    AppString.totalEarning, dashboardModel.totalearning)),
           ],
         ),
       ],
@@ -178,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  setUserDetail() {
+  setUserDetail(List<Usersdetail> usersdetails) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -190,8 +221,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ClipOval(
               child: SizedBox.fromSize(
                 size: Size.fromRadius(40.sp), // Image radius
-                child: Image.network('https://picsum.photos/id/218/200/300',
-                    fit: BoxFit.cover),
+                child: usersdetails[0].profilepics == null
+                    ? Image.asset(AppAssets.profileThumb)
+                    : Image.network(usersdetails[0].profilepics,
+                        fit: BoxFit.cover),
               ),
             ),
           ),
@@ -199,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 1.h,
           ),
           Text(
-            "Saroj Chacko",
+            "${usersdetails[0].name} ${usersdetails[0].lastname}",
             style: TextStyle(
                 fontFamily: AppFonts.poppinsBold,
                 fontSize: 18.sp,
@@ -229,27 +262,12 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 1.h,
           ),
-          Text(
-            "4.0 out of 5 stars",
-            style: TextStyle(
-                fontFamily: AppFonts.poppinsMed,
-                fontSize: 12.sp,
-                color: AppTheme.blue),
-          ),
-          SizedBox(
-            height: 1.5.h,
-          ),
-          ratingBar("5 stars", 0.2, "20%"),
-          ratingBar("4 stars", 0.4, "40%"),
-          ratingBar("3 stars", 0.15, "15%"),
-          ratingBar("2 stars", 0, "0%"),
-          ratingBar("1 star", 0, "0%"),
         ],
       ),
     );
   }
 
-  Widget ratingBar(String text, double percent, String percentText) {
+  Widget ratingBar(String text, double percent) {
     return Row(
       children: [
         Expanded(
@@ -268,9 +286,9 @@ class _HomeScreenState extends State<HomeScreen> {
             animation: true,
             animationDuration: 1000,
             lineHeight: 2.h,
-            percent: percent,
+            percent: (percent / 100),
             center: Text(
-              percentText,
+              "${percent.toStringAsFixed(0)}%",
               style: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   fontSize: 9.sp,
@@ -284,12 +302,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget jobRequest() {
+  Widget jobRequest(List<Jobrequest> jobrequest) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         Text(
           AppString.jobRequest,
           style: TextStyle(
@@ -306,13 +326,13 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 1.h,
             );
           },
-          itemCount: 1,
+          itemCount: jobrequest.length,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return JobListView(
-              jobListingModel: jobModel[index],
+              jobListingModel: jobrequest[index],
               jobType: JobType.jobRequest,
             );
           },
@@ -321,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget newJob() {
+  Widget newJob(List<Jobrequest> newjobs) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -337,8 +357,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontSize: 14.sp,
                     color: AppTheme.black)),
             InkWell(
-              onTap: (){
-                callNextScreen(context, NewJobList());
+              onTap: () {
+                callNextScreen(
+                    context,
+                    NewJobList(
+                      jobModel: newjobs,
+                    ));
               },
               child: Text(
                 AppString.viewAll,
@@ -355,18 +379,23 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 1.h,
         ),
         ListView.builder(
-          itemCount: jobModel.length>3?3: jobModel.length,
+          itemCount: newjobs.length > 3 ? 3 : newjobs.length,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return JobListView(
-              jobListingModel: jobModel[index],
+              jobListingModel: newjobs[index],
               jobType: JobType.newJob,
             );
           },
         ),
       ],
     );
+  }
+
+  double serPercentage(int value) {
+    var percent = value * 20;
+    return percent.toDouble();
   }
 }

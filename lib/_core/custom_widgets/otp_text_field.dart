@@ -42,9 +42,10 @@ class OtpTextField extends StatefulWidget {
   final List<TextStyle?> styles;
   final List<TextInputFormatter>? inputFormatters;
 
-  OtpTextField({super.key,
+  OtpTextField({
+    super.key,
     this.showCursor = true,
-    this.numberOfFields = 4,
+    this.numberOfFields = 6,
     this.fieldWidth = 40.0,
     this.fieldHeight = 80.0,
     this.margin = const EdgeInsets.only(right: 8.0),
@@ -133,7 +134,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
     TextStyle? style,
   }) {
     return Padding(
-      padding:  EdgeInsets.only(left: 1.7.w),
+      padding: EdgeInsets.only(left: 0.4.w),
       child: Container(
         width: widget.fieldWidth,
         height: widget.fieldHeight,
@@ -154,23 +155,23 @@ class _OtpTextFieldState extends State<OtpTextField> {
           decoration: widget.hasCustomInputDecoration
               ? widget.decoration
               : InputDecoration(
-            counterText: "",
-            filled: widget.filled,
-            fillColor: widget.fillColor,
-            contentPadding:  EdgeInsets.all(12.sp),
-            focusedBorder: widget.showFieldAsBox
-                ? outlineBorder(widget.focusedBorderColor)
-                : underlineInputBorder(widget.focusedBorderColor),
-            enabledBorder: widget.showFieldAsBox
-                ? outlineBorder(widget.enabledBorderColor)
-                : underlineInputBorder(widget.enabledBorderColor),
-            disabledBorder: widget.showFieldAsBox
-                ? outlineBorder(widget.disabledBorderColor)
-                : underlineInputBorder(widget.disabledBorderColor),
-            border: widget.showFieldAsBox
-                ? outlineBorder(widget.borderColor)
-                : underlineInputBorder(widget.borderColor),
-          ),
+                  counterText: "",
+                  filled: widget.filled,
+                  fillColor: widget.fillColor,
+                  contentPadding: EdgeInsets.all(12.sp),
+                  focusedBorder: widget.showFieldAsBox
+                      ? outlineBorder(widget.focusedBorderColor)
+                      : underlineInputBorder(widget.focusedBorderColor),
+                  enabledBorder: widget.showFieldAsBox
+                      ? outlineBorder(widget.enabledBorderColor)
+                      : underlineInputBorder(widget.enabledBorderColor),
+                  disabledBorder: widget.showFieldAsBox
+                      ? outlineBorder(widget.disabledBorderColor)
+                      : underlineInputBorder(widget.disabledBorderColor),
+                  border: widget.showFieldAsBox
+                      ? outlineBorder(widget.borderColor)
+                      : underlineInputBorder(widget.borderColor),
+                ),
           obscureText: widget.obscureText,
           onChanged: (String value) {
             //save entered value in a list

@@ -10,8 +10,6 @@ import 'package:flutter_projects/application/login/login_bloc.dart';
 import 'package:flutter_projects/application/login/login_state.dart';
 import 'package:sizer/sizer.dart';
 
-
-
 class FAQSScreen extends StatefulWidget {
   const FAQSScreen({
     Key? key,
@@ -36,41 +34,39 @@ class _FAQSScreenState extends State<FAQSScreen> {
       },
       child: BlocBuilder<FaqBloc, FaqState>(
         builder: (context, state) {
-          return state.isLoading == true
-              ? const Center(
-              child: CircularProgressIndicator(
-                backgroundColor: AppTheme.lightBlue,
-              ))
-              : (state.isLoading == false && (state is FaqSuccess))
-              ?  Scaffold(
-            appBar: EazylifeAppBar(
-              title: AppString.faqs,
-              leadIcon: AppAssets.backIcon,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              sideIcon: null,
-            ),
-            body: Padding(
-              padding:  EdgeInsets.all(18.sp),
-              child:ListView.builder(
-                itemCount: state.mFaqModel.length,
-                itemBuilder: (context, index) {
-                  return EazylifeExpansionTile(
-                    title: state.mFaqModel[index].question,
-                    subTitle: state.mFaqModel[index].answer,
-                  );
+          return Scaffold(
+              appBar: EazylifeAppBar(
+                title: AppString.faqs,
+                leadIcon: AppAssets.backIcon,
+                onPressed: () {
+                  Navigator.pop(context);
                 },
+                sideIcon: null,
               ),
-            ),
-          )
-              : const Center(
-              child: CircularProgressIndicator(
-                backgroundColor: AppTheme.lightBlue,
-              ));
+              body: state.isLoading == true
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      backgroundColor: AppTheme.lightBlue,
+                    ))
+                  : (state.isLoading == false && (state is FaqSuccess))
+                      ? Padding(
+                          padding: EdgeInsets.all(18.sp),
+                          child: ListView.builder(
+                            itemCount: state.mFaqModel.length,
+                            itemBuilder: (context, index) {
+                              return EazylifeExpansionTile(
+                                title: state.mFaqModel[index].question,
+                                subTitle: state.mFaqModel[index].answer,
+                              );
+                            },
+                          ),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(
+                          backgroundColor: AppTheme.lightBlue,
+                        )));
         },
       ),
     );
   }
 }
-

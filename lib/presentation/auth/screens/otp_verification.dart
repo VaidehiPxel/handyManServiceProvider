@@ -1,130 +1,202 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
 import 'package:flutter_projects/_core/custom_widgets/otp_text_field.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/application/auth/auth_bloc.dart';
+import 'package:flutter_projects/application/auth/auth_event.dart';
+import 'package:flutter_projects/application/auth/auth_state.dart';
 import 'package:flutter_projects/presentation/auth/screens/set_new_password.dart';
 import 'package:sizer/sizer.dart';
 
 class OTPVerification extends StatefulWidget {
-  const OTPVerification({super.key});
+  final String mobileNo;
+  const OTPVerification({super.key, required this.mobileNo});
 
   @override
   State<OTPVerification> createState() => _OTPVerificationState();
 }
 
 class _OTPVerificationState extends State<OTPVerification> {
+  String otpValue = "";
   @override
   Widget build(BuildContext context) {
-    return EazylifeScaffold(
-      children: [
-        SizedBox(
-          height: 5.h,
-        ),
-        Center(
-          child: Text(
-            AppString.otpVerification,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20.sp,
-              fontFamily: AppFonts.poppinsBold,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        RichText(
-          overflow: TextOverflow.clip,
-          textAlign: TextAlign.center,
-          textDirection: TextDirection.ltr,
-          softWrap: true,
-          maxLines: 2,
-          textScaleFactor: 1,
-          text: TextSpan(
-            text: AppString.enterTheOtp,
-            style: TextStyle(
-                color: AppTheme.grey,
-                fontFamily: AppFonts.poppinsMed,
-                fontSize: 12.sp),
-            children: <TextSpan>[
-              TextSpan(
-                  text: "+91 72858 31282",
-                  style: TextStyle(
-                      color: AppTheme.black,
-                      fontFamily: AppFonts.poppinsSemiBold,
-                      fontSize: 14.sp)),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 3.h,
-        ),
-        OtpTextField(
-          borderColor: Colors.blue,
-          showFieldAsBox: true,
-          autoFocus: true,
-          borderRadius: BorderRadius.circular(8.sp),
-          borderWidth: 2,
-          clearText: true,
-          cursorColor: Colors.blue,
-          fieldWidth: 16.w,
-          fieldHeight: 10.h,
-          onCodeChanged: (value) {},
-          showCursor: true,
-          textStyle: TextStyle(
-              fontSize: 26.sp,
-              fontFamily: AppFonts.poppinsSemiBold,
-              color: Colors.blue),
-          obscureText: true,
-        ),
-        SizedBox(
-          height: 3.h,
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: RichText(
-              overflow: TextOverflow.clip,
-              textAlign: TextAlign.end,
-              textDirection: TextDirection.rtl,
-              softWrap: true,
-              maxLines: 1,
-              textScaleFactor: 1,
-              text: TextSpan(
-                text: AppString.doNotReceive,
-                style: TextStyle(
-                    color: AppTheme.grey,
-                    fontFamily: AppFonts.poppinsMed,
-                    fontSize: 12.sp),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: AppString.resendOTP,
-                    style: TextStyle(
-                        color: AppTheme.blue,
-                        fontFamily: AppFonts.poppinsMed,
-                        fontSize: 12.sp),
-                  ),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        print(state);
+        if (state is OtpVerifyMessage || state is OtpVerifyError) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(
+                  (state is OtpVerifyMessage)
+                      ? state.msg
+                      : (state is OtpVerifyError)
+                          ? state.mErrorMsg.toString()
+                          : "",
+                  style: const TextStyle(color: Colors.black),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "ok",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  )
                 ],
+              );
+            },
+          );
+        }
+        if (state is VerifyOtpSuccess) {
+          callNextScreen(context, const SetNewPasswordScreen());
+        }
+      },
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          return EazylifeScaffold(
+            children: [
+              SizedBox(
+                height: 5.h,
               ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: AuthButton(
-              btnTitle: AppString.verifyNow,
-              onPressed: () {
-                callNextScreen(context, const SetNewPasswordScreen());
-              }),
-        )
-      ],
+              Center(
+                child: Text(
+                  AppString.otpVerification,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontFamily: AppFonts.poppinsBold,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              RichText(
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.ltr,
+                softWrap: true,
+                maxLines: 2,
+                textScaleFactor: 1,
+                text: TextSpan(
+                  text: AppString.enterTheOtp,
+                  style: TextStyle(
+                      color: AppTheme.grey,
+                      fontFamily: AppFonts.poppinsMed,
+                      fontSize: 12.sp),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: widget.mobileNo,
+                        style: TextStyle(
+                            color: AppTheme.black,
+                            fontFamily: AppFonts.poppinsSemiBold,
+                            fontSize: 14.sp)),
+                    TextSpan(
+                        text: box1.get(AppString.userOTPKey),
+                        style: TextStyle(
+                            color: AppTheme.black,
+                            fontFamily: AppFonts.poppinsSemiBold,
+                            fontSize: 14.sp)),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              OtpTextField(
+                onSubmit: (value) {
+                  print(value);
+                  setState(() {
+                    otpValue = value;
+                  });
+                },
+                borderColor: Colors.blue,
+                showFieldAsBox: true,
+                autoFocus: true,
+                borderRadius: BorderRadius.circular(8.sp),
+                borderWidth: 2,
+                clearText: true,
+                cursorColor: Colors.blue,
+                fieldWidth: 13.w,
+                fieldHeight: 7.h,
+                onCodeChanged: (value) {},
+                showCursor: true,
+                textStyle: TextStyle(
+                    fontSize: 26.sp,
+                    fontFamily: AppFonts.poppinsSemiBold,
+                    color: Colors.blue),
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: RichText(
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.end,
+                    textDirection: TextDirection.rtl,
+                    softWrap: true,
+                    maxLines: 1,
+                    textScaleFactor: 1,
+                    text: TextSpan(
+                      text: AppString.doNotReceive,
+                      style: TextStyle(
+                          color: AppTheme.grey,
+                          fontFamily: AppFonts.poppinsMed,
+                          fontSize: 12.sp),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: AppString.resendOTP,
+                          style: TextStyle(
+                              color: AppTheme.blue,
+                              fontFamily: AppFonts.poppinsMed,
+                              fontSize: 12.sp),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              if (state is! OtpVerifyLoading)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                  child: AuthButton(
+                      btnTitle: AppString.verifyNow,
+                      onPressed: () {
+                        if (otpValue.isNotEmpty) {
+                          context.read<AuthBloc>().add(OtpVerifyApiEvent(
+                              mobileNo: widget.mobileNo, otp: otpValue));
+                        } else {
+                          if (otpValue.isEmpty) {
+                            ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                                const SnackBar(
+                                    content: Text("Please Enter OTP")));
+                          }
+                        }
+                      }),
+                )
+              else
+                const APILoader(),
+            ],
+          );
+        },
+      ),
     );
   }
 }

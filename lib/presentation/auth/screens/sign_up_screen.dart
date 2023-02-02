@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/validation.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -154,7 +155,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mFirstNameKey,
                                           controller: mFirstNameController,
-                                          validator: validateName,
+                                          validator: validateName(
+                                              mFirstNameController.text),
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -180,7 +182,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mLastNameKey,
                                           controller: mLastNameController,
-                                          validator: validateName,
+                                          validator: validateName(
+                                              mLastNameController.text),
                                           style: const TextStyle(
                                               color: AppTheme.authGrey,
                                               fontFamily: AppFonts.poppinsMed),
@@ -206,7 +209,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mEmailKey,
                                           controller: mEmailController,
-                                          validator: validateEmail,
+                                          validator: validateEmail(
+                                              mEmailController.text),
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -232,7 +236,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mMobileKey,
                                           controller: mMobileController,
-                                          validator: validateMobile,
+                                          validator: validateMobile(
+                                              mMobileController.text),
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -350,54 +355,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                       if (state is! SignupLoading)
                                         Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w),
-                                        child: AuthButton(
-                                            btnTitle: AppString.signUp,
-                                            onPressed: () {
-                                              bool mobile = mMobileKey
-                                                  .currentState!
-                                                  .validate();
-                                              bool email = mEmailKey
-                                                  .currentState!
-                                                  .validate();
-                                              bool password = mPasswordKey
-                                                  .currentState!
-                                                  .validate();
-                                              bool cPassword =
-                                                  mConfirmPasswordKey
-                                                      .currentState!
-                                                      .validate();
-                                              if (mobile &&
-                                                  email &&
-                                                  password &&
-                                                  cPassword) {
-                                                context.read<SignupBloc>().add(
-                                                    SignupCallApiEvent(
-                                                      firstName: mFirstNameController.text.trim(),
-                                                        lastName: mLastNameController.text.trim(),
-                                                        mobileNo:
-                                                            mMobileController.text
-                                                                .trim(),
-                                                        email: mEmailController
-                                                            .text
-                                                            .trim(),
-                                                        password:
-                                                            mPasswordController
-                                                                .text
-                                                                .trim(),
-                                                        confirmPassword:
-                                                            mConfirmPasswordController
-                                                                .text
-                                                                .trim()));
-                                              }
-                                            }),
-                                      ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w),
+                                          child: AuthButton(
+                                              btnTitle: AppString.signUp,
+                                              onPressed: () {
+                                                bool mobile = mMobileKey
+                                                    .currentState!
+                                                    .validate();
+                                                bool email = mEmailKey
+                                                    .currentState!
+                                                    .validate();
+                                                bool password = mPasswordKey
+                                                    .currentState!
+                                                    .validate();
+                                                bool cPassword =
+                                                    mConfirmPasswordKey
+                                                        .currentState!
+                                                        .validate();
+                                                if (mobile &&
+                                                    email &&
+                                                    password &&
+                                                    cPassword) {
+                                                  context.read<SignupBloc>().add(SignupCallApiEvent(
+                                                      firstName:
+                                                          mFirstNameController
+                                                              .text
+                                                              .trim(),
+                                                      lastName:
+                                                          mLastNameController.text
+                                                              .trim(),
+                                                      mobileNo:
+                                                          mMobileController.text
+                                                              .trim(),
+                                                      email: mEmailController
+                                                          .text
+                                                          .trim(),
+                                                      password:
+                                                          mPasswordController
+                                                              .text
+                                                              .trim(),
+                                                      confirmPassword:
+                                                          mConfirmPasswordController
+                                                              .text
+                                                              .trim()));
+                                                }
+                                              }),
+                                        ),
                                       if (state is SignupLoading)
                                         const Center(
                                             child: CircularProgressIndicator(
-                                              backgroundColor: AppTheme.lightBlue,
-                                            )),
+                                          backgroundColor: AppTheme.lightBlue,
+                                        )),
                                       SizedBox(
                                         height: 2.h,
                                       ),
@@ -552,39 +561,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ],
       ),
     );
-  }
-
-  String? validateName(String? value) {
-
-    if (value!.isEmpty) {
-      return 'Required';
-    } else {
-      return null;
-    }
-  }
-
-  String? validateMobile(String? value) {
-// Indian Mobile number are of 10 digit only
-    if (RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
-        .hasMatch(value!)) {
-      return null;
-    }
-    if (value!.length != 10) {
-      return 'Mobile Number must be of 10 digit';
-    } else {
-      return null;
-    }
-  }
-
-  String? validateEmail(String? value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-    if (!regex.hasMatch(value!)) {
-      return 'Enter Valid Email';
-    } else {
-      return null;
-    }
   }
 }
