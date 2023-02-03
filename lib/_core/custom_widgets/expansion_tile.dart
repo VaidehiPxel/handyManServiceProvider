@@ -17,10 +17,10 @@ class _EazylifeExpansionTileState extends State<EazylifeExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.symmetric(horizontal:3.5.w),
+      padding: EdgeInsets.symmetric(horizontal: 3.5.w),
       decoration: BoxDecoration(
         color: AppTheme.lightGrey,
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(7.sp),
         shape: BoxShape.rectangle,
       ),
       child: Theme(
@@ -40,16 +40,15 @@ class _EazylifeExpansionTileState extends State<EazylifeExpansionTile> {
                   ),
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 width: 4.w,
               ),
               Text(
                 widget.title,
-                style:  TextStyle(
-                  color: Colors.black,
-                  fontSize: 12.sp,
-                 fontFamily: AppFonts.poppinsMed
-                ),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.sp,
+                    fontFamily: AppFonts.poppinsMed),
               ),
             ],
           ),
@@ -64,14 +63,13 @@ class _EazylifeExpansionTileState extends State<EazylifeExpansionTile> {
           tilePadding: EdgeInsets.zero,
           children: [
             Padding(
-              padding:  EdgeInsets.only(left: 3.w),
+              padding: EdgeInsets.only(left: 3.w),
               child: Text(
                 widget.subTitle,
-                style:  TextStyle(
-                  color:AppTheme.medGrey,
-                  fontSize: 12.sp,
-                    fontFamily: AppFonts.poppins
-                ),
+                style: TextStyle(
+                    color: AppTheme.medGrey,
+                    fontSize: 12.sp,
+                    fontFamily: AppFonts.poppins),
               ),
             ),
           ],

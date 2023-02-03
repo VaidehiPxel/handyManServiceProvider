@@ -11,11 +11,11 @@ class BlueBoxText extends StatefulWidget {
   final bool showSelected;
   const BlueBoxText(
       {super.key,
-        required this.text,
-        required this.showBold,
-        required this.showBlueBox,
-        required this.showSelected,
-        required this.onTap});
+      required this.text,
+      required this.showBold,
+      required this.showBlueBox,
+      required this.showSelected,
+      required this.onTap});
 
   @override
   State<BlueBoxText> createState() => _BlueBoxTextState();
@@ -27,7 +27,9 @@ class _BlueBoxTextState extends State<BlueBoxText> {
     return InkWell(
       onTap: widget.onTap,
       child: Padding(
-        padding:  EdgeInsets.only(left: 5.w,bottom: 1.h),
+        padding: EdgeInsets.only(
+          left: 5.w,
+        ),
         child: Row(
           children: [
             if (widget.showBlueBox)
@@ -39,7 +41,7 @@ class _BlueBoxTextState extends State<BlueBoxText> {
                   //color: Colors.blue.shade700,
                   borderRadius: BorderRadius.circular(0),
                   shape: BoxShape.rectangle,
-                  image:  DecorationImage(
+                  image: DecorationImage(
                     image: AssetImage(AppAssets.sideBlue),
                     fit: BoxFit.cover,
                   ),
@@ -50,18 +52,17 @@ class _BlueBoxTextState extends State<BlueBoxText> {
                 width: 7,
                 height: 31,
               ),
-             SizedBox(
+            SizedBox(
               width: 3.w,
             ),
             Text(
               widget.text,
               textAlign: TextAlign.left,
-
               style: TextStyle(
-                fontSize: 12.sp,
+                  fontSize: 14.sp,
                   color: widget.showSelected ? Colors.blue : Colors.black,
                   fontWeight:
-                  widget.showBold ? FontWeight.bold : FontWeight.normal),
+                      widget.showBold ? FontWeight.bold : FontWeight.normal),
             ),
           ],
         ),

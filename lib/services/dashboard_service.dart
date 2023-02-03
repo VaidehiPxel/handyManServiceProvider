@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/model/home/dashboard_model.dart';
 import 'package:flutter_projects/services/base_service.dart';
 
@@ -41,6 +43,13 @@ class DashboardService {
             message.compareTo("Dashboard Details get Successfull") == 0) {
           dashboardModel = DashboardModel.fromJson(data);
           dashboardData(dashboardModel);
+          box1.put(
+              AppString.userNameKey,
+              data['usersdetails'][0]['name'] +
+                  data['usersdetails'][0]['lastname']);
+          box1.put(AppString.userEmailKey, data['usersdetails'][0]['email']);
+          box1.put(
+              AppString.userProfileKey, data['usersdetails'][0]['profilepics']);
         } else if (resSuccess) {
           errorCallBack(message);
         }

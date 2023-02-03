@@ -28,7 +28,6 @@ class _OTPVerificationState extends State<OTPVerification> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        print(state);
         if (state is OtpVerifyMessage || state is OtpVerifyError) {
           showDialog(
             context: context,
@@ -58,7 +57,11 @@ class _OTPVerificationState extends State<OTPVerification> {
           );
         }
         if (state is VerifyOtpSuccess) {
-          callNextScreen(context, const SetNewPasswordScreen());
+          callNextScreen(
+              context,
+              SetNewPasswordScreen(
+                mobileNo: widget.mobileNo,
+              ));
         }
       },
       child: BlocBuilder<AuthBloc, AuthState>(
@@ -101,12 +104,29 @@ class _OTPVerificationState extends State<OTPVerification> {
                             color: AppTheme.black,
                             fontFamily: AppFonts.poppinsSemiBold,
                             fontSize: 14.sp)),
+                  ],
+                ),
+              ),
+              RichText(
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.ltr,
+                softWrap: true,
+                maxLines: 2,
+                textScaleFactor: 1,
+                text: TextSpan(
+                  text: "  OTP:  ",
+                  style: TextStyle(
+                      color: AppTheme.grey,
+                      fontFamily: AppFonts.poppinsMed,
+                      fontSize: 12.sp),
+                  children: <TextSpan>[
                     TextSpan(
                         text: box1.get(AppString.userOTPKey),
                         style: TextStyle(
-                            color: AppTheme.black,
+                            color: AppTheme.grey,
                             fontFamily: AppFonts.poppinsSemiBold,
-                            fontSize: 14.sp)),
+                            fontSize: 10.sp)),
                   ],
                 ),
               ),
@@ -115,7 +135,6 @@ class _OTPVerificationState extends State<OTPVerification> {
               ),
               OtpTextField(
                 onSubmit: (value) {
-                  print(value);
                   setState(() {
                     otpValue = value;
                   });
@@ -127,12 +146,12 @@ class _OTPVerificationState extends State<OTPVerification> {
                 borderWidth: 2,
                 clearText: true,
                 cursorColor: Colors.blue,
-                fieldWidth: 13.w,
-                fieldHeight: 7.h,
+                fieldWidth: 12.w,
+                fieldHeight: 6.h,
                 onCodeChanged: (value) {},
                 showCursor: true,
                 textStyle: TextStyle(
-                    fontSize: 26.sp,
+                    fontSize: 20.sp,
                     fontFamily: AppFonts.poppinsSemiBold,
                     color: Colors.blue),
                 obscureText: true,

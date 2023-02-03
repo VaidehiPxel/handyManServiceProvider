@@ -38,6 +38,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             }
           },
         );
+      } else if (event is SetPasswordApiEvent) {
+        emit(OtpVerifyLoading());
+        var d = await authService.setPassword(
+          mobileNo: event.mobileNo,
+          password: event.password,
+          confirmpassword: event.confirmPassword,
+          errorCallBack: (appError) {
+            emit(SetPasswordError(mErrorMsg: appError));
+          },
+          setPasswordSuccess: (isSuccess, msg) {
+            if (isSuccess) {
+              emit(SetPasswordSuccess());
+            } else {
+              emit(SetPasswordShowMessage(msg: msg));
+            }
+          },
+        );
       }
     });
   }

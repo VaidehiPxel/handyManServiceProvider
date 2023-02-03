@@ -8,6 +8,7 @@ import 'package:flutter_projects/services/base_service.dart';
 
 typedef GetOTPSuccess = void Function(bool isSuccess, String msg);
 typedef VerifyOTPSuccess = void Function(bool isSuccess, String msg);
+typedef SetPasswordSucces = void Function(bool isSuccess, String msg);
 typedef AppErrorCallBack = void Function(String appError);
 
 class AuthService {
@@ -86,6 +87,48 @@ class AuthService {
         message = data['message'].toString();
         if (resSuccess && message.contains("OTP Validation Successfull")) {
           verifyOtpSuccess(true, "");
+        } else {
+          errorCallBack(message);
+        }
+      }
+    } catch (e) {
+      errorCallBack(e.toString());
+    }
+  }
+
+  Future<void> setPassword(
+      {required String mobileNo,
+      required String password,
+      required String confirmpassword,
+      required AppErrorCallBack errorCallBack,
+      required SetPasswordSucces setPasswordSuccess}) async {
+    try {
+      bool resSuccess = false;
+      String message = '';
+      Response? response;
+
+      Map<String, dynamic> map = {};
+
+      map = {
+        "mobileno": mobileNo,
+        "password": password,
+        "confirmpassword": confirmpassword,
+      };
+
+      response = await _dio.post(
+        URL.setPassword,
+        data: FormData.fromMap(map),
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+        }, responseType: ResponseType.json),
+      );
+      Map<String, dynamic> data = jsonDecode(response.data);
+
+      if (response.statusCode == 200) {
+        resSuccess = data['status'] == true;
+        message = data['message'].toString();
+        if (resSuccess && message.contains("Change Password Successfull")) {
+          setPasswordSuccess(true, "");
         } else {
           errorCallBack(message);
         }

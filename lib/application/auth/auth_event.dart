@@ -23,3 +23,16 @@ class OtpVerifyApiEvent extends AuthEvent {
   @override
   List<Object> get props => [mobileNo, otp];
 }
+
+class SetPasswordApiEvent extends AuthEvent {
+  final String mobileNo;
+  final String password;
+  final String confirmPassword;
+  const SetPasswordApiEvent(
+      {required this.mobileNo,
+      required this.password,
+      required this.confirmPassword});
+
+  @override
+  List<Object> get props => [mobileNo, password, confirmPassword];
+}

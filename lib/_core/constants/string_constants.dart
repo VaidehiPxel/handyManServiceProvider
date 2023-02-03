@@ -44,9 +44,11 @@ class AppString {
   static const String notification = "Notification";
   static const String payment = "Payment";
   static const String reviewAndRating = "Review And Rating";
+  static const String myComplaints = "My Complaints";
   static const String faqs = "FAQS";
   static const String help = "Help";
   static const String termsCondition = "Terms & Condition";
+  static const String langSelection = "Language Selection";
   static const String logOut = "Log Out";
   static const String firstNameHint = "Lannie";
   static const String lastNameHint = "Murphy";
@@ -205,5 +207,8 @@ class AppString {
 
 //Hive
   static const String userIdKey = "USER_ID_KEY";
+  static const String userNameKey = "USER_NAME_KEY";
+  static const String userEmailKey = "USER_EMAIL_KEY";
+  static const String userProfileKey = "USER_PROFILE_KEY";
   static const String userOTPKey = "USER_OTP_KEY";
 }

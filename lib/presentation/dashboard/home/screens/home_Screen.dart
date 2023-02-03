@@ -356,23 +356,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: AppFonts.poppinsBold,
                     fontSize: 14.sp,
                     color: AppTheme.black)),
-            InkWell(
-              onTap: () {
-                callNextScreen(
-                    context,
-                    NewJobList(
-                      jobModel: newjobs,
-                    ));
-              },
-              child: Text(
-                AppString.viewAll,
-                style: TextStyle(
-                  color: AppTheme.blue,
-                  fontSize: 10.sp,
-                  fontFamily: AppFonts.poppinsMed,
-                ),
-              ),
-            ),
+            newjobs.length > 3
+                ? InkWell(
+                    onTap: () {
+                      callNextScreen(
+                          context,
+                          NewJobList(
+                            jobModel: newjobs,
+                          ));
+                    },
+                    child: Text(
+                      AppString.viewAll,
+                      style: TextStyle(
+                        color: AppTheme.blue,
+                        fontSize: 10.sp,
+                        fontFamily: AppFonts.poppinsMed,
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
         ),
         SizedBox(

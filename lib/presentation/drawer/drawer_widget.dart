@@ -10,6 +10,7 @@ import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 
 import 'package:flutter_projects/presentation/drawer/screens/faq_screen.dart';
 import 'package:flutter_projects/presentation/drawer/screens/help_screen.dart';
+import 'package:flutter_projects/presentation/drawer/screens/lang_selection.dart';
 import 'package:flutter_projects/presentation/drawer/screens/rating_review.dart';
 import 'package:flutter_projects/presentation/drawer/screens/terms_screen.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
@@ -19,7 +20,7 @@ import 'package:sizer/sizer.dart';
 
 class DrawerWidget extends StatelessWidget {
   final int currentIndex;
-  const DrawerWidget({Key? key,required this.currentIndex}) : super(key: key);
+  const DrawerWidget({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,42 +29,50 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-           SizedBox(
-            height: kToolbarHeight-1.h,
+          SizedBox(
+            height: kToolbarHeight - 1.h,
           ),
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
             },
             trailing: Padding(
-              padding:  EdgeInsets.only(right: 2.w),
+              padding: EdgeInsets.only(right: 2.w),
               child: SvgPicture.asset(AppAssets.closeSvg),
             ),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               CircleAvatar(
                 radius: 25.sp,
               ),
-            SizedBox(width: 3.w,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Lonnie Murphy",style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: AppFonts.poppinsSemiBold,
-                  fontSize: 14.sp
-                ),),
-                Text("Lonnie.murphy@gmail.com",style: TextStyle(
-                    color: AppTheme.medGrey,
-                    fontFamily: AppFonts.poppins,
-                    fontSize: 10.sp
-                ),),
-              ],
-            )
+              SizedBox(
+                width: 3.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Lonnie Murphy",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: AppFonts.poppinsSemiBold,
+                        fontSize: 14.sp),
+                  ),
+                  Text(
+                    "Lonnie.murphy@gmail.com",
+                    style: TextStyle(
+                        color: AppTheme.medGrey,
+                        fontFamily: AppFonts.poppins,
+                        fontSize: 10.sp),
+                  ),
+                ],
+              )
             ],
           ),
           const SizedBox(
@@ -121,12 +130,24 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
+              text: AppString.myComplaints,
+              onTap: () {
+                //  callNextScreen(context, const MyC());
+              },
+              showBlueBox: currentIndex == 4,
+              showSelected: currentIndex == 4,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlueBoxText(
+              showBold: true,
               text: AppString.changePassword,
               onTap: () {
                 callNextScreen(context, const ChangePassword());
               },
-              showBlueBox: currentIndex == 4,
-              showSelected: currentIndex == 4,
+              showBlueBox: currentIndex == 5,
+              showSelected: currentIndex == 5,
             ),
           ),
           Padding(
@@ -137,8 +158,8 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const FAQSScreen());
               },
-              showBlueBox: currentIndex == 5,
-              showSelected: currentIndex == 5,
+              showBlueBox: currentIndex == 6,
+              showSelected: currentIndex == 6,
             ),
           ),
           Padding(
@@ -149,8 +170,8 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const HelpScreen());
               },
-              showBlueBox: currentIndex == 6,
-              showSelected: currentIndex == 6,
+              showBlueBox: currentIndex == 7,
+              showSelected: currentIndex == 7,
             ),
           ),
           Padding(
@@ -161,8 +182,20 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 callNextScreen(context, const TAndCScreen());
               },
-              showBlueBox: currentIndex == 7,
-              showSelected: currentIndex == 7,
+              showBlueBox: currentIndex == 8,
+              showSelected: currentIndex == 8,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlueBoxText(
+              showBold: true,
+              text: AppString.langSelection,
+              onTap: () {
+                callNextScreen(context, const LanguageSelectionScreen());
+              },
+              showBlueBox: currentIndex == 9,
+              showSelected: currentIndex == 9,
             ),
           ),
           Padding(
@@ -178,8 +211,8 @@ class DrawerWidget extends StatelessWidget {
                       return const LogOutDialogBox();
                     });
               },
-              showBlueBox: currentIndex == 8,
-              showSelected: currentIndex == 8,
+              showBlueBox: currentIndex == 10,
+              showSelected: currentIndex == 10,
             ),
           ),
         ],

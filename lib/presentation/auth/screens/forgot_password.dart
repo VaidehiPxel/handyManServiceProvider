@@ -70,7 +70,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               backgroundColor: Colors.white,
               extendBody: true,
               extendBodyBehindAppBar: true,
-              resizeToAvoidBottomInset: true,
+              resizeToAvoidBottomInset: false,
               body: Stack(
                 children: [
                   SizedBox(
@@ -96,30 +96,32 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 3.h,
-                            ),
-                            _setTitle(),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            _setMobileNumber(),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            SizedBox(
-                              height: 3.5.h,
-                            ),
-                            if (state is! GetOtpLoading)
-                              _getOtpCTA(context)
-                            else
-                              const APILoader(),
-                            SizedBox(
-                              height: 2.5.h,
-                            ),
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                              _setTitle(),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              _setMobileNumber(),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              SizedBox(
+                                height: 3.5.h,
+                              ),
+                              if (state is! GetOtpLoading)
+                                _getOtpCTA(context)
+                              else
+                                const APILoader(),
+                              SizedBox(
+                                height: 2.5.h,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -167,6 +169,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         style: const TextStyle(
           color: Colors.blue,
         ),
+        keyboardType: TextInputType.phone,
         decoration: InputDecoration(
             labelText: AppString.enterMobileNumber,
             focusColor: AppTheme.authGrey,

@@ -44,3 +44,21 @@ class OtpVerifyMessage extends AuthState {
   @override
   List<Object> get props => [msg];
 }
+
+class SetPasswordSuccess extends AuthState {}
+
+class SetPasswordError extends AuthState {
+  final String? mErrorMsg;
+  const SetPasswordError({this.mErrorMsg});
+  @override
+  List<Object> get props => [mErrorMsg!];
+}
+
+class SetPasswordLoading extends AuthState {}
+
+class SetPasswordShowMessage extends AuthState {
+  final String msg;
+  const SetPasswordShowMessage({required this.msg});
+  @override
+  List<Object> get props => [msg];
+}

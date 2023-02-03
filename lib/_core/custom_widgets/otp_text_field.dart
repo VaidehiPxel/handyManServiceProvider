@@ -148,6 +148,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
           style: style ?? widget.textStyle,
           autofocus: widget.autoFocus,
           cursorColor: widget.cursorColor,
+          cursorHeight: 4.h,
           controller: _textControllers[index],
           focusNode: _focusNodes[index],
           enabled: widget.enabled,
@@ -158,7 +159,8 @@ class _OtpTextFieldState extends State<OtpTextField> {
                   counterText: "",
                   filled: widget.filled,
                   fillColor: widget.fillColor,
-                  contentPadding: EdgeInsets.all(12.sp),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 7.sp, horizontal: 8.sp),
                   focusedBorder: widget.showFieldAsBox
                       ? outlineBorder(widget.focusedBorderColor)
                       : underlineInputBorder(widget.focusedBorderColor),

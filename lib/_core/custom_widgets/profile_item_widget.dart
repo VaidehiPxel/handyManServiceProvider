@@ -152,7 +152,8 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                   child: widget.isEdit
                       ? TextFormField(
                           controller: controller,
-                          decoration: const InputDecoration.collapsed(hintText: ""),
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ""),
                         )
                       : Text(widget.value),
                 ),
@@ -167,7 +168,8 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           controller: controller,
                           minLines: 6,
                           maxLines: 10,
-                          decoration: const InputDecoration.collapsed(hintText: ""),
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ""),
                         )
                       : Text(widget.value),
                 ),
@@ -374,8 +376,10 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           children: [
                             Row(
                               children: [
-                                Image.asset(AppAssets.pdf,
-                                height: 3.h,),
+                                Image.asset(
+                                  AppAssets.pdf,
+                                  height: 3.h,
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(widget.value),
@@ -405,8 +409,9 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
             lastDate: DateTime(2101))
         .then((value) {
       if (value != null)
+        // ignore: curly_braces_in_flow_control_structures
         setState(() {
-          pickedDate = value!;
+          pickedDate = value;
         });
     });
   }

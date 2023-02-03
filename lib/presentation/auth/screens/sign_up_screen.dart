@@ -155,8 +155,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mFirstNameKey,
                                           controller: mFirstNameController,
-                                          validator: validateName(
-                                              mFirstNameController.text),
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -182,10 +180,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mLastNameKey,
                                           controller: mLastNameController,
-                                          validator: validateName(
-                                              mLastNameController.text),
                                           style: const TextStyle(
-                                              color: AppTheme.authGrey,
+                                              color: AppTheme.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
                                               labelText: AppString.lastName,
@@ -209,8 +205,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mEmailKey,
                                           controller: mEmailController,
-                                          validator: validateEmail(
-                                              mEmailController.text),
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -236,8 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: TextFormField(
                                           key: mMobileKey,
                                           controller: mMobileController,
-                                          validator: validateMobile(
-                                              mMobileController.text),
+                                          keyboardType: TextInputType.phone,
                                           style: const TextStyle(
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
@@ -360,46 +353,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           child: AuthButton(
                                               btnTitle: AppString.signUp,
                                               onPressed: () {
-                                                bool mobile = mMobileKey
-                                                    .currentState!
-                                                    .validate();
-                                                bool email = mEmailKey
-                                                    .currentState!
-                                                    .validate();
-                                                bool password = mPasswordKey
-                                                    .currentState!
-                                                    .validate();
-                                                bool cPassword =
-                                                    mConfirmPasswordKey
-                                                        .currentState!
-                                                        .validate();
-                                                if (mobile &&
-                                                    email &&
-                                                    password &&
-                                                    cPassword) {
-                                                  context.read<SignupBloc>().add(SignupCallApiEvent(
-                                                      firstName:
-                                                          mFirstNameController
-                                                              .text
-                                                              .trim(),
-                                                      lastName:
-                                                          mLastNameController.text
-                                                              .trim(),
-                                                      mobileNo:
-                                                          mMobileController.text
-                                                              .trim(),
-                                                      email: mEmailController
-                                                          .text
-                                                          .trim(),
-                                                      password:
-                                                          mPasswordController
-                                                              .text
-                                                              .trim(),
-                                                      confirmPassword:
-                                                          mConfirmPasswordController
-                                                              .text
-                                                              .trim()));
-                                                }
+                                                validateSignUp(context);
                                               }),
                                         ),
                                       if (state is SignupLoading)
@@ -509,6 +463,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  void validateSignUp(BuildContext context) {
+    if (mFirstNameController.text.isNotEmpty &&
+        mLastNameController.text.isNotEmpty &&
+        mMobileController.text.isNotEmpty &&
+        mEmailController.text.isNotEmpty &&
+        mPasswordController.text.isNotEmpty &&
+        mConfirmPasswordController.text.isNotEmpty) {
+      context.read<SignupBloc>().add(SignupCallApiEvent(
+          firstName: mFirstNameController.text.trim(),
+          lastName: mLastNameController.text.trim(),
+          mobileNo: mMobileController.text.trim(),
+          email: mEmailController.text.trim(),
+          password: mPasswordController.text.trim(),
+          confirmPassword: mConfirmPasswordController.text.trim()));
+    } else {
+      if (mFirstNameController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("FirstName can't be empty")));
+      } else if (mLastNameController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("LastName can't be empty")));
+      } else if (mEmailController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("Email can't be empty")));
+      } else if (mMobileController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("Mobile can't be empty")));
+      } else if (mPasswordController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("Password can't be empty")));
+      } else if (mConfirmPasswordController.text.isEmpty) {
+        ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+            const SnackBar(content: Text("Confirm Password can't be empty")));
+      }
+    }
+  }
+
+  Center _signupWith() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.facebook),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.google),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AppAssets.linkedIn),
+          )
+        ],
+      ),
+    );
+  }
+
   Align _alreadyAccount(BuildContext context) {
     return Align(
       alignment: Alignment.center,
@@ -537,28 +550,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Center _signupWith() {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.facebook),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.google),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppAssets.linkedIn),
-          )
-        ],
       ),
     );
   }

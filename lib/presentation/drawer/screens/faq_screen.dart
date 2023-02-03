@@ -51,7 +51,12 @@ class _FAQSScreenState extends State<FAQSScreen> {
                   : (state.isLoading == false && (state is FaqSuccess))
                       ? Padding(
                           padding: EdgeInsets.all(18.sp),
-                          child: ListView.builder(
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: 1.5.h,
+                              );
+                            },
                             itemCount: state.mFaqModel.length,
                             itemBuilder: (context, index) {
                               return EazylifeExpansionTile(

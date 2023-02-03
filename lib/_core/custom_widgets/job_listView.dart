@@ -70,7 +70,7 @@ class JobListView extends StatelessWidget {
                       SizedBox(
                         height: 0.3.h,
                       ),
-                      Text(jobListingModel.description!,
+                      Text(jobListingModel.description,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 10.sp,
@@ -89,7 +89,7 @@ class JobListView extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                                jobListingModel.address1! +
+                                jobListingModel.address1 +
                                     jobListingModel.address2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -125,14 +125,14 @@ class JobListView extends StatelessWidget {
                   //                 ))
                   //           ],
                   //         ),
-                  if (jobListingModel.fromamount != null)
-                    Text("₹ ${jobListingModel.fromamount}",
-                        softWrap: true,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: AppFonts.poppinsSemiBold,
-                          color: AppTheme.black,
-                        ))
+                  Text(
+                      "₹ ${jobListingModel.fromamount ?? "0"} - ${jobListingModel.toamount ?? "0"}",
+                      softWrap: true,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: AppFonts.poppinsSemiBold,
+                        color: AppTheme.black,
+                      ))
                 ],
               )
             ],

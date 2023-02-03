@@ -65,5 +65,5 @@ class AppAssets {
   static const String chat = "assets/svg/chat_icon.svg";
 
   static const String wallet = "assets/svg/wallet.svg";
-  static const String profileThumb = "assets/profile/profile_thumb.png";
+  static const String profileThumb = "assets/images/profile/profile_thumb.png";
 }

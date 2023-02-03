@@ -29,8 +29,8 @@ class TermsConditionService {
         }, responseType: ResponseType.json),
       );
 
-      // print(response.statusCode);
-      // print(response.data);
+      print(response.statusCode);
+      print(response.data);
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -42,7 +42,7 @@ class TermsConditionService {
             message.compareTo("terms and condition details Get Successfull") ==
                 0) {
           for (var r in data["result"]) {
-            // print(r);
+            print(r);
             description = r["description"];
           }
           print(description);

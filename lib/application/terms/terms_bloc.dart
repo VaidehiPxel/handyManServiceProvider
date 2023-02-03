@@ -13,6 +13,7 @@ class TermsConditionBloc
       : super(const TermsConditionInitial(isLoading: true)) {
     on<TermsConditionEvent>((event, emit) async {
       if (event is TermsConditionCallApiEvent) {
+        print("is event");
         await termsConditionService.getTAndC(
           errorCallBack: (appError) {},
           termsConditionServiceSuccess: (description) {

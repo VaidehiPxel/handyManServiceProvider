@@ -1,62 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/application/terms/terms_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-class TAndCScreen extends StatelessWidget {
+class TAndCScreen extends StatefulWidget {
   const TAndCScreen({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TAndCScreen> createState() => _TAndCScreenState();
+}
+
+class _TAndCScreenState extends State<TAndCScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<TermsConditionBloc>().add(const TermsConditionCallApiEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: EazylifeAppBar(
-        title: AppString.termsCondition,
-        leadIcon: AppAssets.backIcon,
-        onPressed: () {
-          Navigator.pop(context);
+    return BlocListener<TermsConditionBloc, TermsConditionState>(
+      listener: (context, state) {},
+      child: BlocBuilder<TermsConditionBloc, TermsConditionState>(
+        builder: (context, state) {
+          return Scaffold(
+              appBar: EazylifeAppBar(
+                title: AppString.termsCondition,
+                leadIcon: AppAssets.backIcon,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                sideIcon: null,
+              ),
+              body: state.isLoading == true
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      backgroundColor: AppTheme.lightBlue,
+                    ))
+                  : (state.isLoading == false &&
+                          (state is TermsConditionSuccess))
+                      ? Padding(
+                          padding: EdgeInsets.all(18.sp),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppString.termsCondition,
+                                  style: TextStyle(
+                                    color: AppTheme.black,
+                                    fontSize: 16.sp,
+                                    fontFamily: AppFonts.poppinsBold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                Text(
+                                  state.mTermsConditions,
+                                  style: TextStyle(
+                                    color: AppTheme.medGrey,
+                                    fontSize: 12.sp,
+                                    fontFamily: AppFonts.poppins,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(
+                          backgroundColor: AppTheme.lightBlue,
+                        )));
         },
-        sideIcon: null,
-      ),
-      body: Padding(
-        padding:  EdgeInsets.all(18.sp),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:  [
-              Text(
-                AppString.termsCondition,
-                style: TextStyle(
-                  color: AppTheme.black,
-                  fontSize: 16.sp,
-                  fontFamily: AppFonts.poppinsBold,
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                style: TextStyle(
-                  color: AppTheme.medGrey,
-                  fontSize: 12.sp,
-                  fontFamily: AppFonts.poppins,
-                ),
-              ),
-              Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown",
-                style: TextStyle(
-                  color: AppTheme.medGrey,
-                  fontSize: 12.sp,
-                  fontFamily: AppFonts.poppins,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
