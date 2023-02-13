@@ -9,4 +9,7 @@ class URL {
   static const String termsUrl = '${baseURL}termscondition';
   static const String dashboardUrl =
       '${baseURL}serviceprovidersdashboard?user_id=';
+  static const String jobDeetailUrl = '${baseURL}postjobgetbyid';
+  static const String bidUpdateUrl = '${baseURL}serviceprovidersBidUpdate';
+  static const String bidRemoveUrl = '${baseURL}serviceprovidersBidRemove';
 }

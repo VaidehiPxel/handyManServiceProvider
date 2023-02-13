@@ -11,7 +11,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final DashboardService dashboardService;
 
   DashboardBloc({required this.dashboardService})
-      : super(DashboardInitial(isLoading: true)) {
+      : super(const DashboardInitial(isLoading: true)) {
     on<DashboardEvent>((event, emit) async {
       if (event is DashboardCallApiEvent) {
         await dashboardService.getDashboardData(

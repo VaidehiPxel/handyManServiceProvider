@@ -1,9 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/grey_textField.dart';
+import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
+import 'package:flutter_projects/application/jobDetail/job_detail_event.dart';
+import 'package:flutter_projects/application/jobDetail/job_detail_state.dart';
+import 'package:flutter_projects/model/jobs/job_detail_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
@@ -11,31 +18,78 @@ import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class JobDetailView extends StatelessWidget {
-  final String? appBarTitle;
-  const JobDetailView({Key? key, this.appBarTitle}) : super(key: key);
+class JobDetailView extends StatefulWidget {
+  final String appBarTitle;
+  final int jobId;
+  const JobDetailView(
+      {Key? key, required this.appBarTitle, required this.jobId})
+      : super(key: key);
+
+  @override
+  State<JobDetailView> createState() => _JobDetailViewState();
+}
+
+class _JobDetailViewState extends State<JobDetailView> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<JobDetailBloc>()
+        .add(JobDetailCallApiEvent(jobId: widget.jobId));
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: EazylifeAppBar(
-        title: appBarTitle ?? "",
-        leadIcon: AppAssets.backIcon,
-        onPressed: () {
-          Navigator.pop(context);
+    return BlocListener<JobDetailBloc, JobDetailState>(
+      listener: (context, state) {
+        if (state is JobDetailError) {
+          ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+              SnackBar(content: Text(state.mErrorMsg.toString())));
+        }
+
+        if (state is BidUpdateSuccess) {
+          ScaffoldMessenger.maybeOf(context)!
+              .showSnackBar(const SnackBar(content: Text("Bid Updated")));
+        }
+        if (state is BidRemoveSuccess) {
+          ScaffoldMessenger.maybeOf(context)!
+              .showSnackBar(const SnackBar(content: Text("Bid Remove")));
+        }
+      },
+      child: BlocBuilder<JobDetailBloc, JobDetailState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: EazylifeAppBar(
+              title: widget.appBarTitle,
+              leadIcon: AppAssets.backIcon,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              sideIcon: null,
+            ),
+            body: state is JobDetailLoading == true
+                ? const APILoader()
+                : (state is JobDetailLoading == false &&
+                        (state is JobDetailSuccess))
+                    ? RenderBodyView(
+                        detail: state.jobDetailModel,
+                        state: state,
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator(
+                        backgroundColor: AppTheme.lightBlue,
+                      )),
+          );
         },
-        sideIcon: null,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(18.sp),
-        child: const RenderBodyView(),
       ),
     );
   }
 }
 
 class RenderBodyView extends StatefulWidget {
-  const RenderBodyView({super.key});
+  const RenderBodyView({super.key, required this.detail, required this.state});
+  final GetJobDetailModel detail;
+  final JobDetailState state;
 
   @override
   State<RenderBodyView> createState() => _RenderBodyViewState();
@@ -43,71 +97,79 @@ class RenderBodyView extends StatefulWidget {
 
 class _RenderBodyViewState extends State<RenderBodyView> {
   final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
+      Completer<GoogleMapController>();
 
-  bool isUpdate=false;
+  bool isUpdate = false;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 12.sp,
-          ),
-          setTitle(),
-          SizedBox(
-            height: 8.sp,
-          ),
-          _putDivider(),
-          _setDescription(),
-          _putDivider(),
-          setAddress(),
-          _putDivider(),
-          setLocation(),
-          _putDivider(),
-          _setDateTime(),
-          SizedBox(
-            height: 12.sp,
-          ),
-          _putDivider(),
-          SizedBox(
-            height: 1.h,
-          ),
-          _setProviderTitle(),
-          SizedBox(
-            height: 8.sp,
-          ),
-          _setListOfProvider(),
-          SizedBox(
-            height: 8.sp,
-          ),
-          isUpdate?_setUpdateBid():_setEnterBid(),
-          SizedBox(
-            height: 3.h,
-          ),
-          isUpdate?_setListOfBidTitle():Container(),
-          SizedBox(
-            height: 2.h,
-          ),
-          isUpdate?_setListOfProvider():Container(),
-          SizedBox(
-            height: 2.h,
-          ),
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(10.sp),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 12.sp,
+            ),
+            setTitle(widget.detail),
+            SizedBox(
+              height: 8.sp,
+            ),
+            _putDivider(),
+            _setDescription(widget.detail),
+            _putDivider(),
+            setAddress(widget.detail),
+            _putDivider(),
+            setLocation(widget.detail),
+            _putDivider(),
+            _setDateTime(widget.detail),
+            SizedBox(
+              height: 12.sp,
+            ),
+            _putDivider(),
+            SizedBox(
+              height: 1.h,
+            ),
+            _setProviderTitle(),
+            SizedBox(
+              height: 8.sp,
+            ),
+            if (widget.detail.jobsAppliedServiceProviders.length < 0)
+              Container()
+            else
+              _setListOfProvider(widget.detail.jobsAppliedServiceProviders),
+            SizedBox(
+              height: 8.sp,
+            ),
+            isUpdate
+                ? _setUpdateBid(widget.detail, widget.state)
+                : _setEnterBid(),
+            SizedBox(
+              height: 3.h,
+            ),
+            isUpdate ? _setListOfBidTitle() : Container(),
+            SizedBox(
+              height: 2.h,
+            ),
+            //  isUpdate ? _setListOfProvider() : Container(),
+            SizedBox(
+              height: 2.h,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _setListOfProvider() {
+  Widget _setListOfProvider(List jobsAppliedServiceProviders) {
     return ListView.separated(
       separatorBuilder: (context, index) {
         return SizedBox(
           height: 1.h,
         );
       },
-      itemCount: 3,
+      itemCount: jobsAppliedServiceProviders.length,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -131,56 +193,56 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                     ),
                     Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Abhithi Maheshvari",
+                                softWrap: true,
+                                style: TextStyle(
+                                  color: AppTheme.black,
+                                  fontSize: 12.sp,
+                                  fontFamily: AppFonts.poppinsSemiBold,
+                                ),
+                              ),
+                              Text(
+                                "Bathroom Cleaning",
+                                style: TextStyle(
+                                  color: AppTheme.messageGrey,
+                                  fontSize: 10.sp,
+                                  fontFamily: AppFonts.poppins,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Abhithi Maheshvari",
-                                    softWrap: true,
-                                    style: TextStyle(
-                                      color: AppTheme.black,
-                                      fontSize: 12.sp,
-                                      fontFamily: AppFonts.poppinsSemiBold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Bathroom Cleaning",
-                                    style: TextStyle(
-                                      color: AppTheme.messageGrey,
-                                      fontSize: 10.sp,
-                                      fontFamily: AppFonts.poppins,
-                                    ),
-                                  ),
-                                ],
+                            Text(
+                              AppString.quotationAmount,
+                              style: TextStyle(
+                                color: AppTheme.black,
+                                fontSize: 7.sp,
+                                fontFamily: AppFonts.poppinsMed,
                               ),
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  AppString.quotationAmount,
-                                  style: TextStyle(
-                                    color: AppTheme.black,
-                                    fontSize: 7.sp,
-                                    fontFamily: AppFonts.poppinsMed,
-                                  ),
-                                ),
-                                Text(
-                                  "₹ 799",
-                                  style: TextStyle(
-                                    color: AppTheme.blue,
-                                    fontSize: 14.sp,
-                                    fontFamily: AppFonts.poppinsSemiBold,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              "₹ 799",
+                              style: TextStyle(
+                                color: AppTheme.blue,
+                                fontSize: 14.sp,
+                                fontFamily: AppFonts.poppinsSemiBold,
+                              ),
                             ),
                           ],
-                        )),
+                        ),
+                      ],
+                    )),
                   ],
                 ),
               ),
@@ -287,7 +349,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                 ),
                 onPressed: () {
                   setState(() {
-                    isUpdate=true;
+                    isUpdate = true;
                   });
                 },
                 child: Padding(
@@ -308,7 +370,10 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget _setUpdateBid() {
+  Widget _setUpdateBid(
+    GetJobDetailModel detail,
+    JobDetailState state,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -372,7 +437,11 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                             ..pop();
                         },
                         onOkPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context)..pop();
+                          context.read<JobDetailBloc>().add(BidRemoveApiEvent(
+                                jobId: detail.result[0].id,
+                                userId: detail.result[0].userId,
+                              ));
                         },
                         title: AppString.areYouSure,
                         titleNo: "Cancel",
@@ -392,7 +461,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                     width: 2.w,
                   ),
                   Text(
-                  AppString.remove,
+                    AppString.remove,
                     style: TextStyle(
                       color: AppTheme.red,
                       fontSize: 11.sp,
@@ -420,25 +489,36 @@ class _RenderBodyViewState extends State<RenderBodyView> {
             ),
             Expanded(
               flex: 2,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.blue,
-                  minimumSize: const Size.fromHeight(40),
-                  elevation: 0,
-                  shadowColor: Colors.transparent,
-                ),
-                onPressed: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                  child: Text(
-                    AppString.update,
-                    style: TextStyle(
-                        color: AppTheme.white,
-                        fontSize: 14.sp,
-                        fontFamily: AppFonts.poppinsMed),
-                  ),
-                ),
-              ),
+              child: state is BidUpdateLoading == true
+                  ? const APILoader()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.blue,
+                        minimumSize: const Size.fromHeight(40),
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                      ),
+                      onPressed: () {
+                        print("hhhhhh");
+                        print(state);
+                        context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                            jobId: detail.result[0].id,
+                            userId: detail.result[0].userId,
+                            amount: "0"));
+                        print(state);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 0.w, vertical: 0.h),
+                        child: Text(
+                          AppString.update,
+                          style: TextStyle(
+                              color: AppTheme.white,
+                              fontSize: 14.sp,
+                              fontFamily: AppFonts.poppinsMed),
+                        ),
+                      ),
+                    ),
             ),
           ],
         ),
@@ -466,7 +546,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                         return DialogBoxWithIcon(
                           icon: AppAssets.save,
                           content: Text(
-                           AppString.decline,
+                            AppString.decline,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppTheme.black,
@@ -590,7 +670,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget _setDateTime() {
+  Widget _setDateTime(GetJobDetailModel detail) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -624,7 +704,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                       ),
                     ),
                     Text(
-                      "24 Sep",
+                      detail.result[0].jobdate.formatDate(),
                       style: TextStyle(
                         color: AppTheme.medGrey,
                         fontSize: 10.sp,
@@ -665,7 +745,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                       ),
                     ),
                     Text(
-                      "10:00 PM",
+                      detail.result[0].jobtime.toString(),
                       style: TextStyle(
                         color: AppTheme.medGrey,
                         fontSize: 10.sp,
@@ -680,7 +760,9 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           ],
         ),
         Text(
-          "₹ 799",
+          detail.result[0].amount == null
+              ? '0.0'
+              : "£${detail.result[0].amount}",
           textAlign: TextAlign.end,
           style: TextStyle(
             color: AppTheme.black,
@@ -700,7 +782,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  Widget setTitle() {
+  Widget setTitle(GetJobDetailModel detail) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -710,7 +792,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Sofa Cleaning",
+              detail.result[0].title,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 12.sp,
@@ -720,22 +802,22 @@ class _RenderBodyViewState extends State<RenderBodyView> {
             SizedBox(
               height: 2.sp,
             ),
-            Text(
-              "Lorem ipsum dolor sit amet, adipiscing elit",
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                color: AppTheme.medGrey,
-                fontSize: 10.sp,
-                fontFamily: AppFonts.poppins,
-              ),
-            ),
+            // Text(
+            //   "Lorem ipsum dolor sit amet, adipiscing elit",
+            //   textAlign: TextAlign.justify,
+            //   style: TextStyle(
+            //     color: AppTheme.medGrey,
+            //     fontSize: 10.sp,
+            //     fontFamily: AppFonts.poppins,
+            //   ),
+            // ),
           ],
         ),
       ],
     );
   }
 
-  Widget _setDescription() {
+  Widget _setDescription(GetJobDetailModel detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -754,7 +836,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           height: 2.sp,
         ),
         Text(
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt leo a neque accumsan posuere. Nullam a purus congue, ultricies sapien vitae, tempus purus\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut cidunt leo a neque accumsan posuere.",
+          detail.result[0].description,
           textAlign: TextAlign.justify,
           style: TextStyle(
             color: AppTheme.medGrey,
@@ -769,7 +851,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  setAddress() {
+  setAddress(GetJobDetailModel detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -788,7 +870,16 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           height: 2.sp,
         ),
         Text(
-          "1231, Paradise Lane, Opp. San Diego, CA 92103",
+          detail.result[0].address1 +
+              detail.result[0].address2 +
+              "," +
+              detail.result[0].city +
+              "," +
+              detail.result[0].state +
+              "," +
+              detail.result[0].country +
+              " " +
+              detail.result[0].pincode,
           textAlign: TextAlign.justify,
           style: TextStyle(
             color: AppTheme.medGrey,
@@ -803,7 +894,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-  setLocation() {
+  setLocation(GetJobDetailModel detail) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

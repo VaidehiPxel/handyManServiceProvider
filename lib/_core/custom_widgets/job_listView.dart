@@ -32,6 +32,7 @@ class JobListView extends StatelessWidget {
                 context,
                 JobDetailView(
                   appBarTitle: jobListingModel.title,
+                  jobId: jobListingModel.id,
                 ));
       },
       child: Container(

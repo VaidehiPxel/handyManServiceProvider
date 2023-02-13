@@ -9,19 +9,20 @@ abstract class DashboardState extends Equatable {
 }
 
 class DashboardInitial extends DashboardState {
-  DashboardInitial({required super.isLoading});
+  const DashboardInitial({required super.isLoading});
 }
 
 class DashboardError extends DashboardState {
   final String? mErrorMsg;
-  DashboardError({this.mErrorMsg, required super.isLoading});
+  const DashboardError({this.mErrorMsg, required super.isLoading});
   @override
   List<Object> get props => [mErrorMsg!];
 }
 
 class DashboardSuccess extends DashboardState {
   final DashboardModel dashboardModel;
-  DashboardSuccess({required this.dashboardModel, required super.isLoading});
+  const DashboardSuccess(
+      {required this.dashboardModel, required super.isLoading});
   @override
   List<Object> get props => [dashboardModel];
 }

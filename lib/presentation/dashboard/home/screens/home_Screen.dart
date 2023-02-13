@@ -7,7 +7,6 @@ import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/model/home/dashboard_model.dart';
-import 'package:flutter_projects/model/jobs/job_listing_model.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/new_job_listing_screen.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/logout_dialog.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -47,8 +48,19 @@ class DrawerWidget extends StatelessWidget {
               SizedBox(
                 width: 5.w,
               ),
-              CircleAvatar(
-                radius: 25.sp,
+              Container(
+                padding: EdgeInsets.all(4.5.sp), // Border width
+                decoration: const BoxDecoration(
+                    color: AppTheme.greyBorder, shape: BoxShape.circle),
+                child: ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(25.sp), // Image radius
+                    child: box1.get(AppString.userProfileKey) == null
+                        ? Image.asset(AppAssets.profileThumb)
+                        : Image.network(box1.get(AppString.userProfileKey),
+                            fit: BoxFit.cover),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 3.w,
@@ -58,14 +70,14 @@ class DrawerWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Lonnie Murphy",
+                    box1.get(AppString.userNameKey),
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: AppFonts.poppinsSemiBold,
                         fontSize: 14.sp),
                   ),
                   Text(
-                    "Lonnie.murphy@gmail.com",
+                    box1.get(AppString.userEmailKey),
                     style: TextStyle(
                         color: AppTheme.medGrey,
                         fontFamily: AppFonts.poppins,
@@ -75,8 +87,8 @@ class DrawerWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            height: kToolbarHeight,
+          SizedBox(
+            height: kToolbarHeight - 20.sp,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

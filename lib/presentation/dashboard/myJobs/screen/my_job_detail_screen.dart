@@ -15,12 +15,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class MyJobDetailScreen extends StatefulWidget {
   final String? appBarTitle;
   final String fromWhere;
-  final JobDetailModel? jobDetailModel;
+  final GetJobDetailModel jobDetailModel;
   const MyJobDetailScreen(
       {Key? key,
       this.appBarTitle,
       required this.fromWhere,
-       this.jobDetailModel})
+      required this.jobDetailModel})
       : super(key: key);
 
   @override
@@ -830,7 +830,4 @@ class _MyJobDetailScreenState extends State<MyJobDetailScreen> {
       ],
     );
   }
-
-
-
 }

@@ -27,9 +27,7 @@ class _BlueBoxTextState extends State<BlueBoxText> {
     return InkWell(
       onTap: widget.onTap,
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 5.w,
-        ),
+        padding: EdgeInsets.only(left: 5.w, bottom: 0.7.h),
         child: Row(
           children: [
             if (widget.showBlueBox)
@@ -61,8 +59,7 @@ class _BlueBoxTextState extends State<BlueBoxText> {
               style: TextStyle(
                   fontSize: 14.sp,
                   color: widget.showSelected ? Colors.blue : Colors.black,
-                  fontWeight:
-                      widget.showBold ? FontWeight.bold : FontWeight.normal),
+                  fontFamily: AppFonts.poppinsSemiBold),
             ),
           ],
         ),
