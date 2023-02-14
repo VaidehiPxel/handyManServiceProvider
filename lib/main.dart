@@ -8,6 +8,7 @@ import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
+import 'package:flutter_projects/application/myJobList/my_job_list_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
 import 'package:flutter_projects/application/terms/terms_bloc.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_projects/services/dashboard_service.dart';
 import 'package:flutter_projects/services/faq_services.dart';
 import 'package:flutter_projects/services/job_detail_service.dart';
 import 'package:flutter_projects/services/login_services.dart';
+import 'package:flutter_projects/services/my_job_service.dart';
 import 'package:flutter_projects/services/signup_services.dart';
 import 'package:flutter_projects/services/terms_services.dart';
 import 'package:hive/hive.dart';
@@ -47,6 +49,8 @@ Future<void> main() async {
       BlocProvider(
           create: (context) =>
               JobDetailBloc(jobDetailService: JobDetailService())),
+      BlocProvider(
+          create: (context) => MyJobListBloc(myJobService: MyJobService())),
     ],
     child: const MyApp(),
   ));

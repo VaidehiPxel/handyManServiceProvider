@@ -35,108 +35,110 @@ class JobListView extends StatelessWidget {
                   jobId: jobListingModel.id,
                 ));
       },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppTheme.lightGrey,
-          borderRadius: BorderRadius.circular(7.sp),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(5.sp),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: Size.fromRadius(20.sp), // Image radius
-                  child: Image.network("https://picsum.photos/id/214/200/300",
-                      fit: BoxFit.cover),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 3.2.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        jobListingModel.title,
-                        softWrap: true,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: AppFonts.poppinsSemiBold,
-                          color: AppTheme.black,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.3.h,
-                      ),
-                      Text(jobListingModel.description,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontFamily: AppFonts.poppins,
-                            color: AppTheme.medGrey,
-                          )),
-                      SizedBox(
-                        height: 0.3.h,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(AppAssets.location),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Expanded(
-                            child: Text(
-                                jobListingModel.address1 +
-                                    jobListingModel.address2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontFamily: AppFonts.poppinsMed,
-                                  color: AppTheme.blue,
-                                )),
-                          ),
-                        ],
-                      ),
-                    ],
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 2.h),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: AppTheme.lightGrey,
+            borderRadius: BorderRadius.circular(7.sp),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(5.sp),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(20.sp), // Image radius
+                    child: Image.network("https://picsum.photos/id/214/200/300",
+                        fit: BoxFit.cover),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 2.w,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //  Row(
-                  //           children: [
-                  //             SvgPicture.asset(AppAssets.time),
-                  //             SizedBox(
-                  //               width: 1.w,
-                  //             ),
-                  //             Text(jobListingModel.jobtime,
-                  //                 softWrap: true,
-                  //                 style: TextStyle(
-                  //                   fontSize: 10.sp,
-                  //                   fontFamily: AppFonts.poppins,
-                  //                   color: AppTheme.medGrey,
-                  //                 ))
-                  //           ],
-                  //         ),
-                  Text(
-                      "₹ ${jobListingModel.fromamount ?? "0"} - ${jobListingModel.toamount ?? "0"}",
-                      softWrap: true,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontFamily: AppFonts.poppinsSemiBold,
-                        color: AppTheme.black,
-                      ))
-                ],
-              )
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 3.2.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          jobListingModel.title,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: AppFonts.poppinsSemiBold,
+                            color: AppTheme.black,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 0.3.h,
+                        ),
+                        Text(jobListingModel.description,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontFamily: AppFonts.poppins,
+                              color: AppTheme.medGrey,
+                            )),
+                        SizedBox(
+                          height: 0.3.h,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(AppAssets.location),
+                            SizedBox(
+                              width: 2.w,
+                            ),
+                            Expanded(
+                              child: Text(
+                                  jobListingModel.address1 +
+                                      jobListingModel.address2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontFamily: AppFonts.poppinsMed,
+                                    color: AppTheme.blue,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 2.w,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //  Row(
+                    //           children: [
+                    //             SvgPicture.asset(AppAssets.time),
+                    //             SizedBox(
+                    //               width: 1.w,
+                    //             ),
+                    //             Text(jobListingModel.jobtime,
+                    //                 softWrap: true,
+                    //                 style: TextStyle(
+                    //                   fontSize: 10.sp,
+                    //                   fontFamily: AppFonts.poppins,
+                    //                   color: AppTheme.medGrey,
+                    //                 ))
+                    //           ],
+                    //         ),
+                    Text("₹ ${jobListingModel.amount ?? "0"}",
+                        softWrap: true,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontFamily: AppFonts.poppinsSemiBold,
+                          color: AppTheme.black,
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

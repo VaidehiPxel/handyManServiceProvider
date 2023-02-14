@@ -20,9 +20,13 @@ class BidUpdateApiEvent extends JobDetailEvent {
   final int jobId;
   final int userId;
   final String amount;
+  final bool isApplied;
 
   const BidUpdateApiEvent(
-      {required this.jobId, required this.userId, required this.amount});
+      {required this.jobId,
+      required this.userId,
+      required this.amount,
+      required this.isApplied});
 
   @override
   List<Object> get props => [jobId, userId, amount];

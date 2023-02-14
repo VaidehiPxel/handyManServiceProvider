@@ -97,6 +97,7 @@ class Jobrequest {
     required this.pincode,
     required this.jobdate,
     required this.jobtime,
+    this.amount,
     this.fromamount,
     this.toamount,
     required this.status,
@@ -118,6 +119,7 @@ class Jobrequest {
   String pincode;
   DateTime jobdate;
   String jobtime;
+  String? amount;
   String? fromamount;
   String? toamount;
   int status;
@@ -144,6 +146,7 @@ class Jobrequest {
         pincode: json["pincode"],
         jobdate: DateTime.parse(json["jobdate"]),
         jobtime: json["jobtime"],
+        amount: json["amount"],
         fromamount: json["fromamount"],
         toamount: json["toamount"],
         status: json["status"],
@@ -167,6 +170,7 @@ class Jobrequest {
         "jobdate":
             "${jobdate.year.toString().padLeft(4, '0')}-${jobdate.month.toString().padLeft(2, '0')}-${jobdate.day.toString().padLeft(2, '0')}",
         "jobtime": jobtime,
+        "amount": amount,
         "fromamount": fromamount,
         "toamount": toamount,
         "status": status,

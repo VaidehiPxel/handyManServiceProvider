@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/model/jobs/bid_model.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -35,7 +36,7 @@ class JobDetailService {
       print(jobId);
 
       response = await _dio.post(
-        URL.jobDeetailUrl,
+        URL.jobDetailUrl,
         data: FormData.fromMap(map),
         options: Options(headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -67,9 +68,9 @@ class JobDetailService {
       required int jobId,
       required int userId,
       required String amount,
+      required bool isApplied,
       required BidUpdate bidUpdate}) async {
     try {
-      bool resSuccess = false;
       String message = '';
 
       Map<String, String> map = {};
@@ -83,30 +84,17 @@ class JobDetailService {
       var client = http.Client();
 
       http.Response response = await client.post(
-        Uri.parse(URL.bidUpdateUrl),
+        Uri.parse(isApplied ? URL.bidAppliedUrl : URL.bidUpdateUrl),
         body: map,
       );
 
-      print(response.statusCode);
-      print(response.body.isEmpty);
-      // return DistrictList.fromMap(json.decode(response.body));
-      var data = jsonDecode(response.body);
-      print(data['status']);
+      var data = MyBidModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
-        print("here...");
-        resSuccess = data['status'].toString().compareTo("1") == 0;
-        message = data['message'].toString();
-        print("here...111");
-        print(resSuccess);
-
-        if (resSuccess &&
-            message.compareTo("Updated the bid by the service provider") == 0) {
+        if (data.status.toString().compareTo("1") == 0) {
           bidUpdate(true, "");
         } else {
-          print("in else");
           errorCallBack(message);
         }
-        ;
       }
     } catch (e) {
       errorCallBack(e.toString());

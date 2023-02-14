@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_event.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_state.dart';
+import 'package:flutter_projects/model/jobs/job_detail_model.dart';
 
 import 'package:flutter_projects/services/job_detail_service.dart';
 
@@ -8,59 +9,125 @@ class JobDetailBloc extends Bloc<JobDetailEvent, JobDetailState> {
   final JobDetailService jobDetailService;
 
   JobDetailBloc({required this.jobDetailService})
-      : super(const JobDetailInitial()) {
+      : super(JobDetailInitial(
+            isLoading: true,
+            jobDetailModel: GetJobDetailModel(
+                jobsAppliedServiceProviders: [],
+                message: "",
+                result: [],
+                status: "0"))) {
     on<JobDetailEvent>((event, emit) async {
       if (event is JobDetailCallApiEvent) {
-        emit(JobDetailLoading());
+        emit(JobDetailLoading(
+            isLoading: false,
+            jobDetailModel: GetJobDetailModel(
+                jobsAppliedServiceProviders: [],
+                message: "",
+                result: [],
+                status: "0")));
         await jobDetailService.jobDetail(
           jobId: event.jobId,
           errorCallBack: (appError) {
             emit(JobDetailError(
-              mErrorMsg: appError,
-            ));
+                isLoading: false,
+                mErrorMsg: appError,
+                jobDetailModel: GetJobDetailModel(
+                    jobsAppliedServiceProviders: [],
+                    message: "",
+                    result: [],
+                    status: "0")));
           },
           jobDetailData: (jobdetail) {
             emit(JobDetailSuccess(
+              isLoading: false,
               jobDetailModel: jobdetail,
             ));
           },
         );
       } else if (event is BidUpdateApiEvent) {
-        print("kkkkk");
-        print(event is JobDetailLoading);
-        emit(BidUpdateLoading());
+        emit(BidUpdateLoading(
+            isLoading: false,
+            jobDetailModel: GetJobDetailModel(
+                jobsAppliedServiceProviders: [],
+                message: "",
+                result: [],
+                status: "0")));
         await jobDetailService.bidUpdate(
           jobId: event.jobId,
           userId: event.userId,
           amount: event.amount,
+          isApplied: event.isApplied,
           errorCallBack: (appError) {
             emit(JobDetailError(
-              mErrorMsg: appError,
-            ));
+                isLoading: false,
+                mErrorMsg: appError,
+                jobDetailModel: GetJobDetailModel(
+                    jobsAppliedServiceProviders: [],
+                    message: "",
+                    result: [],
+                    status: "0")));
           },
           bidUpdate: (isUpdate, msg) {
             if (isUpdate) {
-              emit(const BidUpdateSuccess(isUpdate: true));
+              emit(BidUpdateSuccess(
+                  isUpdate: true,
+                  isLoading: false,
+                  jobDetailModel: GetJobDetailModel(
+                      jobsAppliedServiceProviders: [],
+                      message: "",
+                      result: [],
+                      status: "0")));
             } else {
-              emit(const JobDetailError());
+              emit(JobDetailError(
+                  isLoading: false,
+                  mErrorMsg: msg,
+                  jobDetailModel: GetJobDetailModel(
+                      jobsAppliedServiceProviders: [],
+                      message: "",
+                      result: [],
+                      status: "0")));
             }
           },
         );
       } else if (event is BidRemoveApiEvent) {
-        emit(BidLoading());
+        emit(BidLoading(
+            isLoading: false,
+            jobDetailModel: GetJobDetailModel(
+                jobsAppliedServiceProviders: [],
+                message: "",
+                result: [],
+                status: "0")));
         await jobDetailService.bidRemove(
           jobId: event.jobId,
           userId: event.userId,
           errorCallBack: (appError) {
             emit(JobDetailError(
-              mErrorMsg: appError,
-            ));
+                isLoading: false,
+                mErrorMsg: appError,
+                jobDetailModel: GetJobDetailModel(
+                    jobsAppliedServiceProviders: [],
+                    message: "",
+                    result: [],
+                    status: "0")));
           },
           bidUpdate: (isUpdate, msg) {
             if (isUpdate) {
-              emit(const BidRemoveSuccess());
+              emit(BidRemoveSuccess(
+                  isLoading: false,
+                  jobDetailModel: GetJobDetailModel(
+                      jobsAppliedServiceProviders: [],
+                      message: "",
+                      result: [],
+                      status: "0")));
             } else {
-              emit(const JobDetailError());
+              emit(JobDetailError(
+                  mErrorMsg: msg,
+                  isLoading: false,
+                  jobDetailModel: GetJobDetailModel(
+                      jobsAppliedServiceProviders: [],
+                      message: "",
+                      result: [],
+                      status: "0")));
             }
           },
         );
