@@ -10,7 +10,8 @@ part 'faq_state.dart';
 class FaqBloc extends Bloc<FaqEvent, FaqState> {
   final FaqService faqService;
 
-  FaqBloc({required this.faqService}) : super(FaqInitial(isLoading: true)) {
+  FaqBloc({required this.faqService})
+      : super(const FaqInitial(isLoading: true)) {
     on<FaqEvent>((event, emit) async {
       if (event is FaqCallApiEvent) {
         await faqService.getFaqs(

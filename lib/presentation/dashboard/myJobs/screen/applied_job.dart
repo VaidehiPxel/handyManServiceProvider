@@ -11,7 +11,9 @@ import 'package:sizer/sizer.dart';
 
 class AppliedJobDetail extends StatefulWidget {
   final List<Joblist> jobData;
-  const AppliedJobDetail({Key? key, required this.jobData}) : super(key: key);
+  final String title;
+  const AppliedJobDetail({Key? key, required this.jobData, required this.title})
+      : super(key: key);
 
   @override
   State<AppliedJobDetail> createState() => _AppliedJobDetailState();
@@ -22,7 +24,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EazylifeAppBar(
-        title: "Sofa Cleaning",
+        title: widget.title,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -35,7 +37,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              setTitle(),
+              setTitle(widget.jobData),
               SizedBox(
                 height: 0.5.h,
               ),
@@ -62,7 +64,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
     );
   }
 
-  Widget setTitle() {
+  Widget setTitle(List<Joblist> jobData) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +76,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
             Expanded(
               flex: 7,
               child: Text(
-                "Sofa Cleaning",
+                jobData,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14.sp,

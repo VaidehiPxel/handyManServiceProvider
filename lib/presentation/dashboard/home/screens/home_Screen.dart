@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
+import 'package:flutter_projects/services/base_service.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:sizer/sizer.dart';
+
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/custom_widgets/job_list_view.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/model/home/dashboard_model.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
-import 'package:flutter_projects/_core/custom_widgets/job_listView.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/new_job_listing_screen.dart';
-
-import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -220,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: Size.fromRadius(40.sp), // Image radius
                 child: usersdetails[0].profilepics == null
                     ? Image.asset(AppAssets.profileThumb)
-                    : Image.network(usersdetails[0].profilepics,
+                    : Image.network(URL.imageURL + usersdetails[0].profilepics,
                         fit: BoxFit.cover),
               ),
             ),
