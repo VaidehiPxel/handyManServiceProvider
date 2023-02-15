@@ -9,7 +9,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {
       if (event is GetOTPCallApiEvent) {
         emit(GetOtpLoading());
-        var d = await authService.getOTP(
+        await authService.getOTP(
           mobileNo: event.mobileNo,
           errorCallBack: (appError) {
             emit(GetOtpError(mErrorMsg: appError));
@@ -24,7 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       } else if (event is OtpVerifyApiEvent) {
         emit(OtpVerifyLoading());
-        var d = await authService.verifyOtp(
+        await authService.verifyOtp(
           mobileNo: event.mobileNo,
           otp: event.otp,
           errorCallBack: (appError) {
@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       } else if (event is SetPasswordApiEvent) {
         emit(OtpVerifyLoading());
-        var d = await authService.setPassword(
+        await authService.setPassword(
           mobileNo: event.mobileNo,
           password: event.password,
           confirmpassword: event.confirmPassword,

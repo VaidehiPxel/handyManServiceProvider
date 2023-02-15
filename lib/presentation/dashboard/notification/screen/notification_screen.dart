@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:sizer/sizer.dart';
-
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -22,22 +20,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
       backgroundColor: Colors.white,
       extendBody: true,
       extendBodyBehindAppBar: true,
-      appBar:  EazylifeAppBar(
-        title:AppString.notification ,
+      appBar: EazylifeAppBar(
+        title: AppString.notification,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
         },
-
       ),
       body: ListView(
-        children: List.generate(10, (index) => NotificationListItem()),
+        children: List.generate(10, (index) => const NotificationListItem()),
       ),
     );
   }
 }
-
-
 
 class NotificationListItem extends StatelessWidget {
   const NotificationListItem({super.key});
@@ -45,7 +40,7 @@ class NotificationListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 6.sp,horizontal: 12.sp),
+      padding: EdgeInsets.symmetric(vertical: 6.sp, horizontal: 12.sp),
       child: Container(
         decoration: BoxDecoration(
           color: AppTheme.lightGrey,
@@ -53,7 +48,8 @@ class NotificationListItem extends StatelessWidget {
           shape: BoxShape.rectangle,
         ),
         child: Padding(
-          padding:  EdgeInsets.only(left:7.sp,right :7.sp,bottom: 12.sp,top: 7.sp),
+          padding: EdgeInsets.only(
+              left: 7.sp, right: 7.sp, bottom: 12.sp, top: 7.sp),
           child: Row(
             children: [
               Column(
@@ -64,24 +60,24 @@ class NotificationListItem extends StatelessWidget {
                           color: AppTheme.blue,
                           fontWeight: FontWeight.normal)),
                   Container(
-
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       shape: BoxShape.rectangle,
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.all(8.sp),
+                      padding: EdgeInsets.all(8.sp),
                       child: const Icon(
                         Icons.notifications,
                         color: AppTheme.blue,
                       ),
                     ),
                   ),
-
                 ],
               ),
-              SizedBox(width: 3.w,),
+              SizedBox(
+                width: 3.w,
+              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,14 +91,12 @@ class NotificationListItem extends StatelessWidget {
                               color: AppTheme.blue,
                               fontWeight: FontWeight.normal)),
                     ),
-                    Text(
-                      "New Invitation",
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.black,
-                         fontFamily: AppFonts.poppinsSemiBold)),
-                    Text(
-                        "Lorem ipsum dolor sit amet, consectetur",
+                    Text("New Invitation",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.black,
+                            fontFamily: AppFonts.poppinsSemiBold)),
+                    Text("Lorem ipsum dolor sit amet, consectetur",
                         style: TextStyle(
                             fontSize: 10.sp,
                             color: AppTheme.medGrey,

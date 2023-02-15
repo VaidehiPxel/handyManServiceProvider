@@ -10,14 +10,15 @@ import 'package:flutter_projects/_core/custom_widgets/grey_textField.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_projects/presentation/drawer/screens/report_complain.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-
 class AcceptedJobDetail extends StatefulWidget {
-  const AcceptedJobDetail({Key? key}) : super(key: key);
+  final List<Joblist> jobData;
+  const AcceptedJobDetail({Key? key, required this.jobData}) : super(key: key);
 
   @override
   State<AcceptedJobDetail> createState() => _AcceptedJobDetailState();
@@ -128,13 +129,17 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             fontFamily: AppFonts.poppinsSemiBold,
           ),
         ),
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         GreyTextField(
           hintText: "Bathroom Cleaning",
           fontFamily: AppFonts.poppins,
           height: 6.h,
         ),
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         Row(
           children: [
             Expanded(
@@ -144,7 +149,9 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                 height: 6.h,
               ),
             ),
-            SizedBox(width: 2.w,),
+            SizedBox(
+              width: 2.w,
+            ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -178,9 +185,16 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             ),
           ],
         ),
-        SizedBox(height: 3.h,),
-      AppButton(title: AppString.updateAmount,onPressed: (){},),
-        SizedBox(height: 2.h,),
+        SizedBox(
+          height: 3.h,
+        ),
+        AppButton(
+          title: AppString.updateAmount,
+          onPressed: () {},
+        ),
+        SizedBox(
+          height: 2.h,
+        ),
       ],
     );
   }
@@ -273,7 +287,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                     },
                   ),
                   Text(
-                   AppString.no,
+                    AppString.no,
                     style: TextStyle(
                       color: AppTheme.blue,
                       fontSize: 12.sp,
@@ -312,8 +326,8 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: _timerBox(duration.inHours.toString().padLeft(2, '0'),
-                  AppString.hrs),
+              child: _timerBox(
+                  duration.inHours.toString().padLeft(2, '0'), AppString.hrs),
             ),
             colan(),
             Expanded(
@@ -353,7 +367,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
         ),
         Container(
           height: 6.h,
-          margin:  EdgeInsets.symmetric(horizontal:2.w),
+          margin: EdgeInsets.symmetric(horizontal: 2.w),
           decoration: BoxDecoration(
             color: AppTheme.lightGrey,
             borderRadius: BorderRadius.circular(5.sp),
@@ -369,7 +383,10 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                   child: DropdownButton(
                     isExpanded: true,
                     value: dropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down,color: AppTheme.blue,),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppTheme.blue,
+                    ),
                     items: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
@@ -601,7 +618,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
         EazyLifeJobStatusWidget(
           fontSize: 12.sp,
           size: 3,
-          status: EazyLifeJobStatus.Accepted,
+          status: EazyLifeJobStatus.accepted,
         )
       ],
     );
@@ -620,7 +637,6 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             color: Colors.black,
             fontSize: 12.sp,
             fontFamily: AppFonts.poppinsSemiBold,
-           
           ),
         ),
         SizedBox(
@@ -633,7 +649,6 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             color: AppTheme.medGrey,
             fontSize: 10.sp,
             fontFamily: AppFonts.poppins,
-          
           ),
         ),
         SizedBox(
@@ -680,13 +695,19 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
   Widget _setPaymentDetail() {
     return Column(
       children: [
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         _keyValueRow("Past Amount", "799"),
         _keyValueRow("Extra Services", "199"),
         _keyValueBigSize("Total Amount", "998"),
-        SizedBox(height: 1.5.h,),
-
-        AppButton(title: "Complete Job",onPressed: (){},),
+        SizedBox(
+          height: 1.5.h,
+        ),
+        AppButton(
+          title: "Complete Job",
+          onPressed: () {},
+        ),
         SizedBox(
           height: 0.6.h,
         ),
@@ -694,7 +715,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           alignment: Alignment.centerRight,
           child: GestureDetector(
             onTap: () {
-              callNextScreen(context, const ReportComplaintScreen());
+              callNextScreen(context, const CreateReportAndComplaintScreen());
             },
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),

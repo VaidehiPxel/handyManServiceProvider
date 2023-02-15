@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_projects/model/faq/faq_model.dart';
 import 'package:flutter_projects/services/faq_services.dart';
@@ -16,7 +16,6 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
         await faqService.getFaqs(
           errorCallBack: (appError) {},
           faqSuccess: (faq) {
-            print(faq.length);
             emit(FaqSuccess(mFaqModel: faq, isLoading: false));
           },
         );

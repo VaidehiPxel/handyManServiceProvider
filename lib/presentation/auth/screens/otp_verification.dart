@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
-import 'package:flutter_projects/_core/constants/app_constants.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
@@ -122,7 +122,8 @@ class _OTPVerificationState extends State<OTPVerification> {
                       fontSize: 12.sp),
                   children: <TextSpan>[
                     TextSpan(
-                        text: box1.get(AppString.userOTPKey),
+                        text: HiveConstants.instances.box1
+                            .get(HiveConstants.userOTPKey),
                         style: TextStyle(
                             color: AppTheme.grey,
                             fontFamily: AppFonts.poppinsSemiBold,

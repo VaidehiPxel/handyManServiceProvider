@@ -39,7 +39,7 @@ class _BlueBoxTextState extends State<BlueBoxText> {
                   //color: Colors.blue.shade700,
                   borderRadius: BorderRadius.circular(0),
                   shape: BoxShape.rectangle,
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage(AppAssets.sideBlue),
                     fit: BoxFit.cover,
                   ),

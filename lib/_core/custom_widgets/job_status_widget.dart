@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:sizer/sizer.dart';
 
-enum EazyLifeJobStatus { Active, Completed, UnderProcess, Applied, Accepted }
+enum EazyLifeJobStatus { active, completed, underProcess, applied, accepted }
 
 class EazyLifeJobStatusWidget extends StatelessWidget {
   final EazyLifeJobStatus status;
@@ -10,9 +10,9 @@ class EazyLifeJobStatusWidget extends StatelessWidget {
   final double? fontSize;
   const EazyLifeJobStatusWidget(
       {super.key,
-        required this.status,
-        required this.size,
-        required this.fontSize});
+      required this.status,
+      required this.size,
+      required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -49,34 +49,30 @@ class EazyLifeJobStatusWidget extends StatelessWidget {
   }
 
   Color getStatusColor(status) {
-    if (status == EazyLifeJobStatus.Active) {
+    if (status == EazyLifeJobStatus.active) {
       return AppTheme.green;
-    } else if (status == EazyLifeJobStatus.Completed) {
+    } else if (status == EazyLifeJobStatus.completed) {
       return AppTheme.blue;
-    } else if (status == EazyLifeJobStatus.UnderProcess) {
+    } else if (status == EazyLifeJobStatus.underProcess) {
       return AppTheme.amber;
-    }
-    else if (status == EazyLifeJobStatus.Applied) {
+    } else if (status == EazyLifeJobStatus.applied) {
       return AppTheme.amber;
-    }
-    else if (status == EazyLifeJobStatus.Accepted) {
+    } else if (status == EazyLifeJobStatus.accepted) {
       return AppTheme.green;
     }
     return AppTheme.green;
   }
 
   String getStatusTitle(status) {
-    if (status == EazyLifeJobStatus.Active) {
+    if (status == EazyLifeJobStatus.active) {
       return "Active";
-    } else if (status == EazyLifeJobStatus.Completed) {
+    } else if (status == EazyLifeJobStatus.completed) {
       return "Completed";
-    } else if (status == EazyLifeJobStatus.UnderProcess) {
+    } else if (status == EazyLifeJobStatus.underProcess) {
       return "Under Process";
-    }
-    else if (status == EazyLifeJobStatus.Applied) {
+    } else if (status == EazyLifeJobStatus.applied) {
       return "Applied";
-    }
-    else if (status == EazyLifeJobStatus.Accepted) {
+    } else if (status == EazyLifeJobStatus.accepted) {
       return "Accepted";
     }
 

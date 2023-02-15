@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_dialog_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,15 +24,15 @@ class DialogBoxWithIcon extends StatefulWidget {
       required this.icon,
       required this.onCancelPressed,
       required this.title,
-       this.titleNo,
-       this.colorNo,
-       this.colorYesBtn,
+      this.titleNo,
+      this.colorNo,
+      this.colorYesBtn,
       this.sizeNo,
       this.titleFamily,
       required this.colorYes,
-       this.titleYes,
+      this.titleYes,
       required this.content,
-       this.iconColor});
+      this.iconColor});
 
   @override
   State<DialogBoxWithIcon> createState() => _DialogBoxWithIconState();
@@ -86,23 +85,25 @@ class _DialogBoxWithIconState extends State<DialogBoxWithIcon> {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                widget.titleNo!=null? Expanded(
-                  flex: 1,
-                  child: AppDialogButton(
-                    backgroundColor: AppTheme.dialogGrey,
-                    onPressed: widget.onCancelPressed,
-                    title: widget.titleNo??"",
-                    titleColor: widget.colorNo,
-                    titleSize: widget.sizeNo ?? 10.sp,
-                    titleFamily: widget.titleFamily,
-                  ),
-                ):Container(),
+                widget.titleNo != null
+                    ? Expanded(
+                        flex: 1,
+                        child: AppDialogButton(
+                          backgroundColor: AppTheme.dialogGrey,
+                          onPressed: widget.onCancelPressed,
+                          title: widget.titleNo ?? "",
+                          titleColor: widget.colorNo,
+                          titleSize: widget.sizeNo ?? 10.sp,
+                          titleFamily: widget.titleFamily,
+                        ),
+                      )
+                    : Container(),
                 Expanded(
                   flex: 1,
                   child: AppDialogButton(
-                    backgroundColor: widget.colorYesBtn??AppTheme.blue,
+                    backgroundColor: widget.colorYesBtn ?? AppTheme.blue,
                     onPressed: widget.onOkPressed,
-                    title: widget.titleYes??"",
+                    title: widget.titleYes ?? "",
                     titleColor: widget.colorYes,
                     titleFamily: widget.titleFamily,
                     titleSize: widget.sizeNo ?? 10.sp,

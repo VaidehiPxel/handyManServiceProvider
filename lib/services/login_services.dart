@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_projects/_core/constants/app_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/services/base_service.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 typedef LoginSuccess = void Function(bool isSuccess, String msg);
 typedef AppErrorCallBack = void Function(String appError);
@@ -23,7 +21,7 @@ class LoginService {
       required LoginSuccess loginSuccess}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
 
       Map<String, dynamic> map = {};
@@ -47,7 +45,8 @@ class LoginService {
         message = data['message'].toString();
         if (resSuccess && message.contains("login successful")) {
           loginSuccess(true, "");
-          box1.put(AppString.userIdKey, data['result']['userid']);
+          HiveConstants.instances.box1
+              .put(HiveConstants.userIdKey, data['result']['userid']);
         }
         if (resSuccess &&
             data["isNewUser"] &&

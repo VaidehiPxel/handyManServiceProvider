@@ -31,9 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<DashboardBloc, DashboardState>(
-      listener: (context, state) {
-        print(state is DashboardSuccess);
-      },
+      listener: (context, state) {},
       child: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           return state.isLoading == true
@@ -109,38 +107,38 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container _searchTextField() {
-    return Container(
-      height: 6.5.h,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.sp),
-          shape: BoxShape.rectangle,
-          boxShadow: const [
-            BoxShadow(
-              color: AppTheme.dropShadow,
-              blurRadius: 5.0,
-            ),
-          ]),
-      child: Center(
-        child: Column(
-          children: [
-            TextFormField(
-              maxLines: 1,
-              enableIMEPersonalizedLearning: true,
-              enableSuggestions: true,
-              decoration: InputDecoration(
-                suffixIcon: Image.asset(AppAssets.search),
-                border: InputBorder.none,
-                hintText: AppString.searchText,
-                contentPadding: const EdgeInsets.all(14),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Container _searchTextField() {
+  //   return Container(
+  //     height: 6.5.h,
+  //     decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.circular(10.sp),
+  //         shape: BoxShape.rectangle,
+  //         boxShadow: const [
+  //           BoxShadow(
+  //             color: AppTheme.dropShadow,
+  //             blurRadius: 5.0,
+  //           ),
+  //         ]),
+  //     child: Center(
+  //       child: Column(
+  //         children: [
+  //           TextFormField(
+  //             maxLines: 1,
+  //             enableIMEPersonalizedLearning: true,
+  //             enableSuggestions: true,
+  //             decoration: InputDecoration(
+  //               suffixIcon: Image.asset(AppAssets.search),
+  //               border: InputBorder.none,
+  //               hintText: AppString.searchText,
+  //               contentPadding: const EdgeInsets.all(14),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget dashboardValue(DashboardModel dashboardModel) {
     return Column(

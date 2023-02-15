@@ -52,8 +52,10 @@ class _JobDetailViewState extends State<JobDetailView> {
         }
 
         if (state is BidUpdateSuccess) {
-          ScaffoldMessenger.maybeOf(context)!
-              .showSnackBar(const SnackBar(content: Text("Bid Updated")));
+          if (state.isUpdate) {
+            setState(() {});
+            isUpdate == true;
+          }
         }
         if (state is BidRemoveSuccess) {
           ScaffoldMessenger.maybeOf(context)!
@@ -71,9 +73,9 @@ class _JobDetailViewState extends State<JobDetailView> {
               },
               sideIcon: null,
             ),
-            body: state is JobDetailLoading
+            body: state.isLoading
                 ? const APILoader()
-                : (state is! JobDetailLoading)
+                : (state.jobDetailModel.result.isNotEmpty)
                     ? SingleChildScrollView(
                         child: Padding(
                           padding: EdgeInsets.all(10.sp),
@@ -136,7 +138,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                                 height: 1.h,
                               ),
 
-                              if (state.jobDetailModel!
+                              if (state.jobDetailModel
                                   .jobsAppliedServiceProviders.isEmpty)
                                 Container()
                               else
@@ -356,31 +358,34 @@ Widget _setEnterBid(GetJobDetailModel detail, JobDetailState state,
           ),
           Expanded(
             flex: 2,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.blue,
-                minimumSize: const Size.fromHeight(40),
-                elevation: 0,
-                shadowColor: Colors.transparent,
-              ),
-              onPressed: () {
-                context.read<JobDetailBloc>().add(BidUpdateApiEvent(
-                    jobId: jobId,
-                    userId: detail.result[0].userId,
-                    amount: "0",
-                    isApplied: true));
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                child: Text(
-                  AppString.bid,
-                  style: TextStyle(
-                      color: AppTheme.white,
-                      fontSize: 14.sp,
-                      fontFamily: AppFonts.poppinsMed),
-                ),
-              ),
-            ),
+            child: state is BidUpdateLoading == true
+                ? const APILoader()
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.blue,
+                      minimumSize: const Size.fromHeight(40),
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                    ),
+                    onPressed: () {
+                      context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                          jobId: jobId,
+                          userId: detail.result[0].userId,
+                          amount: "100",
+                          isApplied: true));
+                    },
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+                      child: Text(
+                        AppString.bid,
+                        style: TextStyle(
+                            color: AppTheme.white,
+                            fontSize: 14.sp,
+                            fontFamily: AppFonts.poppinsMed),
+                      ),
+                    ),
+                  ),
           ),
         ],
       ),
@@ -543,149 +548,149 @@ Widget _setUpdateBid(
   );
 }
 
-Widget _setAcceptDeclineCTA(BuildContext context) {
-  return Column(
-    children: [
-      Row(
-        children: [
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.lightGrey,
-                minimumSize: const Size.fromHeight(40),
-                elevation: 0,
-                shadowColor: Colors.transparent,
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogBoxWithIcon(
-                        icon: AppAssets.save,
-                        content: Text(
-                          AppString.decline,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppTheme.black,
-                              fontFamily: AppFonts.poppins,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 10.sp),
-                        ),
-                        iconColor: AppTheme.dialogGreen,
-                        onCancelPressed: () {
-                          Navigator.of(context)
-                            ..pop()
-                            ..pop();
-                        },
-                        onOkPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        title: AppString.applied,
-                        titleNo: AppString.apply,
-                        titleYes: AppString.done,
-                        colorNo: AppTheme.black,
-                        colorYes: AppTheme.white,
-                        sizeNo: 10.sp,
-                        titleFamily: AppFonts.poppinsMed,
-                      );
-                    });
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                child: Text(
-                  AppString.decline,
-                  style: TextStyle(
-                      color: AppTheme.medGrey,
-                      fontSize: 14.sp,
-                      fontFamily: AppFonts.poppinsMed),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 4.w,
-          ),
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.blue,
-                minimumSize: const Size.fromHeight(40),
-                elevation: 0,
-                shadowColor: Colors.transparent,
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogBoxWithIcon(
-                        icon: AppAssets.save,
-                        content: Text(
-                          AppString.youAccept,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppTheme.black,
-                              fontFamily: AppFonts.poppins,
-                              fontSize: 10.sp),
-                        ),
-                        iconColor: AppTheme.dialogGreen,
-                        onCancelPressed: () {
-                          Navigator.of(context)
-                            ..pop()
-                            ..pop();
-                        },
-                        onOkPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        title: AppString.cong,
-                        titleNo: AppString.cancel,
-                        titleYes: AppString.startWork,
-                        colorNo: AppTheme.black,
-                        colorYes: AppTheme.white,
-                        sizeNo: 10.sp,
-                        titleFamily: AppFonts.poppinsMed,
-                      );
-                    });
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                child: Text(
-                  AppString.accept,
-                  style: TextStyle(
-                      color: AppTheme.white,
-                      fontSize: 14.sp,
-                      fontFamily: AppFonts.poppinsMed),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 0.7.h,
-      ),
-      Align(
-        alignment: Alignment.centerRight,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(AppAssets.chat),
-            SizedBox(
-              width: 2.w,
-            ),
-            Text(
-              AppString.chatNow,
-              style: TextStyle(
-                color: AppTheme.blue,
-                fontSize: 11.sp,
-                fontFamily: AppFonts.poppinsMed,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-}
+// Widget _setAcceptDeclineCTA(BuildContext context) {
+//   return Column(
+//     children: [
+//       Row(
+//         children: [
+//           Expanded(
+//             child: ElevatedButton(
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: AppTheme.lightGrey,
+//                 minimumSize: const Size.fromHeight(40),
+//                 elevation: 0,
+//                 shadowColor: Colors.transparent,
+//               ),
+//               onPressed: () {
+//                 showDialog(
+//                     context: context,
+//                     builder: (BuildContext context) {
+//                       return DialogBoxWithIcon(
+//                         icon: AppAssets.save,
+//                         content: Text(
+//                           AppString.decline,
+//                           textAlign: TextAlign.center,
+//                           style: TextStyle(
+//                               color: AppTheme.black,
+//                               fontFamily: AppFonts.poppins,
+//                               fontWeight: FontWeight.normal,
+//                               fontSize: 10.sp),
+//                         ),
+//                         iconColor: AppTheme.dialogGreen,
+//                         onCancelPressed: () {
+//                           Navigator.of(context)
+//                             ..pop()
+//                             ..pop();
+//                         },
+//                         onOkPressed: () {
+//                           Navigator.of(context).pop();
+//                         },
+//                         title: AppString.applied,
+//                         titleNo: AppString.apply,
+//                         titleYes: AppString.done,
+//                         colorNo: AppTheme.black,
+//                         colorYes: AppTheme.white,
+//                         sizeNo: 10.sp,
+//                         titleFamily: AppFonts.poppinsMed,
+//                       );
+//                     });
+//               },
+//               child: Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+//                 child: Text(
+//                   AppString.decline,
+//                   style: TextStyle(
+//                       color: AppTheme.medGrey,
+//                       fontSize: 14.sp,
+//                       fontFamily: AppFonts.poppinsMed),
+//                 ),
+//               ),
+//             ),
+//           ),
+//           SizedBox(
+//             width: 4.w,
+//           ),
+//           Expanded(
+//             child: ElevatedButton(
+//               style: ElevatedButton.styleFrom(
+//                 backgroundColor: AppTheme.blue,
+//                 minimumSize: const Size.fromHeight(40),
+//                 elevation: 0,
+//                 shadowColor: Colors.transparent,
+//               ),
+//               onPressed: () {
+//                 showDialog(
+//                     context: context,
+//                     builder: (BuildContext context) {
+//                       return DialogBoxWithIcon(
+//                         icon: AppAssets.save,
+//                         content: Text(
+//                           AppString.youAccept,
+//                           textAlign: TextAlign.center,
+//                           style: TextStyle(
+//                               color: AppTheme.black,
+//                               fontFamily: AppFonts.poppins,
+//                               fontSize: 10.sp),
+//                         ),
+//                         iconColor: AppTheme.dialogGreen,
+//                         onCancelPressed: () {
+//                           Navigator.of(context)
+//                             ..pop()
+//                             ..pop();
+//                         },
+//                         onOkPressed: () {
+//                           Navigator.of(context).pop();
+//                         },
+//                         title: AppString.cong,
+//                         titleNo: AppString.cancel,
+//                         titleYes: AppString.startWork,
+//                         colorNo: AppTheme.black,
+//                         colorYes: AppTheme.white,
+//                         sizeNo: 10.sp,
+//                         titleFamily: AppFonts.poppinsMed,
+//                       );
+//                     });
+//               },
+//               child: Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+//                 child: Text(
+//                   AppString.accept,
+//                   style: TextStyle(
+//                       color: AppTheme.white,
+//                       fontSize: 14.sp,
+//                       fontFamily: AppFonts.poppinsMed),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//       SizedBox(
+//         height: 0.7.h,
+//       ),
+//       Align(
+//         alignment: Alignment.centerRight,
+//         child: Row(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             SvgPicture.asset(AppAssets.chat),
+//             SizedBox(
+//               width: 2.w,
+//             ),
+//             Text(
+//               AppString.chatNow,
+//               style: TextStyle(
+//                 color: AppTheme.blue,
+//                 fontSize: 11.sp,
+//                 fontFamily: AppFonts.poppinsMed,
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ],
+//   );
+// }
 
 Widget _setDateTime(GetJobDetailModel detail) {
   return Row(
@@ -885,16 +890,7 @@ setAddress(GetJobDetailModel detail) {
         height: 2.sp,
       ),
       Text(
-        detail.result[0].address1 +
-            detail.result[0].address2 +
-            "," +
-            detail.result[0].city +
-            "," +
-            detail.result[0].state +
-            "," +
-            detail.result[0].country +
-            " " +
-            detail.result[0].pincode,
+        "${detail.result[0].address1}${detail.result[0].address2},${detail.result[0].city},${detail.result[0].state},${detail.result[0].country} ${detail.result[0].pincode}",
         textAlign: TextAlign.justify,
         style: TextStyle(
           color: AppTheme.medGrey,

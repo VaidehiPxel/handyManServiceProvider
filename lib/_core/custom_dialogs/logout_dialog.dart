@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_dialog_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -77,7 +77,9 @@ class _LogOutDialogBoxState extends State<LogOutDialogBox> {
                     child: AppDialogButton(
                       backgroundColor: AppTheme.blue,
                       onPressed: () {
-                        callNextScreen(context, LoginScreen());
+                        HiveConstants.instances.box1
+                            .put(HiveConstants.userIdKey, null);
+                        callNextScreen(context, const LoginScreen());
                       },
                       title: AppString.yes,
                       titleColor: AppTheme.white,

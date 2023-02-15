@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class CustomClipperPath extends CustomClipper<Path> {
   @override
@@ -21,9 +20,3 @@ class CustomClipperPath extends CustomClipper<Path> {
 }
 
 enum JobType { jobRequest, newJob }
-
-late Box box1;
-
-void createBox() async {
-  box1 = await Hive.openBox('database1');
-}

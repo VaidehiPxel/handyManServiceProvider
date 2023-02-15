@@ -20,12 +20,7 @@ extension StringHelper on String? {
 
 extension DateTimeHelper on DateTime {
   String formatDate() {
-    String defaultValue = "";
-    String defaultFormat = 'dd/MM/yyyy';
-    if (this != null) {
-      return DateFormat(defaultFormat).format(this!).toString();
-    } else {
-      return defaultValue;
-    }
+    String defaultFormat = 'dd MMM';
+    return DateFormat(defaultFormat).format(this).toString();
   }
 }

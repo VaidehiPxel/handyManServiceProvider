@@ -42,15 +42,15 @@ class Joblist {
     required this.title,
     required this.description,
     required this.amount,
-    required this.fromamount,
-    required this.toamount,
+    this.fromamount,
+    this.toamount,
     required this.jobdate,
     required this.jobtime,
     required this.image1,
-    required this.image2,
-    required this.image3,
-    required this.image4,
-    required this.image5,
+    this.image2,
+    this.image3,
+    this.image4,
+    this.image5,
     required this.status,
     required this.createdAt,
   });
@@ -61,15 +61,15 @@ class Joblist {
   String title;
   String description;
   String amount;
-  String fromamount;
-  String toamount;
+  String? fromamount;
+  String? toamount;
   DateTime jobdate;
   String jobtime;
   String image1;
-  String image2;
-  String image3;
-  String image4;
-  String image5;
+  String? image2;
+  String? image3;
+  String? image4;
+  String? image5;
   int status;
   DateTime createdAt;
 

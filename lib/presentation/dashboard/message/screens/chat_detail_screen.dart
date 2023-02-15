@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -16,19 +15,34 @@ class ChatMessage {
   String? messageContent;
   String? messageType;
   String? time;
-  ChatMessage({@required this.messageContent, @required this.messageType,@required this.time});
+  ChatMessage(
+      {@required this.messageContent,
+      @required this.messageType,
+      @required this.time});
 }
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
   List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver",time: "10:20 am"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver",time: "10:20 am"),
+    ChatMessage(
+        messageContent: "Hello, Will",
+        messageType: "receiver",
+        time: "10:20 am"),
+    ChatMessage(
+        messageContent: "How have you been?",
+        messageType: "receiver",
+        time: "10:20 am"),
     ChatMessage(
         messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-        messageType: "sender",time: "10:20 am"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver",time: "10:20 am"),
+        messageType: "sender",
+        time: "10:20 am"),
     ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender",time: "10:20 am"),
+        messageContent: "ehhhh, doing OK.",
+        messageType: "receiver",
+        time: "10:20 am"),
+    ChatMessage(
+        messageContent: "Is there any thing wrong?",
+        messageType: "sender",
+        time: "10:20 am"),
   ];
 
   @override
@@ -73,10 +87,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             automaticallyImplyLeading: false,
             actions: [
               IconButton(
-                  onPressed:(){
-
-                  }, icon: SvgPicture.asset(AppAssets.call))
-
+                  onPressed: () {}, icon: SvgPicture.asset(AppAssets.call))
             ],
             leading: Builder(builder: (context) {
               return IconButton(
@@ -91,15 +102,14 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       ),
       body: Stack(
         children: [
-
           ListView.builder(
             itemCount: messages.length,
             shrinkWrap: true,
             padding: EdgeInsets.all(5.sp),
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
+                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                 child: Align(
                   alignment: (messages[index].messageType == "receiver"
                       ? Alignment.topLeft
@@ -119,7 +129,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           ? AppTheme.lightGrey
                           : AppTheme.blue),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 3.w),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -140,13 +151,13 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           messages[index].time!,
                           style: messages[index].messageType == "receiver"
                               ? TextStyle(
-                              fontSize: 9.sp,
-                              fontFamily: AppFonts.poppins,
-                              color: AppTheme.medGrey)
+                                  fontSize: 9.sp,
+                                  fontFamily: AppFonts.poppins,
+                                  color: AppTheme.medGrey)
                               : TextStyle(
-                              fontSize: 9.sp,
-                              fontFamily: AppFonts.poppins,
-                              color: AppTheme.white),
+                                  fontSize: 9.sp,
+                                  fontFamily: AppFonts.poppins,
+                                  color: AppTheme.white),
                         ),
                       ],
                     ),
@@ -158,7 +169,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:  EdgeInsets.only(left: 5.w,right:  5.w,bottom: 2.h),
+              padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 2.h),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -166,14 +177,16 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   borderRadius: BorderRadius.circular(7.sp),
                 ),
                 child: Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 1.7.h,horizontal: 3.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 1.7.h, horizontal: 3.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Send Message", style:TextStyle(
-                          fontSize: 14.sp,
-                          fontFamily: AppFonts.poppinsMed,
-                          color: AppTheme.messageGrey)),
+                      Text("Send Message",
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontFamily: AppFonts.poppinsMed,
+                              color: AppTheme.messageGrey)),
                       SvgPicture.asset(AppAssets.sendSvg)
                     ],
                   ),

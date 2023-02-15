@@ -23,7 +23,7 @@ class SignUpService {
       required SignUpSuccess signUpSuccess}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
       Map<String, dynamic> map = {
         "firstname": firstName,
@@ -34,7 +34,6 @@ class SignUpService {
         "confirmpassword": confirmPassword
       };
 
-      print(map);
       response = await _dio.post(
         URL.signUpUrl,
         data: FormData.fromMap(map),
@@ -43,8 +42,6 @@ class SignUpService {
         }, responseType: ResponseType.json),
       );
 
-      print(response.statusCode);
-      print(response.data);
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -55,7 +52,6 @@ class SignUpService {
         if (resSuccess &&
             data["isNewUser"] &&
             message.contains("registration successful")) {
-          print(response.data);
           signUpSuccess(true, "");
         }
         if (resSuccess &&
@@ -67,7 +63,6 @@ class SignUpService {
         }
       }
     } catch (e) {
-      print(e);
       errorCallBack(e.toString());
     }
   }

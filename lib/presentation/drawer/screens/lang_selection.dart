@@ -19,7 +19,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       // if (context.locale.toString().compareTo("en") == 0) {
       //   selectedLang = "English";
       // } else if (context.locale.toString().compareTo("fr") == 0) {

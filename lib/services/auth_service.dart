@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_projects/_core/constants/app_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/services/base_service.dart';
 
 typedef GetOTPSuccess = void Function(bool isSuccess, String msg);
@@ -22,7 +21,7 @@ class AuthService {
       required GetOTPSuccess getOTPSuccess}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
 
       Map<String, dynamic> map = {};
@@ -46,7 +45,8 @@ class AuthService {
 
         if (resSuccess && message.contains("OTP get & Generated")) {
           getOTPSuccess(true, "");
-          box1.put(AppString.userOTPKey, data['userotpdetails'][0]['otp']);
+          HiveConstants.instances.box1
+              .put(HiveConstants.userOTPKey, data['userotpdetails'][0]['otp']);
         } else {
           errorCallBack(message);
         }

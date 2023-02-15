@@ -9,8 +9,7 @@ class LoginBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     on<LoginScreenEvent>((event, emit) async {
       if (event is LoginScreenCallApiEvent) {
         emit(LoginScreenLoading());
-        print(event.username);
-        var d = await loginService.login(
+        await loginService.login(
           username: event.username,
           password: event.password,
           isMobile: event.isMobile,

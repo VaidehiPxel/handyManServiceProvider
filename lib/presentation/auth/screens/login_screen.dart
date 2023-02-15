@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_projects/_core/constants/validation.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';

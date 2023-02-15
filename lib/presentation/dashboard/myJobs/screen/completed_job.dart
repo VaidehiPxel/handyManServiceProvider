@@ -4,11 +4,13 @@ import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class CompletedJobDetail extends StatefulWidget {
-  const CompletedJobDetail({Key? key}) : super(key: key);
+  final List<Joblist> jobData;
+  const CompletedJobDetail({Key? key, required this.jobData}) : super(key: key);
 
   @override
   State<CompletedJobDetail> createState() => _CompletedJobDetailState();
@@ -28,7 +30,7 @@ class _CompletedJobDetailState extends State<CompletedJobDetail> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(18.sp),
+          padding: EdgeInsets.all(18.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +89,7 @@ class _CompletedJobDetailState extends State<CompletedJobDetail> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only( right: 2.w),
+                    padding: EdgeInsets.only(right: 2.w),
                     child: SvgPicture.asset(
                       AppAssets.calSvg,
                       height: 10.sp,
@@ -107,7 +109,6 @@ class _CompletedJobDetailState extends State<CompletedJobDetail> {
             ),
           ],
         ),
-
         SizedBox(
           height: 0.5.h,
         ),
@@ -133,7 +134,7 @@ class _CompletedJobDetailState extends State<CompletedJobDetail> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only( right: 2.w),
+                    padding: EdgeInsets.only(right: 2.w),
                     child: SvgPicture.asset(
                       AppAssets.time,
                       height: 10.sp,
@@ -159,7 +160,7 @@ class _CompletedJobDetailState extends State<CompletedJobDetail> {
         EazyLifeJobStatusWidget(
           fontSize: 12.sp,
           size: 3,
-          status: EazyLifeJobStatus.Completed,
+          status: EazyLifeJobStatus.completed,
         )
       ],
     );

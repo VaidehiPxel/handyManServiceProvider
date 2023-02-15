@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
-import 'package:flutter_projects/_core/constants/app_constants.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/logout_dialog.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -55,9 +55,13 @@ class DrawerWidget extends StatelessWidget {
                 child: ClipOval(
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(25.sp), // Image radius
-                    child: box1.get(AppString.userProfileKey) == null
+                    child: HiveConstants.instances.box1
+                                .get(HiveConstants.userProfileKey) ==
+                            null
                         ? Image.asset(AppAssets.profileThumb)
-                        : Image.network(box1.get(AppString.userProfileKey),
+                        : Image.network(
+                            HiveConstants.instances.box1
+                                .get(HiveConstants.userProfileKey),
                             fit: BoxFit.cover),
                   ),
                 ),
@@ -70,14 +74,15 @@ class DrawerWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    box1.get(AppString.userNameKey),
+                    HiveConstants.instances.box1.get(HiveConstants.userNameKey),
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: AppFonts.poppinsSemiBold,
                         fontSize: 14.sp),
                   ),
                   Text(
-                    box1.get(AppString.userEmailKey),
+                    HiveConstants.instances.box1
+                        .get(HiveConstants.userEmailKey),
                     style: TextStyle(
                         color: AppTheme.medGrey,
                         fontFamily: AppFonts.poppins,

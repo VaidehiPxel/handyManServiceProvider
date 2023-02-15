@@ -45,28 +45,28 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
       const Duration(milliseconds: 300),
       () {
         setState(() {
-          if (widget.profileItemType == ProfileItemType.Text) {
+          if (widget.profileItemType == ProfileItemType.text) {
             controller.clear();
             controller = TextEditingController(text: widget.value);
           }
-          if (widget.profileItemType == ProfileItemType.Multiline) {
+          if (widget.profileItemType == ProfileItemType.multiline) {
             controller.clear();
             controller = TextEditingController(text: widget.value);
           }
 
-          if (widget.profileItemType == ProfileItemType.Dropdown) {
+          if (widget.profileItemType == ProfileItemType.dropdown) {
             items.clear();
             items.addAll(widget.items!);
 
             dropdownvalue = widget.value;
           }
-          if (widget.profileItemType == ProfileItemType.Date) {
+          if (widget.profileItemType == ProfileItemType.date) {
             List date = widget.value.split("/");
             pickedDate = DateTime(
                 int.parse(date[2]), int.parse(date[1]), int.parse(date[0]));
           }
 
-          if (widget.profileItemType == ProfileItemType.Gender) {
+          if (widget.profileItemType == ProfileItemType.gender) {
             gender = widget.value;
           }
         });
@@ -144,7 +144,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
             SizedBox(
               width: 2.sp,
             ),
-            if (widget.profileItemType == ProfileItemType.Text)
+            if (widget.profileItemType == ProfileItemType.text)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -158,7 +158,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.Multiline)
+            if (widget.profileItemType == ProfileItemType.multiline)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -174,7 +174,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.Dropdown)
+            if (widget.profileItemType == ProfileItemType.dropdown)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -208,7 +208,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.Date)
+            if (widget.profileItemType == ProfileItemType.date)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -224,7 +224,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.Gender)
+            if (widget.profileItemType == ProfileItemType.gender)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -264,7 +264,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.Upload)
+            if (widget.profileItemType == ProfileItemType.upload)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -408,22 +408,22 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                 2000), //DateTime.now() - not to allow to choose before today.
             lastDate: DateTime(2101))
         .then((value) {
-      if (value != null)
-        // ignore: curly_braces_in_flow_control_structures
+      if (value != null) {
         setState(() {
           pickedDate = value;
         });
+      }
     });
   }
 }
 
 enum ProfileItemType {
-  Text,
-  Dropdown,
-  Location,
-  Date,
-  Gender,
-  Language,
-  Multiline,
-  Upload
+  text,
+  dropdown,
+  location,
+  date,
+  gender,
+  language,
+  multiline,
+  upload
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_projects/services/base_service.dart';
@@ -37,8 +36,6 @@ class MyJobService {
       var data = MyJobListModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
-          print("lenghth");
-          print(data.joblist.length);
           myJobData(data.joblist);
         } else {
           errorCallBack(message);

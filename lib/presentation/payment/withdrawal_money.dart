@@ -4,7 +4,6 @@ import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
-import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/payment/payment_detail.dart';
@@ -31,17 +30,14 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
         title: AppString.withdrawalMoney,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
-          if(currentIndex==2){
-            currentIndex=1;
-          }else if(currentIndex==1){
-            currentIndex=0;
-          }else{
+          if (currentIndex == 2) {
+            currentIndex = 1;
+          } else if (currentIndex == 1) {
+            currentIndex = 0;
+          } else {
             Navigator.pop(context);
-
           }
-          setState(() {
-
-          });
+          setState(() {});
         },
         sideIcon: null,
       ),
@@ -68,39 +64,39 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                             ? AppString.pay
                             : AppString.save,
                     onPressed: () {
-                     setState(() {
-                       if (currentIndex == 0) {
-                         currentIndex = 1;
-                       }
-                       else if (currentIndex == 2) {
-                         showDialog(
-                             context: context,
-                             builder: (BuildContext context) {
-                               return DialogBoxWithIcon(
-                                 icon: AppAssets.save,
-                                 content: Text(
-                                   "₹100",
-                                   textAlign: TextAlign.center,
-                                   style: TextStyle(
-                                       color: AppTheme.black,
-                                       fontFamily: AppFonts.poppinsBold,
-                                       fontSize: 14.sp),
-                                 ),
-                                 iconColor: AppTheme.dialogGreen,
-                                 onOkPressed: () {
-                                   Navigator.of(context).pop();
-                                   callNextScreen(context, PaymentDetail());
-                                 },
-                                 title:  AppString.moneyBankToSuccess,
-                                 titleYes: AppString.viewDetails,
-                                 colorYes: AppTheme.white,
-                                 sizeNo: 10.sp,
-                                 titleFamily: AppFonts.poppinsMed,
-                                 onCancelPressed: () {},
-                               );
-                             });
-                       }
-                     });
+                      setState(() {
+                        if (currentIndex == 0) {
+                          currentIndex = 1;
+                        } else if (currentIndex == 2) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return DialogBoxWithIcon(
+                                  icon: AppAssets.save,
+                                  content: Text(
+                                    "₹100",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppTheme.black,
+                                        fontFamily: AppFonts.poppinsBold,
+                                        fontSize: 14.sp),
+                                  ),
+                                  iconColor: AppTheme.dialogGreen,
+                                  onOkPressed: () {
+                                    Navigator.of(context).pop();
+                                    callNextScreen(
+                                        context, const PaymentDetail());
+                                  },
+                                  title: AppString.moneyBankToSuccess,
+                                  titleYes: AppString.viewDetails,
+                                  colorYes: AppTheme.white,
+                                  sizeNo: 10.sp,
+                                  titleFamily: AppFonts.poppinsMed,
+                                  onCancelPressed: () {},
+                                );
+                              });
+                        }
+                      });
                     },
                   ),
             SizedBox(
@@ -289,11 +285,15 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                 color: AppTheme.black,
                 fontFamily: AppFonts.poppins,
                 fontSize: 11.sp)),
-        SizedBox(height: 1.h,),
-        Divider(
+        SizedBox(
+          height: 1.h,
+        ),
+        const Divider(
           color: AppTheme.grey,
         ),
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -302,7 +302,9 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                     color: AppTheme.black,
                     fontFamily: AppFonts.poppinsMed,
                     fontSize: 11.sp)),
-            SizedBox(height: 0.6.h,),
+            SizedBox(
+              height: 0.6.h,
+            ),
             Text("₹100",
                 style: TextStyle(
                     color: AppTheme.black,
@@ -310,7 +312,9 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                     fontSize: 11.sp)),
           ],
         ),
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -326,11 +330,15 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                     fontSize: 11.sp)),
           ],
         ),
-        SizedBox(height: 1.h,),
-        Divider(
+        SizedBox(
+          height: 1.h,
+        ),
+        const Divider(
           color: AppTheme.grey,
         ),
-        SizedBox(height: 1.h,),
+        SizedBox(
+          height: 1.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

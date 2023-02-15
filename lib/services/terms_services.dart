@@ -18,7 +18,7 @@ class TermsConditionService {
           termsConditionServiceSuccess}) async {
     try {
       bool resSuccess = false;
-      String message = '', errorCode = '';
+      String message = '';
       Response? response;
       String description = "";
 
@@ -29,8 +29,6 @@ class TermsConditionService {
         }, responseType: ResponseType.json),
       );
 
-      print(response.statusCode);
-      print(response.data);
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -42,17 +40,14 @@ class TermsConditionService {
             message.compareTo("terms and condition details Get Successfull") ==
                 0) {
           for (var r in data["result"]) {
-            print(r);
             description = r["description"];
           }
-          print(description);
           termsConditionServiceSuccess(description);
         } else if (resSuccess) {
           errorCallBack(message);
         }
       }
     } catch (e) {
-      print(e);
       errorCallBack(e.toString());
     }
   }

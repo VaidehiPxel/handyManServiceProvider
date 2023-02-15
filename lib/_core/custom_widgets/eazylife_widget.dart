@@ -19,7 +19,7 @@ class EazyLifeWidget extends StatefulWidget {
       this.fontFamily,
       this.fontSize,
       this.withoutBlue = false,
-      this.isLogoRounded=false});
+      this.isLogoRounded = false});
 
   @override
   State<EazyLifeWidget> createState() => _EazyLifeWidgetState();
@@ -45,7 +45,7 @@ class _EazyLifeWidgetState extends State<EazyLifeWidget> {
                     ),
                     child: SvgPicture.asset(AppAssets.sideBlueSvg))
               else
-                SideBlueContainer(),
+                const SideBlueContainer(),
               SizedBox(
                 width: 1.5.w,
               ),
@@ -62,8 +62,8 @@ class _EazyLifeWidgetState extends State<EazyLifeWidget> {
           Row(
             children: [
               Container(
-                width:widget.isLogoRounded!? 1.w:0,
-                height:widget.isLogoRounded!? 3.h:0,
+                width: widget.isLogoRounded! ? 1.w : 0,
+                height: widget.isLogoRounded! ? 3.h : 0,
                 padding: EdgeInsets.zero,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(0),

@@ -204,11 +204,9 @@ class AppString {
   static const String paymentFromPaypal = "Payment from Paypal";
   static const String areYouSure = "Are you sure?";
   static const String removeDetail = "Remove your Detail";
+  static const String selectJob = "Select Job";
+  static const String selectUser = "Select User";
 
 //Hive
-  static const String userIdKey = "USER_ID_KEY";
-  static const String userNameKey = "USER_NAME_KEY";
-  static const String userEmailKey = "USER_EMAIL_KEY";
-  static const String userProfileKey = "USER_PROFILE_KEY";
-  static const String userOTPKey = "USER_OTP_KEY";
+
 }

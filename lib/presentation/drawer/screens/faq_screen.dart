@@ -6,8 +6,6 @@ import 'package:flutter_projects/_core/custom_widgets/expansion_tile.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
-import 'package:flutter_projects/application/login/login_bloc.dart';
-import 'package:flutter_projects/application/login/login_state.dart';
 import 'package:sizer/sizer.dart';
 
 class FAQSScreen extends StatefulWidget {
@@ -29,9 +27,7 @@ class _FAQSScreenState extends State<FAQSScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<FaqBloc, FaqState>(
-      listener: (context, state) {
-        print(state is FaqSuccess);
-      },
+      listener: (context, state) {},
       child: BlocBuilder<FaqBloc, FaqState>(
         builder: (context, state) {
           return Scaffold(

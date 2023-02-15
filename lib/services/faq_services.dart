@@ -42,14 +42,12 @@ class FaqService {
           for (var r in data["result"]) {
             faq.add(FaqModel.fromMap(r));
           }
-          print(faq.length);
           faqSuccess(faq);
         } else if (resSuccess) {
           errorCallBack(message);
         }
       }
     } catch (e) {
-      print(e);
       errorCallBack(e.toString());
     }
   }

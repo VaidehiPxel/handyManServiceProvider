@@ -1,21 +1,23 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
-import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
 import 'package:sizer/sizer.dart';
 
-class ReportComplaintScreen extends StatefulWidget {
-  const ReportComplaintScreen({super.key});
+class CreateReportAndComplaintScreen extends StatefulWidget {
+  const CreateReportAndComplaintScreen({super.key});
 
   @override
-  State<ReportComplaintScreen> createState() => _ReportComplaintScreenState();
+  State<CreateReportAndComplaintScreen> createState() =>
+      _CreateReportAndComplaintScreenState();
 }
 
-class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
+class _CreateReportAndComplaintScreenState
+    extends State<CreateReportAndComplaintScreen> {
   var items = [
     'Item 1',
     'Item 2',
@@ -29,103 +31,157 @@ class _ReportComplaintScreenState extends State<ReportComplaintScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
         title: AppString.reportAndComplaint,
         leadIcon: AppAssets.backIcon,
+        sideIcon: AppAssets.notifications,
+        sideOnPressed: () {
+          callNextScreen(context, const NotificationScreen());
+        },
         onPressed: () {
           Navigator.pop(context);
         },
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:  EdgeInsets.all(12.sp),
-          child: Column(
-            children: [
-               SizedBox(
-                height: 2.h,
-              ),
-              EazyLifeWidget(
-                title: AppString.selectComplaint,
-                fontFamily: AppFonts.poppinsMed,
-                fontSize: 16.sp,
-                widget: Padding(
-                  padding:  EdgeInsets.only(top:0.8.h),
-                  child: Container(
-                    height: 6.h,
-                    margin:  EdgeInsets.symmetric(horizontal:2.w),
-                    decoration: BoxDecoration(
-                      color: AppTheme.lightGrey,
-                      borderRadius: BorderRadius.circular(5.sp),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Theme(
-                          data: Theme.of(context)
-                              .copyWith(dividerColor: Colors.transparent),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              value: dropdownvalue,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              items: items.map((String items) {
-                                return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(items),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  dropdownvalue = value!;
-                                });
-                              },
-                            ),
-                          ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            EazyLifeWidget(
+              title: AppString.selectUser,
+              widget: Container(
+                height: 60,
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF6F6F6),
+                  borderRadius: BorderRadius.circular(16),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Theme(
+                      data: Theme.of(context)
+                          .copyWith(dividerColor: Colors.transparent),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: dropdownvalue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              dropdownvalue = value!;
+                            });
+                          },
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 2.h,),
-              EazyLifeWidget(
-                title: AppString.addComplaint,
-                widget: Padding(
-                  padding:  EdgeInsets.only(top:0.8.h),
-                  child: Container(
-
-                    margin:  EdgeInsets.symmetric(horizontal:2.w),
-                    decoration: BoxDecoration(
-                      color: AppTheme.lightGrey,
-                      borderRadius: BorderRadius.circular(5.sp),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        enableIMEPersonalizedLearning: true,
-                        enableSuggestions: true,
-                        minLines: 10,
-                        maxLines: 40,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: AppString.addComplaint,
-                          contentPadding: EdgeInsets.all(14),
+            ),
+            EazyLifeWidget(
+              title: AppString.selectJob,
+              widget: Container(
+                height: 60,
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF6F6F6),
+                  borderRadius: BorderRadius.circular(16),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Theme(
+                      data: Theme.of(context)
+                          .copyWith(dividerColor: Colors.transparent),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          isExpanded: true,
+                          value: dropdownvalue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              dropdownvalue = value!;
+                            });
+                          },
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+            ),
+            EazyLifeWidget(
+              title: AppString.addComplaint,
+              widget: Container(
+                height: 160,
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF6F6F6),
+                  borderRadius: BorderRadius.circular(16),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Center(
+                  child: TextFormField(
+                    enableIMEPersonalizedLearning: true,
+                    enableSuggestions: true,
+                    minLines: 50,
+                    maxLines: 100,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: AppString.addComplaint,
+                      contentPadding: EdgeInsets.all(14),
+                    ),
+                  ),
+                ),
               ),
-              AppButton(
-                title: AppString.raiseAComplaint,
-                onPressed: () {},
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 26, right: 26),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0082EB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text(
+                    AppString.raiseAComplaint,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                      fontFamily: AppFonts.poppinsMed,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

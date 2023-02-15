@@ -5,11 +5,13 @@ import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class AppliedJobDetail extends StatefulWidget {
-  const AppliedJobDetail({Key? key}) : super(key: key);
+  final List<Joblist> jobData;
+  const AppliedJobDetail({Key? key, required this.jobData}) : super(key: key);
 
   @override
   State<AppliedJobDetail> createState() => _AppliedJobDetailState();
@@ -29,11 +31,10 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(18.sp),
+          padding: EdgeInsets.all(18.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               setTitle(),
               SizedBox(
                 height: 0.5.h,
@@ -87,7 +88,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only( right: 2.w),
+                    padding: EdgeInsets.only(right: 2.w),
                     child: SvgPicture.asset(
                       AppAssets.calSvg,
                       height: 10.sp,
@@ -107,12 +108,11 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
             ),
           ],
         ),
-
         SizedBox(
           height: 0.5.h,
         ),
         Row(
-         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
@@ -133,7 +133,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only( right: 2.w),
+                    padding: EdgeInsets.only(right: 2.w),
                     child: SvgPicture.asset(
                       AppAssets.time,
                       height: 10.sp,
@@ -159,7 +159,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
         EazyLifeJobStatusWidget(
           fontSize: 12.sp,
           size: 3,
-          status: EazyLifeJobStatus.Applied,
+          status: EazyLifeJobStatus.applied,
         )
       ],
     );

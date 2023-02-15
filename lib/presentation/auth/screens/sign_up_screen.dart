@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_projects/_core/constants/validation.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
@@ -304,9 +303,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Please Re-Enter New Password";
-                                            } else if (value!.length < 8) {
+                                            } else if (value.length < 8) {
                                               return "Password must be atleast 8 characters long";
-                                            } else if (value! !=
+                                            } else if (value !=
                                                 mPasswordController.text) {
                                               return "Password must be same as above";
                                             } else {

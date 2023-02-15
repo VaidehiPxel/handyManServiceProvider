@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
-import 'package:flutter_projects/_core/custom_widgets/grey_textField.dart';
 import 'package:flutter_projects/presentation/dashboard/message/screens/chat_detail_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -45,9 +44,7 @@ class RenderBodyView extends StatefulWidget {
 
 class _RenderBodyViewState extends State<RenderBodyView> {
   final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
-
-
+      Completer<GoogleMapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +86,6 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           SizedBox(
             height: 8.sp,
           ),
-
         ],
       ),
     );
@@ -126,56 +122,56 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                     ),
                     Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Abhithi Maheshvari",
+                                softWrap: true,
+                                style: TextStyle(
+                                  color: AppTheme.black,
+                                  fontSize: 12.sp,
+                                  fontFamily: AppFonts.poppinsSemiBold,
+                                ),
+                              ),
+                              Text(
+                                "Bathroom Cleaning",
+                                style: TextStyle(
+                                  color: AppTheme.messageGrey,
+                                  fontSize: 10.sp,
+                                  fontFamily: AppFonts.poppins,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Abhithi Maheshvari",
-                                    softWrap: true,
-                                    style: TextStyle(
-                                      color: AppTheme.black,
-                                      fontSize: 12.sp,
-                                      fontFamily: AppFonts.poppinsSemiBold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Bathroom Cleaning",
-                                    style: TextStyle(
-                                      color: AppTheme.messageGrey,
-                                      fontSize: 10.sp,
-                                      fontFamily: AppFonts.poppins,
-                                    ),
-                                  ),
-                                ],
+                            Text(
+                              AppString.quotationAmount,
+                              style: TextStyle(
+                                color: AppTheme.black,
+                                fontSize: 7.sp,
+                                fontFamily: AppFonts.poppinsMed,
                               ),
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  AppString.quotationAmount,
-                                  style: TextStyle(
-                                    color: AppTheme.black,
-                                    fontSize: 7.sp,
-                                    fontFamily: AppFonts.poppinsMed,
-                                  ),
-                                ),
-                                Text(
-                                  "₹ 799",
-                                  style: TextStyle(
-                                    color: AppTheme.blue,
-                                    fontSize: 14.sp,
-                                    fontFamily: AppFonts.poppinsSemiBold,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              "₹ 799",
+                              style: TextStyle(
+                                color: AppTheme.blue,
+                                fontSize: 14.sp,
+                                fontFamily: AppFonts.poppinsSemiBold,
+                              ),
                             ),
                           ],
-                        )),
+                        ),
+                      ],
+                    )),
                   ],
                 ),
               ),
@@ -196,7 +192,6 @@ class _RenderBodyViewState extends State<RenderBodyView> {
       },
     );
   }
-
 
   Widget _setProviderTitle() {
     return Row(
@@ -221,8 +216,6 @@ class _RenderBodyViewState extends State<RenderBodyView> {
       ],
     );
   }
-
-
 
   Widget _setAcceptDeclineCTA(BuildContext context) {
     return Column(
@@ -347,8 +340,8 @@ class _RenderBodyViewState extends State<RenderBodyView> {
         Align(
           alignment: Alignment.centerRight,
           child: GestureDetector(
-            onTap: (){
-              callNextScreen(context, ChatDetailScreen());
+            onTap: () {
+              callNextScreen(context, const ChatDetailScreen());
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -626,37 +619,35 @@ class _RenderBodyViewState extends State<RenderBodyView> {
     );
   }
 
-
-
-  Widget _keyValueRow(String key, String value) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 1.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              key,
-              style: TextStyle(
-                  color: AppTheme.black,
-                  fontSize: 10.sp,
-                  fontFamily: AppFonts.poppins),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              value,
-              style: TextStyle(
-                color: AppTheme.medGrey,
-                fontSize: 10.sp,
-                fontFamily: AppFonts.poppinsMed,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _keyValueRow(String key, String value) {
+  //   return Padding(
+  //     padding: EdgeInsets.only(bottom: 1.h),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       children: [
+  //         Expanded(
+  //           flex: 2,
+  //           child: Text(
+  //             key,
+  //             style: TextStyle(
+  //                 color: AppTheme.black,
+  //                 fontSize: 10.sp,
+  //                 fontFamily: AppFonts.poppins),
+  //           ),
+  //         ),
+  //         Expanded(
+  //           flex: 2,
+  //           child: Text(
+  //             value,
+  //             style: TextStyle(
+  //               color: AppTheme.medGrey,
+  //               fontSize: 10.sp,
+  //               fontFamily: AppFonts.poppinsMed,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

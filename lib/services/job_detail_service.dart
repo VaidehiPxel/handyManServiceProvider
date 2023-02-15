@@ -33,7 +33,6 @@ class JobDetailService {
       map = {
         "job_id": jobId,
       };
-      print(jobId);
 
       response = await _dio.post(
         URL.jobDetailUrl,
@@ -43,8 +42,6 @@ class JobDetailService {
         }, responseType: ResponseType.json),
       );
 
-      print(response.statusCode);
-      print(response.data);
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -71,14 +68,12 @@ class JobDetailService {
       required bool isApplied,
       required BidUpdate bidUpdate}) async {
     try {
-      String message = '';
-
-      Map<String, String> map = {};
+      Map<String, dynamic> map = {};
 
       map = {
-        "job_id": jobId.toString(),
-        "user_id": userId.toString(),
-        "amount": amount,
+        'jobid': jobId.toString(),
+        'user_id': userId.toString(),
+        'amount': amount,
       };
 
       var client = http.Client();
@@ -91,9 +86,9 @@ class JobDetailService {
       var data = MyBidModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
-          bidUpdate(true, "");
+          bidUpdate(isApplied ? true : false, "");
         } else {
-          errorCallBack(message);
+          errorCallBack(data.message);
         }
       }
     } catch (e) {
@@ -124,8 +119,6 @@ class JobDetailService {
         body: map,
       );
 
-      print(response.statusCode);
-      // return DistrictList.fromMap(json.decode(response.body));
       Map<String, dynamic> data = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
