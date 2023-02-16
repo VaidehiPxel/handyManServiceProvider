@@ -117,7 +117,7 @@ class Result {
     required this.pincode,
     required this.jobdate,
     required this.jobtime,
-    required this.amount,
+    this.amount,
     this.fromamount,
     this.toamount,
     required this.status,
@@ -139,7 +139,7 @@ class Result {
   String pincode;
   DateTime jobdate;
   String jobtime;
-  String amount;
+  String? amount;
   dynamic fromamount;
   dynamic toamount;
   int status;

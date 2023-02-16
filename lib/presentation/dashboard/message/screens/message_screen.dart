@@ -14,6 +14,13 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("message");
+  }
+
   int currentIndex = 2;
 
   List<MessageModel> messageModel = [
@@ -57,7 +64,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  renderBodyView(); //HomeScreenWidget(),
+    return renderBodyView(); //HomeScreenWidget(),
   }
 
   Widget renderBodyView() {

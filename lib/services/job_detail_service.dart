@@ -82,7 +82,8 @@ class JobDetailService {
         Uri.parse(isApplied ? URL.bidAppliedUrl : URL.bidUpdateUrl),
         body: map,
       );
-
+      print(response.body);
+      print(MyBidModel.fromJson(json.decode(response.body)));
       var data = MyBidModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
@@ -92,6 +93,7 @@ class JobDetailService {
         }
       }
     } catch (e) {
+      print(e);
       errorCallBack(e.toString());
     }
   }

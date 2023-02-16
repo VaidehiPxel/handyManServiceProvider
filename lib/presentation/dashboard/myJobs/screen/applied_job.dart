@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
@@ -11,8 +12,13 @@ import 'package:sizer/sizer.dart';
 
 class AppliedJobDetail extends StatefulWidget {
   final List<Joblist> jobData;
+  final int index;
   final String title;
-  const AppliedJobDetail({Key? key, required this.jobData, required this.title})
+  const AppliedJobDetail(
+      {Key? key,
+      required this.jobData,
+      required this.index,
+      required this.title})
       : super(key: key);
 
   @override
@@ -42,9 +48,9 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
                 height: 0.5.h,
               ),
               _putDivider(),
-              _setDescription(),
+              _setDescription(widget.jobData),
               _putDivider(),
-              _setAddress(),
+              _setAddress(widget.jobData),
               _putDivider(),
               _cancelApplication(),
               SizedBox(
@@ -76,7 +82,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
             Expanded(
               flex: 7,
               child: Text(
-                jobData,
+                jobData[widget.index].title,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14.sp,
@@ -98,7 +104,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
                     ),
                   ),
                   Text(
-                    "24 Sep",
+                    jobData[widget.index].jobdate.formatDate(),
                     style: TextStyle(
                       color: AppTheme.medGrey,
                       fontSize: 10.sp,
@@ -120,7 +126,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
             Expanded(
               flex: 7,
               child: Text(
-                "Lorem ipsum dolor sit amet, adipiscing elit",
+                "Dummy text",
                 softWrap: true,
                 style: TextStyle(
                   color: AppTheme.medGrey,
@@ -143,7 +149,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
                     ),
                   ),
                   Text(
-                    "60 Mins",
+                    jobData[widget.index].jobtime,
                     style: TextStyle(
                       color: AppTheme.medGrey,
                       fontSize: 10.sp,
@@ -167,7 +173,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
     );
   }
 
-  Widget _setDescription() {
+  Widget _setDescription(List<Joblist> jobData) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -187,7 +193,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
           height: 2.sp,
         ),
         Text(
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tincidunt leo a neque accumsan posuere. Nullam a purus congue, ultricies sapien vitae, tempus purus\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut cidunt leo a neque accumsan posuere.",
+          jobData[widget.index].description,
           textAlign: TextAlign.justify,
           style: TextStyle(
             color: AppTheme.medGrey,
@@ -203,7 +209,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
     );
   }
 
-  Widget _setAddress() {
+  Widget _setAddress(List<Joblist> jobData) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

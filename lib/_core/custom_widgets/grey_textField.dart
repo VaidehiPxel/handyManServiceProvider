@@ -7,8 +7,13 @@ class GreyTextField extends StatelessWidget {
   final String hintText;
   final String? fontFamily;
   final double? height;
+  final TextEditingController? controller;
   const GreyTextField(
-      {Key? key, required this.hintText, this.fontFamily, this.height})
+      {Key? key,
+      required this.hintText,
+      this.fontFamily,
+      this.height,
+      this.controller})
       : super(key: key);
 
   @override
@@ -27,6 +32,7 @@ class GreyTextField extends StatelessWidget {
           ]),
       child: TextFormField(
         maxLines: 1,
+        controller: controller,
         enableSuggestions: true,
         decoration: InputDecoration(
           border: InputBorder.none,

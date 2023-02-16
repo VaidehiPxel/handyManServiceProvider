@@ -16,6 +16,7 @@ import 'package:flutter_projects/services/login_services.dart';
 import 'package:flutter_projects/services/my_job_service.dart';
 import 'package:flutter_projects/services/signup_services.dart';
 import 'package:flutter_projects/services/terms_services.dart';
+import 'package:flutter_projects/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -76,6 +77,6 @@ class MyApp extends StatelessWidget {
     // } else {
     //   return const DashBoard();
     // }
-    return const AppLangSelectScreen();
+    return const SplashScreen();
   }
 }

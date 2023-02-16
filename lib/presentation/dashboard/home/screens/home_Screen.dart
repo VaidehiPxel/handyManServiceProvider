@@ -26,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    print("heeee");
     context.read<DashboardBloc>().add(const DashboardCallApiEvent());
   }
 

@@ -28,6 +28,14 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print("fhdghf");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
@@ -57,10 +65,12 @@ class _DashBoardState extends State<DashBoard> {
       bottomNavigationBar: EazylifeBottomAppBar(
         onTap: (int currentIndex) {
           setState(() {
+            print(currentIndex);
             this.currentIndex = currentIndex;
-            pageController.animateToPage(currentIndex,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease);
+            pageController.jumpToPage(currentIndex);
+            // pageController.animateToPage(currentIndex,
+            //     duration: const Duration(milliseconds: 500),
+            //     curve: Curves.ease);
           });
         },
         currentIndex: currentIndex,
@@ -70,16 +80,16 @@ class _DashBoardState extends State<DashBoard> {
 
   PageController pageController = PageController(
     initialPage: 0,
-    keepPage: true,
   );
 
   Widget buildPageView() {
     return PageView(
+      physics: const NeverScrollableScrollPhysics(),
       controller: pageController,
       onPageChanged: (index) {
         pageChanged(index);
       },
-      children: const <Widget>[
+      children: const [
         HomeScreen(),
         MyJobsScreen(),
         MessageScreen(),

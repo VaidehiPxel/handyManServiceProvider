@@ -18,7 +18,10 @@ import 'package:sizer/sizer.dart';
 
 class AcceptedJobDetail extends StatefulWidget {
   final List<Joblist> jobData;
-  const AcceptedJobDetail({Key? key, required this.jobData}) : super(key: key);
+  final String title;
+  const AcceptedJobDetail(
+      {Key? key, required this.jobData, required this.title})
+      : super(key: key);
 
   @override
   State<AcceptedJobDetail> createState() => _AcceptedJobDetailState();
@@ -76,7 +79,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EazylifeAppBar(
-        title: "Sofa Cleaning",
+        title: widget.title,
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);

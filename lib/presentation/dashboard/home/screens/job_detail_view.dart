@@ -33,6 +33,8 @@ class _JobDetailViewState extends State<JobDetailView> {
   bool isUpdate = false;
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController updatedAmountController = TextEditingController();
 
   @override
   void initState() {
@@ -54,7 +56,7 @@ class _JobDetailViewState extends State<JobDetailView> {
         if (state is BidUpdateSuccess) {
           if (state.isUpdate) {
             setState(() {});
-            isUpdate == true;
+            isUpdate = true;
           }
         }
         if (state is BidRemoveSuccess) {
@@ -173,380 +175,380 @@ class _JobDetailViewState extends State<JobDetailView> {
       ),
     );
   }
-}
 
-Widget _setListOfProvider(List jobsAppliedServiceProviders) {
-  return Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            AppString.listOfServiceProvider,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 12.sp,
-              fontFamily: AppFonts.poppinsSemiBold,
+  Widget _setListOfProvider(List jobsAppliedServiceProviders) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              AppString.listOfServiceProvider,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12.sp,
+                fontFamily: AppFonts.poppinsSemiBold,
+              ),
             ),
-          ),
-          Text(
-            AppString.viewAll,
-            style: TextStyle(
-              color: AppTheme.blue,
-              fontSize: 10.sp,
-              fontFamily: AppFonts.poppinsMed,
+            Text(
+              AppString.viewAll,
+              style: TextStyle(
+                color: AppTheme.blue,
+                fontSize: 10.sp,
+                fontFamily: AppFonts.poppinsMed,
+              ),
             ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 8.sp,
-      ),
-      ListView.separated(
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 1.h,
-          );
-        },
-        itemCount: jobsAppliedServiceProviders.length,
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppTheme.lightGrey,
-                  borderRadius: BorderRadius.circular(7.sp),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(10.sp),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CircleAvatar(),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      Expanded(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+          ],
+        ),
+        SizedBox(
+          height: 8.sp,
+        ),
+        ListView.separated(
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: 1.h,
+            );
+          },
+          itemCount: jobsAppliedServiceProviders.length,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightGrey,
+                    borderRadius: BorderRadius.circular(7.sp),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.sp),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CircleAvatar(),
+                        SizedBox(
+                          width: 3.w,
+                        ),
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Abhithi Maheshvari",
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      color: AppTheme.black,
+                                      fontSize: 12.sp,
+                                      fontFamily: AppFonts.poppinsSemiBold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Bathroom Cleaning",
+                                    style: TextStyle(
+                                      color: AppTheme.messageGrey,
+                                      fontSize: 10.sp,
+                                      fontFamily: AppFonts.poppins,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "Abhithi Maheshvari",
-                                  softWrap: true,
+                                  AppString.quotationAmount,
                                   style: TextStyle(
                                     color: AppTheme.black,
-                                    fontSize: 12.sp,
-                                    fontFamily: AppFonts.poppinsSemiBold,
+                                    fontSize: 7.sp,
+                                    fontFamily: AppFonts.poppinsMed,
                                   ),
                                 ),
                                 Text(
-                                  "Bathroom Cleaning",
+                                  "₹ 799",
                                   style: TextStyle(
-                                    color: AppTheme.messageGrey,
-                                    fontSize: 10.sp,
-                                    fontFamily: AppFonts.poppins,
+                                    color: AppTheme.blue,
+                                    fontSize: 14.sp,
+                                    fontFamily: AppFonts.poppinsSemiBold,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                AppString.quotationAmount,
-                                style: TextStyle(
-                                  color: AppTheme.black,
-                                  fontSize: 7.sp,
-                                  fontFamily: AppFonts.poppinsMed,
-                                ),
-                              ),
-                              Text(
-                                "₹ 799",
-                                style: TextStyle(
-                                  color: AppTheme.blue,
-                                  fontSize: 14.sp,
-                                  fontFamily: AppFonts.poppinsSemiBold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  "1 hr ago",
-                  style: TextStyle(
-                    color: AppTheme.medGrey,
-                    fontSize: 8.sp,
-                    fontFamily: AppFonts.poppinsMed,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    ],
-  );
-}
-
-Widget _setListOfBidTitle() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        AppString.listOfBids,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 13.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
-        ),
-      ),
-      Text(
-        AppString.viewAll,
-        style: TextStyle(
-          color: AppTheme.blue,
-          fontSize: 10.sp,
-          fontFamily: AppFonts.poppinsMed,
-        ),
-      ),
-    ],
-  );
-}
-
-Widget _setEnterBid(GetJobDetailModel detail, JobDetailState state,
-    BuildContext context, int jobId) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        AppString.yourBid,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 13.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
-        ),
-      ),
-      SizedBox(
-        height: 1.h,
-      ),
-      Row(
-        children: [
-          const Expanded(
-            flex: 4,
-            child: GreyTextField(
-              hintText: "Enter Amount",
-            ),
-          ),
-          SizedBox(
-            width: 2.w,
-          ),
-          Expanded(
-            flex: 2,
-            child: state is BidUpdateLoading == true
-                ? const APILoader()
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.blue,
-                      minimumSize: const Size.fromHeight(40),
-                      elevation: 0,
-                      shadowColor: Colors.transparent,
-                    ),
-                    onPressed: () {
-                      context.read<JobDetailBloc>().add(BidUpdateApiEvent(
-                          jobId: jobId,
-                          userId: detail.result[0].userId,
-                          amount: "100",
-                          isApplied: true));
-                    },
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                      child: Text(
-                        AppString.bid,
-                        style: TextStyle(
-                            color: AppTheme.white,
-                            fontSize: 14.sp,
-                            fontFamily: AppFonts.poppinsMed),
-                      ),
+                          ],
+                        )),
+                      ],
                     ),
                   ),
-          ),
-        ],
-      ),
-    ],
-  );
-}
-
-Widget _setUpdateBid(
-  GetJobDetailModel detail,
-  JobDetailState state,
-  BuildContext context,
-) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        AppString.bidInfo,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 13.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
-        ),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          RichText(
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.ltr,
-            softWrap: true,
-            maxLines: 2,
-            textScaleFactor: 1,
-            text: TextSpan(
-              text: AppString.myBidPosition,
-              style: TextStyle(
-                  color: AppTheme.medGrey,
-                  fontFamily: AppFonts.poppinsMed,
-                  fontSize: 10.sp),
-              children: <TextSpan>[
-                TextSpan(
-                    text: "# 20",
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    "1 hr ago",
                     style: TextStyle(
-                        color: AppTheme.blue,
-                        fontFamily: AppFonts.poppinsMed,
-                        fontSize: 10.sp)),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 4.w,
-          ),
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return DialogBoxWithIcon(
-                      icon: AppAssets.delete,
-                      content: Text(
-                        AppString.removeYourBid,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: AppTheme.black,
-                            fontFamily: AppFonts.poppins,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 10.sp),
-                      ),
-                      iconColor: AppTheme.red,
-                      onCancelPressed: () {
-                        Navigator.of(context)
-                          ..pop()
-                          ..pop();
-                      },
-                      onOkPressed: () {
-                        Navigator.of(context).pop();
-                        context.read<JobDetailBloc>().add(BidRemoveApiEvent(
-                              jobId: detail.result[0].id,
-                              userId: detail.result[0].userId,
-                            ));
-                      },
-                      title: AppString.areYouSure,
-                      titleNo: "Cancel",
-                      titleYes: "Remove",
-                      colorNo: AppTheme.black,
-                      colorYes: AppTheme.white,
-                      colorYesBtn: AppTheme.red,
-                      sizeNo: 10.sp,
-                      titleFamily: AppFonts.poppinsMed,
-                    );
-                  });
-            },
-            child: Row(
-              children: [
-                SvgPicture.asset(AppAssets.delete),
-                SizedBox(
-                  width: 2.w,
+                      color: AppTheme.medGrey,
+                      fontSize: 8.sp,
+                      fontFamily: AppFonts.poppinsMed,
+                    ),
+                  ),
                 ),
-                Text(
-                  AppString.remove,
-                  style: TextStyle(
-                    color: AppTheme.red,
-                    fontSize: 11.sp,
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _setListOfBidTitle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          AppString.listOfBids,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 13.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
+          ),
+        ),
+        Text(
+          AppString.viewAll,
+          style: TextStyle(
+            color: AppTheme.blue,
+            fontSize: 10.sp,
+            fontFamily: AppFonts.poppinsMed,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _setEnterBid(GetJobDetailModel detail, JobDetailState state,
+      BuildContext context, int jobId) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppString.yourBid,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 13.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
+          ),
+        ),
+        SizedBox(
+          height: 1.h,
+        ),
+        Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: GreyTextField(
+                controller: amountController,
+                hintText: "Enter Amount",
+              ),
+            ),
+            SizedBox(
+              width: 2.w,
+            ),
+            Expanded(
+              flex: 2,
+              child: state is BidUpdateLoading == true
+                  ? const APILoader()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.blue,
+                        minimumSize: const Size.fromHeight(40),
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                      ),
+                      onPressed: () {
+                        context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                            jobId: jobId,
+                            userId: detail.result[0].userId,
+                            amount: amountController.text,
+                            isApplied: true));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 0.w, vertical: 0.h),
+                        child: Text(
+                          AppString.bid,
+                          style: TextStyle(
+                              color: AppTheme.white,
+                              fontSize: 14.sp,
+                              fontFamily: AppFonts.poppinsMed),
+                        ),
+                      ),
+                    ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _setUpdateBid(
+    GetJobDetailModel detail,
+    JobDetailState state,
+    BuildContext context,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppString.bidInfo,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 13.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RichText(
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.ltr,
+              softWrap: true,
+              maxLines: 2,
+              textScaleFactor: 1,
+              text: TextSpan(
+                text: AppString.myBidPosition,
+                style: TextStyle(
+                    color: AppTheme.medGrey,
                     fontFamily: AppFonts.poppinsMed,
+                    fontSize: 10.sp),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: "# 20",
+                      style: TextStyle(
+                          color: AppTheme.blue,
+                          fontFamily: AppFonts.poppinsMed,
+                          fontSize: 10.sp)),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 4.w,
+            ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DialogBoxWithIcon(
+                        icon: AppAssets.delete,
+                        content: Text(
+                          AppString.removeYourBid,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: AppTheme.black,
+                              fontFamily: AppFonts.poppins,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 10.sp),
+                        ),
+                        iconColor: AppTheme.red,
+                        onCancelPressed: () {
+                          Navigator.of(context)
+                            ..pop()
+                            ..pop();
+                        },
+                        onOkPressed: () {
+                          Navigator.of(context).pop();
+                          context.read<JobDetailBloc>().add(BidRemoveApiEvent(
+                                jobId: detail.result[0].id,
+                                userId: detail.result[0].userId,
+                              ));
+                        },
+                        title: AppString.areYouSure,
+                        titleNo: "Cancel",
+                        titleYes: "Remove",
+                        colorNo: AppTheme.black,
+                        colorYes: AppTheme.white,
+                        colorYesBtn: AppTheme.red,
+                        sizeNo: 10.sp,
+                        titleFamily: AppFonts.poppinsMed,
+                      );
+                    });
+              },
+              child: Row(
+                children: [
+                  SvgPicture.asset(AppAssets.delete),
+                  SizedBox(
+                    width: 2.w,
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 1.h,
-      ),
-      Row(
-        children: [
-          const Expanded(
-            flex: 4,
-            child: GreyTextField(
-              hintText: "\$ 290.00",
-            ),
-          ),
-          SizedBox(
-            width: 2.w,
-          ),
-          Expanded(
-            flex: 2,
-            child: state is BidUpdateLoading == true
-                ? const APILoader()
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.blue,
-                      minimumSize: const Size.fromHeight(40),
-                      elevation: 0,
-                      shadowColor: Colors.transparent,
+                  Text(
+                    AppString.remove,
+                    style: TextStyle(
+                      color: AppTheme.red,
+                      fontSize: 11.sp,
+                      fontFamily: AppFonts.poppinsMed,
                     ),
-                    onPressed: () {
-                      context.read<JobDetailBloc>().add(BidUpdateApiEvent(
-                          jobId: detail.result[0].id,
-                          userId: detail.result[0].userId,
-                          amount: "0",
-                          isApplied: false));
-                    },
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-                      child: Text(
-                        AppString.update,
-                        style: TextStyle(
-                            color: AppTheme.white,
-                            fontSize: 14.sp,
-                            fontFamily: AppFonts.poppinsMed),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 1.h,
+        ),
+        Row(
+          children: [
+            const Expanded(
+              flex: 4,
+              child: GreyTextField(
+                hintText: "\$ 290.00",
+              ),
+            ),
+            SizedBox(
+              width: 2.w,
+            ),
+            Expanded(
+              flex: 2,
+              child: state is BidUpdateLoading == true
+                  ? const APILoader()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.blue,
+                        minimumSize: const Size.fromHeight(40),
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                      ),
+                      onPressed: () {
+                        context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                            jobId: detail.result[0].id,
+                            userId: detail.result[0].userId,
+                            amount: "0",
+                            isApplied: false));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 0.w, vertical: 0.h),
+                        child: Text(
+                          AppString.update,
+                          style: TextStyle(
+                              color: AppTheme.white,
+                              fontSize: 14.sp,
+                              fontFamily: AppFonts.poppinsMed),
+                        ),
                       ),
                     ),
-                  ),
-          ),
-        ],
-      ),
-    ],
-  );
-}
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
 // Widget _setAcceptDeclineCTA(BuildContext context) {
 //   return Column(
@@ -692,215 +694,218 @@ Widget _setUpdateBid(
 //   );
 // }
 
-Widget _setDateTime(GetJobDetailModel detail) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppString.date,
-                style: TextStyle(
-                  color: AppTheme.black,
-                  fontSize: 12.sp,
-                  fontFamily: AppFonts.poppinsSemiBold,
+  Widget _setDateTime(GetJobDetailModel detail) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppString.date,
+                  style: TextStyle(
+                    color: AppTheme.black,
+                    fontSize: 12.sp,
+                    fontFamily: AppFonts.poppinsSemiBold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 0.7.h,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 0, right: 8),
-                    child: SvgPicture.asset(
-                      AppAssets.calSvg,
-                      height: 10.sp,
-                      width: 10.sp,
-                    ),
-                  ),
-                  Text(
-                    detail.result[0].jobdate.formatDate(),
-                    style: TextStyle(
-                      color: AppTheme.medGrey,
-                      fontSize: 10.sp,
-                      fontFamily: AppFonts.poppins,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-          SizedBox(
-            width: 4.w,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppString.time,
-                style: TextStyle(
-                  color: AppTheme.black,
-                  fontSize: 12.sp,
-                  fontFamily: AppFonts.poppinsSemiBold,
+                SizedBox(
+                  height: 0.7.h,
                 ),
-              ),
-              SizedBox(
-                height: 0.7.h,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 0, right: 8),
-                    child: SvgPicture.asset(
-                      AppAssets.time,
-                      height: 10.sp,
-                      width: 10.sp,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0, right: 8),
+                      child: SvgPicture.asset(
+                        AppAssets.calSvg,
+                        height: 10.sp,
+                        width: 10.sp,
+                      ),
                     ),
-                  ),
-                  Text(
-                    detail.result[0].jobtime.toString(),
-                    style: TextStyle(
-                      color: AppTheme.medGrey,
-                      fontSize: 10.sp,
-                      fontFamily: AppFonts.poppins,
-                      fontWeight: FontWeight.normal,
+                    Text(
+                      detail.result[0].jobdate.formatDate(),
+                      style: TextStyle(
+                        color: AppTheme.medGrey,
+                        fontSize: 10.sp,
+                        fontFamily: AppFonts.poppins,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-      Text(
-        detail.result[0].amount == null ? '0.0' : "£${detail.result[0].amount}",
-        textAlign: TextAlign.end,
-        style: TextStyle(
-          color: AppTheme.black,
-          fontSize: 14.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    ],
-  );
-}
-
-Divider _putDivider() {
-  return const Divider(
-    color: AppTheme.grey,
-    thickness: 1,
-  );
-}
-
-Widget setTitle(GetJobDetailModel detail) {
-  return Row(
-    mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            detail.result[0].title,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 12.sp,
-              fontFamily: AppFonts.poppinsSemiBold,
+                  ],
+                )
+              ],
             ),
+            SizedBox(
+              width: 4.w,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppString.time,
+                  style: TextStyle(
+                    color: AppTheme.black,
+                    fontSize: 12.sp,
+                    fontFamily: AppFonts.poppinsSemiBold,
+                  ),
+                ),
+                SizedBox(
+                  height: 0.7.h,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0, right: 8),
+                      child: SvgPicture.asset(
+                        AppAssets.time,
+                        height: 10.sp,
+                        width: 10.sp,
+                      ),
+                    ),
+                    Text(
+                      detail.result[0].jobtime.toString(),
+                      style: TextStyle(
+                        color: AppTheme.medGrey,
+                        fontSize: 10.sp,
+                        fontFamily: AppFonts.poppins,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+        Text(
+          detail.result[0].amount == null
+              ? '0.0'
+              : "£${detail.result[0].amount}",
+          textAlign: TextAlign.end,
+          style: TextStyle(
+            color: AppTheme.black,
+            fontSize: 14.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
+            fontWeight: FontWeight.w700,
           ),
-          SizedBox(
-            height: 2.sp,
+        ),
+      ],
+    );
+  }
+
+  Divider _putDivider() {
+    return const Divider(
+      color: AppTheme.grey,
+      thickness: 1,
+    );
+  }
+
+  Widget setTitle(GetJobDetailModel detail) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              detail.result[0].title,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12.sp,
+                fontFamily: AppFonts.poppinsSemiBold,
+              ),
+            ),
+            SizedBox(
+              height: 2.sp,
+            ),
+            // Text(
+            //   "Lorem ipsum dolor sit amet, adipiscing elit",
+            //   textAlign: TextAlign.justify,
+            //   style: TextStyle(
+            //     color: AppTheme.medGrey,
+            //     fontSize: 10.sp,
+            //     fontFamily: AppFonts.poppins,
+            //   ),
+            // ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _setDescription(GetJobDetailModel detail) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 8.sp,
+        ),
+        Text(
+          AppString.description,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 12.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
           ),
-          // Text(
-          //   "Lorem ipsum dolor sit amet, adipiscing elit",
-          //   textAlign: TextAlign.justify,
-          //   style: TextStyle(
-          //     color: AppTheme.medGrey,
-          //     fontSize: 10.sp,
-          //     fontFamily: AppFonts.poppins,
-          //   ),
-          // ),
-        ],
-      ),
-    ],
-  );
-}
+        ),
+        SizedBox(
+          height: 2.sp,
+        ),
+        Text(
+          detail.result[0].description,
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            color: AppTheme.medGrey,
+            fontSize: 10.sp,
+            fontFamily: AppFonts.poppins,
+          ),
+        ),
+        SizedBox(
+          height: 8.sp,
+        ),
+      ],
+    );
+  }
 
-Widget _setDescription(GetJobDetailModel detail) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(
-        height: 8.sp,
-      ),
-      Text(
-        AppString.description,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 12.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
+  setAddress(GetJobDetailModel detail) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 8.sp,
         ),
-      ),
-      SizedBox(
-        height: 2.sp,
-      ),
-      Text(
-        detail.result[0].description,
-        textAlign: TextAlign.justify,
-        style: TextStyle(
-          color: AppTheme.medGrey,
-          fontSize: 10.sp,
-          fontFamily: AppFonts.poppins,
+        Text(
+          AppString.address,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 12.sp,
+            fontFamily: AppFonts.poppinsSemiBold,
+          ),
         ),
-      ),
-      SizedBox(
-        height: 8.sp,
-      ),
-    ],
-  );
-}
-
-setAddress(GetJobDetailModel detail) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(
-        height: 8.sp,
-      ),
-      Text(
-        AppString.address,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 12.sp,
-          fontFamily: AppFonts.poppinsSemiBold,
+        SizedBox(
+          height: 2.sp,
         ),
-      ),
-      SizedBox(
-        height: 2.sp,
-      ),
-      Text(
-        "${detail.result[0].address1}${detail.result[0].address2},${detail.result[0].city},${detail.result[0].state},${detail.result[0].country} ${detail.result[0].pincode}",
-        textAlign: TextAlign.justify,
-        style: TextStyle(
-          color: AppTheme.medGrey,
-          fontSize: 10.sp,
-          fontFamily: AppFonts.poppins,
+        Text(
+          "${detail.result[0].address1}${detail.result[0].address2},${detail.result[0].city},${detail.result[0].state},${detail.result[0].country} ${detail.result[0].pincode}",
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            color: AppTheme.medGrey,
+            fontSize: 10.sp,
+            fontFamily: AppFonts.poppins,
+          ),
         ),
-      ),
-      SizedBox(
-        height: 8.sp,
-      ),
-    ],
-  );
+        SizedBox(
+          height: 8.sp,
+        ),
+      ],
+    );
+  }
 }

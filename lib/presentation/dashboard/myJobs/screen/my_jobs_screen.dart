@@ -46,6 +46,7 @@ class _MyJobsScreenState extends State<MyJobsScreen>
       initialPage: 0,
       keepPage: true,
     );
+    print("cccc");
 
     context
         .read<MyJobListBloc>()
@@ -212,6 +213,7 @@ class _MyJobsScreenState extends State<MyJobsScreen>
                 index: index,
                 nextScreen: AcceptedJobDetail(
                   jobData: myJobListModel,
+                  title: myJobListModel[index].title,
                 ),
                 jobList: myJobListModel,
               );
@@ -232,6 +234,8 @@ class _MyJobsScreenState extends State<MyJobsScreen>
                 index: index,
                 nextScreen: AppliedJobDetail(
                   jobData: myJobListModel,
+                  title: myJobListModel[index].title,
+                  index: index,
                 ),
                 jobList: myJobListModel,
               );
@@ -252,6 +256,7 @@ class _MyJobsScreenState extends State<MyJobsScreen>
                 index: index,
                 nextScreen: CompletedJobDetail(
                   jobData: myJobListModel,
+                  title: myJobListModel[index].title,
                 ),
                 jobList: myJobListModel,
               );
@@ -299,7 +304,8 @@ class MyJobListView extends StatelessWidget {
                     ClipOval(
                       child: SizedBox.fromSize(
                         size: Size.fromRadius(18.sp), // Image radius
-                        child: Image.network(URL.baseURL + jobList[0].image1,
+                        child: Image.network(
+                            URL.imageURL + jobList[index].image1,
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -314,7 +320,7 @@ class MyJobListView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                jobList[0].title,
+                                jobList[index].title,
                                 softWrap: true,
                                 style: TextStyle(
                                   color: Colors.black,
@@ -324,7 +330,7 @@ class MyJobListView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                jobList[0].description,
+                                jobList[index].description,
                                 softWrap: true,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -372,7 +378,7 @@ class MyJobListView extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            jobList[0].jobdate.formatDate(),
+                            jobList[index].jobdate.formatDate(),
                             style: TextStyle(
                               color: AppTheme.messageGrey,
                               fontSize: 10.sp,
@@ -394,7 +400,7 @@ class MyJobListView extends StatelessWidget {
                         ),
                         Text(
                           "60 mins",
-                          //jobList[0].jobtime,
+                          //jobList[index].jobtime,
                           style: TextStyle(
                             color: AppTheme.messageGrey,
                             fontSize: 10.sp,
