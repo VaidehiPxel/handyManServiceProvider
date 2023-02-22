@@ -30,9 +30,7 @@ class DashboardService {
         }, responseType: ResponseType.json),
       );
 
-      // print(response.statusCode);
-      // print(response.data);
-      Map<String, dynamic> data = jsonDecode(response.data);
+     Map<String, dynamic> data = Map<String, dynamic>.from(json.decode(response.data));
 
       if (response.statusCode == 200) {
         resSuccess = data['status'].toString().compareTo("1") == 0;
@@ -44,17 +42,21 @@ class DashboardService {
           dashboardData(dashboardModel);
           HiveConstants.instances.box1.put(
               HiveConstants.userNameKey,
-              data['usersdetails'][0]['name'] +
-                  data['usersdetails'][0]['lastname']);
+              data['usersdetails']['name'] +
+                  data['usersdetails']['lastname']);
           HiveConstants.instances.box1.put(
-              HiveConstants.userEmailKey, data['usersdetails'][0]['email']);
+              HiveConstants.userEmailKey, data['usersdetails']['email']);
           HiveConstants.instances.box1.put(HiveConstants.userProfileKey,
-              data['usersdetails'][0]['profilepics']);
+              data['usersdetails']['profilepics']);
         } else if (resSuccess) {
+          errorCallBack(message);
+        } else {
+          print("hhhh");
           errorCallBack(message);
         }
       }
     } catch (e) {
+      print(e);
       errorCallBack(e.toString());
     }
   }

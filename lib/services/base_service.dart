@@ -1,6 +1,5 @@
 class URL {
   static const String baseURL = "https://mrinvito.com/laravel/easylife/api/";
-  static const String imageURL = "https://mrinvito.com/laravel/easylife/";
   static const String faqUrl = '${baseURL}faqs';
   static const String loginUrl = '${baseURL}userlogin';
   static const String getOTP = '${baseURL}getOTP';

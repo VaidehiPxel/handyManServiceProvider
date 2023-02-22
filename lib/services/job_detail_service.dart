@@ -42,6 +42,8 @@ class JobDetailService {
         }, responseType: ResponseType.json),
       );
 
+      print(response.data);
+
       Map<String, dynamic> data = jsonDecode(response.data);
 
       if (response.statusCode == 200) {
@@ -71,20 +73,22 @@ class JobDetailService {
       Map<String, dynamic> map = {};
 
       map = {
-        'jobid': jobId.toString(),
+        'job_id': jobId.toString(),
         'user_id': userId.toString(),
         'amount': amount,
       };
+      Map<String, String> headers = {'Content-Type': 'application/json'};
 
       var client = http.Client();
 
       http.Response response = await client.post(
-        Uri.parse(isApplied ? URL.bidAppliedUrl : URL.bidUpdateUrl),
-        body: map,
-      );
+          Uri.parse(isApplied ? URL.bidAppliedUrl : URL.bidUpdateUrl),
+          body: json.encode(map),
+          headers: headers);
       print(response.body);
-      print(MyBidModel.fromJson(json.decode(response.body)));
+
       var data = MyBidModel.fromJson(json.decode(response.body));
+        print(data);
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
           bidUpdate(isApplied ? true : false, "");
@@ -107,7 +111,7 @@ class JobDetailService {
       bool resSuccess = false;
       String message = '';
 
-      Map<String, String> map = {};
+      Map<String, dynamic> map = {};
 
       map = {
         "job_id": jobId.toString(),

@@ -305,7 +305,7 @@ class MyJobListView extends StatelessWidget {
                       child: SizedBox.fromSize(
                         size: Size.fromRadius(18.sp), // Image radius
                         child: Image.network(
-                            URL.imageURL + jobList[index].image1,
+                           jobList[index].image1,
                             fit: BoxFit.cover),
                       ),
                     ),

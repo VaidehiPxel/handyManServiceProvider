@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/services/base_service.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -27,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    print("heeee");
     context.read<DashboardBloc>().add(const DashboardCallApiEvent());
   }
 
@@ -38,16 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           return state.isLoading == true
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  backgroundColor: AppTheme.lightBlue,
-                ))
+              ? const APILoader()
               : (state.isLoading == false && (state is DashboardSuccess))
                   ? renderBodyView(state)
-                  : const Center(
-                      child: CircularProgressIndicator(
-                      backgroundColor: AppTheme.lightBlue,
-                    ));
+                  :  const APILoader();
         },
       ),
     );
@@ -209,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  setUserDetail(List<Usersdetail> usersdetails) {
+  setUserDetail(Usersdetail usersdetails) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -221,9 +215,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ClipOval(
               child: SizedBox.fromSize(
                 size: Size.fromRadius(40.sp), // Image radius
-                child: usersdetails[0].profilepics == null
+                child: usersdetails.profilepics == null
                     ? Image.asset(AppAssets.profileThumb)
-                    : Image.network(URL.imageURL + usersdetails[0].profilepics,
+                    : Image.network( usersdetails.profilepics,
                         fit: BoxFit.cover),
               ),
             ),
@@ -232,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 1.h,
           ),
           Text(
-            "${usersdetails[0].name} ${usersdetails[0].lastname}",
+            "${usersdetails.name} ${usersdetails.lastname}",
             style: TextStyle(
                 fontFamily: AppFonts.poppinsBold,
                 fontSize: 18.sp,

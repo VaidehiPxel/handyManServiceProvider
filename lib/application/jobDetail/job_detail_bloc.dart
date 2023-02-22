@@ -8,12 +8,17 @@ import 'package:flutter_projects/services/job_detail_service.dart';
 class JobDetailBloc extends Bloc<JobDetailEvent, JobDetailState> {
   final JobDetailService jobDetailService;
   var getJobDetailModel = GetJobDetailModel(
-      jobsAppliedServiceProviders: [], message: "", result: [], status: "0");
+      bidInformation: [],
+      jobsAppliedServiceProviders: [],
+      message: "",
+      result: [],
+      status: "0");
 
   JobDetailBloc({required this.jobDetailService})
       : super(JobDetailInitial(
             isLoading: true,
             jobDetailModel: GetJobDetailModel(
+                bidInformation: [],
                 jobsAppliedServiceProviders: [],
                 message: "",
                 result: [],

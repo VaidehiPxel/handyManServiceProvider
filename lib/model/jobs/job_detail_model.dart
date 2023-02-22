@@ -4,18 +4,21 @@
 
 import 'dart:convert';
 
+import 'package:flutter_projects/model/jobs/bid_model.dart';
+
 class GetJobDetailModel {
-  GetJobDetailModel({
-    required this.status,
-    required this.message,
-    required this.result,
-    required this.jobsAppliedServiceProviders,
-  });
+  GetJobDetailModel(
+      {required this.status,
+      required this.message,
+      required this.result,
+      required this.jobsAppliedServiceProviders,
+      required this.bidInformation});
 
   String status;
   String message;
   List<Result> result;
-  List<dynamic> jobsAppliedServiceProviders;
+  List<BidInformation> jobsAppliedServiceProviders;
+  List<BidInformation> bidInformation;
 
   factory GetJobDetailModel.fromRawJson(String str) =>
       GetJobDetailModel.fromJson(json.decode(str));
@@ -28,8 +31,10 @@ class GetJobDetailModel {
         message: json["message"],
         result:
             List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
-        jobsAppliedServiceProviders: List<dynamic>.from(
+        jobsAppliedServiceProviders: List<BidInformation>.from(
             json["jobsAppliedServiceProviders"].map((x) => x)),
+        bidInformation:
+            List<BidInformation>.from(json["BidInformation"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +43,7 @@ class GetJobDetailModel {
         "result": List<dynamic>.from(result.map((x) => x.toJson())),
         "jobsAppliedServiceProviders":
             List<dynamic>.from(jobsAppliedServiceProviders.map((x) => x)),
+        "BidInformation": List<dynamic>.from(bidInformation.map((x) => x)),
       };
 }
 
@@ -50,8 +56,6 @@ class Result {
     required this.description,
     required this.address1,
     required this.address2,
-    required this.latitude,
-    required this.longitude,
     required this.city,
     required this.state,
     required this.country,
@@ -59,8 +63,6 @@ class Result {
     required this.jobdate,
     required this.jobtime,
     this.amount,
-    this.fromamount,
-    this.toamount,
     required this.status,
     required this.createdAt,
   });
@@ -72,8 +74,7 @@ class Result {
   String description;
   String address1;
   String address2;
-  String latitude;
-  String longitude;
+
   String city;
   String state;
   String country;
@@ -81,8 +82,7 @@ class Result {
   DateTime jobdate;
   String jobtime;
   dynamic amount;
-  dynamic fromamount;
-  dynamic toamount;
+
   int status;
   DateTime createdAt;
 
@@ -98,8 +98,6 @@ class Result {
         description: json["description"],
         address1: json["address1"],
         address2: json["address2"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
         city: json["city"],
         state: json["state"],
         country: json["country"],
@@ -107,8 +105,6 @@ class Result {
         jobdate: DateTime.parse(json["jobdate"]),
         jobtime: json["jobtime"],
         amount: json["amount"] ?? 0.0,
-        fromamount: json["fromamount"],
-        toamount: json["toamount"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
       );
@@ -121,8 +117,6 @@ class Result {
         "description": description,
         "address1": address1,
         "address2": address2,
-        "latitude": latitude,
-        "longitude": longitude,
         "city": city,
         "state": state,
         "country": country,
@@ -131,8 +125,6 @@ class Result {
             "${jobdate.year.toString().padLeft(4, '0')}-${jobdate.month.toString().padLeft(2, '0')}-${jobdate.day.toString().padLeft(2, '0')}",
         "jobtime": jobtime,
         "amount": amount,
-        "fromamount": fromamount,
-        "toamount": toamount,
         "status": status,
         "created_at": createdAt.toIso8601String(),
       };

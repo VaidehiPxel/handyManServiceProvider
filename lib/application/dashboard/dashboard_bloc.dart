@@ -15,8 +15,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<DashboardEvent>((event, emit) async {
       if (event is DashboardCallApiEvent) {
         await dashboardService.getDashboardData(
-          errorCallBack: (appError) {},
+          errorCallBack: (appError) {
+            emit(DashboardError(
+              isLoading: false,
+              mErrorMsg: appError,
+            ));
+          },
           dashboardData: (dashBoard) {
+            print("herrrr111");
             emit(DashboardSuccess(dashboardModel: dashBoard, isLoading: false));
           },
         );

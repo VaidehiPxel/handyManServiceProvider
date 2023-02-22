@@ -24,7 +24,7 @@ class DashboardModel {
 
   String status;
   String message;
-  List<Usersdetail> usersdetails;
+  Usersdetail usersdetails;
   int total5Star;
   int total4Star;
   int total3Star;
@@ -45,8 +45,7 @@ class DashboardModel {
   factory DashboardModel.fromJson(Map<String, dynamic> json) => DashboardModel(
         status: json["status"],
         message: json["message"],
-        usersdetails: List<Usersdetail>.from(
-            json["usersdetails"].map((x) => Usersdetail.fromJson(x))),
+        usersdetails: Usersdetail.fromJson(json["usersdetails"]),
         total5Star: json["total5star"],
         total4Star: json["total4star"],
         total3Star: json["total3star"],
@@ -65,7 +64,7 @@ class DashboardModel {
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "usersdetails": List<dynamic>.from(usersdetails.map((x) => x.toJson())),
+        "usersdetails": usersdetails.toJson(),
         "total5star": total5Star,
         "total4star": total4Star,
         "total3star": total3Star,
@@ -188,10 +187,7 @@ class Usersdetail {
     this.emailVerifiedAt,
     required this.mobileno,
     this.otp,
-    required this.encryptedPassword,
-    required this.originalePasword,
-    required this.apiToken,
-    this.profilepics,
+    required this.profilepics,
     required this.status,
     this.gender,
     this.dob,
@@ -209,10 +205,7 @@ class Usersdetail {
   dynamic emailVerifiedAt;
   String mobileno;
   dynamic otp;
-  String encryptedPassword;
-  String originalePasword;
-  String apiToken;
-  dynamic profilepics;
+  String profilepics;
   int status;
   dynamic gender;
   dynamic dob;
@@ -235,9 +228,6 @@ class Usersdetail {
         emailVerifiedAt: json["email_verified_at"],
         mobileno: json["mobileno"],
         otp: json["otp"],
-        encryptedPassword: json["encrypted_password"],
-        originalePasword: json["originale_pasword"],
-        apiToken: json["api_token"],
         profilepics: json["profilepics"],
         status: json["status"],
         gender: json["gender"],
@@ -257,9 +247,6 @@ class Usersdetail {
         "email_verified_at": emailVerifiedAt,
         "mobileno": mobileno,
         "otp": otp,
-        "encrypted_password": encryptedPassword,
-        "originale_pasword": originalePasword,
-        "api_token": apiToken,
         "profilepics": profilepics,
         "status": status,
         "gender": gender,

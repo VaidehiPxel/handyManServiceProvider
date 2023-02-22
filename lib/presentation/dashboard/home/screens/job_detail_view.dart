@@ -52,6 +52,15 @@ class _JobDetailViewState extends State<JobDetailView> {
           ScaffoldMessenger.maybeOf(context)!.showSnackBar(
               SnackBar(content: Text(state.mErrorMsg.toString())));
         }
+        if (state is JobDetailSuccess) {
+          print("herrr");
+          print(state.jobDetailModel.bidInformation.isNotEmpty);
+          print(state.jobDetailModel.bidInformation.length);
+          if (state.jobDetailModel.bidInformation.isNotEmpty) {
+            isUpdate = true;
+          }
+          setState(() {});
+        }
 
         if (state is BidUpdateSuccess) {
           if (state.isUpdate) {
@@ -150,8 +159,8 @@ class _JobDetailViewState extends State<JobDetailView> {
                                 height: 8.sp,
                               ),
                               isUpdate
-                                  ? _setUpdateBid(
-                                      state.jobDetailModel, state, context)
+                                  ? _setUpdateBid(state.jobDetailModel, state,
+                                      context, widget.jobId)
                                   : _setEnterBid(state.jobDetailModel, state,
                                       context, widget.jobId),
                               SizedBox(
@@ -370,11 +379,17 @@ class _JobDetailViewState extends State<JobDetailView> {
                         shadowColor: Colors.transparent,
                       ),
                       onPressed: () {
-                        context.read<JobDetailBloc>().add(BidUpdateApiEvent(
-                            jobId: jobId,
-                            userId: detail.result[0].userId,
-                            amount: amountController.text,
-                            isApplied: true));
+                        if (amountController.text.isNotEmpty) {
+                          context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                              jobId: jobId,
+                              userId: 26,
+                              amount: amountController.text,
+                              isApplied: true));
+                        } else {
+                          ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                              const SnackBar(
+                                  content: Text("Please Enter Amount")));
+                        }
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -399,6 +414,7 @@ class _JobDetailViewState extends State<JobDetailView> {
     GetJobDetailModel detail,
     JobDetailState state,
     BuildContext context,
+    int jobId,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -504,9 +520,10 @@ class _JobDetailViewState extends State<JobDetailView> {
         ),
         Row(
           children: [
-            const Expanded(
+            Expanded(
               flex: 4,
               child: GreyTextField(
+                controller: updatedAmountController,
                 hintText: "\$ 290.00",
               ),
             ),
@@ -525,11 +542,17 @@ class _JobDetailViewState extends State<JobDetailView> {
                         shadowColor: Colors.transparent,
                       ),
                       onPressed: () {
-                        context.read<JobDetailBloc>().add(BidUpdateApiEvent(
-                            jobId: detail.result[0].id,
-                            userId: detail.result[0].userId,
-                            amount: "0",
-                            isApplied: false));
+                        if (updatedAmountController.text.isNotEmpty) {
+                          context.read<JobDetailBloc>().add(BidUpdateApiEvent(
+                              jobId: detail.result[0].id,
+                              userId: 26,
+                              amount: updatedAmountController.text,
+                              isApplied: false));
+                        } else {
+                          ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                              const SnackBar(
+                                  content: Text("Please Enter Amount")));
+                        }
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(

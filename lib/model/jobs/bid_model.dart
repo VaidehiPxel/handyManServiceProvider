@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter_projects/model/jobs/job_detail_model.dart';
+
 class MyBidModel {
   MyBidModel({
     required this.status,
@@ -100,99 +102,3 @@ class BidInformation {
       };
 }
 
-class Result {
-  Result({
-    required this.id,
-    required this.userId,
-    required this.userName,
-    required this.title,
-    required this.description,
-    required this.address1,
-    required this.address2,
-    required this.latitude,
-    required this.longitude,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.pincode,
-    required this.jobdate,
-    required this.jobtime,
-    this.amount,
-    this.fromamount,
-    this.toamount,
-    required this.status,
-    required this.createdAt,
-  });
-
-  int id;
-  int userId;
-  String userName;
-  String title;
-  String description;
-  String address1;
-  String address2;
-  String latitude;
-  String longitude;
-  String city;
-  String state;
-  String country;
-  String pincode;
-  DateTime jobdate;
-  String jobtime;
-  String? amount;
-  dynamic fromamount;
-  dynamic toamount;
-  int status;
-  DateTime createdAt;
-
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
-        id: json["id"],
-        userId: json["user_id"],
-        userName: json["user_name"],
-        title: json["title"],
-        description: json["description"],
-        address1: json["address1"],
-        address2: json["address2"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
-        city: json["city"],
-        state: json["state"],
-        country: json["country"],
-        pincode: json["pincode"],
-        jobdate: DateTime.parse(json["jobdate"]),
-        jobtime: json["jobtime"],
-        amount: json["amount"],
-        fromamount: json["fromamount"],
-        toamount: json["toamount"],
-        status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "user_name": userName,
-        "title": title,
-        "description": description,
-        "address1": address1,
-        "address2": address2,
-        "latitude": latitude,
-        "longitude": longitude,
-        "city": city,
-        "state": state,
-        "country": country,
-        "pincode": pincode,
-        "jobdate":
-            "${jobdate.year.toString().padLeft(4, '0')}-${jobdate.month.toString().padLeft(2, '0')}-${jobdate.day.toString().padLeft(2, '0')}",
-        "jobtime": jobtime,
-        "amount": amount,
-        "fromamount": fromamount,
-        "toamount": toamount,
-        "status": status,
-        "created_at": createdAt.toIso8601String(),
-      };
-}
