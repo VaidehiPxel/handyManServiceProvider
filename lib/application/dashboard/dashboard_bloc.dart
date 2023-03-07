@@ -22,7 +22,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
             ));
           },
           dashboardData: (dashBoard) {
-            print("herrrr111");
             emit(DashboardSuccess(dashboardModel: dashBoard, isLoading: false));
           },
         );

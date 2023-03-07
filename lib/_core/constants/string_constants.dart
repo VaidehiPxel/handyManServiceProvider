@@ -207,6 +207,11 @@ class AppString {
   static const String selectJob = "Select Job";
   static const String selectUser = "Select User";
 
+   static const String expertSol = "Expert Solutions";
+    static const String thankYou = "Thank You!";
+      static const String yourMsg = "Your Message has been submitted.\nWe will contact you shortly.";
+       static const String createComplaint = " Create Complaint";
+
 //Hive
 
 }

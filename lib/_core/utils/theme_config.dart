@@ -16,6 +16,7 @@ class AppTheme {
   static const containerBlue = Color(0xFFCFEAFF);
   static const black = Color(0xFF202020);
   static const paymentBorder = Color(0xFFB8B8B8);
+  static const dividerBlack = Color(0xFF040404);
 
   static const white = Color(0xFFF4F4F4);
   static const dropShadow = Color(0xff0000001c);

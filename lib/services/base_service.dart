@@ -14,4 +14,9 @@ class URL {
   static const String bidUpdateUrl = '${baseURL}serviceprovidersBidUpdate';
   static const String bidRemoveUrl = '${baseURL}serviceprovidersBidRemove';
   static const String myJobListUrl = '${baseURL}serviceprovidersJoblist';
+  static const String jobStart = '${baseURL}serviceprovidersJobStart?job_id=';
+  static const String jobComplete = '${baseURL}serviceprovidersJobCompleted';
+  static const String complaintList =
+      '${baseURL}usercomplaintslist?created_by=';
+  static const String createComplaint = '${baseURL}usercomplaints';
 }

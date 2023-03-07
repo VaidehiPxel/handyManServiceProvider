@@ -11,7 +11,7 @@ import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
-import 'package:flutter_projects/presentation/drawer/screens/report_complain.dart';
+import 'package:flutter_projects/presentation/drawer/screens/create_report.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -45,10 +45,9 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 300), () {
-      reset();
-      timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
-    });
+    // Future.delayed(const Duration(milliseconds: 300), () {
+    //  // reset();
+    // });
   }
 
   void reset() {
@@ -505,7 +504,11 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                   elevation: 0,
                   shadowColor: Colors.transparent,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  
+                  timer = Timer.periodic(
+                      const Duration(seconds: 1), (_) => addTime());
+                },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                   child: Text(

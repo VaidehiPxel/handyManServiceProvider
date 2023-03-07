@@ -53,9 +53,6 @@ class _JobDetailViewState extends State<JobDetailView> {
               SnackBar(content: Text(state.mErrorMsg.toString())));
         }
         if (state is JobDetailSuccess) {
-          print("herrr");
-          print(state.jobDetailModel.bidInformation.isNotEmpty);
-          print(state.jobDetailModel.bidInformation.length);
           if (state.jobDetailModel.bidInformation.isNotEmpty) {
             isUpdate = true;
           }

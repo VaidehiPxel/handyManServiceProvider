@@ -16,7 +16,6 @@ import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_projects/presentation/dashboard/myJobs/screen/accepted_job.dart';
 import 'package:flutter_projects/presentation/dashboard/myJobs/screen/applied_job.dart';
 import 'package:flutter_projects/presentation/dashboard/myJobs/screen/completed_job.dart';
-import 'package:flutter_projects/services/base_service.dart';
 
 class MyJobsScreen extends StatefulWidget {
   const MyJobsScreen({
@@ -35,7 +34,8 @@ class _MyJobsScreenState extends State<MyJobsScreen>
     initialPage: 0,
     keepPage: true,
   );
-  int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  int userId2 = 26;
 
   @override
   void initState() {
@@ -140,8 +140,8 @@ class _MyJobsScreenState extends State<MyJobsScreen>
                                       userId: userId2, status: "1"));
                             } else if (currentIndex == 1) {
                               context.read<MyJobListBloc>().add(
-                                  const MyJobListCallApiEvent(
-                                      userId: 26, status: "3"));
+                                  MyJobListCallApiEvent(
+                                      userId: userId2, status: "3"));
                             } else {
                               context.read<MyJobListBloc>().add(
                                   MyJobListCallApiEvent(
@@ -304,8 +304,7 @@ class MyJobListView extends StatelessWidget {
                     ClipOval(
                       child: SizedBox.fromSize(
                         size: Size.fromRadius(18.sp), // Image radius
-                        child: Image.network(
-                           jobList[index].image1,
+                        child: Image.network(jobList[index].image1,
                             fit: BoxFit.cover),
                       ),
                     ),
