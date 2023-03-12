@@ -20,7 +20,7 @@ class GetReportListCallApiEvent extends ReportEvent {
 }
 
 class ReportListSuccessEvent extends ReportEvent {
-  final Getcomplaints getcomplaints;
+  final List<Getcomplaint> getcomplaints;
 
   const ReportListSuccessEvent({
     required this.getcomplaints,

@@ -2,7 +2,7 @@ part of 'report_bloc.dart';
 
 abstract class Report1State extends Equatable {
   final bool isLoading;
-  final Getcomplaints getcomplaints;
+  final List<Getcomplaint> getcomplaints;
   const Report1State({required this.isLoading, required this.getcomplaints});
 
   @override
@@ -15,6 +15,11 @@ class ReportInitial extends Report1State {
 
 class ReportLoading extends Report1State {
   const ReportLoading({required super.isLoading, required super.getcomplaints});
+}
+
+class CreateReportLoading extends Report1State {
+  const CreateReportLoading(
+      {required super.isLoading, required super.getcomplaints});
 }
 
 class ReportError extends Report1State {

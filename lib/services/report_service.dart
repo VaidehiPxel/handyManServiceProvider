@@ -5,7 +5,7 @@ import 'package:flutter_projects/model/report/report_listing_model.dart';
 import 'package:flutter_projects/services/base_service.dart';
 import 'package:http/http.dart' as http;
 
-typedef ReportData = void Function(Getcomplaints getComplaintsModel);
+typedef ReportData = void Function(List<Getcomplaint> getComplaintsModel);
 typedef CreateReportData = void Function(bool isCreate);
 typedef AppErrorCallBack = void Function(String appError);
 
@@ -26,7 +26,9 @@ class ReportService {
       var data = GetComplaintsModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
-          getComplaintsModel(data.getcomplaints);
+          for (var i = 0; i < data.getcomplaints.length; i++) {
+            getComplaintsModel(data.getcomplaints);
+          }
         } else {
           errorCallBack(message);
         }

@@ -34,7 +34,7 @@ class _MyJobsScreenState extends State<MyJobsScreen>
     initialPage: 0,
     keepPage: true,
   );
-  // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+ // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
   int userId2 = 26;
 
   @override

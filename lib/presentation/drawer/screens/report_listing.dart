@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/application/report/report_bloc.dart';
+import 'package:flutter_projects/model/report/report_listing_model.dart';
 import 'package:flutter_projects/presentation/drawer/screens/create_report.dart';
 import 'package:flutter_projects/presentation/drawer/screens/report_detail.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,68 +36,90 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
   String dropdownvalue = 'Item 1';
 
   @override
+  void initState() {
+    // TODO: implement initState
+    context.read<ReportBloc>().add(const GetReportListCallApiEvent(userId: 26));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      appBar: EazylifeAppBar(
-        title: AppString.reportAndComplaint,
-        leadIcon: AppAssets.backIcon,
-        sideIcon: AppAssets.notifications,
-        sideOnPressed: () {
-          callNextScreen(context, const NotificationScreen());
-        },
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            SizedBox(
-              height: 18.sp,
-            ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              primary: false,
-              itemCount: 6,
-              shrinkWrap: true,
-              itemBuilder: (context, i) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 8.sp),
-                  child: InkWell(
-                    onTap: () {
-                      callNextScreen(
-                          context, const ReportAndComplaintDetailsScreen());
-                    },
-                    child: ReportAndComplaintWidget(
-                        title: "Full Home Cleaning",
-                        subTitle:
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do... eiusmod tempor incididunt ut labore et dolore magna Ut. enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                        date: "24 Sep",
-                        time: "10:00 AM",
-                        isSolved: i != 0 && i != 1),
-                  ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            AppButton(
-              title: AppString.createComplaint,
-              onPressed: () {
-                callNextScreen(context, const CreateReportAndComplaintScreen());
-              },
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-          ],
+        backgroundColor: Colors.white,
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        appBar: EazylifeAppBar(
+          title: AppString.reportAndComplaint,
+          leadIcon: AppAssets.backIcon,
+          sideIcon: AppAssets.notifications,
+          sideOnPressed: () {
+            callNextScreen(context, const NotificationScreen());
+          },
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        body: BlocListener<ReportBloc, Report1State>(
+          listener: (context, state) {},
+          child: BlocBuilder<ReportBloc, Report1State>(
+            builder: (context, state) {
+              return state.isLoading == true
+                  ? const APILoader()
+                  : (state.isLoading == false && (state is ReportSuccess))
+                      ? renderBodyView(state.getcomplaints)
+                      : const APILoader();
+            },
+          ),
+        ));
+  }
+
+  renderBodyView(List<Getcomplaint> getcomplaints) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          SizedBox(
+            height: 18.sp,
+          ),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            primary: false,
+            itemCount: getcomplaints.length,
+            shrinkWrap: true,
+            itemBuilder: (context, i) {
+              return Padding(
+                padding: EdgeInsets.only(bottom: 8.sp),
+                child: InkWell(
+                  onTap: () {
+                    callNextScreen(
+                        context,  ReportAndComplaintDetailsScreen(
+                          getcomplaint:getcomplaints[i] ,
+                        ));
+                  },
+                  child: ReportAndComplaintWidget(
+                      title: getcomplaints[i].jobTitle,
+                      subTitle: getcomplaints[i].complaintsDesc,
+                      date: getcomplaints[i].createdAt.formatDate(),
+                      time: getcomplaints[i].createdAt.toFormattedTime(),
+                      isSolved: i != 0 && i != 1),
+                ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          AppButton(
+            title: AppString.createComplaint,
+            onPressed: () {
+              callNextScreen(context, const CreateReportAndComplaintScreen());
+            },
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+        ],
       ),
     );
   }

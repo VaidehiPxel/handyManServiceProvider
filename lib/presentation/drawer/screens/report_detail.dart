@@ -1,16 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
+import 'package:flutter_projects/model/report/report_listing_model.dart';
 import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class ReportAndComplaintDetailsScreen extends StatefulWidget {
-  const ReportAndComplaintDetailsScreen({super.key});
+  final Getcomplaint getcomplaint;
+  const ReportAndComplaintDetailsScreen(
+      {super.key, required this.getcomplaint});
 
   @override
   State<ReportAndComplaintDetailsScreen> createState() =>
@@ -26,13 +29,12 @@ class _ReportAndComplaintDetailsScreenState
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
-        title: "Full Home Cleaning",
+        title: widget.getcomplaint.jobTitle,
         leadIcon: AppAssets.backIcon,
         sideIcon: AppAssets.notificationSvg,
-        sideOnPressed: (){
-           callNextScreen(context, const NotificationScreen());
+        sideOnPressed: () {
+          callNextScreen(context, const NotificationScreen());
         },
-      
         onPressed: () {
           Navigator.pop(context);
         },
@@ -53,7 +55,7 @@ class _ReportAndComplaintDetailsScreenState
                   height: 14.sp,
                 ),
                 Text(
-                  "Full Home Cleaning",
+                  widget.getcomplaint.jobTitle,
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 14.sp,
@@ -65,7 +67,7 @@ class _ReportAndComplaintDetailsScreenState
                   height: 12.sp,
                 ),
                 Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do... eiusmod tempor incididunt ut labore et dolore magna Ut. enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                  widget.getcomplaint.complaintsDesc,
                   maxLines: 1000,
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
@@ -98,7 +100,7 @@ class _ReportAndComplaintDetailsScreenState
                       width: 4.sp,
                     ),
                     Text(
-                      "24 Sep",
+                      widget.getcomplaint.createdAt.formatDate(),
                       style: TextStyle(
                         color: Colors.grey.shade600,
                         fontSize: 10.sp,
@@ -121,7 +123,7 @@ class _ReportAndComplaintDetailsScreenState
                       width: 4.sp,
                     ),
                     Text(
-                      "10:00 AM",
+                      widget.getcomplaint.createdAt.toFormattedTime(),
                       style: TextStyle(
                         color: Colors.grey.shade600,
                         fontSize: 10.sp,
@@ -143,7 +145,7 @@ class _ReportAndComplaintDetailsScreenState
           Padding(
             padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
             child: Text(
-            AppString.expertSol,
+              AppString.expertSol,
               style: TextStyle(
                 color: AppTheme.black,
                 fontSize: 14.sp,
@@ -172,7 +174,9 @@ class _ReportAndComplaintDetailsScreenState
             ),
             child: Column(
               children: [
-                Text(AppString.thankYou, style: TextStyle(
+                Text(
+                  AppString.thankYou,
+                  style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 16.sp,
                     fontFamily: AppFonts.poppinsSemiBold,
@@ -183,7 +187,7 @@ class _ReportAndComplaintDetailsScreenState
                   height: 4.sp,
                 ),
                 Text(
-                AppString.yourMsg,
+                  AppString.yourMsg,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(

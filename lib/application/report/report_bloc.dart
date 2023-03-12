@@ -9,35 +9,14 @@ part 'report_state.dart';
 
 class ReportBloc extends Bloc<ReportEvent, Report1State> {
   final ReportService reportService;
-  Getcomplaints getcomplaints = Getcomplaints(
-      id: 0,
-      jobId: 0,
-      status: 0,
-      userId: 0,
-      complaintsDesc: "",
-      createdAt: DateTime.now(),
-      jobTitle: "",
-      updatedAt: DateTime.now(),
-      createdBy: 1);
 
   ReportBloc({required this.reportService})
-      : super(ReportInitial(
-            isLoading: true,
-            getcomplaints: Getcomplaints(
-                id: 0,
-                jobId: 0,
-                status: 0,
-                userId: 0,
-                complaintsDesc: "",
-                createdAt: DateTime.now(),
-                jobTitle: "",
-                updatedAt: DateTime.now(),
-                createdBy: 1))) {
+      : super(const ReportInitial(isLoading: true, getcomplaints: [])) {
     on<ReportEvent>((event, emit) async {
       if (event is GetReportListCallApiEvent) {
-        emit(ReportLoading(
+        emit(const ReportLoading(
           isLoading: true,
-          getcomplaints: getcomplaints,
+          getcomplaints: [],
         ));
         await reportService.getComplaintList(
           errorCallBack: (appError) {
@@ -51,9 +30,9 @@ class ReportBloc extends Bloc<ReportEvent, Report1State> {
           },
         );
       } else if (event is CreateReportCallApiEvent) {
-        emit(ReportLoading(
+        emit(const ReportLoading(
           isLoading: true,
-          getcomplaints: getcomplaints,
+          getcomplaints: [],
         ));
         await reportService.createComplaint(
           jobId: event.jobId,
@@ -67,7 +46,7 @@ class ReportBloc extends Bloc<ReportEvent, Report1State> {
                 getcomplaints: state.getcomplaints));
           },
           createReportData: (isCreate) {
-            emit(ReportSuccess(getcomplaints: getcomplaints, isLoading: false));
+            emit(const ReportSuccess(getcomplaints: [], isLoading: false));
           },
         );
       }

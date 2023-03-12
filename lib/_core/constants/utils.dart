@@ -24,3 +24,28 @@ extension DateTimeHelper on DateTime {
     return DateFormat(defaultFormat).format(this).toString();
   }
 }
+
+extension DateTimeExtensions on DateTime {
+  String toFormattedTime() {
+    // Convert the UTC date to local time.
+    final localDate = toLocal();
+
+    // Extract the hour and minute from the local date.
+    final hour = localDate.hour;
+    final minute = localDate.minute;
+
+    // Determine whether it's AM or PM.
+    final isAm = hour < 12;
+    final meridian = isAm ? 'AM' : 'PM';
+
+    // Format the hour using a 12-hour clock.
+    final formattedHour = (hour % 12).toString();
+
+    // Format the minute with leading zeros if necessary.
+    final formattedMinute = minute.toString().padLeft(2, '0');
+
+    // Combine the formatted hour, minute, and meridian into a single string.
+    return '$formattedHour:$formattedMinute $meridian';
+  }
+}
+

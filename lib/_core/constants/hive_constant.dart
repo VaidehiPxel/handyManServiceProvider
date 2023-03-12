@@ -26,3 +26,10 @@ extension HHiveConstants on HiveConstants {
     createBox();
   }
 }
+
+extension IntExtensions on int {
+  int userIdFromBox() {
+    return HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+    
+  }
+}
