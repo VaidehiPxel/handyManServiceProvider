@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
@@ -14,8 +15,9 @@ import 'package:flutter_projects/presentation/dashboard/notification/screen/noti
 import 'package:sizer/sizer.dart';
 
 class CreateReportAndComplaintScreen extends StatefulWidget {
-  
-  const CreateReportAndComplaintScreen({super.key,});
+  const CreateReportAndComplaintScreen({
+    super.key,
+  });
 
   @override
   State<CreateReportAndComplaintScreen> createState() =>
@@ -56,7 +58,7 @@ class _CreateReportAndComplaintScreenState
             if (state is ReportSuccess) {
               ScaffoldMessenger.maybeOf(context)!.showSnackBar(
                   const SnackBar(content: Text("Complaint Successfull")));
-              Future.delayed(const Duration(milliseconds: 300), () {
+              Future.delayed(const Duration(milliseconds: 1000), () {
                 callNextScreen(context, const HomeScreen());
               });
             }
@@ -191,16 +193,17 @@ class _CreateReportAndComplaintScreenState
           SizedBox(
             height: 5.h,
           ),
-          state is CreateReportLoading == true
+          state is CreateReportLoading
               ? const APILoader()
               : AppButton(
                   title: AppString.raiseAComplaint,
                   onPressed: () {
                     context.read<ReportBloc>().add(CreateReportCallApiEvent(
-                        userId: 26,
-                        jobId: 25,
-                        jobTitle: "ghggh",
-                        description: descriptionController.text));
+                          userId: 26,
+                          jobId: 25,
+                          jobTitle: "ghggh",
+                          description: descriptionController.text,
+                        ));
                   },
                 ),
         ],

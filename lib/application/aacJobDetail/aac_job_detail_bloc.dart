@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_projects/services/aacJobDetail_service.dart';
-import 'package:flutter_projects/services/my_job_service.dart';
 
 part 'aac_job_detail_event.dart';
 part 'aac_job_detail_state.dart';

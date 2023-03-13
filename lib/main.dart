@@ -5,7 +5,9 @@ import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
+import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
 import 'package:flutter_projects/application/myJobList/my_job_list_bloc.dart';
+import 'package:flutter_projects/application/report/report_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
 import 'package:flutter_projects/application/terms/terms_bloc.dart';
 import 'package:flutter_projects/presentation/drawer/screens/create_report.dart';
@@ -14,8 +16,10 @@ import 'package:flutter_projects/services/auth_service.dart';
 import 'package:flutter_projects/services/dashboard_service.dart';
 import 'package:flutter_projects/services/faq_services.dart';
 import 'package:flutter_projects/services/job_detail_service.dart';
+import 'package:flutter_projects/services/job_review_rating_service.dart';
 import 'package:flutter_projects/services/login_services.dart';
 import 'package:flutter_projects/services/my_job_service.dart';
+import 'package:flutter_projects/services/report_service.dart';
 import 'package:flutter_projects/services/signup_services.dart';
 import 'package:flutter_projects/services/terms_services.dart';
 import 'package:flutter_projects/splash_screen.dart';
@@ -49,6 +53,11 @@ Future<void> main() async {
               JobDetailBloc(jobDetailService: JobDetailService())),
       BlocProvider(
           create: (context) => MyJobListBloc(myJobService: MyJobService())),
+      BlocProvider(
+          create: (context) => ReportBloc(reportService: ReportService())),
+      BlocProvider(
+          create: (context) => JobReviewRatingBloc(
+              jobReviewRatingService: JobReviewRatingService())),
     ],
     child: const MyApp(),
   ));

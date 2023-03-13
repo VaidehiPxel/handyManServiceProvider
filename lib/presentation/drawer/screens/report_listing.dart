@@ -63,11 +63,12 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
           listener: (context, state) {},
           child: BlocBuilder<ReportBloc, Report1State>(
             builder: (context, state) {
+              print(state);
               return state.isLoading == true
                   ? const APILoader()
-                  : (state.isLoading == false && (state is ReportSuccess))
+                  : (state is ReportSuccess)
                       ? renderBodyView(state.getcomplaints)
-                      : const APILoader();
+                      : const Center(child: Text("No data Found"));
             },
           ),
         ));
@@ -93,8 +94,9 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
                 child: InkWell(
                   onTap: () {
                     callNextScreen(
-                        context,  ReportAndComplaintDetailsScreen(
-                          getcomplaint:getcomplaints[i] ,
+                        context,
+                        ReportAndComplaintDetailsScreen(
+                          getcomplaint: getcomplaints[i],
                         ));
                   },
                   child: ReportAndComplaintWidget(

@@ -1,10 +1,15 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
+import 'package:flutter_projects/application/jobReviewRating/job_review_rating_state.dart';
+import 'package:flutter_projects/model/job_review_rating/job_review_rating_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,98 +24,109 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: EazylifeAppBar(
-        title: AppString.reviewAndRating,
-        leadIcon: AppAssets.backIcon,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: ListView(
-        padding:  EdgeInsets.symmetric(horizontal: 12.sp),
-        children: [
-          SizedBox(
-            height: 3.h,
+        backgroundColor: Colors.white,
+        appBar: EazylifeAppBar(
+          title: AppString.reviewAndRating,
+          leadIcon: AppAssets.backIcon,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        body: BlocListener<JobReviewRatingBloc, JobReviewRatingState>(
+          listener: (context, state) {},
+          child: BlocBuilder<JobReviewRatingBloc, JobReviewRatingState>(
+            builder: (context, state) {
+              return state is JobReviewRatingLoading
+                  ? const APILoader()
+                  : (state is JobReviewRatingLoaded)
+                      ? renderBodyView(state.jobReviewRating)
+                      : const APILoader();
+            },
           ),
-          Center(
-            child: Text(
-              "4.0",
-              style: TextStyle(
-                color: AppTheme.blue,
-                fontSize: 16.sp,
-                fontFamily: AppFonts.poppinsSemiBold,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 0.5.h,
-          ),
-          RatingsWidget(
-            value: 4,
-            filledStar: Icon(
-              Icons.star_rate_rounded,
-              color: AppTheme.ratingsStarColor,
-              size: 30.sp,
-            ),
-            halffilledStar: Icon(
-              Icons.star_half_rounded,
-              color: AppTheme.ratingsStarColor,
-              size: 30.sp,
-            ),
-            unfilledStar: Icon(
-              Icons.star_rate_rounded,
-              color: AppTheme.greyStar,
-              size: 30.sp,
-            ),
-          ),
-          SizedBox(
-            height: 1.h,
-          ),
-          Center(
-            child: Text(
-              "538 Review",
-              style: TextStyle(
-                color: AppTheme.black,
-                fontSize: 12.sp,
-                fontFamily: AppFonts.poppinsMed,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 3.h,
-          ),
-
-          // ListView.separated(
-          //   separatorBuilder: (context, index) {
-          //     return SizedBox(
-          //       height: 1.2.h,
-          //     );
-          //   },
-          //   padding: EdgeInsets.zero,
-          //   itemCount: messageModel.length,
-          //   shrinkWrap: true,
-          //   physics: const NeverScrollableScrollPhysics(),
-          //   itemBuilder: (context, index) {
-          //     return messageView(messageModel[index]);
-          //   },
-          // ),
-          for (int i = 0; i < 6; i++) const CustomerReviewsListItem(),
-          SizedBox(
-            height: 1.h,
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
+  renderBodyView(JobReviewRatingModel jobReviewRating) {
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 12.sp),
+      children: [
+        SizedBox(
+          height: 3.h,
+        ),
+        Center(
+          child: Text(
+            jobReviewRating.totalavaragerateing.toString(),
+            style: TextStyle(
+              color: AppTheme.blue,
+              fontSize: 16.sp,
+              fontFamily: AppFonts.poppinsSemiBold,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 0.5.h,
+        ),
+        RatingsWidget(
+          value: 4,
+          filledStar: Icon(
+            Icons.star_rate_rounded,
+            color: AppTheme.ratingsStarColor,
+            size: 30.sp,
+          ),
+          halffilledStar: Icon(
+            Icons.star_half_rounded,
+            color: AppTheme.ratingsStarColor,
+            size: 30.sp,
+          ),
+          unfilledStar: Icon(
+            Icons.star_rate_rounded,
+            color: AppTheme.greyStar,
+            size: 30.sp,
+          ),
+        ),
+        SizedBox(
+          height: 1.h,
+        ),
+        Center(
+          child: Text(
+            "${jobReviewRating.result.length} Review",
+            style: TextStyle(
+              color: AppTheme.black,
+              fontSize: 12.sp,
+              fontFamily: AppFonts.poppinsMed,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 3.h,
+        ),
+        ListView.separated(
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: 1.2.h,
+            );
+          },
+          padding: EdgeInsets.zero,
+          itemCount: jobReviewRating.result.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return CustomerReviewsListItem(result: jobReviewRating.result[index]);
+          },
+        ),
+        SizedBox(
+          height: 1.h,
+        ),
+      ],
+    );
+  }
 }
 
-
 class CustomerReviewsListItem extends StatefulWidget {
-  const CustomerReviewsListItem({super.key});
+  final jobReviewRatingList result;
+  const CustomerReviewsListItem( {required this.result,super.key});
 
   @override
   State<CustomerReviewsListItem> createState() =>
@@ -121,7 +137,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(bottom: 2.h),
+      padding: EdgeInsets.only(bottom: 2.h),
       child: Container(
         decoration: BoxDecoration(
           color: AppTheme.lightGrey,
@@ -130,18 +146,19 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
           shape: BoxShape.rectangle,
         ),
         child: Padding(
-          padding:  EdgeInsets.all(10.sp),
+          padding: EdgeInsets.all(10.sp),
           child: Column(
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Expanded(flex: 0, child: CircleAvatar()),
-                  SizedBox(width: 3 .w,),
+                  SizedBox(
+                    width: 3.w,
+                  ),
                   Expanded(
                     flex: 2,
-                    child:
-                    Column(
+                    child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,7 +167,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Abhithi Maheshvari",
+                                 widget.result.customerName,
                                   style: TextStyle(
                                     color: AppTheme.black,
                                     fontSize: 12.sp,
@@ -158,7 +175,9 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                SizedBox(height: 0.5.h,),
+                                SizedBox(
+                                  height: 0.5.h,
+                                ),
                                 Row(
                                   children: [
                                     RatingsWidget(
@@ -179,9 +198,11 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                         size: 14.sp,
                                       ),
                                     ),
-                                    SizedBox(width: 3 .w,),
+                                    SizedBox(
+                                      width: 3.w,
+                                    ),
                                     Text(
-                                      "4.0",
+                                      widget.result.ratingValue.toString(),
                                       style: TextStyle(
                                         color: AppTheme.blue,
                                         fontSize: 12.sp,
@@ -200,9 +221,11 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                   Row(
                                     children: [
                                       SvgPicture.asset(AppAssets.calSvg),
-                                      SizedBox(width: 2 .w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       Text(
-                                        "24 Sep",
+                                       widget.result.createdAt.formatDate(),
                                         style: TextStyle(
                                           color: AppTheme.messageGrey,
                                           fontSize: 10.sp,
@@ -212,13 +235,17 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 0.5.h,),
+                                  SizedBox(
+                                    height: 0.5.h,
+                                  ),
                                   Row(
                                     children: [
                                       SvgPicture.asset(AppAssets.time),
-                                      SizedBox(width: 2 .w,),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                       Text(
-                                        "60 mins",
+                                        widget.result.createdAt.toFormattedTime(),
                                         style: TextStyle(
                                           color: AppTheme.messageGrey,
                                           fontSize: 10.sp,
@@ -233,16 +260,16 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                             ),
                           ],
                         ),
-                       SizedBox(height: 1.h,),
+                        SizedBox(
+                          height: 1.h,
+                        ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
-
                             Text(
-                              "Excellent service and very fast dispatch and good customer service and wide number.",
+                               widget.result.ratingDesc,
                               style: TextStyle(
                                 color: AppTheme.messageGrey,
                                 fontSize: 10.sp,
@@ -258,7 +285,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                               maxLines: 1,
                               textScaleFactor: 1,
                               text: TextSpan(
-                                text: "Job Title :",
+                                text: "Job Title :  ",
                                 style: TextStyle(
                                   color: AppTheme.black,
                                   fontFamily: AppFonts.poppinsSemiBold,
@@ -266,7 +293,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: "  Sofa Cleaning",
+                                      text:  widget.result.jobTitle,
                                       style: TextStyle(
                                         color: AppTheme.messageGrey,
                                         fontFamily: AppFonts.poppins,
@@ -280,7 +307,6 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                         )
                       ],
                     ),
-
                   ),
                 ],
               ),

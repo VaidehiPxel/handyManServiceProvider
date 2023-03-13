@@ -19,4 +19,6 @@ class URL {
   static const String complaintList =
       '${baseURL}usercomplaintslist?created_by=';
   static const String createComplaint = '${baseURL}usercomplaints';
+  static const String getJobReviewRating =
+      '${baseURL}getjobreviewratting?job_id=';
 }

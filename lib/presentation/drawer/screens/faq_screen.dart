@@ -62,10 +62,7 @@ class _FAQSScreenState extends State<FAQSScreen> {
                             },
                           ),
                         )
-                      : const Center(
-                          child: CircularProgressIndicator(
-                          backgroundColor: AppTheme.lightBlue,
-                        )));
+                      : const Center(child: Text("No data Found")));
         },
       ),
     );

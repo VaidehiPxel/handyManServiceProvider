@@ -30,7 +30,7 @@ class ReportBloc extends Bloc<ReportEvent, Report1State> {
           },
         );
       } else if (event is CreateReportCallApiEvent) {
-        emit(const ReportLoading(
+        emit(const CreateReportLoading(
           isLoading: true,
           getcomplaints: [],
         ));
