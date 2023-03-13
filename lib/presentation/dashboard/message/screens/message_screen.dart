@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/model/home/message_model.dart';
+import 'package:flutter_projects/application/message/message_bloc.dart';
+import 'package:flutter_projects/application/report/report_bloc.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/model/message/message_list_model.dart';
 import 'package:flutter_projects/presentation/dashboard/message/screens/chat_detail_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,55 +23,30 @@ class _MessageScreenState extends State<MessageScreen> {
     // TODO: implement initState
     super.initState();
     print("message");
+     context.read<MessageBloc>().add(const GetMessageListCallApiEvent());
   }
 
   int currentIndex = 2;
 
-  List<MessageModel> messageModel = [
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    ),
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    ),
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    ),
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    ),
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    ),
-    MessageModel(
-      senderImage: "https://picsum.photos/id/237/200/300",
-      senderMessage: "Excellent service and very fast",
-      senderName: "Naman Bali",
-      senderTime: "8 mins ago",
-    )
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {
-    return renderBodyView(); //HomeScreenWidget(),
+    return BlocListener<MessageBloc, MessageState>(
+      listener: (context, state) {},
+      child: BlocBuilder<MessageBloc, MessageState>(
+        builder: (context, state) {
+          return state.isLoading == true
+              ? const APILoader()
+              : (state is GetMessageSuccess)
+                  ? renderBodyView(state.messageList)
+                  : const Center(child: Text("No data Found"));
+        },
+      ),
+    ); //HomeScreenWidget(),
   }
 
-  Widget renderBodyView() {
+  Widget renderBodyView(List<Getuserchatdetail> messageList) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 3.5.w),
@@ -92,11 +71,11 @@ class _MessageScreenState extends State<MessageScreen> {
                 );
               },
               padding: EdgeInsets.zero,
-              itemCount: messageModel.length,
+              itemCount: messageList.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return messageView(messageModel[index]);
+                return messageView(messageList[index]);
               },
             ),
           ],
@@ -105,7 +84,7 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  Widget messageView(MessageModel messageModel) {
+  Widget messageView(Getuserchatdetail messageList) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -125,7 +104,7 @@ class _MessageScreenState extends State<MessageScreen> {
               ClipOval(
                 child: SizedBox.fromSize(
                   size: Size.fromRadius(18.sp), // Image radius
-                  child: Image.network(messageModel.senderImage!,
+                  child: Image.network(messageList.profilepics,
                       fit: BoxFit.cover),
                 ),
               ),
@@ -136,7 +115,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        messageModel.senderName!,
+                        messageList.name,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 13.sp,
@@ -147,7 +126,7 @@ class _MessageScreenState extends State<MessageScreen> {
                       SizedBox(
                         height: 0.3.h,
                       ),
-                      Text(messageModel.senderMessage!,
+                      Text(messageList.description,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 11.sp,
@@ -158,7 +137,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   ),
                 ),
               ),
-              Text(messageModel.senderTime!,
+              Text(messageList.createdAt.toString(),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 9.sp,

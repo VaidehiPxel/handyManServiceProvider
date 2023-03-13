@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
+import 'package:flutter_projects/application/message/message_bloc.dart';
 import 'package:flutter_projects/application/myJobList/my_job_list_bloc.dart';
 import 'package:flutter_projects/application/report/report_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_projects/services/faq_services.dart';
 import 'package:flutter_projects/services/job_detail_service.dart';
 import 'package:flutter_projects/services/job_review_rating_service.dart';
 import 'package:flutter_projects/services/login_services.dart';
+import 'package:flutter_projects/services/message_service.dart';
 import 'package:flutter_projects/services/my_job_service.dart';
 import 'package:flutter_projects/services/report_service.dart';
 import 'package:flutter_projects/services/signup_services.dart';
@@ -58,6 +61,8 @@ Future<void> main() async {
       BlocProvider(
           create: (context) => JobReviewRatingBloc(
               jobReviewRatingService: JobReviewRatingService())),
+      BlocProvider(
+          create: (context) => MessageBloc(messageService: MessageService())),
     ],
     child: const MyApp(),
   ));
@@ -83,11 +88,6 @@ class MyApp extends StatelessWidget {
   }
 
   returnScreen() {
-    // if (box1.get(AppString.userIdKey) != null) {
-    //   return const AppLangSelectScreen();
-    // } else {
-    //   return const DashBoard();
-    // }
-    return const ReportAndComplaint();
+    return const SplashScreen();
   }
 }

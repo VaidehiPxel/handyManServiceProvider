@@ -8,14 +8,10 @@ abstract class MessageEvent extends Equatable {
 }
 
 class GetMessageListCallApiEvent extends MessageEvent {
-  final int userId;
-  const GetMessageListCallApiEvent({
-    required this.userId,
-  });
+  const GetMessageListCallApiEvent();
 
   @override
   List<Object> get props => [
-        userId,
       ];
 }
 
