@@ -21,4 +21,7 @@ class URL {
   static const String createComplaint = '${baseURL}usercomplaints';
   static const String getJobReviewRating =
       '${baseURL}getjobreviewratting?job_id=';
+  static const String messageList = '${baseURL}userchatslist?user_id=';
+  static const String sendMessage = '${baseURL}userchats';
+  static const String chatHistory = '${baseURL}userchatshistory?user_id=25&serviceprovider_id=26';
 }

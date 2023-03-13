@@ -19,18 +19,7 @@ class GetReportListCallApiEvent extends ReportEvent {
       ];
 }
 
-class ReportListSuccessEvent extends ReportEvent {
-  final List<Getcomplaint> getcomplaints;
 
-  const ReportListSuccessEvent({
-    required this.getcomplaints,
-  });
-
-  @override
-  List<Object> get props => [
-        getcomplaints,
-      ];
-}
 
 class CreateReportCallApiEvent extends ReportEvent {
   final int userId;
