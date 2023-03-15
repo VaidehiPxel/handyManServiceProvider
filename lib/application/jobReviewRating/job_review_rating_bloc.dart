@@ -17,7 +17,7 @@ class JobReviewRatingBloc extends Bloc<JobReviewRatingEvent, JobReviewRatingStat
     if (event is FetchJobReviewRating) {
       yield JobReviewRatingLoading();
       try {
-        final rating = await jobReviewRatingService.getJobReviewRating(event.jobId);
+        final rating = await jobReviewRatingService.getJobReviewRating();
         yield JobReviewRatingLoaded(jobReviewRating: rating);
       } catch (e) {
         yield JobReviewRatingError(message: e.toString());

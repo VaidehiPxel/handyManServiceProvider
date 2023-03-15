@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/message/message_bloc.dart';
@@ -23,12 +25,10 @@ class _MessageScreenState extends State<MessageScreen> {
     // TODO: implement initState
     super.initState();
     print("message");
-     context.read<MessageBloc>().add(const GetMessageListCallApiEvent());
+    context.read<MessageBloc>().add(const GetMessageListCallApiEvent());
   }
 
   int currentIndex = 2;
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,14 @@ class _MessageScreenState extends State<MessageScreen> {
         padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 7.sp),
         child: InkWell(
           onTap: () {
-            callNextScreen(context, const ChatDetailScreen());
+            callNextScreen(
+                context,
+                ChatDetailScreen(
+                  userId: messageList.userId,
+                  //tushar change here to handymanid
+                  userName: messageList.name!,
+                  userProfile: messageList.profilepics!,
+                ));
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -104,8 +111,11 @@ class _MessageScreenState extends State<MessageScreen> {
               ClipOval(
                 child: SizedBox.fromSize(
                   size: Size.fromRadius(18.sp), // Image radius
-                  child: Image.network(messageList.profilepics,
-                      fit: BoxFit.cover),
+                  child: messageList.profilepics.toString().contains("null") ||
+                          messageList.profilepics.toString().contains("")
+                      ? Image.asset(AppAssets.profileThumb)
+                      : Image.network(messageList.profilepics!,
+                          fit: BoxFit.cover),
                 ),
               ),
               Expanded(
@@ -115,7 +125,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        messageList.name,
+                        messageList.name!,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 13.sp,
@@ -137,7 +147,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   ),
                 ),
               ),
-              Text(messageList.createdAt.toString(),
+              Text(messageList.createdAt.timeAgo(),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 9.sp,

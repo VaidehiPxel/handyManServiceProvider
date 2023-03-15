@@ -23,5 +23,5 @@ class URL {
       '${baseURL}getjobreviewratting?job_id=';
   static const String messageList = '${baseURL}userchatslist?user_id=';
   static const String sendMessage = '${baseURL}userchats';
-  static const String chatHistory = '${baseURL}userchatshistory?user_id=25&serviceprovider_id=26';
+  static const String chatHistory = '${baseURL}userchatshistory?user_id=X&serviceprovider_id=Y';
 }

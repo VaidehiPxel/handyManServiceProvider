@@ -8,6 +8,7 @@ import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
+import 'package:flutter_projects/application/jobReviewRating/job_review_rating_event.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_state.dart';
 import 'package:flutter_projects/model/job_review_rating/job_review_rating_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,6 +22,13 @@ class RatingAndReviewScreen extends StatefulWidget {
 }
 
 class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
+
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<JobReviewRatingBloc>().add( const FetchJobReviewRating());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +44,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
           listener: (context, state) {},
           child: BlocBuilder<JobReviewRatingBloc, JobReviewRatingState>(
             builder: (context, state) {
+              print(state);
               return state is JobReviewRatingLoading
                   ? const APILoader()
                   : (state is JobReviewRatingLoaded)
@@ -113,7 +122,8 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return CustomerReviewsListItem(result: jobReviewRating.result[index]);
+            return CustomerReviewsListItem(
+                result: jobReviewRating.result[index]);
           },
         ),
         SizedBox(
@@ -126,7 +136,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
 
 class CustomerReviewsListItem extends StatefulWidget {
   final jobReviewRatingList result;
-  const CustomerReviewsListItem( {required this.result,super.key});
+  const CustomerReviewsListItem({required this.result, super.key});
 
   @override
   State<CustomerReviewsListItem> createState() =>
@@ -167,7 +177,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                 widget.result.customerName,
+                                  widget.result.customerName,
                                   style: TextStyle(
                                     color: AppTheme.black,
                                     fontSize: 12.sp,
@@ -225,7 +235,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                         width: 2.w,
                                       ),
                                       Text(
-                                       widget.result.createdAt.formatDate(),
+                                        widget.result.createdAt.formatDate(),
                                         style: TextStyle(
                                           color: AppTheme.messageGrey,
                                           fontSize: 10.sp,
@@ -245,7 +255,8 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                         width: 2.w,
                                       ),
                                       Text(
-                                        widget.result.createdAt.toFormattedTime(),
+                                        widget.result.createdAt
+                                            .toFormattedTime(),
                                         style: TextStyle(
                                           color: AppTheme.messageGrey,
                                           fontSize: 10.sp,
@@ -269,7 +280,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                               widget.result.ratingDesc,
+                              widget.result.ratingDesc,
                               style: TextStyle(
                                 color: AppTheme.messageGrey,
                                 fontSize: 10.sp,
@@ -293,7 +304,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text:  widget.result.jobTitle,
+                                      text: widget.result.jobTitle,
                                       style: TextStyle(
                                         color: AppTheme.messageGrey,
                                         fontFamily: AppFonts.poppins,

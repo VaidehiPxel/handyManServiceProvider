@@ -341,7 +341,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           alignment: Alignment.centerRight,
           child: GestureDetector(
             onTap: () {
-              callNextScreen(context, const ChatDetailScreen());
+             // callNextScreen(context, const ChatDetailScreen());
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,

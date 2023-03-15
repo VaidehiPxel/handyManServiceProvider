@@ -7,11 +7,14 @@ class JobReviewRatingService {
 
   JobReviewRatingService();
 
-  Future<JobReviewRatingModel> getJobReviewRating(int jobId) async {
+    // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  int userId2 = 26;
+
+  Future<JobReviewRatingModel> getJobReviewRating() async {
     var client = http.Client();
 
     http.Response response = await client.get(
-      Uri.parse("${URL.getJobReviewRating}jobId"),
+      Uri.parse("${URL.getJobReviewRating}$userId2"),
     );
 
     var data = JobReviewRatingModel.fromJson(json.decode(response.body));

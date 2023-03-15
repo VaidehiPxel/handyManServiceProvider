@@ -17,10 +17,10 @@ class GetMessageListCallApiEvent extends MessageEvent {
 
 
 
-class GetMessageHistoryCallApiEvent extends MessageEvent {
+class SendMessageCallApiEvent extends MessageEvent {
   final int userId;
    final String message;
-  const GetMessageHistoryCallApiEvent({
+  const SendMessageCallApiEvent({
     required this.userId,
     required this.message
   });

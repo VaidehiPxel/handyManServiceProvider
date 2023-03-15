@@ -9,13 +9,7 @@ abstract class JobReviewRatingEvent extends Equatable {
 }
 
 class FetchJobReviewRating extends JobReviewRatingEvent {
-  final int jobId;
 
-  const FetchJobReviewRating({required this.jobId});
+  const FetchJobReviewRating();
 
-  @override
-  List<Object> get props => [jobId];
-
-  @override
-  String toString() => 'FetchJobReviewRating { jobId: $jobId }';
 }
