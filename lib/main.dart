@@ -5,6 +5,7 @@ import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
+import 'package:flutter_projects/application/help/help_bloc.dart';
 import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
 import 'package:flutter_projects/application/message/message_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_projects/presentation/drawer/screens/report_listing.dart
 import 'package:flutter_projects/services/auth_service.dart';
 import 'package:flutter_projects/services/dashboard_service.dart';
 import 'package:flutter_projects/services/faq_services.dart';
+import 'package:flutter_projects/services/help_service.dart';
 import 'package:flutter_projects/services/job_detail_service.dart';
 import 'package:flutter_projects/services/job_review_rating_service.dart';
 import 'package:flutter_projects/services/login_services.dart';
@@ -63,6 +65,8 @@ Future<void> main() async {
               jobReviewRatingService: JobReviewRatingService())),
       BlocProvider(
           create: (context) => MessageBloc(messageService: MessageService())),
+           BlocProvider(
+          create: (context) => HelpBloc(helpService: HelpService())),
     ],
     child: const MyApp(),
   ));
