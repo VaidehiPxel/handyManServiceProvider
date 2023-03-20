@@ -38,7 +38,7 @@ class _MessageScreenState extends State<MessageScreen> {
         builder: (context, state) {
           return state.isLoading == true
               ? const APILoader()
-              : (state is GetMessageSuccess)
+              : state.messageList.isNotEmpty
                   ? renderBodyView(state.messageList)
                   : const Center(child: Text("No data Found"));
         },

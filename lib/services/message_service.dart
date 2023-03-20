@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
-import 'package:flutter_projects/model/message/message_list_model.dart';
 import 'package:flutter_projects/services/base_service.dart';
 import 'package:http/http.dart' as http;
+
+import '../../model/message/message_list_model.dart';
 
 typedef MessageList = void Function(List<Getuserchatdetail> messageList);
 typedef ChatHistory = void Function(List<Getuserchatdetail> chatHistory);
@@ -12,8 +13,7 @@ typedef SendMessage = void Function(bool isSend);
 typedef AppErrorCallBack = void Function(String appError);
 
 class MessageService {
-  // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
-  int userId2 = 26;
+  int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
 
   Future<void> getMessageList(
       {required AppErrorCallBack errorCallBack,
@@ -22,17 +22,20 @@ class MessageService {
       String message = '';
 
       var client = http.Client();
-
       http.Response response = await client.get(
+        //Uri.parse("${URL.messageList}$userId2"),
         Uri.parse("${URL.messageList}26"),
       );
 
       var data = MessageListModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
+          print("here111..");
           if (data.getuserchatdetails.isNotEmpty) {
+            print("here..");
             messageList(data.getuserchatdetails);
           } else {
+            print("there..");
             errorCallBack(message);
           }
         } else {
@@ -40,6 +43,7 @@ class MessageService {
         }
       }
     } catch (e) {
+      print(e);
       errorCallBack(e.toString());
     }
   }
@@ -54,8 +58,8 @@ class MessageService {
       Map<String, String> map = {};
 
       map = {
-        'user_id': userId.toString(),
-        'serviceprovider_id': userId2.toString(),
+        'user_id': userId2.toString(),
+        'serviceprovider_id': userId.toString(),
         'description': description.toString(),
         'usertype': "serviceprovider"
       };
@@ -86,11 +90,13 @@ class MessageService {
       String message = '';
 
       var client = http.Client();
-
+      print(Uri.parse(URL.chatHistory
+          .replaceAll("X", userId2.toString())
+          .replaceAll("Y", userId.toString())));
       http.Response response = await client.get(
         Uri.parse(URL.chatHistory
-            .replaceAll("X", userId.toString())
-            .replaceAll("Y", userId2.toString())),
+            .replaceAll("X", userId2.toString())
+            .replaceAll("Y", userId.toString())),
       );
 
       var data = MessageListModel.fromJson(json.decode(response.body));

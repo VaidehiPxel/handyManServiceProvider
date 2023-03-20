@@ -3,29 +3,38 @@ import 'package:flutter_projects/model/job_review_rating/job_review_rating_model
 import 'package:flutter_projects/services/base_service.dart';
 import 'package:http/http.dart' as http;
 
-class JobReviewRatingService {
+typedef ReviewSuccess = void Function(
+    JobReviewRatingModel jobReviewRatingModel);
+typedef AppErrorCallBack = void Function(String appError);
 
+class JobReviewRatingService {
   JobReviewRatingService();
 
-    // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
-  int userId2 = 26;
+  // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  int userId2 = 31;
 
-  Future<JobReviewRatingModel> getJobReviewRating() async {
+  Future<void> getJobReviewRating({
+    required ReviewSuccess reviewSuccess,
+    required AppErrorCallBack errorCallBack,
+  }) async {
     var client = http.Client();
 
     http.Response response = await client.get(
       Uri.parse("${URL.getJobReviewRating}$userId2"),
     );
-
-    var data = JobReviewRatingModel.fromJson(json.decode(response.body));
+    Map<String, dynamic> data = jsonDecode(response.body);
+    print(data);
+    print("${URL.getJobReviewRating}$userId2");
     if (response.statusCode == 200) {
-      if (data.status.toString().compareTo("1") == 0) {
-        return data;
+      if (data["status"].toString().compareTo("1") == 0) {
+        var data = JobReviewRatingModel.fromJson(json.decode(response.body));
+
+        return reviewSuccess(data);
       } else {
-        throw Exception('Failed to get job review rating');
+        return errorCallBack(data["message"]);
       }
     } else {
-      throw Exception('Failed to get job review rating');
+      return errorCallBack('Failed to get job review rating');
     }
   }
 }

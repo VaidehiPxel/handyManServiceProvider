@@ -9,7 +9,9 @@ import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/application/report/report_bloc.dart';
+import 'package:flutter_projects/model/report/report_job_list.dart';
 import 'package:flutter_projects/model/report/report_listing_model.dart';
+import 'package:flutter_projects/model/report/report_service_provider.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/home_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -26,14 +28,10 @@ class CreateReportAndComplaintScreen extends StatefulWidget {
 
 class _CreateReportAndComplaintScreenState
     extends State<CreateReportAndComplaintScreen> {
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
-  String dropdownvalue = 'Item 1';
+ List<GetServiceProvidersList> userItems = [];
+  List<GetJobList> jobItems = [];
+  GetServiceProvidersList? dropdownvalue;
+  GetJobList? dropdownvalue1;
   TextEditingController descriptionController = TextEditingController();
 
   @override
@@ -55,23 +53,38 @@ class _CreateReportAndComplaintScreenState
         ),
         body: BlocListener<ReportBloc, Report1State>(
           listener: (context, state) {
-            if (state is ReportSuccess) {
-              ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                  const SnackBar(content: Text("Complaint Successfull")));
-              Future.delayed(const Duration(milliseconds: 1000), () {
-                callNextScreen(context, const HomeScreen());
-              });
-            }
-          },
+       if (state is CreateReportSuccess) {
+            ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                const SnackBar(content: Text("Complaint Successfull")));
+            Future.delayed(const Duration(milliseconds: 1000), () {
+              //TODO: check this
+              //callNextScreen(context, const HomeScreen());
+            });
+          }
+
+          if (state is ReportServiceListSuccess) {
+            context
+                .read<ReportBloc>()
+                .add(const GetReportUserListCallApiEvent());
+          }
+
+          if (state is ReportSuccess) {
+            userItems = state.getServiceProvidersList;
+            jobItems = state.getJobList;
+            setState(() {});
+          }
+        },
           child: BlocBuilder<ReportBloc, Report1State>(
             builder: (context, state) {
-              return renderBodyView(state);
+                return state.isLoading == true
+                ? const APILoader()
+                : renderBodyView(context, state);
             },
           ),
         ));
   }
 
-  Widget renderBodyView(Report1State state) {
+  Widget renderBodyView(BuildContext context, Report1State state) {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: ListView(
@@ -99,12 +112,12 @@ class _CreateReportAndComplaintScreenState
                           isExpanded: true,
                           value: dropdownvalue,
                           icon: const Icon(Icons.keyboard_arrow_down),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
+                          items: userItems.map((GetServiceProvidersList items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items.name),
+                          );
+                        }).toList(),
                           onChanged: (value) {
                             setState(() {
                               dropdownvalue = value!;
@@ -141,17 +154,17 @@ class _CreateReportAndComplaintScreenState
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
                           isExpanded: true,
-                          value: dropdownvalue,
+                          value: dropdownvalue1,
                           icon: const Icon(Icons.keyboard_arrow_down),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
+                          items: jobItems.map((GetJobList items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items.title),
+                          );
+                        }).toList(),
                           onChanged: (value) {
                             setState(() {
-                              dropdownvalue = value!;
+                              dropdownvalue1 = value!;
                             });
                           },
                         ),
@@ -198,12 +211,16 @@ class _CreateReportAndComplaintScreenState
               : AppButton(
                   title: AppString.raiseAComplaint,
                   onPressed: () {
-                    context.read<ReportBloc>().add(CreateReportCallApiEvent(
-                          userId: 26,
-                          jobId: 25,
-                          jobTitle: "ghggh",
-                          description: descriptionController.text,
-                        ));
+                  if (descriptionController.text.isNotEmpty &&
+                          dropdownvalue1 != null &&
+                          dropdownvalue != null) {
+                        context.read<ReportBloc>().add(CreateReportCallApiEvent(
+                              userId: dropdownvalue!.id,
+                              jobId: dropdownvalue1!.id,
+                              jobTitle: dropdownvalue1!.title,
+                              description: descriptionController.text,
+                            ));
+                      }
                   },
                 ),
         ],

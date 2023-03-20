@@ -33,6 +33,7 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
     'Item 4',
     'Item 5',
   ];
+  
   String dropdownvalue = 'Item 1';
 
   @override
@@ -66,8 +67,8 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
               print(state);
               return state.isLoading == true
                   ? const APILoader()
-                  : (state is ReportSuccess)
-                      ? renderBodyView(state.getcomplaints)
+                  : state.getComplaints.isNotEmpty
+                      ? renderBodyView(state.getComplaints)
                       : const Center(child: Text("No data Found"));
             },
           ),

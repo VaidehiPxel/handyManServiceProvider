@@ -2,8 +2,12 @@ part of 'message_bloc.dart';
 
 abstract class MessageState extends Equatable {
   final bool isLoading;
+  final List<Getuserchatdetail> messageList;
+  final List<Getuserchatdetail> historyList;
   const MessageState({
     required this.isLoading,
+    required this.messageList,
+    required this.historyList,
   });
 
   @override
@@ -11,15 +15,17 @@ abstract class MessageState extends Equatable {
 }
 
 class MessageInitial extends MessageState {
-  const MessageInitial({
-    required super.isLoading,
-  });
+  MessageInitial(
+      {required super.isLoading,
+      required super.messageList,
+      required super.historyList});
 }
 
 class MessageLoading extends MessageState {
-  const MessageLoading({
-    required super.isLoading,
-  });
+  MessageLoading(
+      {required super.isLoading,
+      required super.messageList,
+      required super.historyList});
 }
 
 class ReportError extends MessageState {
@@ -27,27 +33,33 @@ class ReportError extends MessageState {
   const ReportError({
     this.mErrorMsg,
     required super.isLoading,
+    required super.messageList,
+    required super.historyList,
   });
   @override
   List<Object> get props => [mErrorMsg!];
 }
 
 class GetMessageSuccess extends MessageState {
-  final List<Getuserchatdetail> messageList;
-
-  const GetMessageSuccess(
-      {required super.isLoading, required this.messageList});
+  GetMessageSuccess(
+      {required super.isLoading,
+      required super.messageList,
+      required super.historyList});
 }
 
 class SendMessageSuccess extends MessageState {
   final bool isSend;
 
   const SendMessageSuccess(
-      {required super.isLoading, required this.isSend});
+      {required super.isLoading,
+      required this.isSend,
+      required super.historyList,
+      required super.messageList});
 }
 
 class GetHistorySuccess extends MessageState {
-  final List<Getuserchatdetail> historyList;
   const GetHistorySuccess(
-      {required super.isLoading, required this.historyList});
+      {required super.isLoading,
+      required super.historyList,
+      required super.messageList});
 }

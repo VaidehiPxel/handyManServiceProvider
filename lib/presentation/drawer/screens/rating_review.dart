@@ -22,13 +22,13 @@ class RatingAndReviewScreen extends StatefulWidget {
 }
 
 class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
-
-    @override
+  @override
   void initState() {
     // TODO: implement initState
+    context.read<JobReviewRatingBloc>().add(const FetchJobReviewRating());
     super.initState();
-    context.read<JobReviewRatingBloc>().add( const FetchJobReviewRating());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,15 +41,19 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
           },
         ),
         body: BlocListener<JobReviewRatingBloc, JobReviewRatingState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is JobReviewRatingError) {
+              ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                  SnackBar(content: Text(state.message.toString())));
+            }
+          },
           child: BlocBuilder<JobReviewRatingBloc, JobReviewRatingState>(
             builder: (context, state) {
-              print(state);
               return state is JobReviewRatingLoading
                   ? const APILoader()
                   : (state is JobReviewRatingLoaded)
                       ? renderBodyView(state.jobReviewRating)
-                      : const APILoader();
+                      : const Center(child: Text("No Data Found"));
             },
           ),
         ));
@@ -64,7 +68,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
         ),
         Center(
           child: Text(
-            jobReviewRating.totalavaragerateing.toString(),
+            jobReviewRating.totalavaragerateing.toStringAsFixed(1),
             style: TextStyle(
               color: AppTheme.blue,
               fontSize: 16.sp,
@@ -77,7 +81,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
           height: 0.5.h,
         ),
         RatingsWidget(
-          value: 4,
+          value: jobReviewRating.totalavaragerateing.toDouble(),
           filledStar: Icon(
             Icons.star_rate_rounded,
             color: AppTheme.ratingsStarColor,
@@ -158,6 +162,8 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
         child: Padding(
           padding: EdgeInsets.all(10.sp),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +175,8 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                   Expanded(
                     flex: 2,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,7 +199,8 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                 Row(
                                   children: [
                                     RatingsWidget(
-                                      value: 4,
+                                      value:
+                                          widget.result.ratingValue.toDouble(),
                                       filledStar: Icon(
                                         Icons.star_rate_rounded,
                                         color: AppTheme.ratingsStarColor,
@@ -212,7 +221,8 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                       width: 3.w,
                                     ),
                                     Text(
-                                      widget.result.ratingValue.toString(),
+                                      widget.result.ratingValue
+                                          .toStringAsFixed(1),
                                       style: TextStyle(
                                         color: AppTheme.blue,
                                         fontSize: 12.sp,
@@ -277,15 +287,14 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
                               widget.result.ratingDesc,
                               style: TextStyle(
                                 color: AppTheme.messageGrey,
                                 fontSize: 10.sp,
-                                fontFamily: AppFonts.poppins,
-                                fontWeight: FontWeight.normal,
+                                fontFamily: AppFonts.poppinsMed,
                               ),
                             ),
                             RichText(
@@ -307,8 +316,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                                       text: widget.result.jobTitle,
                                       style: TextStyle(
                                         color: AppTheme.messageGrey,
-                                        fontFamily: AppFonts.poppins,
-                                        fontWeight: FontWeight.w400,
+                                        fontFamily: AppFonts.poppinsMed,
                                         fontSize: 10.sp,
                                       )),
                                 ],
