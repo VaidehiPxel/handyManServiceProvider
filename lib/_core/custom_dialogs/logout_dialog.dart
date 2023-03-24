@@ -68,7 +68,7 @@ class _LogOutDialogBoxState extends State<LogOutDialogBox> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      title: AppString.cancel,
+                      title: LocaleKeys.cancel,
                       titleColor: AppTheme.medGrey,
                     ),
                   ),
@@ -81,7 +81,7 @@ class _LogOutDialogBoxState extends State<LogOutDialogBox> {
                             .put(HiveConstants.userIdKey, null);
                         callNextScreen(context, const LoginScreen());
                       },
-                      title: AppString.yes,
+                      title: LocaleKeys.yes,
                       titleColor: AppTheme.white,
                     ),
                   ),

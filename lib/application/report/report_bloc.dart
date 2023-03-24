@@ -97,7 +97,6 @@ class ReportBloc extends Bloc<ReportEvent, Report1State> {
             ));
           },
           getServiceProvidersList: (serviceProvidersList) async {
-            print("asda sasdf sdaf");
             emit(ReportServiceListSuccess(
               isLoading: false,
               getComplaints: state.getComplaints,

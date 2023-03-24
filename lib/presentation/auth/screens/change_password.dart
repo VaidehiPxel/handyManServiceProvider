@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -24,7 +25,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: AppString.changePassword,
+        title: LocaleKeys.changePassword.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -37,27 +38,30 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: Column(
             children: [
               EazyLifeWidget(
-                title: AppString.oldPassword,
-                widget: _customTextField(6.h, AppString.oldPassword, 1),
+                title: LocaleKeys.oldPassword,
+                widget: _customTextField(6.h, LocaleKeys.oldPassword, 1),
               ),
               SizedBox(
                 height: 1.h,
               ),
               EazyLifeWidget(
-                title: AppString.newPassword,
-                widget: _customTextField(6.h, AppString.newPassword, 1),
+                title: LocaleKeys.newPassword,
+                widget: _customTextField(6.h, LocaleKeys.newPassword, 1),
               ),
               SizedBox(
                 height: 1.h,
               ),
               EazyLifeWidget(
-                title: AppString.confirmPassword,
-                widget: _customTextField(6.h, AppString.confirmPassword, 1),
+                title: LocaleKeys.confirmPassword,
+                widget: _customTextField(6.h, LocaleKeys.confirmPassword, 1),
               ),
               SizedBox(
                 height: 4.h,
               ),
-              AppButton(title:AppString.save,onPressed: (){},),
+              AppButton(
+                title: LocaleKeys.save,
+                onPressed: () {},
+              ),
               SizedBox(
                 height: 2.h,
               ),

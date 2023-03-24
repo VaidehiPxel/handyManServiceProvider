@@ -26,6 +26,9 @@ class URL {
   static const String chatHistory =
       '${baseURL}userchatshistory?user_id=X&serviceprovider_id=Y';
   static const String submitHelp = '${baseURL}helpdetails';
-  static const String serviceProvidersList = '${baseURL}serviceproviderslist';
+  static const String serviceProvidersList = '${baseURL}userlist';
   static const String jobList = '${baseURL}joblist';
+   static const String userChangePassword = '${baseURL}userchangepassword';
+    static const String sPProfile = '${baseURL}serviceproviderprofileByID';
+     static const String sPSubmit = '${baseURL}serviceproviderprofileSubmit';
 }

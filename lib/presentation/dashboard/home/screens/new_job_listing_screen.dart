@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_list_view.dart';
 import 'package:flutter_projects/model/home/dashboard_model.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,7 +25,7 @@ class _NewJobListState extends State<NewJobList> {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
-        title: AppString.myJobs,
+        title: LocaleKeys.myJobs.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);

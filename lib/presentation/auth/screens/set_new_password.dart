@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/auth/auth_event.dart';
 import 'package:flutter_projects/application/auth/auth_state.dart';
@@ -102,7 +103,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                               height: 3.h,
                             ),
                             Text(
-                              AppString.setNewPassword,
+                              LocaleKeys.setNewPassword.tr(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20.sp,
@@ -116,7 +117,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                     color: AppTheme.blue,
                                     fontFamily: AppFonts.poppinsMed),
                                 decoration: InputDecoration(
-                                  labelText: AppString.newPassword,
+                                  labelText: LocaleKeys.newPassword.tr(),
                                   focusColor: AppTheme.blue,
                                   labelStyle: const TextStyle(
                                       color: AppTheme.authGrey,
@@ -150,7 +151,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                     color: Colors.blue,
                                     fontFamily: AppFonts.poppinsMed),
                                 decoration: InputDecoration(
-                                  labelText: AppString.confirmPassword,
+                                  labelText: LocaleKeys.confirmPassword.tr(),
                                   focusColor: Colors.blue,
                                   labelStyle: const TextStyle(
                                       color: AppTheme.authGrey,
@@ -183,7 +184,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: AuthButton(
-                                    btnTitle: AppString.save,
+                                    btnTitle: LocaleKeys.save.tr(),
                                     onPressed: () {
                                       if (passwordController.text.isNotEmpty &&
                                           confirmPasswordController

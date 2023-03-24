@@ -21,7 +21,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return   EazyLifeWidget(
-//               title: AppString.selectUser,
+//               title: LocaleKeys.selectUser,
 //               widget: Container(
 //                 height:height ?? 5.5.h,
 //                 decoration: BoxDecoration(

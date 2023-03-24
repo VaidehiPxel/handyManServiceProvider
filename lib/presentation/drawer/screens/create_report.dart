@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
@@ -28,11 +29,17 @@ class CreateReportAndComplaintScreen extends StatefulWidget {
 
 class _CreateReportAndComplaintScreenState
     extends State<CreateReportAndComplaintScreen> {
- List<GetServiceProvidersList> userItems = [];
+  List<GetServiceProvidersList> userItems = [];
   List<GetJobList> jobItems = [];
   GetServiceProvidersList? dropdownvalue;
   GetJobList? dropdownvalue1;
   TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ReportBloc>().add(const GetReportServiceListCallApiEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +48,7 @@ class _CreateReportAndComplaintScreenState
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: EazylifeAppBar(
-          title: AppString.reportAndComplaint,
+          title: LocaleKeys.reportAndComplaint.tr(),
           leadIcon: AppAssets.backIcon,
           sideIcon: AppAssets.notifications,
           sideOnPressed: () {
@@ -53,32 +60,32 @@ class _CreateReportAndComplaintScreenState
         ),
         body: BlocListener<ReportBloc, Report1State>(
           listener: (context, state) {
-       if (state is CreateReportSuccess) {
-            ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                const SnackBar(content: Text("Complaint Successfull")));
-            Future.delayed(const Duration(milliseconds: 1000), () {
-              //TODO: check this
-              //callNextScreen(context, const HomeScreen());
-            });
-          }
+            if (state is CreateReportSuccess) {
+              ScaffoldMessenger.maybeOf(context)!.showSnackBar(
+                  const SnackBar(content: Text("Complaint Successfull")));
+              Future.delayed(const Duration(milliseconds: 1000), () {
+                //TODO: check this
+                //callNextScreen(context, const HomeScreen());
+              });
+            }
 
-          if (state is ReportServiceListSuccess) {
-            context
-                .read<ReportBloc>()
-                .add(const GetReportUserListCallApiEvent());
-          }
+            if (state is ReportServiceListSuccess) {
+              context
+                  .read<ReportBloc>()
+                  .add(const GetReportUserListCallApiEvent());
+            }
 
-          if (state is ReportSuccess) {
-            userItems = state.getServiceProvidersList;
-            jobItems = state.getJobList;
-            setState(() {});
-          }
-        },
+            if (state is ReportSuccess) {
+              userItems = state.getServiceProvidersList;
+              jobItems = state.getJobList;
+              setState(() {});
+            }
+          },
           child: BlocBuilder<ReportBloc, Report1State>(
             builder: (context, state) {
-                return state.isLoading == true
-                ? const APILoader()
-                : renderBodyView(context, state);
+              return state.isLoading == true
+                  ? const APILoader()
+                  : renderBodyView(context, state);
             },
           ),
         ));
@@ -91,7 +98,7 @@ class _CreateReportAndComplaintScreenState
         shrinkWrap: true,
         children: [
           EazyLifeWidget(
-            title: AppString.selectUser,
+            title: LocaleKeys.selectUser.tr(),
             widget: Padding(
               padding: EdgeInsets.only(top: 0.5.h),
               child: Container(
@@ -113,11 +120,11 @@ class _CreateReportAndComplaintScreenState
                           value: dropdownvalue,
                           icon: const Icon(Icons.keyboard_arrow_down),
                           items: userItems.map((GetServiceProvidersList items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items.name),
-                          );
-                        }).toList(),
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items.name),
+                            );
+                          }).toList(),
                           onChanged: (value) {
                             setState(() {
                               dropdownvalue = value!;
@@ -135,7 +142,7 @@ class _CreateReportAndComplaintScreenState
             height: 1.h,
           ),
           EazyLifeWidget(
-            title: AppString.selectJob,
+            title: LocaleKeys.selectJob.tr(),
             widget: Padding(
               padding: EdgeInsets.only(top: 0.5.h),
               child: Container(
@@ -157,11 +164,11 @@ class _CreateReportAndComplaintScreenState
                           value: dropdownvalue1,
                           icon: const Icon(Icons.keyboard_arrow_down),
                           items: jobItems.map((GetJobList items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items.title),
-                          );
-                        }).toList(),
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items.title),
+                            );
+                          }).toList(),
                           onChanged: (value) {
                             setState(() {
                               dropdownvalue1 = value!;
@@ -179,7 +186,7 @@ class _CreateReportAndComplaintScreenState
             height: 1.h,
           ),
           EazyLifeWidget(
-            title: AppString.addComplaint,
+            title: LocaleKeys.addComplaint.tr(),
             widget: Container(
               height: 20.h,
               decoration: BoxDecoration(
@@ -194,9 +201,9 @@ class _CreateReportAndComplaintScreenState
                   enableSuggestions: true,
                   minLines: 50,
                   maxLines: 100,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     border: InputBorder.none,
-                    hintText: AppString.addComplaint,
+                    hintText: LocaleKeys.addComplaint.tr(),
                     contentPadding: EdgeInsets.all(14),
                   ),
                 ),
@@ -209,18 +216,18 @@ class _CreateReportAndComplaintScreenState
           state is CreateReportLoading
               ? const APILoader()
               : AppButton(
-                  title: AppString.raiseAComplaint,
+                  title: LocaleKeys.raiseAComplaint.tr(),
                   onPressed: () {
-                  if (descriptionController.text.isNotEmpty &&
-                          dropdownvalue1 != null &&
-                          dropdownvalue != null) {
-                        context.read<ReportBloc>().add(CreateReportCallApiEvent(
-                              userId: dropdownvalue!.id,
-                              jobId: dropdownvalue1!.id,
-                              jobTitle: dropdownvalue1!.title,
-                              description: descriptionController.text,
-                            ));
-                      }
+                    if (descriptionController.text.isNotEmpty &&
+                        dropdownvalue1 != null &&
+                        dropdownvalue != null) {
+                      context.read<ReportBloc>().add(CreateReportCallApiEvent(
+                            userId: dropdownvalue!.id,
+                            jobId: dropdownvalue1!.id,
+                            jobTitle: dropdownvalue1!.title,
+                            description: descriptionController.text,
+                          ));
+                    }
                   },
                 ),
         ],

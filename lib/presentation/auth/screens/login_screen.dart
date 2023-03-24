@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
@@ -9,7 +11,6 @@ import 'package:flutter_projects/application/login/login_bloc.dart';
 import 'package:flutter_projects/application/login/login_event.dart';
 import 'package:flutter_projects/application/login/login_state.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
 import 'package:flutter_projects/presentation/auth/screens/forgot_password.dart';
 import 'package:flutter_projects/presentation/auth/screens/sign_up_screen.dart';
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: Text(
-                                      AppString.or,
+                                      LocaleKeys.or.tr(),
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.sp,
@@ -166,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-          labelText: AppString.password,
+          labelText: LocaleKeys.password.tr(),
           focusColor: Colors.blue,
           labelStyle: const TextStyle(
               color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
@@ -196,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: "${AppString.mobileNumber} / ${AppString.email}",
+            labelText: "${LocaleKeys.mobileNumber.tr()} / ${LocaleKeys.email.tr()}",
             focusColor: Colors.blue,
             labelStyle: const TextStyle(
                 color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
@@ -212,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: AuthButton(
-        btnTitle: AppString.login,
+        btnTitle: LocaleKeys.login.tr(),
         onPressed: () async {
           if (mMobileEmailController.text.isNotEmpty &&
               mPasswordController.text.isNotEmpty) {
@@ -244,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "${AppString.forgetPassword}?",
+            "${LocaleKeys.forgetPassword.tr()}?",
             style: TextStyle(
                 color: Colors.blue,
                 fontSize: 10.sp,
@@ -260,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AppString.login,
+          LocaleKeys.login.tr(),
           style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
@@ -269,7 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            AppString.subLogin,
+            LocaleKeys.subLogin.tr(),
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,
@@ -291,12 +292,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: RichText(
           overflow: TextOverflow.clip,
           textAlign: TextAlign.end,
-          textDirection: TextDirection.rtl,
+          //textDirection: TextDirection.RTL,
           softWrap: true,
           maxLines: 1,
           textScaleFactor: 1,
           text: TextSpan(
-            text: AppString.doNotHaveAccount,
+            text: LocaleKeys.doNotHaveAccount.tr(),
             style: const TextStyle(
                 color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
             children: <TextSpan>[

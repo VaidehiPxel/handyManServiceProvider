@@ -11,17 +11,14 @@ class JobReviewRatingBloc
       : super(JobReviewRatingInitial()) {
     on<JobReviewRatingEvent>((event, emit) async {
       try {
-        print("hhhh" + event.toString());
         if (event is FetchJobReviewRating) {
           emit(JobReviewRatingLoading());
           await jobReviewRatingService.getJobReviewRating(
           
             errorCallBack: (appError) {
-               print("kkkk");
               emit(JobReviewRatingError(message: appError));
             },
             reviewSuccess: (jobReviewRatingModel) {
-              print("hhhhh111");
               emit(
                   JobReviewRatingLoaded(jobReviewRating: jobReviewRatingModel));
             },

@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/message/message_bloc.dart';
-import 'package:flutter_projects/application/report/report_bloc.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+
 import 'package:flutter_projects/model/message/message_list_model.dart';
 import 'package:flutter_projects/presentation/dashboard/message/screens/chat_detail_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -56,7 +57,7 @@ class _MessageScreenState extends State<MessageScreen> {
             const SizedBox(
               height: kToolbarHeight * 2.3,
             ),
-            Text(AppString.message,
+            Text(LocaleKeys.message.tr(),
                 style: TextStyle(
                     fontFamily: AppFonts.poppinsSemiBold,
                     fontSize: 16.sp,

@@ -47,6 +47,9 @@ class LoginService {
           loginSuccess(true, "");
           HiveConstants.instances.box1
               .put(HiveConstants.userIdKey, data['result']['userid']);
+
+          print("aaaa");
+          print(HiveConstants.instances.box1.get(HiveConstants.userIdKey));
         }
         if (resSuccess &&
             data["isNewUser"] &&

@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/logout_dialog.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/auth/screens/change_password.dart';
@@ -15,7 +17,6 @@ import 'package:flutter_projects/presentation/drawer/screens/lang_selection.dart
 import 'package:flutter_projects/presentation/drawer/screens/rating_review.dart';
 import 'package:flutter_projects/presentation/drawer/screens/report_listing.dart';
 import 'package:flutter_projects/presentation/drawer/screens/terms_screen.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/payment/payment_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -100,7 +101,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.dashboard,
+              text: LocaleKeys.dashboard.tr(),
               onTap: () {
                 callNextScreen(context, const DashBoard());
               },
@@ -112,7 +113,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.notification,
+              text: LocaleKeys.notification.tr(),
               onTap: () {
                 callNextScreen(context, const NotificationScreen());
               },
@@ -124,7 +125,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.payment,
+              text: LocaleKeys.payment.tr(),
               onTap: () {
                 callNextScreen(context, const PaymentScreen());
               },
@@ -136,7 +137,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.reviewAndRating,
+              text: LocaleKeys.reviewAndRating.tr(),
               onTap: () {
                 callNextScreen(context, const RatingAndReviewScreen());
               },
@@ -148,7 +149,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.myComplaints,
+              text: LocaleKeys.myComplaints.tr(),
               onTap: () {
                 callNextScreen(context, const ReportAndComplaint());
               },
@@ -160,7 +161,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.changePassword,
+              text: LocaleKeys.changePassword.tr(),
               onTap: () {
                 callNextScreen(context, const ChangePassword());
               },
@@ -172,7 +173,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.faqs,
+              text: LocaleKeys.faqs.tr(),
               onTap: () {
                 callNextScreen(context, const FAQSScreen());
               },
@@ -184,7 +185,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.help,
+              text: LocaleKeys.help.tr(),
               onTap: () {
                 callNextScreen(context, const HelpScreen());
               },
@@ -196,7 +197,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.termsCondition,
+              text: LocaleKeys.termsCondition.tr(),
               onTap: () {
                 callNextScreen(context, const TAndCScreen());
               },
@@ -208,7 +209,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.langSelection,
+              text: LocaleKeys.langSelection.tr(),
               onTap: () {
                 callNextScreen(context, const LanguageSelectionScreen());
               },
@@ -220,7 +221,7 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: BlueBoxText(
               showBold: true,
-              text: AppString.logOut,
+              text: LocaleKeys.logOut.tr(),
               onTap: () {
                 Navigator.pop(context);
                 showDialog(

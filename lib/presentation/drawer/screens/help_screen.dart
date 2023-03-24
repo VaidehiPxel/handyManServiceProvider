@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/help/help_bloc.dart';
 import 'package:flutter_projects/application/help/help_event.dart';
 import 'package:flutter_projects/application/help/help_state.dart';
@@ -74,7 +75,7 @@ class _HelpScreenState extends State<HelpScreen> {
         builder: (context, state) {
           return Scaffold(
               appBar: EazylifeAppBar(
-                title: AppString.help,
+                title: LocaleKeys.help.tr(),
                 leadIcon: AppAssets.backIcon,
                 onPressed: () {
                   Navigator.pop(context);
@@ -94,48 +95,48 @@ class _HelpScreenState extends State<HelpScreen> {
         child: Column(
           children: [
             EazyLifeWidget(
-              title: AppString.firstName,
+              title: LocaleKeys.firstName.tr(),
               widget: _customTextField(
-                  6.h, AppString.firstNameHint, 1, firstNameController),
+                  6.h, LocaleKeys.firstNameHint.tr(), 1, firstNameController),
             ),
             SizedBox(
               height: 1.h,
             ),
             EazyLifeWidget(
-              title: AppString.lastName,
+              title: LocaleKeys.lastName.tr(),
               widget: _customTextField(
-                  6.h, AppString.lastNameHint, 1, lastNameController),
+                  6.h, LocaleKeys.lastNameHint.tr(), 1, lastNameController),
             ),
             SizedBox(
               height: 1.h,
             ),
             EazyLifeWidget(
-              title: AppString.emailAddress,
+              title: LocaleKeys.emailAddress.tr(),
               widget: _customTextField(
-                  6.h, AppString.emailAddressHint, 1, emailController),
+                  6.h, LocaleKeys.emailAddressHint.tr(), 1, emailController),
             ),
             SizedBox(
               height: 1.h,
             ),
             EazyLifeWidget(
-              title: AppString.mobileNumber,
+              title: LocaleKeys.mobileNumber.tr(),
               widget: _customTextField(
-                  6.h, AppString.mobileNumberHint, 1, mobileController),
+                  6.h, LocaleKeys.mobileNumberHint.tr(), 1, mobileController),
             ),
             SizedBox(
               height: 1.h,
             ),
             EazyLifeWidget(
-              title: AppString.message,
+              title: LocaleKeys.message.tr(),
               widget: _customTextField(
-                  25.h, AppString.messageHint, 70, messageController),
+                  25.h, LocaleKeys.messageHint.tr(), 70, messageController),
             ),
             SizedBox(
               height: 2.5.h,
             ),
             if (state is! HelpLoading)
               AppButton(
-                title: AppString.submit,
+                title: LocaleKeys.submit.tr(),
                 onPressed: () {
                   if (firstNameController.text.isNotEmpty &&
                       lastNameController.text.isNotEmpty &&

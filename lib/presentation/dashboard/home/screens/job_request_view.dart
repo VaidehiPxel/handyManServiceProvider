@@ -1,15 +1,17 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/_core/Navigation.dart';
+
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
-import 'package:flutter_projects/presentation/dashboard/message/screens/chat_detail_screen.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 class JobRequestView extends StatelessWidget {
@@ -153,7 +155,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              AppString.quotationAmount,
+                              LocaleKeys.quotationAmount.tr(),
                               style: TextStyle(
                                 color: AppTheme.black,
                                 fontSize: 7.sp,
@@ -198,7 +200,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          AppString.listOfServiceProvider,
+          LocaleKeys.listOfServiceProvider.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -206,7 +208,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           ),
         ),
         Text(
-          AppString.viewAll,
+          LocaleKeys.viewAll.tr(),
           style: TextStyle(
             color: AppTheme.blue,
             fontSize: 10.sp,
@@ -237,7 +239,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                         return DialogBoxWithIcon(
                           icon: AppAssets.save,
                           content: Text(
-                            AppString.decline,
+                            LocaleKeys.decline,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppTheme.black,
@@ -254,9 +256,9 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                           onOkPressed: () {
                             Navigator.of(context).pop();
                           },
-                          title: AppString.applied,
-                          titleNo: AppString.apply,
-                          titleYes: AppString.done,
+                          title: LocaleKeys.applied,
+                          titleNo: LocaleKeys.apply,
+                          titleYes: LocaleKeys.done,
                           colorNo: AppTheme.black,
                           colorYes: AppTheme.white,
                           sizeNo: 10.sp,
@@ -267,7 +269,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                   child: Text(
-                    AppString.decline,
+                    LocaleKeys.decline,
                     style: TextStyle(
                         color: AppTheme.medGrey,
                         fontSize: 14.sp,
@@ -294,7 +296,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                         return DialogBoxWithIcon(
                           icon: AppAssets.save,
                           content: Text(
-                            AppString.youAccept,
+                            LocaleKeys.youAccept,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppTheme.black,
@@ -310,9 +312,9 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                           onOkPressed: () {
                             Navigator.of(context).pop();
                           },
-                          title: AppString.cong,
-                          titleNo: AppString.cancel,
-                          titleYes: AppString.startWork,
+                          title: LocaleKeys.cong,
+                          titleNo: LocaleKeys.cancel,
+                          titleYes: LocaleKeys.startWork,
                           colorNo: AppTheme.black,
                           colorYes: AppTheme.white,
                           sizeNo: 10.sp,
@@ -323,7 +325,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                   child: Text(
-                    AppString.accept,
+                    LocaleKeys.accept,
                     style: TextStyle(
                         color: AppTheme.white,
                         fontSize: 14.sp,
@@ -341,7 +343,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           alignment: Alignment.centerRight,
           child: GestureDetector(
             onTap: () {
-             // callNextScreen(context, const ChatDetailScreen());
+              // callNextScreen(context, const ChatDetailScreen());
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -351,7 +353,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
                   width: 2.w,
                 ),
                 Text(
-                  AppString.chatNow,
+                  LocaleKeys.chatNow.tr(),
                   style: TextStyle(
                     color: AppTheme.blue,
                     fontSize: 11.sp,
@@ -378,7 +380,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppString.date,
+                  LocaleKeys.date.tr(),
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 12.sp,
@@ -419,7 +421,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppString.time,
+                  LocaleKeys.time.tr(),
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 12.sp,
@@ -519,7 +521,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           height: 8.sp,
         ),
         Text(
-          AppString.description,
+          LocaleKeys.description.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -553,7 +555,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           height: 8.sp,
         ),
         Text(
-          AppString.address,
+          LocaleKeys.address.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -587,7 +589,7 @@ class _RenderBodyViewState extends State<RenderBodyView> {
           height: 8.sp,
         ),
         Text(
-          AppString.locationMap,
+          LocaleKeys.locationMap.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,

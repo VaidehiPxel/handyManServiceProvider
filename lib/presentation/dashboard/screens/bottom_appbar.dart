@@ -1,8 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
-
-
 
 class EazylifeBottomAppBar extends StatefulWidget {
   final void Function(int)? onTap;
@@ -43,7 +42,7 @@ class _EazylifeBottomAppBarState extends State<EazylifeBottomAppBar> {
                     height: 30,
                     width: 30,
                   ),
-                  label: AppString.home,
+                  label: LocaleKeys.home.tr(),
                   activeIcon: Image.asset(
                     AppAssets.homehover,
                     height: 30,
@@ -56,7 +55,7 @@ class _EazylifeBottomAppBarState extends State<EazylifeBottomAppBar> {
                     height: 30,
                     width: 30,
                   ),
-                  label: AppString.myJobs,
+                  label: LocaleKeys.myJobs.tr(),
                   activeIcon: Image.asset(
                     AppAssets.myJobshover,
                     height: 30,
@@ -69,7 +68,7 @@ class _EazylifeBottomAppBarState extends State<EazylifeBottomAppBar> {
                     height: 30,
                     width: 30,
                   ),
-                  label: AppString.message,
+                  label: LocaleKeys.message.tr(),
                   activeIcon: Image.asset(
                     AppAssets.messagehover,
                     height: 30,
@@ -82,7 +81,7 @@ class _EazylifeBottomAppBarState extends State<EazylifeBottomAppBar> {
                     height: 30,
                     width: 30,
                   ),
-                  label: AppString.profile,
+                  label: LocaleKeys.profile.tr(),
                   activeIcon: Image.asset(
                     AppAssets.profilehover,
                     height: 30,

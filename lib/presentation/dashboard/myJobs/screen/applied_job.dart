@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -181,7 +182,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
           height: 0.5.h,
         ),
         Text(
-          AppString.description,
+          LocaleKeys.description.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -217,7 +218,7 @@ class _AppliedJobDetailState extends State<AppliedJobDetail> {
           height: 0.5.h,
         ),
         Text(
-          AppString.address,
+          LocaleKeys.address.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,

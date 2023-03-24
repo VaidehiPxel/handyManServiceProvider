@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
@@ -42,12 +43,12 @@ class _DashBoardState extends State<DashBoard> {
       extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
         title: currentIndex == 0
-            ? AppString.welcome
+            ? LocaleKeys.welcome.tr()
             : currentIndex == 1
-                ? AppString.myJobs
+                ? LocaleKeys.myJobs
                 : currentIndex == 2
-                    ? AppString.message
-                    : AppString.profile,
+                    ? LocaleKeys.message.tr()
+                    : LocaleKeys.profile.tr(),
         leadIcon: AppAssets.humBurgerSvg,
         sideIcon: currentIndex == 1
             ? AppAssets.filter

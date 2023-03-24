@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
 import 'package:flutter_projects/application/faq/faq_bloc.dart';
@@ -13,8 +13,6 @@ import 'package:flutter_projects/application/myJobList/my_job_list_bloc.dart';
 import 'package:flutter_projects/application/report/report_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
 import 'package:flutter_projects/application/terms/terms_bloc.dart';
-import 'package:flutter_projects/presentation/drawer/screens/create_report.dart';
-import 'package:flutter_projects/presentation/drawer/screens/report_listing.dart';
 import 'package:flutter_projects/services/auth_service.dart';
 import 'package:flutter_projects/services/dashboard_service.dart';
 import 'package:flutter_projects/services/faq_services.dart';
@@ -32,7 +30,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import 'application/login/login_bloc.dart';
-import 'presentation/auth/screens/app_lang_select_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,10 +62,14 @@ Future<void> main() async {
               jobReviewRatingService: JobReviewRatingService())),
       BlocProvider(
           create: (context) => MessageBloc(messageService: MessageService())),
-           BlocProvider(
-          create: (context) => HelpBloc(helpService: HelpService())),
+      BlocProvider(create: (context) => HelpBloc(helpService: HelpService())),
     ],
-    child: const MyApp(),
+    child: EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('fr')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: const Locale('en', 'US'),
+        child: const MyApp()),
   ));
 }
 
@@ -79,9 +80,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-        // localizationsDelegates: context.localizationDelegates,
-        // supportedLocales: context.supportedLocales,
-        // locale: context.locale,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

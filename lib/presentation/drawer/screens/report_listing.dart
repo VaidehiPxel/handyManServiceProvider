@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
@@ -33,13 +35,14 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
     'Item 4',
     'Item 5',
   ];
-  
+
   String dropdownvalue = 'Item 1';
 
   @override
   void initState() {
     // TODO: implement initState
-    context.read<ReportBloc>().add(const GetReportListCallApiEvent(userId: 26));
+    context.read<ReportBloc>().add(GetReportListCallApiEvent(
+        userId: HiveConstants.instances.box1.get(HiveConstants.userIdKey)));
     super.initState();
   }
 
@@ -50,7 +53,7 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: EazylifeAppBar(
-          title: AppString.reportAndComplaint,
+          title: LocaleKeys.reportAndComplaint.tr(),
           leadIcon: AppAssets.backIcon,
           sideIcon: AppAssets.notifications,
           sideOnPressed: () {
@@ -114,7 +117,7 @@ class _ReportAndComplaintState extends State<ReportAndComplaint> {
             height: 2.h,
           ),
           AppButton(
-            title: AppString.createComplaint,
+            title: LocaleKeys.createComplaint.tr(),
             onPressed: () {
               callNextScreen(context, const CreateReportAndComplaintScreen());
             },

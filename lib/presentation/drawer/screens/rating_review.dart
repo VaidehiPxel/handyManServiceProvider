@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_event.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_state.dart';
@@ -34,7 +35,7 @@ class _RatingAndReviewScreenState extends State<RatingAndReviewScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: EazylifeAppBar(
-          title: AppString.reviewAndRating,
+          title: LocaleKeys.reviewAndRating.tr(),
           leadIcon: AppAssets.backIcon,
           onPressed: () {
             Navigator.pop(context);
@@ -300,7 +301,7 @@ class _CustomerReviewsListItemState extends State<CustomerReviewsListItem> {
                             RichText(
                               overflow: TextOverflow.clip,
                               textAlign: TextAlign.center,
-                              textDirection: TextDirection.rtl,
+                              //textDirection: TextDirection.rtl,
                               softWrap: true,
                               maxLines: 1,
                               textScaleFactor: 1,

@@ -149,7 +149,9 @@ class Jobrequest {
         fromamount: json["fromamount"],
         toamount: json["toamount"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
+        createdAt: DateTime.parse(json["created_at"],
+      
+       ),
       );
 
   Map<String, dynamic> toJson() => {

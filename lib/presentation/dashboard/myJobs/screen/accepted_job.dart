@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
@@ -12,7 +14,7 @@ import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/model/jobs/my_joblist_model.dart';
 import 'package:flutter_projects/presentation/drawer/screens/create_report.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
@@ -124,7 +126,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 8.sp,
         ),
         Text(
-          AppString.extraServicesCharges,
+          LocaleKeys.extraServicesCharges.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -191,7 +193,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 3.h,
         ),
         AppButton(
-          title: AppString.updateAmount,
+          title: LocaleKeys.updateAmount.tr(),
           onPressed: () {},
         ),
         SizedBox(
@@ -209,7 +211,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 8.sp,
         ),
         Text(
-          AppString.anyExtraTask,
+          LocaleKeys.anyExtraTask.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -247,7 +249,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                   },
                 ),
                 Text(
-                  AppString.yes,
+                  LocaleKeys.yes.tr(),
                   style: TextStyle(
                     color: AppTheme.blue,
                     fontSize: 12.sp,
@@ -289,7 +291,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                     },
                   ),
                   Text(
-                    AppString.no,
+                    LocaleKeys.no.tr(),
                     style: TextStyle(
                       color: AppTheme.blue,
                       fontSize: 12.sp,
@@ -314,7 +316,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 8.sp,
         ),
         Text(
-          AppString.timeCounter,
+          LocaleKeys.timeCounter.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -329,19 +331,19 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           children: [
             Expanded(
               child: _timerBox(
-                  duration.inHours.toString().padLeft(2, '0'), AppString.hrs),
+                  duration.inHours.toString().padLeft(2, '0'), LocaleKeys.hrs.tr()),
             ),
             colan(),
             Expanded(
               child: _timerBox(
                   duration.inMinutes.remainder(60).toString().padLeft(2, '0'),
-                  AppString.min),
+                  LocaleKeys.min.tr()),
             ),
             colan(),
             Expanded(
               child: _timerBox(
                   duration.inSeconds.remainder(60).toString().padLeft(2, '0'),
-                  AppString.sec),
+                  LocaleKeys.sec.tr()),
             ),
           ],
         ),
@@ -357,7 +359,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 8.sp,
         ),
         Text(
-          AppString.changeJobStatus,
+          LocaleKeys.changeJobStatus.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -484,7 +486,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                   child: Text(
-                    AppString.stop,
+                    LocaleKeys.stop.tr(),
                     style: TextStyle(
                         color: AppTheme.medGrey,
                         fontSize: 14.sp,
@@ -505,14 +507,13 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
                   shadowColor: Colors.transparent,
                 ),
                 onPressed: () {
-                  
                   timer = Timer.periodic(
                       const Duration(seconds: 1), (_) => addTime());
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                   child: Text(
-                    AppString.start,
+                    LocaleKeys.start.tr(),
                     style: TextStyle(
                         color: AppTheme.white,
                         fontSize: 14.sp,
@@ -638,7 +639,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 0.3.h,
         ),
         Text(
-          AppString.description,
+          LocaleKeys.description.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -672,7 +673,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           height: 8.sp,
         ),
         Text(
-          AppString.address,
+          LocaleKeys.address.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -726,7 +727,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
               child: Text(
-                AppString.complaintQ,
+                LocaleKeys.complaintQ.tr(),
                 style: TextStyle(
                   color: AppTheme.red,
                   fontSize: 10.sp,
@@ -762,7 +763,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             child: RichText(
               overflow: TextOverflow.clip,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.ltr,
+             // textDirection: TextDirection.ltr,
               softWrap: true,
               maxLines: 2,
               textScaleFactor: 1,
@@ -809,7 +810,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             child: RichText(
               overflow: TextOverflow.clip,
               textAlign: TextAlign.right,
-              textDirection: TextDirection.ltr,
+              //textDirection: TextDirection.ltr,
               softWrap: true,
               maxLines: 2,
               textScaleFactor: 1,

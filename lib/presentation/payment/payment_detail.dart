@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,7 +24,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: AppString.paymentDetails,
+        title: LocaleKeys.paymentDetails.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           callNextScreen(context, const DashBoard());
@@ -37,7 +38,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppString.paymentDetails,
+              LocaleKeys.paymentDetails.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsSemiBold,
                   color: AppTheme.black,
@@ -50,7 +51,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  AppString.to + AppString.beneficiaryNameHint,
+                  LocaleKeys.to.tr() + LocaleKeys.beneficiaryNameHint.tr(),
                   style: TextStyle(
                       fontFamily: AppFonts.poppinsMed,
                       color: AppTheme.black,
@@ -69,7 +70,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               height: 2.h,
             ),
             Text(
-              AppString.bankAcNo + AppString.bankAccountNumberHint,
+              LocaleKeys.bankAcNo.tr() + LocaleKeys.bankAccountNumberHint.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   color: AppTheme.black,
@@ -79,7 +80,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               height: 3.h,
             ),
             Text(
-              AppString.transferDetailCap,
+              LocaleKeys.transferDetailCap.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsSemiBold,
                   color: AppTheme.black,
@@ -91,7 +92,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppString.amountToBeSent,
+                Text(LocaleKeys.amountToBeSent.tr(),
                     style: TextStyle(
                         color: AppTheme.black,
                         fontFamily: AppFonts.poppinsMed,
@@ -112,7 +113,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppString.charges,
+                Text(LocaleKeys.charges.tr(),
                     style: TextStyle(
                         color: AppTheme.black,
                         fontFamily: AppFonts.poppinsMed,
@@ -136,7 +137,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppString.totalAmount,
+                Text(LocaleKeys.totalAmount.tr(),
                     style: TextStyle(
                         color: AppTheme.black,
                         fontFamily: AppFonts.poppinsSemiBold,
@@ -158,7 +159,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               height: 2.h,
             ),
             Text(
-              AppString.withdrawalId + AppString.paymentReferenceHint,
+              LocaleKeys.withdrawalId.tr() + LocaleKeys.paymentReferenceHint.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   color: AppTheme.black,
@@ -168,7 +169,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               height: 0.8.h,
             ),
             Text(
-              AppString.bankId + AppString.bankAccountNumberHint,
+              LocaleKeys.bankId.tr()+ LocaleKeys.bankAccountNumberHint.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   color: AppTheme.black,
@@ -178,7 +179,7 @@ class _PaymentDetailState extends State<PaymentDetail> {
               height: 0.8.h,
             ),
             Text(
-              AppString.dateTimeHint,
+              LocaleKeys.dateTimeHint.tr(),
               style: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   color: AppTheme.black,

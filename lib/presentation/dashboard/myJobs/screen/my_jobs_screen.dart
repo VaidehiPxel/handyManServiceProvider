@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_status_widget.dart';
@@ -34,8 +35,8 @@ class _MyJobsScreenState extends State<MyJobsScreen>
     initialPage: 0,
     keepPage: true,
   );
- // int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
-  int userId2 = 26;
+  int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  // int userId2 = 26;
 
   @override
   void initState() {
@@ -149,15 +150,15 @@ class _MyJobsScreenState extends State<MyJobsScreen>
                             }
                           });
                         },
-                        tabs: const [
+                        tabs:  [
                           Tab(
-                            text: AppString.acceptedJob,
+                            text: LocaleKeys.acceptedJob.tr(),
                           ),
                           Tab(
-                            text: AppString.appliedJob,
+                            text: LocaleKeys.appliedJob.tr(),
                           ),
                           Tab(
-                            text: AppString.completedJob,
+                            text: LocaleKeys.completedJob.tr(),
                           ),
                         ],
                       ),
@@ -191,13 +192,13 @@ class _MyJobsScreenState extends State<MyJobsScreen>
 
   String getTitle(int currentIndex) {
     if (currentIndex == 0) {
-      return AppString.acceptedJob;
+      return LocaleKeys.acceptedJob.tr();
     } else if (currentIndex == 1) {
-      return AppString.appliedJob;
+      return LocaleKeys.appliedJob.tr();
     } else if (currentIndex == 2) {
-      return AppString.completedJob;
+      return LocaleKeys.completedJob.tr();
     }
-    return AppString.acceptedJob;
+    return LocaleKeys.acceptedJob.tr();
   }
 
   setAcceptedJob(List<Joblist> myJobListModel) {

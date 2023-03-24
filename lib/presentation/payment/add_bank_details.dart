@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:sizer/sizer.dart';
 
 class AddBankDetails extends StatefulWidget {
@@ -26,7 +27,9 @@ class _AddBankDetailsState extends State<AddBankDetails> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: widget.isEdit?AppString.editBankDetail:AppString.addBankDetail,
+        title: widget.isEdit
+            ? LocaleKeys.editBankDetail.tr()
+            : LocaleKeys.addBankDetail.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -41,7 +44,7 @@ class _AddBankDetailsState extends State<AddBankDetails> {
           children: [
             Expanded(child: setDetailField()),
             AppButton(
-              title:  widget.isEdit?AppString.update:AppString.save,
+              title: widget.isEdit ? LocaleKeys.update.tr() : LocaleKeys.save.tr(),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -90,7 +93,7 @@ class _AddBankDetailsState extends State<AddBankDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.isEdit?AppString.editBankDetail:AppString.addBankDetail,
+          widget.isEdit ? LocaleKeys.editBankDetail.tr() : LocaleKeys.addBankDetail.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppinsSemiBold,
               color: AppTheme.black,
@@ -108,15 +111,15 @@ class _AddBankDetailsState extends State<AddBankDetails> {
             child: Column(
               children: [
                 EazyLifeWidget(
-                  title: AppString.bankName,
-                  widget: _customTextField(AppString.bankNameHint, 1),
+                  title: LocaleKeys.bankName.tr(),
+                  widget: _customTextField(LocaleKeys.bankNameHint.tr(), 1),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
                 EazyLifeWidget(
-                  title: AppString.bankAccountNumber,
-                  widget: _customTextField(AppString.bankAccountNumberHint, 1),
+                  title: LocaleKeys.bankAccountNumber.tr(),
+                  widget: _customTextField(LocaleKeys.bankAccountNumberHint.tr(), 1),
                 ),
                 SizedBox(
                   height: 2.h,
@@ -125,9 +128,9 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                   children: [
                     Expanded(
                       child: EazyLifeWidget(
-                        title: AppString.beneficiaryName,
+                        title: LocaleKeys.beneficiaryName.tr(),
                         widget:
-                            _customTextField(AppString.beneficiaryNameHint, 1),
+                            _customTextField(LocaleKeys.beneficiaryNameHint.tr(), 1),
                       ),
                     ),
                     SizedBox(
@@ -135,9 +138,9 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                     ),
                     Expanded(
                       child: EazyLifeWidget(
-                        title: AppString.paymentReference,
-                        widget:
-                            _customTextField(AppString.paymentReferenceHint, 1),
+                        title: LocaleKeys.paymentReference.tr(),
+                        widget: _customTextField(
+                            LocaleKeys.paymentReferenceHint.tr(), 1),
                       ),
                     ),
                   ],

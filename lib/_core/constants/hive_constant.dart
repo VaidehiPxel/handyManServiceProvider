@@ -14,6 +14,8 @@ class HiveConstants {
 
   get database => box1;
 
+  static const String langKey = "LANGUAGE_KEY";
+
   static const String userIdKey = "USER_ID_KEY";
   static const String userNameKey = "USER_NAME_KEY";
   static const String userEmailKey = "USER_EMAIL_KEY";

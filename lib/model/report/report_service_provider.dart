@@ -26,7 +26,7 @@ class ReportServiceProvidersList {
         status: json["status"],
         message: json["message"],
         getServiceProvidersList: List<GetServiceProvidersList>.from(
-            json["getserviceproviderslist"]
+            json["getuserchatdetails"]
                 .map((x) => GetServiceProvidersList.fromJson(x))),
       );
 

@@ -1,9 +1,11 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+
 
 class ProfileItemWidget extends StatefulWidget {
   final String assetName;
@@ -14,6 +16,7 @@ class ProfileItemWidget extends StatefulWidget {
   final String value;
   final ProfileItemType profileItemType;
   final List<dynamic>? items;
+  final void Function(String value) onChange;
   const ProfileItemWidget(
       {required super.key,
       required this.assetName,
@@ -23,7 +26,8 @@ class ProfileItemWidget extends StatefulWidget {
       required this.value,
       required this.profileItemType,
       this.items,
-      this.withoutBlue = false});
+      this.withoutBlue = false,
+      required this.onChange});
 
   @override
   State<ProfileItemWidget> createState() => _ProfileItemWidgetState();
@@ -31,43 +35,56 @@ class ProfileItemWidget extends StatefulWidget {
 
 class _ProfileItemWidgetState extends State<ProfileItemWidget> {
   TextEditingController controller = TextEditingController();
-  List<dynamic> items = [
-    AppString.english,
-    AppString.french,
-  ];
+  // List<dynamic> items = [
+  //   LocaleKeys.english.tr(),
+  //   LocaleKeys.french.tr(),
+  // ];
   String dropdownvalue = 'English';
   DateTime? pickedDate;
   String gender = "";
   @override
   void initState() {
     super.initState();
+    //print(widget.isEdit);
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
         setState(() {
-          if (widget.profileItemType == ProfileItemType.text) {
+          if (widget.profileItemType == ProfileItemType.Text) {
             controller.clear();
             controller = TextEditingController(text: widget.value);
           }
-          if (widget.profileItemType == ProfileItemType.multiline) {
+          if (widget.profileItemType == ProfileItemType.Multiline) {
             controller.clear();
             controller = TextEditingController(text: widget.value);
           }
 
-          if (widget.profileItemType == ProfileItemType.dropdown) {
-            items.clear();
-            items.addAll(widget.items!);
+          if (widget.profileItemType == ProfileItemType.Dropdown) {
+            // items.clear();
+            // items.addAll(widget.items!);
+            //print(items);
 
             dropdownvalue = widget.value;
           }
-          if (widget.profileItemType == ProfileItemType.date) {
-            List date = widget.value.split("/");
-            pickedDate = DateTime(
-                int.parse(date[2]), int.parse(date[1]), int.parse(date[0]));
+          if (widget.profileItemType == ProfileItemType.Date) {
+            if (widget.value.isNotEmpty) {
+              if (widget.value.contains("/")) {
+                List date = widget.value.split("/");
+                pickedDate = DateTime(
+                    int.parse(date[2]), int.parse(date[1]), int.parse(date[0]));
+              } else {
+                List date = widget.value.split("-");
+                pickedDate = DateTime(
+                    int.parse(date[0]), int.parse(date[1]), int.parse(date[2]));
+              }
+            }
           }
 
-          if (widget.profileItemType == ProfileItemType.gender) {
+          if (widget.profileItemType == ProfileItemType.Gender) {
             gender = widget.value;
+            // print("gender");
+            // print(gender);
+            // print("gender");
           }
         });
       },
@@ -93,15 +110,10 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                   borderRadius: BorderRadius.circular(0),
                   shape: BoxShape.rectangle,
                 ),
-                child: widget.assetName.endsWith(".svg")
-                    ? SvgPicture.asset(
-                        widget.assetName,
-                        color: AppTheme.blue,
-                      )
-                    : Image.asset(
-                        widget.assetName,
-                        color: AppTheme.blue,
-                      ),
+                child: SvgPicture.asset(
+                  widget.assetName,
+                  color: AppTheme.blue,
+                ),
               ),
             ),
             SizedBox(
@@ -144,7 +156,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
             SizedBox(
               width: 2.sp,
             ),
-            if (widget.profileItemType == ProfileItemType.text)
+            if (widget.profileItemType == ProfileItemType.Text)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -154,11 +166,24 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           controller: controller,
                           decoration:
                               const InputDecoration.collapsed(hintText: ""),
+                          // onTapOutside: (event) {
+                          //   widget.onChange(controller.text);
+                          // },
+
+                          onEditingComplete: () {
+                            widget.onChange(controller.text);
+                          },
+                          onFieldSubmitted: (value) {
+                            widget.onChange(controller.text);
+                          },
+                          onChanged: (value) {
+                            widget.onChange(value);
+                          },
                         )
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.multiline)
+            if (widget.profileItemType == ProfileItemType.Multiline)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -170,45 +195,51 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           maxLines: 10,
                           decoration:
                               const InputDecoration.collapsed(hintText: ""),
+                          onChanged: (value) {
+                            widget.onChange(value);
+                          },
                         )
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.dropdown)
-              Expanded(
-                flex: 12,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: widget.isEdit && items.isNotEmpty
-                      ? Center(
-                          child: Theme(
-                            data: Theme.of(context)
-                                .copyWith(dividerColor: Colors.transparent),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                isExpanded: true,
-                                value: dropdownvalue,
-                                isDense: true,
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                items: items.map((items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    dropdownvalue = value!.toString();
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        )
-                      : Text(widget.value),
-                ),
-              ),
-            if (widget.profileItemType == ProfileItemType.date)
+            if (widget.profileItemType == ProfileItemType.Dropdown)
+            //   Expanded(
+            //     flex: 12,
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(left: 12),
+            //       child: widget.isEdit 
+            //       //&& items.isNotEmpty
+            //           ? Center(
+            //               child: Theme(
+            //                 data: Theme.of(context)
+            //                     .copyWith(dividerColor: Colors.transparent),
+            //                 child: DropdownButtonHideUnderline(
+            //                   child: DropdownButton(
+            //                     isExpanded: true,
+            //                     value: dropdownvalue,
+            //                     isDense: true,
+            //                     icon: const Icon(Icons.keyboard_arrow_down),
+            //                     items: items.map((items) {
+            //                       return DropdownMenuItem(
+            //                         value: items,
+            //                         child: Text(items),
+            //                       );
+            //                     }).toList(),
+            //                     onChanged: (value) {
+            //                       setState(() {
+            //                         dropdownvalue = value!.toString();
+            //                         widget.onChange(value!.toString());
+            //                       });
+            //                     },
+            //                   ),
+            //                 ),
+            //               ),
+            //             )
+            //           : Text(widget.value),
+            //     ),
+            //   ),
+            // 
+            if (widget.profileItemType == ProfileItemType.Date)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -220,11 +251,14 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           },
                           child: pickedDate == null
                               ? Text(widget.value)
-                              : Text(pickedDate!.toLocal().toString()))
+                              : Text(pickedDate!
+                                  .toLocal()
+                                  .toString()
+                                  .split(" ")[0]))
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.gender)
+            if (widget.profileItemType == ProfileItemType.Gender)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -241,8 +275,10 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                                 value: "Male",
                                 groupValue: gender,
                                 onChanged: (value) {
+                                  print(value);
                                   setState(() {
                                     gender = value.toString();
+                                    widget.onChange("Male");
                                   });
                                 },
                               ),
@@ -252,8 +288,10 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                                 value: "Female",
                                 groupValue: gender,
                                 onChanged: (value) {
+                                  print(value);
                                   setState(() {
                                     gender = value.toString();
+                                    widget.onChange("Female");
                                   });
                                 },
                               ),
@@ -264,7 +302,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                       : Text(widget.value),
                 ),
               ),
-            if (widget.profileItemType == ProfileItemType.upload)
+            if (widget.profileItemType == ProfileItemType.Upload)
               Expanded(
                 flex: 12,
                 child: Padding(
@@ -376,10 +414,7 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
                           children: [
                             Row(
                               children: [
-                                Image.asset(
-                                  AppAssets.pdf,
-                                  height: 3.h,
-                                ),
+                                Image.asset(AppAssets.pdf),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(widget.value),
@@ -401,29 +436,32 @@ class _ProfileItemWidgetState extends State<ProfileItemWidget> {
   }
 
   showDatePickers() async {
-    pickedDate = await showDatePicker(
+    await showDatePicker(
             context: context,
             initialDate: DateTime.now(), //get today's date
             firstDate: DateTime(
                 2000), //DateTime.now() - not to allow to choose before today.
             lastDate: DateTime(2101))
         .then((value) {
-      if (value != null) {
+      print(value);
+      if (value != null)
         setState(() {
           pickedDate = value;
+          print(pickedDate);
+          widget.onChange(
+              pickedDate!.toLocal().toString().split(" ")[0].toString());
         });
-      }
     });
   }
 }
 
 enum ProfileItemType {
-  text,
-  dropdown,
-  location,
-  date,
-  gender,
-  language,
-  multiline,
-  upload
+  Text,
+  Dropdown,
+  Location,
+  Date,
+  Gender,
+  Language,
+  Multiline,
+  Upload
 }

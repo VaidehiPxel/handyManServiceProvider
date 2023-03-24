@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
@@ -145,7 +146,7 @@ class _ReportAndComplaintDetailsScreenState
           Padding(
             padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
             child: Text(
-              AppString.expertSol,
+              LocaleKeys.expertSol.tr(),
               style: TextStyle(
                 color: AppTheme.black,
                 fontSize: 14.sp,
@@ -175,7 +176,7 @@ class _ReportAndComplaintDetailsScreenState
             child: Column(
               children: [
                 Text(
-                  AppString.thankYou,
+                  LocaleKeys.thankYou.tr(),
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 16.sp,
@@ -187,7 +188,7 @@ class _ReportAndComplaintDetailsScreenState
                   height: 4.sp,
                 ),
                 Text(
-                  AppString.yourMsg,
+                  LocaleKeys.yourMsg.tr(),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(

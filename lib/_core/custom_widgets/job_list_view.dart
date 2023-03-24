@@ -48,13 +48,15 @@ class JobListView extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ClipOval(
-                  child: SizedBox.fromSize(
-                    size: Size.fromRadius(20.sp), // Image radius
-                    child: Image.network("https://picsum.photos/id/214/200/300",
-                        fit: BoxFit.cover),
-                  ),
-                ),
+                // ClipOval(
+                //   child: SizedBox.fromSize(
+                //     size: Size.fromRadius(20.sp), // Image radius
+                //     child: jobListingModel.profilepics == null
+                //     ? Image.asset(AppAssets.profileThumb)
+                //     : Image.network( usersdetails.profilepics,
+                //         fit: BoxFit.cover),
+                //   ),
+                // ),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(left: 3.2.w),

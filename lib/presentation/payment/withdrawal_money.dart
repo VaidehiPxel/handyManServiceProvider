@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/payment/payment_detail.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +28,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: AppString.withdrawalMoney,
+        title: LocaleKeys.withdrawalMoney.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           if (currentIndex == 2) {
@@ -59,10 +60,10 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                 ? Container()
                 : AppButton(
                     title: currentIndex == 0
-                        ? AppString.proceed
+                        ? LocaleKeys.proceed.tr()
                         : currentIndex == 2
-                            ? AppString.pay
-                            : AppString.save,
+                            ? LocaleKeys.pay.tr()
+                            : LocaleKeys.save.tr(),
                     onPressed: () {
                       setState(() {
                         if (currentIndex == 0) {
@@ -87,8 +88,8 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                                     callNextScreen(
                                         context, const PaymentDetail());
                                   },
-                                  title: AppString.moneyBankToSuccess,
-                                  titleYes: AppString.viewDetails,
+                                  title: LocaleKeys.moneyBankToSuccess.tr(),
+                                  titleYes: LocaleKeys.viewDetails.tr(),
                                   colorYes: AppTheme.white,
                                   sizeNo: 10.sp,
                                   titleFamily: AppFonts.poppinsMed,
@@ -113,7 +114,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppString.moneyWithdrawal,
+          LocaleKeys.moneyWithdrawal.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppinsSemiBold,
               color: AppTheme.black,
@@ -123,7 +124,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
           height: 1.5.h,
         ),
         Text(
-          AppString.moneyWithdrawalDes,
+          LocaleKeys.moneyWithdrawalDes.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppins,
               color: AppTheme.medGrey,
@@ -146,7 +147,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                 borderSide: BorderSide(color: AppTheme.amountGrey),
               ),
               contentPadding: EdgeInsets.all(10.sp),
-              hintText: AppString.amount,
+              hintText: LocaleKeys.amount.tr(),
               hintStyle: TextStyle(
                   fontFamily: AppFonts.poppinsMed,
                   color: AppTheme.amountGrey,
@@ -167,7 +168,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
           children: [
             Expanded(
               child: Text(
-                AppString.selectBankAccount,
+                LocaleKeys.selectBankAccount.tr(),
                 style: TextStyle(
                     fontFamily: AppFonts.poppinsSemiBold,
                     color: AppTheme.black,
@@ -189,7 +190,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                       size: 9.sp,
                     ),
                     Text(
-                      AppString.addBankDetailCap,
+                      LocaleKeys.addBankDetailCap.tr(),
                       style: TextStyle(
                           fontFamily: AppFonts.poppinsMed,
                           color: AppTheme.blue,
@@ -228,13 +229,13 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppString.bankNameHint,
+                      LocaleKeys.bankNameHint.tr(),
                       style: TextStyle(
                           fontFamily: AppFonts.poppinsSemiBold,
                           color: AppTheme.black,
                           fontSize: 11.sp),
                     ),
-                    Text(AppString.acNo + AppString.bankAccountNumberHint,
+                    Text(LocaleKeys.acNo.tr() + LocaleKeys.bankAccountNumberHint.tr(),
                         style: TextStyle(
                             color: AppTheme.black,
                             fontFamily: AppFonts.poppins,
@@ -258,7 +259,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
           children: [
             Expanded(
               child: Text(
-                AppString.sendingMoneyFrom,
+                LocaleKeys.sendingMoneyFrom.tr(),
                 style: TextStyle(
                     fontFamily: AppFonts.poppinsSemiBold,
                     color: AppTheme.black,
@@ -274,13 +275,13 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
           height: 2.5.h,
         ),
         Text(
-          AppString.bankNameHint,
+          LocaleKeys.bankNameHint.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppinsSemiBold,
               color: AppTheme.black,
               fontSize: 11.sp),
         ),
-        Text(AppString.acNo + AppString.bankAccountNumberHint,
+        Text(LocaleKeys.acNo.tr() + LocaleKeys.bankAccountNumberHint.tr(),
             style: TextStyle(
                 color: AppTheme.black,
                 fontFamily: AppFonts.poppins,
@@ -297,7 +298,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AppString.amountToBeSent,
+            Text(LocaleKeys.amountToBeSent.tr(),
                 style: TextStyle(
                     color: AppTheme.black,
                     fontFamily: AppFonts.poppinsMed,
@@ -318,7 +319,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AppString.charges,
+            Text(LocaleKeys.charges.tr(),
                 style: TextStyle(
                     color: AppTheme.black,
                     fontFamily: AppFonts.poppinsMed,
@@ -342,7 +343,7 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AppString.totalPayable,
+            Text(LocaleKeys.totalPayable.tr(),
                 style: TextStyle(
                     color: AppTheme.black,
                     fontFamily: AppFonts.poppinsSemiBold,

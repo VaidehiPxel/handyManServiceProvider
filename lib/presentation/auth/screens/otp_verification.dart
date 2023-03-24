@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
 import 'package:flutter_projects/_core/custom_widgets/otp_text_field.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/auth/auth_bloc.dart';
 import 'package:flutter_projects/application/auth/auth_event.dart';
 import 'package:flutter_projects/application/auth/auth_state.dart';
@@ -73,7 +74,7 @@ class _OTPVerificationState extends State<OTPVerification> {
               ),
               Center(
                 child: Text(
-                  AppString.otpVerification,
+                  LocaleKeys.otpVerification,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.sp,
@@ -87,12 +88,12 @@ class _OTPVerificationState extends State<OTPVerification> {
               RichText(
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
-                textDirection: TextDirection.ltr,
+               // textDirection: TextDirection.ltr,
                 softWrap: true,
                 maxLines: 2,
                 textScaleFactor: 1,
                 text: TextSpan(
-                  text: AppString.enterTheOtp,
+                  text: LocaleKeys.enterTheOtp,
                   style: TextStyle(
                       color: AppTheme.grey,
                       fontFamily: AppFonts.poppinsMed,
@@ -110,7 +111,7 @@ class _OTPVerificationState extends State<OTPVerification> {
               RichText(
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
-                textDirection: TextDirection.ltr,
+               // textDirection: TextDirection.LTR,
                 softWrap: true,
                 maxLines: 2,
                 textScaleFactor: 1,
@@ -167,19 +168,19 @@ class _OTPVerificationState extends State<OTPVerification> {
                   child: RichText(
                     overflow: TextOverflow.clip,
                     textAlign: TextAlign.end,
-                    textDirection: TextDirection.rtl,
+                   // textDirection: TextDirection.RTL,
                     softWrap: true,
                     maxLines: 1,
                     textScaleFactor: 1,
                     text: TextSpan(
-                      text: AppString.doNotReceive,
+                      text: LocaleKeys.doNotReceive,
                       style: TextStyle(
                           color: AppTheme.grey,
                           fontFamily: AppFonts.poppinsMed,
                           fontSize: 12.sp),
                       children: <TextSpan>[
                         TextSpan(
-                          text: AppString.resendOTP,
+                          text: LocaleKeys.resendOTP,
                           style: TextStyle(
                               color: AppTheme.blue,
                               fontFamily: AppFonts.poppinsMed,
@@ -197,7 +198,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: AuthButton(
-                      btnTitle: AppString.verifyNow,
+                      btnTitle: LocaleKeys.verifyNow.tr(),
                       onPressed: () {
                         if (otpValue.isNotEmpty) {
                           context.read<AuthBloc>().add(OtpVerifyApiEvent(
@@ -206,7 +207,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                           if (otpValue.isEmpty) {
                             ScaffoldMessenger.maybeOf(context)!.showSnackBar(
                                 const SnackBar(
-                                    content: Text("Please Enter OTP")));
+                                    content: Text(LocaleKeys.enterOtP)));
                           }
                         }
                       }),

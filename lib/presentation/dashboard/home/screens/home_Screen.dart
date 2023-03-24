@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/rating_widget.dart';
 import 'package:flutter_projects/services/base_service.dart';
@@ -9,7 +11,6 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/job_list_view.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/application/dashboard/dashboard_bloc.dart';
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const APILoader()
               : (state.isLoading == false && (state is DashboardSuccess))
                   ? renderBodyView(state)
-                  :  const APILoader();
+                  : const APILoader();
         },
       ),
     );
@@ -127,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //             decoration: InputDecoration(
   //               suffixIcon: Image.asset(AppAssets.search),
   //               border: InputBorder.none,
-  //               hintText: AppString.searchText,
+  //               hintText: LocaleKeys.searchText,
   //               contentPadding: const EdgeInsets.all(14),
   //             ),
   //           ),
@@ -144,13 +145,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
                 child: _blueContainer(
-                    AppString.totalReviews, dashboardModel.totalreview)),
+                    LocaleKeys.totalReviews.tr(), dashboardModel.totalreview)),
             SizedBox(
               width: 3.w,
             ),
             Expanded(
                 child: _blueContainer(
-                    AppString.todayJob, dashboardModel.todayjob)),
+                    LocaleKeys.todayJob.tr(), dashboardModel.todayjob)),
           ],
         ),
         SizedBox(
@@ -160,13 +161,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
                 child: _blueContainer(
-                    AppString.completedJob, dashboardModel.completedjob)),
+                    LocaleKeys.completedJob.tr(), dashboardModel.completedjob)),
             SizedBox(
               width: 3.w,
             ),
             Expanded(
                 child: _blueContainer(
-                    AppString.totalEarning, dashboardModel.totalearning)),
+                    LocaleKeys.totalEarning.tr(), dashboardModel.totalearning)),
           ],
         ),
       ],
@@ -217,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: Size.fromRadius(40.sp), // Image radius
                 child: usersdetails.profilepics == null
                     ? Image.asset(AppAssets.profileThumb)
-                    : Image.network( usersdetails.profilepics,
+                    : Image.network(usersdetails.profilepics,
                         fit: BoxFit.cover),
               ),
             ),
@@ -305,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 1.h,
         ),
         Text(
-          AppString.jobRequest,
+          LocaleKeys.jobRequest.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppinsBold,
               fontSize: 14.sp,
@@ -345,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AppString.newJob,
+            Text(LocaleKeys.newJob.tr(),
                 style: TextStyle(
                     fontFamily: AppFonts.poppinsBold,
                     fontSize: 14.sp,
@@ -360,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ));
                     },
                     child: Text(
-                      AppString.viewAll,
+                      LocaleKeys.viewAll.tr(),
                       style: TextStyle(
                         color: AppTheme.blue,
                         fontSize: 10.sp,

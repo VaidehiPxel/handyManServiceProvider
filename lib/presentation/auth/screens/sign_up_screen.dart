@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_event.dart';
 import 'package:flutter_projects/application/signup/signup_state.dart';
@@ -126,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                       Center(
                                         child: Text(
-                                          AppString.signUp,
+                                          LocaleKeys.signUp.tr(),
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20.sp,
@@ -138,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                       Center(
                                         child: Text(
-                                          AppString.subLogin,
+                                          LocaleKeys.subLogin.tr(),
                                           maxLines: 2,
                                           softWrap: true,
                                           textAlign: TextAlign.center,
@@ -158,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
-                                              labelText: AppString.firstName,
+                                              labelText: LocaleKeys.firstName.tr(),
                                               focusColor: Colors.blue,
                                               labelStyle: const TextStyle(
                                                   color: AppTheme.authGrey,
@@ -183,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: AppTheme.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
-                                              labelText: AppString.lastName,
+                                              labelText: LocaleKeys.lastName.tr(),
                                               focusColor: Colors.blue,
                                               labelStyle: const TextStyle(
                                                   color: AppTheme.authGrey,
@@ -208,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
-                                              labelText: AppString.email,
+                                              labelText: LocaleKeys.email.tr(),
                                               focusColor: Colors.blue,
                                               labelStyle: const TextStyle(
                                                   color: AppTheme.authGrey,
@@ -234,7 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
-                                              labelText: AppString.mobileNumber,
+                                              labelText:
+                                                  LocaleKeys.mobileNumber.tr(),
                                               focusColor: Colors.blue,
                                               labelStyle: const TextStyle(
                                                   color: AppTheme.authGrey,
@@ -268,7 +270,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: Colors.blue,
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
-                                            labelText: AppString.password,
+                                            labelText: LocaleKeys.password.tr(),
                                             focusColor: Colors.blue,
                                             labelStyle: const TextStyle(
                                                 color: AppTheme.authGrey,
@@ -317,7 +319,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               fontFamily: AppFonts.poppinsMed),
                                           decoration: InputDecoration(
                                             labelText:
-                                                AppString.confirmPassword,
+                                                LocaleKeys.confirmPassword.tr(),
                                             focusColor: Colors.blue,
                                             labelStyle: const TextStyle(
                                                 color: AppTheme.authGrey,
@@ -350,7 +352,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 15.w),
                                           child: AuthButton(
-                                              btnTitle: AppString.signUp,
+                                              btnTitle: LocaleKeys.signUp.tr(),
                                               onPressed: () {
                                                 validateSignUp(context);
                                               }),
@@ -363,13 +365,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       SizedBox(
                                         height: 2.h,
                                       ),
-                                      const Align(
+                                       Align(
                                         alignment: Alignment.center,
                                         child: Padding(
-                                          padding: EdgeInsets.all(2.0),
+                                          padding: const EdgeInsets.all(2.0),
                                           child: Text(
-                                            AppString.or,
-                                            style: TextStyle(
+                                            LocaleKeys.or.tr(),
+                                            style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontFamily:
@@ -529,17 +531,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: RichText(
           overflow: TextOverflow.clip,
           textAlign: TextAlign.end,
-          textDirection: TextDirection.rtl,
+          //textDirection: TextDirection.RTL,
           softWrap: true,
           maxLines: 1,
           textScaleFactor: 1,
           text: TextSpan(
-            text: AppString.alreadyMember,
+            text: LocaleKeys.alreadyMember.tr(),
             style: const TextStyle(
                 color: AppTheme.grey, fontFamily: AppFonts.poppinsMed),
             children: <TextSpan>[
               TextSpan(
-                  text: AppString.logIn,
+                  text: LocaleKeys.logIn.tr(),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       callNextScreen(context, const LoginScreen());

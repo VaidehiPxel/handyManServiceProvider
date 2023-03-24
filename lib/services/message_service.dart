@@ -23,19 +23,16 @@ class MessageService {
 
       var client = http.Client();
       http.Response response = await client.get(
-        //Uri.parse("${URL.messageList}$userId2"),
-        Uri.parse("${URL.messageList}26"),
+        Uri.parse("${URL.messageList}$userId2"),
+      //  Uri.parse("${URL.messageList}26"),
       );
 
       var data = MessageListModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         if (data.status.toString().compareTo("1") == 0) {
-          print("here111..");
           if (data.getuserchatdetails.isNotEmpty) {
-            print("here..");
             messageList(data.getuserchatdetails);
           } else {
-            print("there..");
             errorCallBack(message);
           }
         } else {

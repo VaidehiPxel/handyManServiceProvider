@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/side_blue_container.dart';
 
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/presentation/payment/add_bank_details.dart';
 import 'package:flutter_projects/presentation/payment/withdrawal_money.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,7 +28,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: EazylifeAppBar(
-        title: AppString.payment,
+        title: LocaleKeys.payment.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -45,7 +46,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        AppString.internetBanking,
+                        LocaleKeys.internetBanking.tr(),
                         style: TextStyle(
                             fontFamily: AppFonts.poppinsSemiBold,
                             color: AppTheme.black,
@@ -73,7 +74,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 size: 9.sp,
                               ),
                               Text(
-                                AppString.addBankDetailCap,
+                                LocaleKeys.addBankDetailCap.tr(),
                                 style: TextStyle(
                                     fontFamily: AppFonts.poppinsMed,
                                     color: AppTheme.blue,
@@ -110,7 +111,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       const AddBankDetails(isEdit: true));
                                 },
                                 child: Text(
-                                  AppString.edit,
+                                  LocaleKeys.edit.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppinsMed,
                                       color: AppTheme.blue,
@@ -134,7 +135,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         return DialogBoxWithIcon(
                                           icon: AppAssets.delete,
                                           content: Text(
-                                            AppString.removeDetail,
+                                            LocaleKeys.removeDetail.tr(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: AppTheme.black,
@@ -149,9 +150,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           onOkPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          title: AppString.areYouSure,
-                                          titleNo: AppString.cancel,
-                                          titleYes: AppString.remove,
+                                          title: LocaleKeys.areYouSure.tr(),
+                                          titleNo: LocaleKeys.cancel.tr(),
+                                          titleYes: LocaleKeys.remove.tr(),
                                           colorNo: AppTheme.black,
                                           colorYes: AppTheme.white,
                                           colorYesBtn: AppTheme.red,
@@ -161,7 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       });
                                 },
                                 child: Text(
-                                  AppString.remove,
+                                  LocaleKeys.remove.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppinsMed,
                                       color: AppTheme.red,
@@ -180,14 +181,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           softWrap: true,
                           textScaleFactor: 1,
                           text: TextSpan(
-                            text: AppString.bank,
+                            text: LocaleKeys.bank.tr(),
                             style: TextStyle(
                                 fontFamily: AppFonts.poppinsMed,
                                 color: AppTheme.black,
                                 fontSize: 11.sp),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: AppString.bankNameHint,
+                                  text: LocaleKeys.bankNameHint.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppins,
                                       color: AppTheme.black,
@@ -201,14 +202,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           softWrap: true,
                           textScaleFactor: 1,
                           text: TextSpan(
-                            text: "${AppString.bankAccountNumber} : ",
+                            text: "${LocaleKeys.bankAccountNumber.tr()} : ",
                             style: TextStyle(
                                 fontFamily: AppFonts.poppinsMed,
                                 color: AppTheme.black,
                                 fontSize: 11.sp),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: AppString.bankAccountNumberHint,
+                                  text: LocaleKeys.bankAccountNumberHint.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppins,
                                       color: AppTheme.black,
@@ -222,14 +223,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           softWrap: true,
                           textScaleFactor: 1,
                           text: TextSpan(
-                            text: "${AppString.beneficiaryName} : ",
+                            text: "${LocaleKeys.beneficiaryName.tr()} : ",
                             style: TextStyle(
                                 fontFamily: AppFonts.poppinsMed,
                                 color: AppTheme.black,
                                 fontSize: 11.sp),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: AppString.beneficiaryNameHint,
+                                  text: LocaleKeys.beneficiaryNameHint.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppins,
                                       color: AppTheme.black,
@@ -243,14 +244,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           softWrap: true,
                           textScaleFactor: 1,
                           text: TextSpan(
-                            text: "${AppString.paymentReference} : ",
+                            text: "${LocaleKeys.paymentReference.tr()} : ",
                             style: TextStyle(
                                 fontFamily: AppFonts.poppinsMed,
                                 color: AppTheme.black,
                                 fontSize: 11.sp),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: AppString.paymentReferenceHint,
+                                  text: LocaleKeys.paymentReferenceHint.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppins,
                                       color: AppTheme.black,
@@ -293,14 +294,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppString.availableBalance,
+                                  LocaleKeys.availableBalance.tr(),
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppinsMed,
                                       color: AppTheme.white,
                                       fontSize: 11.sp),
                                 ),
                                 Text(
-                                  "${AppString.rs}50000",
+                                  "${LocaleKeys.rs.tr()}50000",
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppinsSemiBold,
                                       color: AppTheme.white,
@@ -322,7 +323,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 4.5.w, vertical: 1.h),
                               child: Text(
-                                AppString.withdraw,
+                                LocaleKeys.withdraw.tr(),
                                 style: TextStyle(
                                     fontFamily: AppFonts.poppinsSemiBold,
                                     color: AppTheme.black,
@@ -339,7 +340,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   height: 2.h,
                 ),
                 Text(
-                  AppString.paymentHistory,
+                  LocaleKeys.paymentHistory.tr(),
                   style: TextStyle(
                       fontFamily: AppFonts.poppinsSemiBold,
                       color: AppTheme.black,
@@ -378,14 +379,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppString.settlementSummary,
+                          LocaleKeys.settlementSummary.tr(),
                           style: TextStyle(
                               fontFamily: AppFonts.poppinsSemiBold,
                               color: AppTheme.black,
                               fontSize: 12.sp),
                         ),
                         Text(
-                          AppString.totalPayment,
+                          LocaleKeys.totalPayment.tr(),
                           style: TextStyle(
                               fontFamily: AppFonts.poppins,
                               color: AppTheme.black,
@@ -398,21 +399,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             buildColumn(
-                                AppString.collection, "${AppString.rs}5,000"),
+                                LocaleKeys.collection.tr(), "${LocaleKeys.rs.tr()}5,000"),
                             Container(
                               color: AppTheme.grey,
                               width: 0.3.w,
                               height: 4.h,
                             ),
-                            buildColumn(
-                                AppString.deductions, "${AppString.rs}132.57"),
+                            buildColumn(LocaleKeys.deductions.tr(),
+                                "${LocaleKeys.rs.tr()}132.57"),
                             Container(
                               color: AppTheme.grey,
                               width: 0.3.w,
                               height: 4.h,
                             ),
-                            buildColumn(AppString.netSettlement,
-                                "${AppString.rs}4867.25"),
+                            buildColumn(LocaleKeys.netSettlement.tr(),
+                                "${LocaleKeys.rs.tr()}4867.25"),
                           ],
                         )
                       ],
@@ -434,7 +435,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${AppString.last3Transactions}November 2020",
+                          "${LocaleKeys.last3Transactions.tr()}November 2020",
                           style: TextStyle(
                               fontFamily: AppFonts.poppinsSemiBold,
                               color: AppTheme.black,
@@ -478,7 +479,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          AppString.paymentFromPaypal,
+                                          LocaleKeys.paymentFromPaypal.tr(),
                                           style: TextStyle(
                                               fontFamily:
                                                   AppFonts.poppinsSemiBold,
@@ -500,7 +501,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   ],
                                 ),
                                 Text(
-                                  "${AppString.rs}1,500",
+                                  "${LocaleKeys.rs.tr()}1,500",
                                   style: TextStyle(
                                       fontFamily: AppFonts.poppinsSemiBold,
                                       color: AppTheme.black,

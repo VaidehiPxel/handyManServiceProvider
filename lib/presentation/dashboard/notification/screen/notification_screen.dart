@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
 import 'package:flutter_projects/_core/constants/string_constants.dart';
@@ -21,7 +22,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: EazylifeAppBar(
-        title: AppString.notification,
+        title: LocaleKeys.notification.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);

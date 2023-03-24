@@ -151,7 +151,7 @@
 //                           crossAxisAlignment: CrossAxisAlignment.end,
 //                           children: [
 //                             Text(
-//                               AppString.quotationAmount,
+//                               LocaleKeys.quotationAmount,
 //                               style: TextStyle(
 //                                 color: AppTheme.black,
 //                                 fontSize: 7.sp,
@@ -204,7 +204,7 @@
 //           ),
 //         ),
 //         Text(
-//           AppString.viewAll,
+//           LocaleKeys.viewAll,
 //           style: TextStyle(
 //             color: AppTheme.blue,
 //             fontSize: 10.sp,
@@ -220,7 +220,7 @@
 //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //       children: [
 //         Text(
-//           AppString.listOfServiceProvider,
+//           LocaleKeys.listOfServiceProvider,
 //           style: TextStyle(
 //             color: Colors.black,
 //             fontSize: 12.sp,
@@ -228,7 +228,7 @@
 //           ),
 //         ),
 //         Text(
-//           AppString.viewAll,
+//           LocaleKeys.viewAll,
 //           style: TextStyle(
 //             color: AppTheme.blue,
 //             fontSize: 10.sp,
@@ -359,7 +359,7 @@
 //                         onOkPressed: () {
 //                           Navigator.of(context).pop();
 //                         },
-//                         title: AppString.areYouSure,
+//                         title: LocaleKeys.areYouSure,
 //                         titleNo: "Cancel",
 //                         titleYes: "Remove",
 //                         colorNo: AppTheme.black,
@@ -468,9 +468,9 @@
 //                           onOkPressed: () {
 //                             Navigator.of(context).pop();
 //                           },
-//                           title: " AppString.applied",
-//                           titleNo: "AppString.gotoHome",
-//                           titleYes: " AppString.done",
+//                           title: " LocaleKeys.applied",
+//                           titleNo: "LocaleKeys.gotoHome",
+//                           titleYes: " LocaleKeys.done",
 //                           colorNo: AppTheme.black,
 //                           colorYes: AppTheme.white,
 //                           sizeNo: 10.sp,
@@ -481,7 +481,7 @@
 //                 child: Padding(
 //                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
 //                   child: Text(
-//                     AppString.decline,
+//                     LocaleKeys.decline,
 //                     style: TextStyle(
 //                         color: AppTheme.medGrey,
 //                         fontSize: 14.sp,
@@ -508,7 +508,7 @@
 //                         return DialogBoxWithIcon(
 //                           icon: AppAssets.save,
 //                           content: Text(
-//                             AppString.youAccept,
+//                             LocaleKeys.youAccept,
 //                             textAlign: TextAlign.center,
 //                             style: TextStyle(
 //                                 color: AppTheme.black,
@@ -524,9 +524,9 @@
 //                           onOkPressed: () {
 //                             Navigator.of(context).pop();
 //                           },
-//                           title: AppString.cong,
-//                           titleNo: AppString.cancel,
-//                           titleYes: AppString.startWork,
+//                           title: LocaleKeys.cong,
+//                           titleNo: LocaleKeys.cancel,
+//                           titleYes: LocaleKeys.startWork,
 //                           colorNo: AppTheme.black,
 //                           colorYes: AppTheme.white,
 //                           sizeNo: 10.sp,
@@ -537,7 +537,7 @@
 //                 child: Padding(
 //                   padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
 //                   child: Text(
-//                     AppString.accept,
+//                     LocaleKeys.accept,
 //                     style: TextStyle(
 //                         color: AppTheme.white,
 //                         fontSize: 14.sp,
@@ -587,7 +587,7 @@
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //               children: [
 //                 Text(
-//                   AppString.date,
+//                   LocaleKeys.date,
 //                   style: TextStyle(
 //                     color: AppTheme.black,
 //                     fontSize: 12.sp,
@@ -628,7 +628,7 @@
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //               children: [
 //                 Text(
-//                   AppString.time,
+//                   LocaleKeys.time,
 //                   style: TextStyle(
 //                     color: AppTheme.black,
 //                     fontSize: 12.sp,
@@ -729,7 +729,7 @@
 //           height: 8.sp,
 //         ),
 //         Text(
-//           AppString.description,
+//           LocaleKeys.description,
 //           style: TextStyle(
 //             color: Colors.black,
 //             fontSize: 12.sp,
@@ -765,7 +765,7 @@
 //           height: 8.sp,
 //         ),
 //         Text(
-//           AppString.address,
+//           LocaleKeys.address,
 //           style: TextStyle(
 //             color: Colors.black,
 //             fontSize: 12.sp,
@@ -799,7 +799,7 @@
 //           height: 8.sp,
 //         ),
 //         Text(
-//           AppString.locationMap,
+//           LocaleKeys.locationMap,
 //           style: TextStyle(
 //             color: Colors.black,
 //             fontSize: 12.sp,

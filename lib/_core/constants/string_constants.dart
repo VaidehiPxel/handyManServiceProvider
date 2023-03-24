@@ -1,4 +1,4 @@
-class AppString {
+class LocaleKeys {
   static const String selectLang = "Select your Language";
 
   static const String login = "Login";
@@ -213,6 +213,8 @@ class AppString {
       "Your Message has been submitted.\nWe will contact you shortly.";
   static const String createComplaint = " Create Complaint";
 
-//Hive
-
+//Error
+  static const String enterOtP = "Please Enter OTP";
+  static const String mobileNotEmpty = "Mobile can't be empty";
+  static const String mobileNotValid = "Mobile no is not valid";
 }

@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../_core/constants/app_string.g.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -19,12 +22,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 300), () {
-      // if (context.locale.toString().compareTo("en") == 0) {
-      //   selectedLang = "English";
-      // } else if (context.locale.toString().compareTo("fr") == 0) {
-      //   selectedLang = "Français";
-      // }
+    Future.delayed(Duration(milliseconds: 300), () {
+      if (context.locale.toString().compareTo("en") == 0) {
+        selectedLang = "English";
+      } else if (context.locale.toString().compareTo("fr") == 0) {
+        selectedLang = "Français";
+      }
       setState(() {});
     });
   }
@@ -34,7 +37,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: EazylifeAppBar(
-        title: AppString.langSelection,
+        title: LocaleKeys.langSelection.tr(),
         leadIcon: AppAssets.backIcon,
         onPressed: () {
           Navigator.pop(context);
@@ -49,9 +52,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               flex: 1,
               child: GestureDetector(
                 onTap: () async {
-                  // if (context.locale.toString().compareTo("fr") == 0) {
-                  //   await context.setLocale(Locale('en'));
-                  // }
+                  if (context.locale.toString().compareTo("fr") == 0) {
+                    await context.setLocale(Locale('en'));
+                  }
                   setState(() {
                     selectedLang = "English";
                   });
@@ -88,6 +91,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                           value: "English",
                           groupValue: selectedLang,
                           onChanged: (value) {
+                            print(value);
                             setState(() {
                               selectedLang = value.toString();
                             });
@@ -103,9 +107,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               flex: 1,
               child: GestureDetector(
                 onTap: () async {
-                  // if (context.locale.toString().compareTo("en") == 0) {
-                  //   await context.setLocale(const Locale('fr'));
-                  // }
+                  if (context.locale.toString().compareTo("en") == 0) {
+                    await context.setLocale(const Locale('fr'));
+                  }
                   setState(() {
                     selectedLang = "Français";
                   });

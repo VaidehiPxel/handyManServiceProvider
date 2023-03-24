@@ -28,15 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   returnScreen() {
-    // if (HiveConstants.instances.box1.get(box1.langKey) != null) {
     if (HiveConstants.instances.box1.get(HiveConstants.userIdKey) == null) {
       return const AppLangSelectScreen();
     } else {
       return const DashBoard();
     }
-    // } else {
-    //   return const AppLangSelectScreen();
-    // }
+   
   }
 
   @override

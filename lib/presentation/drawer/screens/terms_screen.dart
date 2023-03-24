@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/application/terms/terms_bloc.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +32,7 @@ class _TAndCScreenState extends State<TAndCScreen> {
         builder: (context, state) {
           return Scaffold(
               appBar: EazylifeAppBar(
-                title: AppString.termsCondition,
+                title: LocaleKeys.termsCondition.tr(),
                 leadIcon: AppAssets.backIcon,
                 onPressed: () {
                   Navigator.pop(context);
@@ -52,7 +53,7 @@ class _TAndCScreenState extends State<TAndCScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppString.termsCondition,
+                                  LocaleKeys.termsCondition.tr(),
                                   style: TextStyle(
                                     color: AppTheme.black,
                                     fontSize: 16.sp,

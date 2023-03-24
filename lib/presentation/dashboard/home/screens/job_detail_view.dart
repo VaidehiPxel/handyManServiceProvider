@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
+import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/constants/utils.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
@@ -15,7 +18,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class JobDetailView extends StatefulWidget {
@@ -106,7 +108,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                                 height: 8.sp,
                               ),
                               Text(
-                                AppString.locationMap,
+                                LocaleKeys.locationMap,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 12.sp,
@@ -189,7 +191,7 @@ class _JobDetailViewState extends State<JobDetailView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              AppString.listOfServiceProvider,
+              LocaleKeys.listOfServiceProvider.tr(),
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 12.sp,
@@ -197,7 +199,7 @@ class _JobDetailViewState extends State<JobDetailView> {
               ),
             ),
             Text(
-              AppString.viewAll,
+              LocaleKeys.viewAll.tr(),
               style: TextStyle(
                 color: AppTheme.blue,
                 fontSize: 10.sp,
@@ -270,7 +272,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  AppString.quotationAmount,
+                                  LocaleKeys.quotationAmount.tr(),
                                   style: TextStyle(
                                     color: AppTheme.black,
                                     fontSize: 7.sp,
@@ -317,7 +319,7 @@ class _JobDetailViewState extends State<JobDetailView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          AppString.listOfBids,
+          LocaleKeys.listOfBids.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 13.sp,
@@ -325,7 +327,7 @@ class _JobDetailViewState extends State<JobDetailView> {
           ),
         ),
         Text(
-          AppString.viewAll,
+          LocaleKeys.viewAll.tr(),
           style: TextStyle(
             color: AppTheme.blue,
             fontSize: 10.sp,
@@ -342,7 +344,7 @@ class _JobDetailViewState extends State<JobDetailView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppString.yourBid,
+          LocaleKeys.yourBid.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 13.sp,
@@ -379,7 +381,8 @@ class _JobDetailViewState extends State<JobDetailView> {
                         if (amountController.text.isNotEmpty) {
                           context.read<JobDetailBloc>().add(BidUpdateApiEvent(
                               jobId: jobId,
-                              userId: 26,
+                              userId: HiveConstants.instances.box1
+                                  .get(HiveConstants.userIdKey),
                               amount: amountController.text,
                               isApplied: true));
                         } else {
@@ -392,7 +395,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 0.w, vertical: 0.h),
                         child: Text(
-                          AppString.bid,
+                          LocaleKeys.bid.tr(),
                           style: TextStyle(
                               color: AppTheme.white,
                               fontSize: 14.sp,
@@ -417,7 +420,7 @@ class _JobDetailViewState extends State<JobDetailView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppString.bidInfo,
+          LocaleKeys.bidInfo.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 13.sp,
@@ -430,12 +433,12 @@ class _JobDetailViewState extends State<JobDetailView> {
             RichText(
               overflow: TextOverflow.clip,
               textAlign: TextAlign.center,
-              textDirection: TextDirection.ltr,
+              //textDirection: TextDirection.ltr,
               softWrap: true,
               maxLines: 2,
               textScaleFactor: 1,
               text: TextSpan(
-                text: AppString.myBidPosition,
+                text: LocaleKeys.myBidPosition.tr(),
                 style: TextStyle(
                     color: AppTheme.medGrey,
                     fontFamily: AppFonts.poppinsMed,
@@ -461,7 +464,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                       return DialogBoxWithIcon(
                         icon: AppAssets.delete,
                         content: Text(
-                          AppString.removeYourBid,
+                          LocaleKeys.removeYourBid.tr(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: AppTheme.black,
@@ -482,7 +485,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                                 userId: detail.result[0].userId,
                               ));
                         },
-                        title: AppString.areYouSure,
+                        title: LocaleKeys.areYouSure.tr(),
                         titleNo: "Cancel",
                         titleYes: "Remove",
                         colorNo: AppTheme.black,
@@ -500,7 +503,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                     width: 2.w,
                   ),
                   Text(
-                    AppString.remove,
+                    LocaleKeys.remove.tr(),
                     style: TextStyle(
                       color: AppTheme.red,
                       fontSize: 11.sp,
@@ -542,7 +545,8 @@ class _JobDetailViewState extends State<JobDetailView> {
                         if (updatedAmountController.text.isNotEmpty) {
                           context.read<JobDetailBloc>().add(BidUpdateApiEvent(
                               jobId: detail.result[0].id,
-                              userId: 26,
+                              userId: HiveConstants.instances.box1
+                                  .get(HiveConstants.userIdKey),
                               amount: updatedAmountController.text,
                               isApplied: false));
                         } else {
@@ -555,7 +559,7 @@ class _JobDetailViewState extends State<JobDetailView> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 0.w, vertical: 0.h),
                         child: Text(
-                          AppString.update,
+                          LocaleKeys.update.tr(),
                           style: TextStyle(
                               color: AppTheme.white,
                               fontSize: 14.sp,
@@ -570,149 +574,6 @@ class _JobDetailViewState extends State<JobDetailView> {
     );
   }
 
-// Widget _setAcceptDeclineCTA(BuildContext context) {
-//   return Column(
-//     children: [
-//       Row(
-//         children: [
-//           Expanded(
-//             child: ElevatedButton(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: AppTheme.lightGrey,
-//                 minimumSize: const Size.fromHeight(40),
-//                 elevation: 0,
-//                 shadowColor: Colors.transparent,
-//               ),
-//               onPressed: () {
-//                 showDialog(
-//                     context: context,
-//                     builder: (BuildContext context) {
-//                       return DialogBoxWithIcon(
-//                         icon: AppAssets.save,
-//                         content: Text(
-//                           AppString.decline,
-//                           textAlign: TextAlign.center,
-//                           style: TextStyle(
-//                               color: AppTheme.black,
-//                               fontFamily: AppFonts.poppins,
-//                               fontWeight: FontWeight.normal,
-//                               fontSize: 10.sp),
-//                         ),
-//                         iconColor: AppTheme.dialogGreen,
-//                         onCancelPressed: () {
-//                           Navigator.of(context)
-//                             ..pop()
-//                             ..pop();
-//                         },
-//                         onOkPressed: () {
-//                           Navigator.of(context).pop();
-//                         },
-//                         title: AppString.applied,
-//                         titleNo: AppString.apply,
-//                         titleYes: AppString.done,
-//                         colorNo: AppTheme.black,
-//                         colorYes: AppTheme.white,
-//                         sizeNo: 10.sp,
-//                         titleFamily: AppFonts.poppinsMed,
-//                       );
-//                     });
-//               },
-//               child: Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-//                 child: Text(
-//                   AppString.decline,
-//                   style: TextStyle(
-//                       color: AppTheme.medGrey,
-//                       fontSize: 14.sp,
-//                       fontFamily: AppFonts.poppinsMed),
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SizedBox(
-//             width: 4.w,
-//           ),
-//           Expanded(
-//             child: ElevatedButton(
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: AppTheme.blue,
-//                 minimumSize: const Size.fromHeight(40),
-//                 elevation: 0,
-//                 shadowColor: Colors.transparent,
-//               ),
-//               onPressed: () {
-//                 showDialog(
-//                     context: context,
-//                     builder: (BuildContext context) {
-//                       return DialogBoxWithIcon(
-//                         icon: AppAssets.save,
-//                         content: Text(
-//                           AppString.youAccept,
-//                           textAlign: TextAlign.center,
-//                           style: TextStyle(
-//                               color: AppTheme.black,
-//                               fontFamily: AppFonts.poppins,
-//                               fontSize: 10.sp),
-//                         ),
-//                         iconColor: AppTheme.dialogGreen,
-//                         onCancelPressed: () {
-//                           Navigator.of(context)
-//                             ..pop()
-//                             ..pop();
-//                         },
-//                         onOkPressed: () {
-//                           Navigator.of(context).pop();
-//                         },
-//                         title: AppString.cong,
-//                         titleNo: AppString.cancel,
-//                         titleYes: AppString.startWork,
-//                         colorNo: AppTheme.black,
-//                         colorYes: AppTheme.white,
-//                         sizeNo: 10.sp,
-//                         titleFamily: AppFonts.poppinsMed,
-//                       );
-//                     });
-//               },
-//               child: Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
-//                 child: Text(
-//                   AppString.accept,
-//                   style: TextStyle(
-//                       color: AppTheme.white,
-//                       fontSize: 14.sp,
-//                       fontFamily: AppFonts.poppinsMed),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       SizedBox(
-//         height: 0.7.h,
-//       ),
-//       Align(
-//         alignment: Alignment.centerRight,
-//         child: Row(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             SvgPicture.asset(AppAssets.chat),
-//             SizedBox(
-//               width: 2.w,
-//             ),
-//             Text(
-//               AppString.chatNow,
-//               style: TextStyle(
-//                 color: AppTheme.blue,
-//                 fontSize: 11.sp,
-//                 fontFamily: AppFonts.poppinsMed,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     ],
-//   );
-// }
 
   Widget _setDateTime(GetJobDetailModel detail) {
     return Row(
@@ -726,7 +587,7 @@ class _JobDetailViewState extends State<JobDetailView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppString.date,
+                  LocaleKeys.date.tr(),
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 12.sp,
@@ -767,7 +628,7 @@ class _JobDetailViewState extends State<JobDetailView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppString.time,
+                  LocaleKeys.time.tr(),
                   style: TextStyle(
                     color: AppTheme.black,
                     fontSize: 12.sp,
@@ -869,7 +730,7 @@ class _JobDetailViewState extends State<JobDetailView> {
           height: 8.sp,
         ),
         Text(
-          AppString.description,
+          LocaleKeys.description.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
@@ -903,7 +764,7 @@ class _JobDetailViewState extends State<JobDetailView> {
           height: 8.sp,
         ),
         Text(
-          AppString.address,
+          LocaleKeys.address.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 12.sp,
