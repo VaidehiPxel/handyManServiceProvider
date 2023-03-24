@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 import 'package:flutter_projects/presentation/auth/screens/login_screen.dart';
 import 'package:flutter_projects/presentation/auth/widget/app_bg_widget.dart';
@@ -74,6 +74,7 @@ class _AppLangSelectScreenState extends State<AppLangSelectScreen> {
                           setState(() {
                             selectedLang = 1;
                           });
+                          print("here....");
                           print(context.locale.toString());
                         },
                         bgColor:

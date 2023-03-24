@@ -6,12 +6,9 @@ import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/services/base_service.dart';
 import 'package:path/path.dart';
 
-import '../../model/profile/address_model.dart';
 import '../../model/profile/profile_model.dart';
 
 typedef ProfileServiceSuccess = void Function(ProfileModel profileModel);
-typedef UserAddressListSuccess = void Function(UserAddressList userAddressList);
-typedef UserAddressAddedSuccess = void Function(Getuseraddress getuseraddress);
 typedef UserAddressRemoveSuccess = void Function();
 typedef AppErrorCallBack = void Function(String appError);
 

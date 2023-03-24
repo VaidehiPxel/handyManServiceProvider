@@ -101,6 +101,7 @@ class Jobrequest {
     this.toamount,
     required this.status,
     required this.createdAt,
+    this.image1,
   });
 
   int id;
@@ -123,6 +124,7 @@ class Jobrequest {
   String? toamount;
   int status;
   DateTime createdAt;
+  String? image1;
 
   factory Jobrequest.fromRawJson(String str) =>
       Jobrequest.fromJson(json.decode(str));
@@ -130,29 +132,29 @@ class Jobrequest {
   String toRawJson() => json.encode(toJson());
 
   factory Jobrequest.fromJson(Map<String, dynamic> json) => Jobrequest(
-        id: json["id"],
-        userId: json["user_id"],
-        userName: json["user_name"],
-        title: json["title"],
-        description: json["description"],
-        address1: json["address1"],
-        address2: json["address2"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
-        city: json["city"],
-        state: json["state"],
-        country: json["country"],
-        pincode: json["pincode"],
-        jobdate: DateTime.parse(json["jobdate"]),
-        jobtime: json["jobtime"],
-        amount: json["amount"],
-        fromamount: json["fromamount"],
-        toamount: json["toamount"],
-        status: json["status"],
-        createdAt: DateTime.parse(json["created_at"],
-      
-       ),
-      );
+      id: json["id"],
+      userId: json["user_id"],
+      userName: json["user_name"],
+      title: json["title"],
+      description: json["description"],
+      address1: json["address1"],
+      address2: json["address2"],
+      latitude: json["latitude"],
+      longitude: json["longitude"],
+      city: json["city"],
+      state: json["state"],
+      country: json["country"],
+      pincode: json["pincode"],
+      jobdate: DateTime.parse(json["jobdate"]),
+      jobtime: json["jobtime"],
+      amount: json["amount"],
+      fromamount: json["fromamount"],
+      toamount: json["toamount"],
+      status: json["status"],
+      createdAt: DateTime.parse(
+        json["created_at"],
+      ),
+      image1: json["image1"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -176,6 +178,7 @@ class Jobrequest {
         "toamount": toamount,
         "status": status,
         "created_at": createdAt.toIso8601String(),
+        "image1": image1,
       };
 }
 

@@ -9,7 +9,7 @@
 // import 'package:sizer/sizer.dart';
 // import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 // import 'package:flutter_projects/_core/utils/theme_config.dart';
-// import 'package:flutter_projects/_core/constants/string_constants.dart';
+// import 'package:flutter_projects/_core/constants/app_string.g.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
 // class MyJobDetailScreen extends StatefulWidget {

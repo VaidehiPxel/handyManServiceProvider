@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_scaffold.dart';
@@ -173,14 +173,14 @@ class _OTPVerificationState extends State<OTPVerification> {
                     maxLines: 1,
                     textScaleFactor: 1,
                     text: TextSpan(
-                      text: LocaleKeys.doNotReceive,
+                      text: LocaleKeys.doNotReceive.tr(),
                       style: TextStyle(
                           color: AppTheme.grey,
                           fontFamily: AppFonts.poppinsMed,
                           fontSize: 12.sp),
                       children: <TextSpan>[
                         TextSpan(
-                          text: LocaleKeys.resendOTP,
+                          text: LocaleKeys.resendOTP.tr(),
                           style: TextStyle(
                               color: AppTheme.blue,
                               fontFamily: AppFonts.poppinsMed,
@@ -206,8 +206,8 @@ class _OTPVerificationState extends State<OTPVerification> {
                         } else {
                           if (otpValue.isEmpty) {
                             ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                                const SnackBar(
-                                    content: Text(LocaleKeys.enterOtP)));
+                                 SnackBar(
+                                    content: Text(LocaleKeys.enterOtP.tr())));
                           }
                         }
                       }),

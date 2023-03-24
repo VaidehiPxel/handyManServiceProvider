@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_projects/services/profile_service.dart';
 
-import '../../model/profile/address_model.dart';
 import '../../model/profile/profile_model.dart';
 
 part 'profile_event.dart';

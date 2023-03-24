@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/app_constants.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/utils/theme_config.dart';
 
 import 'package:sizer/sizer.dart';
@@ -174,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     this.showEdit = false;
                   });
                 },
-                child:  Padding(
+                child: Padding(
                   padding: EdgeInsets.all(18.0),
                   child: Text(
                     LocaleKeys.submit.tr(),
@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.only(
                   right: 12.sp,
                 ),
-                child:  Align(
+                child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     LocaleKeys.edit.tr(),

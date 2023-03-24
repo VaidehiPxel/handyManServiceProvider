@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
 import 'package:flutter_projects/_core/navigation.dart';
@@ -197,7 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.blue,
         ),
         decoration: InputDecoration(
-            labelText: "${LocaleKeys.mobileNumber.tr()} / ${LocaleKeys.email.tr()}",
+            labelText:
+                "${LocaleKeys.mobileNumber.tr()} / ${LocaleKeys.email.tr()}",
             focusColor: Colors.blue,
             labelStyle: const TextStyle(
                 color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),

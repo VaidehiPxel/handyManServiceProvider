@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/constants/validation.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/auth_button.dart';
@@ -139,7 +139,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          LocaleKeys.forgetPassword,
+          LocaleKeys.forgetPassword.tr(),
           style: TextStyle(
               color: Colors.black,
               fontSize: 20.sp,
@@ -148,7 +148,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            LocaleKeys.subLogin,
+            LocaleKeys.subLogin.tr(),
             maxLines: 2,
             softWrap: true,
             textAlign: TextAlign.center,
@@ -172,7 +172,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
-            labelText: LocaleKeys.enterMobileNumber,
+            labelText: LocaleKeys.enterMobileNumber.tr(),
             focusColor: AppTheme.authGrey,
             labelStyle: const TextStyle(
                 color: AppTheme.authGrey, fontFamily: AppFonts.poppinsMed),
@@ -190,10 +190,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           onPressed: () {
             if (mobileController.text.isEmpty) {
               ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                  const SnackBar(content: Text(LocaleKeys.mobileNotEmpty)));
+                   SnackBar(content: Text(LocaleKeys.mobileNotEmpty.tr())));
             } else if (validateMobile(mobileController.text) == false) {
               ScaffoldMessenger.maybeOf(context)!.showSnackBar(
-                  const SnackBar(content: Text(LocaleKeys.mobileNotValid)));
+                   SnackBar(content: Text(LocaleKeys.mobileNotValid.tr())));
             } else {
               context.read<AuthBloc>().add(
                   GetOTPCallApiEvent(mobileNo: mobileController.text.trim()));

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/custom_widgets/api_loader.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
@@ -201,7 +201,7 @@ class _CreateReportAndComplaintScreenState
                   enableSuggestions: true,
                   minLines: 50,
                   maxLines: 100,
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: LocaleKeys.addComplaint.tr(),
                     contentPadding: EdgeInsets.all(14),

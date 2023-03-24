@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
@@ -235,7 +235,9 @@ class _WithdrawalMoneyState extends State<WithdrawalMoney> {
                           color: AppTheme.black,
                           fontSize: 11.sp),
                     ),
-                    Text(LocaleKeys.acNo.tr() + LocaleKeys.bankAccountNumberHint.tr(),
+                    Text(
+                        LocaleKeys.acNo.tr() +
+                            LocaleKeys.bankAccountNumberHint.tr(),
                         style: TextStyle(
                             color: AppTheme.black,
                             fontFamily: AppFonts.poppins,

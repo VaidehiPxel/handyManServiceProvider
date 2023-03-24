@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
@@ -330,8 +330,8 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: _timerBox(
-                  duration.inHours.toString().padLeft(2, '0'), LocaleKeys.hrs.tr()),
+              child: _timerBox(duration.inHours.toString().padLeft(2, '0'),
+                  LocaleKeys.hrs.tr()),
             ),
             colan(),
             Expanded(
@@ -763,7 +763,7 @@ class _AcceptedJobDetailState extends State<AcceptedJobDetail> {
             child: RichText(
               overflow: TextOverflow.clip,
               textAlign: TextAlign.right,
-             // textDirection: TextDirection.ltr,
+              // textDirection: TextDirection.ltr,
               softWrap: true,
               maxLines: 2,
               textScaleFactor: 1,

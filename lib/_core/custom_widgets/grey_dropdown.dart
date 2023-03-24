@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_projects/_core/constants/string_constants.dart';
+// import 'package:flutter_projects/_core/constants/app_string.g.dart';
 // import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
 // import 'package:sizer/sizer.dart';
 

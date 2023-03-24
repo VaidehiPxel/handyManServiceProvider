@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
@@ -38,28 +38,28 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: Column(
             children: [
               EazyLifeWidget(
-                title: LocaleKeys.oldPassword,
-                widget: _customTextField(6.h, LocaleKeys.oldPassword, 1),
+                title: LocaleKeys.oldPassword.tr(),
+                widget: _customTextField(6.h, LocaleKeys.oldPassword.tr(), 1),
               ),
               SizedBox(
                 height: 1.h,
               ),
               EazyLifeWidget(
-                title: LocaleKeys.newPassword,
-                widget: _customTextField(6.h, LocaleKeys.newPassword, 1),
+                title: LocaleKeys.newPassword.tr(),
+                widget: _customTextField(6.h, LocaleKeys.newPassword.tr(), 1),
               ),
               SizedBox(
                 height: 1.h,
               ),
               EazyLifeWidget(
-                title: LocaleKeys.confirmPassword,
-                widget: _customTextField(6.h, LocaleKeys.confirmPassword, 1),
+                title: LocaleKeys.confirmPassword.tr(),
+                widget: _customTextField(6.h, LocaleKeys.confirmPassword.tr(), 1),
               ),
               SizedBox(
                 height: 4.h,
               ),
               AppButton(
-                title: LocaleKeys.save,
+                title: LocaleKeys.save.tr(),
                 onPressed: () {},
               ),
               SizedBox(

@@ -35,6 +35,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await HiveConstants.instances.init();
+    await EasyLocalization.ensureInitialized();
 
   runApp(MultiBlocProvider(
     providers: [

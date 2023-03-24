@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/Navigation.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/custom_dialogs/dialog_icon.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/side_blue_container.dart';
@@ -398,8 +398,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            buildColumn(
-                                LocaleKeys.collection.tr(), "${LocaleKeys.rs.tr()}5,000"),
+                            buildColumn(LocaleKeys.collection.tr(),
+                                "${LocaleKeys.rs.tr()}5,000"),
                             Container(
                               color: AppTheme.grey,
                               width: 0.3.w,

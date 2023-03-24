@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/_core/constants/image_constants.dart';
-import 'package:flutter_projects/_core/constants/string_constants.dart';
+import 'package:flutter_projects/_core/constants/app_string.g.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_bar.dart';
 import 'package:flutter_projects/_core/custom_widgets/app_button.dart';
 import 'package:flutter_projects/_core/custom_widgets/eazylife_widget.dart';
@@ -44,7 +44,8 @@ class _AddBankDetailsState extends State<AddBankDetails> {
           children: [
             Expanded(child: setDetailField()),
             AppButton(
-              title: widget.isEdit ? LocaleKeys.update.tr() : LocaleKeys.save.tr(),
+              title:
+                  widget.isEdit ? LocaleKeys.update.tr() : LocaleKeys.save.tr(),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -93,7 +94,9 @@ class _AddBankDetailsState extends State<AddBankDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.isEdit ? LocaleKeys.editBankDetail.tr() : LocaleKeys.addBankDetail.tr(),
+          widget.isEdit
+              ? LocaleKeys.editBankDetail.tr()
+              : LocaleKeys.addBankDetail.tr(),
           style: TextStyle(
               fontFamily: AppFonts.poppinsSemiBold,
               color: AppTheme.black,
@@ -119,7 +122,8 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                 ),
                 EazyLifeWidget(
                   title: LocaleKeys.bankAccountNumber.tr(),
-                  widget: _customTextField(LocaleKeys.bankAccountNumberHint.tr(), 1),
+                  widget: _customTextField(
+                      LocaleKeys.bankAccountNumberHint.tr(), 1),
                 ),
                 SizedBox(
                   height: 2.h,
@@ -129,8 +133,8 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                     Expanded(
                       child: EazyLifeWidget(
                         title: LocaleKeys.beneficiaryName.tr(),
-                        widget:
-                            _customTextField(LocaleKeys.beneficiaryNameHint.tr(), 1),
+                        widget: _customTextField(
+                            LocaleKeys.beneficiaryNameHint.tr(), 1),
                       ),
                     ),
                     SizedBox(
