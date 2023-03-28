@@ -10,6 +10,7 @@ import 'package:flutter_projects/application/jobDetail/job_detail_bloc.dart';
 import 'package:flutter_projects/application/jobReviewRating/job_review_rating_bloc.dart';
 import 'package:flutter_projects/application/message/message_bloc.dart';
 import 'package:flutter_projects/application/myJobList/my_job_list_bloc.dart';
+import 'package:flutter_projects/application/profile/profile_bloc.dart';
 import 'package:flutter_projects/application/report/report_bloc.dart';
 import 'package:flutter_projects/application/signup/signup_bloc.dart';
 import 'package:flutter_projects/application/terms/terms_bloc.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_projects/services/job_review_rating_service.dart';
 import 'package:flutter_projects/services/login_services.dart';
 import 'package:flutter_projects/services/message_service.dart';
 import 'package:flutter_projects/services/my_job_service.dart';
+import 'package:flutter_projects/services/profile_service.dart';
 import 'package:flutter_projects/services/report_service.dart';
 import 'package:flutter_projects/services/signup_services.dart';
 import 'package:flutter_projects/services/terms_services.dart';
@@ -64,6 +66,7 @@ Future<void> main() async {
       BlocProvider(
           create: (context) => MessageBloc(messageService: MessageService())),
       BlocProvider(create: (context) => HelpBloc(helpService: HelpService())),
+       BlocProvider(create: (context) => ProfileBloc(profileService: ProfileService())),
     ],
     child: EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('fr')],

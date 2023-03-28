@@ -10,11 +10,11 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileService profileService;
   ProfileModel profileModel =
-      ProfileModel(getuserdetails: [], message: "", status: "");
+      ProfileModel(getserviceproviderdetails: [], message: "", status: "");
   ProfileBloc({required this.profileService})
       : super(ProfileInitial(isLoading: true, profileModel: ProfileModel(
             // getuseraddress: [],
-            getuserdetails: [], message: "", status: ""))) {
+            getserviceproviderdetails: [], message: "", status: ""))) {
     on<ProfileEvent>((event, emit) async {
       emit(ProfileStateLoading(isLoading: true, profileModel: profileModel));
       if (event is ProfileCallApiGetProfileEvent) {

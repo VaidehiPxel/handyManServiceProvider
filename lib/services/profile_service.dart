@@ -20,13 +20,12 @@ class ProfileService {
   Future<void> getSPProfileByID(
       {required AppErrorCallBack errorCallBack,
       required ProfileServiceSuccess profileServiceSuccess}) async {
-    String userId = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+    int userId = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
     try {
       bool resSuccess = false;
       String message = '', errorCode = '';
       Response? response;
       ProfileModel profileModel;
-      print({"user_id": userId});
       response = await _dio.post(
         data: FormData.fromMap({"user_id": userId}),
         URL.sPProfile,
@@ -44,7 +43,7 @@ class ProfileService {
 
         message = data['message'].toString();
 
-        if (resSuccess && message.compareTo("Get Users Details") == 0) {
+        if (resSuccess) {
           profileModel = ProfileModel.fromJson(data);
           print(profileModel.toString());
           profileServiceSuccess(profileModel);
@@ -71,41 +70,30 @@ class ProfileService {
       ProfileModel profileModels;
       print({"user_id": userId});
 
-      Getuserdetail getuserdetails = profileModel.getuserdetails.first;
+      Getserviceproviderdetail getserviceproviderdetail = profileModel.getserviceproviderdetails.first;
 
       print({
-        'user_id': getuserdetails.userid,
-        'name': getuserdetails.name,
-        'email': getuserdetails.email,
-        'mobileno': getuserdetails.mobileno,
-        'gender': getuserdetails.gender,
-        'dob': getuserdetails.dob,
-        'language': getuserdetails.language,
-        'oldpassword': getuserdetails.originalePasword,
-        'newpassword': getuserdetails.originalePasword,
-        'confirmpassword': getuserdetails.originalePasword,
-        
+        'user_id': getserviceproviderdetail.userid,
+        'name': getserviceproviderdetail.name,
+        'email': getserviceproviderdetail.email,
+        'mobileno': getserviceproviderdetail.mobileno,
+      
       });
 
       FormData formData = FormData.fromMap({
-        'user_id': getuserdetails.userid,
-        'name': getuserdetails.name,
-        'email': getuserdetails.email,
-        'mobileno': getuserdetails.mobileno,
-        'gender': getuserdetails.gender,
-        'dob': getuserdetails.dob,
-        'language': getuserdetails.language,
-        'oldpassword': getuserdetails.originalePasword,
-        'newpassword': getuserdetails.originalePasword,
-        'confirmpassword': getuserdetails.originalePasword,
+        'user_id': getserviceproviderdetail.userid,
+        'name': getserviceproviderdetail.name,
+        'email': getserviceproviderdetail.email,
+        'mobileno': getserviceproviderdetail.mobileno,
+       
       });
 
-      if (getuserdetails.profilepics.toString().isNotEmpty) {
+      if (getserviceproviderdetail.profilepics.toString().isNotEmpty) {
         formData.files.add(MapEntry(
             'profilepics',
             await MultipartFile.fromFile(
-              getuserdetails.profilepics,
-              filename: basename(getuserdetails.profilepics),
+              getserviceproviderdetail.profilepics,
+              filename: basename(getserviceproviderdetail.profilepics),
             )));
       }
 
@@ -145,8 +133,4 @@ class ProfileService {
       errorCallBack(e.toString());
     }
   }
-
-
-
-
-      }
+}

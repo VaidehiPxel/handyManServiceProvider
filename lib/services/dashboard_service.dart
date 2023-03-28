@@ -18,7 +18,8 @@ class DashboardService {
       bool resSuccess = false;
       String message = '';
       DashboardModel dashboardModel;
-      int userId = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+      //int userId = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+      int userId = 26;
       print("userId");
       print(userId);
       var client = http.Client();

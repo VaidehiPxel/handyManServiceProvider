@@ -13,8 +13,8 @@ typedef SendMessage = void Function(bool isSend);
 typedef AppErrorCallBack = void Function(String appError);
 
 class MessageService {
-  int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
-
+  //int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
+  int userId2 = 26;
   Future<void> getMessageList(
       {required AppErrorCallBack errorCallBack,
       required MessageList messageList}) async {
@@ -22,9 +22,9 @@ class MessageService {
       String message = '';
 
       var client = http.Client();
-      http.Response response = await client.get(
+      http.Response response = await client.post(
         Uri.parse("${URL.messageList}$userId2"),
-      //  Uri.parse("${URL.messageList}26"),
+        //  Uri.parse("${URL.messageList}26"),
       );
 
       var data = MessageListModel.fromJson(json.decode(response.body));

@@ -45,7 +45,7 @@ class _DashBoardState extends State<DashBoard> {
         title: currentIndex == 0
             ? LocaleKeys.welcome.tr()
             : currentIndex == 1
-                ? LocaleKeys.myJobs
+                ? LocaleKeys.myJobs.tr()
                 : currentIndex == 2
                     ? LocaleKeys.message.tr()
                     : LocaleKeys.profile.tr(),

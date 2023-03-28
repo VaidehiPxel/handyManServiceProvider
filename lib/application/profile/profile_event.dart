@@ -9,7 +9,6 @@ abstract class ProfileEvent extends Equatable {
 
 class ProfileCallApiGetProfileEvent extends ProfileEvent {}
 
-class ProfileCallApiGetAddressListEvent extends ProfileEvent {}
 
 class ProfileCallApiPutProfileEvent extends ProfileEvent {
   final ProfileModel profileModel;

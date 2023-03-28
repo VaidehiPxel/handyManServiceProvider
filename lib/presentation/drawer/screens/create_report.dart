@@ -15,6 +15,7 @@ import 'package:flutter_projects/model/report/report_listing_model.dart';
 import 'package:flutter_projects/model/report/report_service_provider.dart';
 import 'package:flutter_projects/presentation/dashboard/home/screens/home_screen.dart';
 import 'package:flutter_projects/presentation/dashboard/notification/screen/notification_screen.dart';
+import 'package:flutter_projects/presentation/dashboard/screens/dashboard.dart';
 import 'package:sizer/sizer.dart';
 
 class CreateReportAndComplaintScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _CreateReportAndComplaintScreenState
                   const SnackBar(content: Text("Complaint Successfull")));
               Future.delayed(const Duration(milliseconds: 1000), () {
                 //TODO: check this
-                //callNextScreen(context, const HomeScreen());
+                callNextScreen(context, const DashBoard());
               });
             }
 
@@ -118,6 +119,7 @@ class _CreateReportAndComplaintScreenState
                         child: DropdownButton(
                           isExpanded: true,
                           value: dropdownvalue,
+                          hint: Text("User1"),
                           icon: const Icon(Icons.keyboard_arrow_down),
                           items: userItems.map((GetServiceProvidersList items) {
                             return DropdownMenuItem(
@@ -162,6 +164,7 @@ class _CreateReportAndComplaintScreenState
                         child: DropdownButton(
                           isExpanded: true,
                           value: dropdownvalue1,
+                          hint: Text("Cleaning"),
                           icon: const Icon(Icons.keyboard_arrow_down),
                           items: jobItems.map((GetJobList items) {
                             return DropdownMenuItem(

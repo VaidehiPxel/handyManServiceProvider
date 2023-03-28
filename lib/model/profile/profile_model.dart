@@ -2,120 +2,79 @@ class ProfileModel {
   ProfileModel({
     required this.status,
     required this.message,
-    required this.getuserdetails,
+    required this.getserviceproviderdetails,
     //required this.getuseraddress,
   });
 
   final String status;
   final String message;
-  final List<Getuserdetail> getuserdetails;
-  //List<Getuseraddress> getuseraddress;
-
-  // set setUserAddress(List<Getuseraddress> getuseraddress) {
-  //   this.getuseraddress = getuseraddress;
-  // }
+  final List<Getserviceproviderdetail> getserviceproviderdetails;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         status: json["status"],
         message: json["message"],
-        getuserdetails: [Getuserdetail.fromJson(json["getuserdetails"])],
-        // getuseraddress: List<Getuseraddress>.from(
-        //     json["getuseraddress"].map((x) => Getuseraddress.fromJson(x))),
+        getserviceproviderdetails: [
+          Getserviceproviderdetail.fromJson(json["getuserdetails"])
+        ],
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "getuserdetails":
-            List<dynamic>.from(getuserdetails.map((x) => x.toJson())),
-        // "getuseraddress":
-        //     List<dynamic>.from(getuseraddress.map((x) => x.toJson())),
+        "getserviceproviderdetails": List<dynamic>.from(
+            getserviceproviderdetails.map((x) => x.toJson())),
       };
 }
 
-// class Getuseraddress {
-//   Getuseraddress({
-//     required this.id,
-//     required this.userId,
-//     required this.name,
-//     required this.address,
-//     required this.defaultset,
-//     required this.status,
-//     required this.createdAt,
-//   });
-
-//   final int id;
-//   final int userId;
-//   final String name;
-//   final String address;
-//   int defaultset;
-//   final int status;
-//   final DateTime createdAt;
-
-//   set setDefaultset(int defaultset) {
-//     this.defaultset = defaultset;
-//   }
-
-//   factory Getuseraddress.fromJson(Map<String, dynamic> json) => Getuseraddress(
-//         id: json["id"],
-//         userId: json["user_id"],
-//         name: json["name"].toString(),
-//         address: json["address"].toString(),
-//         defaultset: json["defaultset"],
-//         status: json["status"],
-//         createdAt: DateTime.parse(json["created_at"]),
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "user_id": userId,
-//         "name": name,
-//         "address": address,
-//         "defaultset": defaultset,
-//         "status": status,
-//         "created_at": createdAt.toIso8601String(),
-//       };
-// }
-
-class Getuserdetail {
-  Getuserdetail({
+class Getserviceproviderdetail {
+  Getserviceproviderdetail({
     required this.userid,
-    required this.userRole,
-    required this.name,
+    this.name,
     required this.lastname,
     required this.email,
     required this.mobileno,
-    required this.otp,
-    required this.originalePasword,
-    required this.apiToken,
     required this.profilepics,
-    required this.status,
-    required this.gender,
-    required this.dob,
-    required this.language,
-    required this.userBalance,
     required this.createdAt,
+    this.description,
+    this.extradescription,
+    this.workexperience,
+    this.educationdetail,
+    this.categoryid,
+    this.categoryname,
+    this.subcategoryid,
+    this.subcategoryname,
+    this.amount,
+    this.time,
+    this.cetrificate1,
+    this.cetrificate2,
   });
 
-  final int userid;
-  final int userRole;
-  String name;
-  final dynamic lastname;
+  int userid;
+  dynamic name;
+  String lastname;
   String email;
   String mobileno;
-  final String otp;
-  final String originalePasword;
-  final String apiToken;
-  final dynamic profilepics;
-  final int status;
-  dynamic gender;
-  dynamic dob;
-  dynamic language;
-  final int userBalance;
-  final DateTime createdAt;
+  String profilepics;
+  DateTime createdAt;
+  dynamic description;
+  dynamic extradescription;
+  dynamic workexperience;
+  dynamic educationdetail;
+  dynamic categoryid;
+  dynamic categoryname;
+  dynamic subcategoryid;
+  dynamic subcategoryname;
+  dynamic amount;
+  dynamic time;
+  dynamic cetrificate1;
+  dynamic cetrificate2;
 
-  set setName(String name) {
-    this.name = name;
+  set setFirstName(String fname) {
+    this.name = fname;
+  }
+
+  set setLastName(String Lname) {
+    this.lastname = Lname;
   }
 
   set setEmail(String email) {
@@ -126,110 +85,114 @@ class Getuserdetail {
     this.mobileno = mobileno;
   }
 
-  set setGender(String gender) {
-    this.gender = gender;
+  set setIntroduction(String introduction) {
+    description = introduction;
   }
 
-  set setDob(String dob) {
-    this.dob = dob;
+  set setExperience(String experience) {
+    this.workexperience = experience;
   }
 
-  set setLanguage(String language) {
-    this.language = language;
+  set setCategory(String category) {
+    this.categoryname = category;
   }
 
-  factory Getuserdetail.fromJson(Map<String, dynamic> json) => Getuserdetail(
+  factory Getserviceproviderdetail.fromJson(Map<String, dynamic> json) =>
+      Getserviceproviderdetail(
         userid: json["userid"],
-        userRole: json["user_role"],
-        name: json["name"] ?? "",
-        lastname: json["lastname"] ?? "",
-        email: json["email"] ?? "",
-        mobileno: json["mobileno"] ?? "",
-        otp: json["otp"] ?? "",
-        originalePasword: json["originale_pasword"] ?? "",
-        apiToken: json["api_token"] ?? "",
-        profilepics: json["profilepics"] ?? "",
-        status: json["status"],
-        gender: json["gender"] ?? "",
-        dob: json["dob"] ?? "",
-        language: json["language"] ?? "",
-        userBalance: json["user_balance"] ?? 0,
+        name: json["name"],
+        lastname: json["lastname"],
+        email: json["email"],
+        mobileno: json["mobileno"],
+        profilepics: json["profilepics"],
         createdAt: DateTime.parse(json["created_at"]),
+        description: json["description"],
+        extradescription: json["extradescription"],
+        workexperience: json["workexperience"],
+        educationdetail: json["educationdetail"],
+        categoryid: json["categoryid"],
+        categoryname: json["categoryname"],
+        subcategoryid: json["subcategoryid"],
+        subcategoryname: json["subcategoryname"],
+        amount: json["amount"],
+        time: json["time"],
+        cetrificate1: json["cetrificate1"],
+        cetrificate2: json["cetrificate2"],
       );
 
   Map<String, dynamic> toJson() => {
         "userid": userid,
-        "user_role": userRole,
         "name": name,
         "lastname": lastname,
         "email": email,
         "mobileno": mobileno,
-        "otp": otp,
-        "originale_pasword": originalePasword,
-        "api_token": apiToken,
         "profilepics": profilepics,
-        "status": status,
-        "gender": gender,
-        "dob": dob,
-        "language": language,
-        "user_balance": userBalance,
         "created_at": createdAt.toIso8601String(),
+        "description": description,
+        "extradescription": extradescription,
+        "workexperience": workexperience,
+        "educationdetail": educationdetail,
+        "categoryid": categoryid,
+        "categoryname": categoryname,
+        "subcategoryid": subcategoryid,
+        "subcategoryname": subcategoryname,
+        "amount": amount,
+        "time": time,
+        "cetrificate1": cetrificate1,
+        "cetrificate2": cetrificate2,
       };
 }
 
 extension Profile on ProfileModel {
-  getName() {
-    return getuserdetails.first.language.toString().compareTo("null") == 0
-        ? getuserdetails.first.name
-        : "${getuserdetails.first.name}${getuserdetails.first.lastname}";
+  getFirstName() {
+    return getserviceproviderdetails.first.name.toString().compareTo("null") ==
+            0
+        ? "Dummy"
+        : "${getserviceproviderdetails.first.name}";
+  }
+
+  getLastName() {
+    return getserviceproviderdetails.first.lastname
+                .toString()
+                .compareTo("null") ==
+            0
+        ? "LastName"
+        : getserviceproviderdetails.first.lastname;
   }
 
   getMobile() {
-    return getuserdetails.first.mobileno;
+    return getserviceproviderdetails.first.mobileno;
   }
 
   getEmail() {
-    return getuserdetails.first.email;
+    return getserviceproviderdetails.first.email;
   }
 
-  getGender() {
-    return getuserdetails.first.gender.toString().compareTo("null") == 0 ||
-            getuserdetails.first.gender.toString().isEmpty
-        ? "Male"
-        : getuserdetails.first.gender;
+  getIntroduction() {
+    return getserviceproviderdetails.first.description
+                    .toString()
+                    .compareTo("null") ==
+                0 ||
+            getserviceproviderdetails.first.description.toString().isEmpty
+        ? "Dummy Text"
+        : getserviceproviderdetails.first.description;
   }
 
-  getDob() {
-    return getuserdetails.first.dob.toString().compareTo("null") == 0
-        ? ""
-        : getuserdetails.first.dob;
+  getExperience() {
+    return getserviceproviderdetails.first.workexperience
+                .toString()
+                .compareTo("null") ==
+            0
+        ? "0"
+        : getserviceproviderdetails.first.workexperience;
   }
 
-  getLanguage() {
-    return getuserdetails.first.language.toString().compareTo("null") == 0
-        ? "English"
-        : getuserdetails.first.language;
-  }
-
-  // getAddress() {
-  //   return getuseraddress.isNotEmpty
-  //       ? getuseraddress
-  //           .where((element) => element.defaultset == 1)
-  //           .first
-  //           .address
-  //       : "";
-  // }
-
-  getUserBal() {
-    return getuserdetails.first.userBalance;
+  getCategory() {
+    return getserviceproviderdetails.first.categoryname
+                .toString()
+                .compareTo("null") ==
+            0
+        ? "Cleaning"
+        : getserviceproviderdetails.first.categoryname;
   }
 }
-
-// extension AddressDefault on List<Getuseraddress> {
-//   setAllDefault() {
-//     for (var d in this) {
-//       d.setDefaultset = 0;
-//     }
-//     return this;
-//   }
-// }

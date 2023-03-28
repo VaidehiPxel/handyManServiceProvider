@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_projects/_core/constants/hive_constant.dart';
 import 'package:flutter_projects/model/jobs/bid_model.dart';
 
 import 'package:http/http.dart' as http;
@@ -17,6 +18,7 @@ class JobDetailService {
   final Dio _dio;
 
   JobDetailService({Dio? dio}) : _dio = dio ?? Dio();
+  int userId2 = HiveConstants.instances.box1.get(HiveConstants.userIdKey);
 
   Future<void> jobDetail(
       {required AppErrorCallBack errorCallBack,
@@ -32,6 +34,7 @@ class JobDetailService {
 
       map = {
         "job_id": jobId,
+        "user_id":userId2,
       };
 
       response = await _dio.post(
